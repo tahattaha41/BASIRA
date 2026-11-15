@@ -2,7 +2,7 @@
  "source": "open.er-api.com",
  "note": "سعر مرجعي لمنتصف السوق",
  "updated": 1794700952,
- "fetched": 1794726270,
+ "fetched": 1794739679,
  "egp": {
   "USD": 53.4393,
   "EUR": 58.9848,
@@ -15,8 +15,8 @@
  "gold": {
   "source": "xaus.com",
   "note": "سعر مرجعي عالمي محوّل للجنيه، لا يشمل المصنعية ولا فرق السوق المحلي",
-  "updated": 1794736161,
-  "fetched": 1794736168,
+  "updated": 1794739636,
+  "fetched": 1794739679,
   "status": "fresh",
   "usd_oz": 3887.6,
   "egp_gram": {
@@ -28,8 +28,8 @@
  "silver": {
   "source": "xaus.com",
   "note": "سعر مرجعي عالمي للفضة الخالصة محوّل للجنيه",
-  "updated": 1794736161,
-  "fetched": 1794736168,
+  "updated": 1794739636,
+  "fetched": 1794739679,
   "status": "fresh",
   "usd_oz": 48.65,
   "egp_gram": {
