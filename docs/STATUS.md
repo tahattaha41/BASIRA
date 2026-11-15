@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-14 13:24 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-15 01:41 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 24 (متوسط الكلمات 709)
@@ -19,15 +19,15 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
-- 977b280 2026-11-14 chore: live browser test report [skip ci]
-- 0b58da0 2026-11-14 chore: visitor stats [skip ci]
-- 6d52c91 2026-11-14 chore: periodic site review [skip ci]
-- 3d67674 2026-11-14 chore: reference FX rates [skip ci]
-- bbd0d38 2026-11-14 chore: reference FX rates [skip ci]
-- d89cb4e 2026-11-14 chore: reference FX rates [skip ci]
-- af7a1e8 2026-11-14 chore: reference FX rates [skip ci]
-- 9c32ef1 2026-11-14 chore(smart-choice): update Blogger pages sync state [skip ci]
-- e418551 2026-11-14 chore: quality audit reports [skip ci]
-- f1c9bba 2026-11-14 docs: auto-update STATUS.md [skip ci]
-- ba50fbb 2026-11-14 chore: update content bundle [skip ci]
-- 9e5b8c9 2026-11-14 content+theme: rebuild server-side home, 3 data-rich articles, internal tool links, expand about/editorial/contact, noindex admin
+- 8e3c6e1 2026-11-15 chore: live browser test report [skip ci]
+- 889d3ec 2026-11-15 chore: visitor stats [skip ci]
+- fa33986 2026-11-15 chore: periodic site review [skip ci]
+- ee7aeeb 2026-11-15 chore: reference FX rates [skip ci]
+- 298802d 2026-11-14 chore: reference FX rates [skip ci]
+- ab18725 2026-11-14 chore: reference FX rates [skip ci]
+- 9ff9b78 2026-11-14 chore: visitor stats [skip ci]
+- cb0f835 2026-11-14 chore: reference FX rates [skip ci]
+- c489ae2 2026-11-14 chore: reference FX rates [skip ci]
+- 62420b5 2026-11-14 chore: reference FX rates [skip ci]
+- 3f5bc6a 2026-11-14 chore: live browser test report [skip ci]
+- 28cdca4 2026-11-14 chore: visitor stats [skip ci]
