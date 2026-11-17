@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-16 15:33 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-17 01:47 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 24 (متوسط الكلمات 709)
@@ -19,15 +19,15 @@
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
-- 6e43b46 2026-11-16 chore: live browser test report [skip ci]
-- 92befcc 2026-11-16 chore: visitor stats [skip ci]
-- 43ee212 2026-11-16 chore: periodic site review [skip ci]
-- 060a6a3 2026-11-16 chore: reference FX rates [skip ci]
-- 11c1290 2026-11-16 chore: reference FX rates [skip ci]
-- d00a0ab 2026-11-16 chore: reference FX rates [skip ci]
-- fb22dc6 2026-11-16 chore: live browser test report [skip ci]
-- 4bda006 2026-11-16 chore: visitor stats [skip ci]
-- d392311 2026-11-16 chore: periodic site review [skip ci]
-- 2162761 2026-11-16 chore: reference FX rates [skip ci]
-- fe62773 2026-11-16 chore: quality audit reports [skip ci]
-- 16b8c1e 2026-11-16 chore: reference FX rates [skip ci]
+- 23f772d 2026-11-17 chore: live browser test report [skip ci]
+- c0605ca 2026-11-17 chore: visitor stats [skip ci]
+- c7d9776 2026-11-17 chore: periodic site review [skip ci]
+- 5ff9185 2026-11-17 chore: reference FX rates [skip ci]
+- ae99e10 2026-11-16 chore: reference FX rates [skip ci]
+- 7b3cce0 2026-11-16 chore: reference FX rates [skip ci]
+- c935ec3 2026-11-16 chore: visitor stats [skip ci]
+- 1150a83 2026-11-16 chore: reference FX rates [skip ci]
+- 078bdae 2026-11-16 chore: reference FX rates [skip ci]
+- 83ef70c 2026-11-16 chore: reference FX rates [skip ci]
+- 16770dc 2026-11-16 chore: live browser test report [skip ci]
+- 646a18d 2026-11-16 chore: visitor stats [skip ci]
