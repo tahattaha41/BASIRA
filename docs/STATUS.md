@@ -1,6 +1,6 @@
 # حالة المشروع (تُولَّد تلقائياً — لا تعدّل يدوياً)
 
-> آخر توليد: 2026-11-17 13:43 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
+> آخر توليد: 2026-11-18 01:49 UTC بواسطة scripts/update_status.py. للتفاصيل الثابتة والقرارات: docs/HANDOFF.md.
 
 ## الأرقام
 - مقالات: 24 (متوسط الكلمات 709)
@@ -13,24 +13,21 @@
 - مقالات أقل من 500 كلمة: 1 — smart-choice-welcome.md(66)
 
 ## آخر فحص حي
-- FAIL: 3
-  - FAIL  Contact loads
-  - FAIL  Contact: body text length 0
-  - FAIL  Contact shows email
+- FAIL: 0
 
 ## Workflows
 auto-posts.yml، blogger-cleanup.yml، blogger-pages-sync.yml، blogger-sync.yml، content-bundle.yml، frontend-assets.yml، live-e2e.yml، quality-audit.yml، rates.yml، site-review.yml، site-stats.yml، status-doc.yml، theme-validation.yml
 
 ## آخر الكوميتات
-- d3427fc 2026-11-17 chore: live browser test report [skip ci]
-- abbf8b3 2026-11-17 chore: visitor stats [skip ci]
-- dc71283 2026-11-17 chore: periodic site review [skip ci]
-- 9db9003 2026-11-17 chore: reference FX rates [skip ci]
-- cb6cd12 2026-11-17 chore: reference FX rates [skip ci]
-- 142bf56 2026-11-17 chore: reference FX rates [skip ci]
-- 73926ed 2026-11-17 chore: reference FX rates [skip ci]
-- 9c7b827 2026-11-17 chore: live browser test report [skip ci]
-- 90b1d28 2026-11-17 chore: live browser test report [skip ci]
-- 412327f 2026-11-17 chore: visitor stats [skip ci]
-- 134ce00 2026-11-17 chore: periodic site review [skip ci]
-- dc51c0c 2026-11-17 chore: reference FX rates [skip ci]
+- 4d79c82 2026-11-18 chore: live browser test report [skip ci]
+- 049b06c 2026-11-18 chore: visitor stats [skip ci]
+- d3f600f 2026-11-18 chore(smart-choice): update Blogger sync state [skip ci]
+- d7fdbc8 2026-11-18 chore: reference FX rates [skip ci]
+- f619878 2026-11-17 chore: reference FX rates [skip ci]
+- 1758480 2026-11-17 chore: reference FX rates [skip ci]
+- 44daafb 2026-11-17 chore: visitor stats [skip ci]
+- a6f5407 2026-11-17 chore: reference FX rates [skip ci]
+- 09748da 2026-11-17 chore: reference FX rates [skip ci]
+- a3a8a7d 2026-11-17 chore: live browser test report [skip ci]
+- b6a372a 2026-11-17 chore(smart-choice): update Blogger sync state [skip ci]
+- 35b3315 2026-11-17 chore: visitor stats [skip ci]
