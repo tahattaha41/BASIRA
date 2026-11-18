@@ -17,26 +17,30 @@ OK    Discount tool page loads
 OK    Discount tool visible on its own page
 OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
 OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٨‏/١١‏/٢٠٢٦، ١:١٦ ص): عيار 21 ≈ ٥٬٧٧٢٫٦٤ عيار 24 ≈ 
+OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٨‏/١١‏/٢٠٢٦، ٦:٠٩ ص): عيار 21 ≈ ٥٬٧٢٥٫١٩ عيار 24 ≈ 
 OK    Rates page loads
 OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
 OK    Rates board has no NaN/undefined
-INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٨‏/١١‏/٢٠٢٦، ١:١٦ ص
+INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٨‏/١١‏/٢٠٢٦، ٦:١٠ ص
 OK    Tool page opens with its tool visible: taxeg
 OK    Tool page guide text words (taxeg): 662
 OK    Tool page opens with its tool visible: percent
 OK    Tool page guide text words (percent): 478
-OK    About loads
-OK    About: body text length 2557
+FAIL  About loads
+INFO  About url=https://smartchoicee1.blogspot.com/p/smart-choice.html status=302
+FAIL  About: body text length 0
 OK    Contact loads
 OK    Contact: body text length 1440
 OK    Contact shows email
-OK    Privacy loads
-OK    Privacy: body text length 2162
-OK    Terms loads
-OK    Terms: body text length 1131
-OK    Decision page loads
-OK    Decision page: body text length 2363
+FAIL  Privacy loads
+INFO  Privacy url=https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html status=302
+FAIL  Privacy: body text length 0
+FAIL  Terms loads
+INFO  Terms url=https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html status=302
+FAIL  Terms: body text length 0
+FAIL  Decision page loads
+INFO  Decision page url=https://smartchoicee1.blogspot.com/p/smart-choice_01190848683.html status=302
+FAIL  Decision page: body text length 0
 OK    Compare page loads
 OK    Compare page: body text length 3098
 OK    Editorial page loads
@@ -48,8 +52,8 @@ OK    Posts in feed: 20
 OK    Latest post body length 3759
 OK    No JS errors
 OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 3321
+OK    Mobile: home content length 3288
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools hub rendered
 OK    Mobile: about content length 2564
-failed=0
+failed=8
