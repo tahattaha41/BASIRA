@@ -3,7 +3,7 @@ import { createRequire } from 'node:module'; import fs from 'node:fs';
 const { chromium } = createRequire(import.meta.url)('playwright');
 const R = '/home/claude/smart-choice';
 const js = fs.readFileSync(R + '/assets/js/smart-choice.js', 'utf8');
-const css = fs.readFileSync(R + '/assets/css/smart-choice.css', 'utf8').split('\n').filter(l => !l.startsWith('@import')).join('\n');
+const css=(await import('./lib.mjs')).skin;
 const md = fs.readFileSync(R + '/pages/rates.md', 'utf8').split('---').slice(2).join('---');
 const now = Math.floor(Date.now() / 1000);
 const mk = (o = {}) => ({ source: 'open.er-api.com', updated: now - 600, fetched: now - 60,

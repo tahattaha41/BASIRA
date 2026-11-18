@@ -39,5 +39,5 @@ jobs:
           grep -q "application/ld+json" theme/smart-choice-blogger.xml
           grep -q "name='description'" theme/smart-choice-blogger.xml
           grep -q "id='main-content'" theme/smart-choice-blogger.xml
-          grep -q "smart-choice.css" theme/smart-choice-blogger.xml
           grep -q "smart-choice.js" theme/smart-choice-blogger.xml
+          grep -q "class='v2 sc2'" theme/smart-choice-blogger.xml

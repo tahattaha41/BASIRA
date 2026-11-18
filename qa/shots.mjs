@@ -4,7 +4,7 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 const R = '/home/claude/smart-choice'; const out = process.argv[2] || '/tmp/claude-0/shots'; const label = process.argv[3] || 'cur';
 fs.mkdirSync(out, { recursive: true });
 const js = fs.readFileSync(R + '/assets/js/smart-choice.js', 'utf8');
-const css = fs.readFileSync(R + '/assets/css/smart-choice.css', 'utf8').split('\n').filter(l => !l.startsWith('@import')).join('\n');
+const css=(await import('./lib.mjs')).skin;
 const body = f => fs.readFileSync(R + '/pages/' + f, 'utf8').split('---').slice(2).join('---');
 const now = Math.floor(Date.now() / 1000);
 const rates = { updated: now - 600, fetched: now - 60, egp: { USD: 53.45, EUR: 59.16, GBP: 70.78, SAR: 14.25, AED: 14.55, KWD: 174.2, QAR: 14.68 },

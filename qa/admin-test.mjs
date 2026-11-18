@@ -3,7 +3,7 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 const root='/home/claude/smart-choice';
 const js=fs.readFileSync(root+'/assets/js/smart-choice.js','utf8');
 const md=fs.readFileSync(root+'/pages/admin.md','utf8').split('---').slice(2).join('---');
-const css=fs.readFileSync(root+'/assets/css/smart-choice.css','utf8').split('\n').filter(l=>!l.startsWith('@import')).join('\n');
+const css=(await import('./lib.mjs')).skin;
 const b=await chromium.launch(); const p=await b.newPage({viewport:{width:1100,height:900}}); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
 const H={'access-control-allow-origin':'*'};
 await p.route('**/feeds/**',r=>r.fulfill({json:{feed:{entry:[{title:{$t:'مقال تجريبي'},published:{$t:'2026-10-30T10:00:00Z'},category:[{term:'التسوق الذكي'}],link:[{rel:'alternate',href:'https://x.test/a'}]}]}}}));

@@ -4,7 +4,7 @@ const R='/home/claude/smart-choice';
 const theme=fs.readFileSync(R+'/theme/smart-choice-blogger.xml','utf8');
 const skin=theme.split("<b:skin><![CDATA[")[1].split("]]>")[0];
 const js=fs.readFileSync(R+'/assets/js/smart-choice.js','utf8');
-const css=fs.readFileSync(R+'/assets/css/smart-choice.css','utf8').split('\n').filter(l=>!l.startsWith('@import')).join('\n');
+const css=(await import('./lib.mjs')).skin;
 const bundle=JSON.parse(fs.readFileSync(R+'/assets/content/bundle.json','utf8'));
 const page=(t)=>bundle.items.find(i=>i.title.startsWith(t)).html;
 const posts=bundle.items.filter(i=>i.kind==='post').slice(0,6);

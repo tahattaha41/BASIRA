@@ -5,14 +5,14 @@ const xml = fs.readFileSync('../theme/smart-choice-blogger.xml', 'utf8');
 const gate = xml.slice(xml.indexOf('/*SC-AD-GATE*/') + 14, xml.indexOf('//]]></script>', xml.indexOf('/*SC-AD-GATE*/')));
 const long = ('كلمة طويلة للاختبار ').repeat(200);
 const cases = [
-  ['home', '/', 'index', '<div class="sc-main"><section class="sc-h-hero"></section><p>' + long + '</p></div>', false],
-  ['hub', '/p/x.html', 'static_page', '<div class="sc-main"><div class="sc-tabs"></div><div class="sc-tool"></div><p>' + long + '</p></div>', false],
-  ['search', '/search?q=a', 'index', '<div class="sc-main"><p>' + long + '</p></div>', false],
-  ['error', '/404', 'error_page', '<div class="sc-main"><p>' + long + '</p></div>', false],
-  ['thin-post', '/2026/01/a.html', 'item', '<div class="sc-main"><p>قصير</p></div>', false],
-  ['static-nontool', '/p/about.html', 'static_page', '<div class="sc-main"><p>' + long + '</p></div>', false],
-  ['post', '/2026/01/a.html', 'item', '<div class="sc-main"><article><p>' + long + '</p></article></div>', true],
-  ['tool-page', '/p/t.html', 'static_page', '<div class="sc-main"><section class="sc-tool"></section><div class="sc-guide"><p>' + long + '</p></div></div>', true],
+  ['home', '/', 'index', '<div id="main-content"><section class="hero"></section><p>' + long + '</p></div>', false],
+  ['hub', '/p/x.html', 'static_page', '<div id="main-content"><div class="sc-tabs"></div><div class="sc-tool"></div><p>' + long + '</p></div>', false],
+  ['search', '/search?q=a', 'index', '<div id="main-content"><p>' + long + '</p></div>', false],
+  ['error', '/404', 'error_page', '<div id="main-content"><p>' + long + '</p></div>', false],
+  ['thin-post', '/2026/01/a.html', 'item', '<div id="main-content"><p>قصير</p></div>', false],
+  ['static-nontool', '/p/about.html', 'static_page', '<div id="main-content"><p>' + long + '</p></div>', false],
+  ['post', '/2026/01/a.html', 'item', '<div id="main-content"><article><p>' + long + '</p></article></div>', true],
+  ['tool-page', '/p/t.html', 'static_page', '<div id="main-content"><section class="sc-tool"></section><div class="sc-guide"><p>' + long + '</p></div></div>', true],
 ];
 const b = await chromium.launch(); let bad = 0;
 for (const [name, path, pt, body, want] of cases) {

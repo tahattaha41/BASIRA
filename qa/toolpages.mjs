@@ -2,7 +2,7 @@ import { createRequire } from 'node:module'; import fs from 'node:fs';
 const { chromium } = createRequire(import.meta.url)('playwright');
 const R='/home/claude/smart-choice';
 const js=fs.readFileSync(R+'/assets/js/smart-choice.js','utf8');
-const css=fs.readFileSync(R+'/assets/css/smart-choice.css','utf8').split('\n').filter(l=>!l.startsWith('@import')).join('\n');
+const css=(await import('./lib.mjs')).skin;
 const page=f=>fs.readFileSync(R+'/pages/'+f,'utf8').split('---').slice(2).join('---');
 const b=await chromium.launch(); const errs=[]; let bad=0;
 const files=fs.readdirSync(R+'/pages').filter(f=>/^tool-.*\.md$/.test(f));

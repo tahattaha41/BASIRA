@@ -23,16 +23,17 @@ const cdn = await page.evaluate(async () => { try { return await (await fetch('h
 // (يُقيَّم بعد فتح الصفحة الأولى)
 // الرئيسية
 { const okH = await go(BASE + '/'); rec(okH, 'Home loads'); if (!okH && /google\.com\/sorry/.test(page.url())) { mkdirSync('reports', { recursive: true }); writeFileSync('reports/live-e2e-blocked.md', '# الفحص الحي متوقف مؤقتاً\n\nجوجل حجبت عنوان سيرفر GitHub مؤقتاً (صفحة sorry) بسبب كثرة الطلبات، وهذا ليس عطلاً في الموقع. آخر نتيجة سليمة في live-e2e.txt محفوظة. ' + new Date().toISOString() + '\n'); console.log('blocked by google rate limit'); await browser.close().catch(() => {}); process.exit(0); } if (!okH) { const r2 = await fetch(BASE + '/', { redirect: 'manual' }).catch((e) => ({ status: 'neterr ' + e.message })); out.push('INFO  Home fetch status=' + r2.status + ' location=' + (r2.headers ? r2.headers.get('location') : '') + ' page.url=' + page.url()); } }
-rec((await page.locator('.sc-h-hero, .sc-hero2, .sc-hero').count()) > 0, 'Home shows hero');
+rec((await page.locator('.hero').count()) > 0, 'Home shows hero');
 await page.waitForTimeout(3500);
-rec((await page.locator('#sc-hq-g').count()) > 0, 'Design v4 live: hero calculator present (if FAIL: new JS not loading)');
+rec((await page.locator('#hc-g').count()) > 0, 'Theme v2 live: hero calculator present (if FAIL: upload new theme)');
+rec(await page.evaluate(() => document.documentElement.classList.contains('sc2')), 'Theme v2 live: html.sc2 marker (if FAIL: old theme installed)');
 const dsn = await page.evaluate(() => ({ font: getComputedStyle(document.body).fontFamily.slice(0, 40), btn: (document.querySelector('.sc-btn') ? getComputedStyle(document.querySelector('.sc-btn')).backgroundColor : '') }));
 out.push('INFO  Home style probe: font=' + dsn.font + ' | button=' + dsn.btn);
 rec((await page.content()).includes('Smart Choice loader'), 'Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)');
 const cdn2 = await page.evaluate(async () => { try { return await (await fetch('https://cdn.jsdelivr.net/gh/tahattaha41/Smart-Choice@main/assets/js/smart-choice.js')).text(); } catch { return ''; } });
 rec(cdn2.includes('content bundle'), 'CDN serves latest front-end JS (self-heal present)');
 await page.waitForTimeout(2500);
-const nav = (await page.locator('.sc-nav').innerText()).replace(/\s+/g, ' ');
+const nav = (await page.locator('.site-header').innerText()).replace(/\s+/g, ' ');
 rec(!/utilit[y]ra|flarivo|toolora/i.test(nav), 'Nav has no old-brand pages: ' + nav.slice(0, 120));
 
 // ads.txt (تحذير فقط: إجراء على المالك في إعدادات بلوجر)
@@ -53,8 +54,8 @@ try {
   hrefs = await page.evaluate(() => [...document.querySelectorAll('nav.sc-tabs [data-tab]')].map((b) => ({ t: b.getAttribute('data-tab'), h: b.getAttribute('data-href') || (window.__scToolUrls || {})[b.getAttribute('data-tab')] || '' })));
   rec(hrefs.length >= 30, 'Hub: icon buttons (' + hrefs.length + ')');
   rec(hrefs.filter((x) => x.h).length >= 30, 'Hub: icons carry page links (' + hrefs.filter((x) => x.h).length + ')');
-  const fontOk = await page.evaluate(() => document.fonts && [...document.fonts].some((f) => /Tajawal/i.test(f.family) && f.status === 'loaded'));
-  out.push((fontOk ? 'OK    ' : 'WARN  ') + 'Design font Tajawal loaded');
+  const fontOk = await page.evaluate(() => document.fonts && [...document.fonts].some((f) => /IBM Plex Sans Arabic/i.test(f.family) && f.status === 'loaded'));
+  out.push((fontOk ? 'OK    ' : 'WARN  ') + 'Design font IBM Plex Sans Arabic loaded');
   await page.fill('#sc-ask', 'خصم 25% على 1800'); await page.click('#sc-ask-go'); await page.waitForTimeout(800);
   const at = await page.locator('#sc-assistant-result').innerText().catch(() => '');
   rec(/[1١][,٬]?[3٣][5٥][0٠]/.test(at) && !/NaN|undefined/.test(at), 'Hub: assistant answers -> ' + at.replace(/\s+/g, ' ').slice(0, 60));

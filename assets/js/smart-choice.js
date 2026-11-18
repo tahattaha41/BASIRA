@@ -63,6 +63,7 @@
 /* Smart Choice — أحدث CSS دائماً: يُحقن من GitHub مباشرة لتجاوز كاش CDN القديم */
 (function () {
   "use strict";
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   try {
     var key = Math.floor(Date.now() / 300000);
     fetch("https://raw.githubusercontent.com/tahattaha41/Smart-Choice/main/assets/css/smart-choice.css?t=" + key, { credentials: "omit" })
@@ -702,6 +703,7 @@
    Static markup in the theme remains as a fallback if a request fails. */
 (function () {
   "use strict";
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   var ORDER = ["الأدوات", "أسعار اليوم", "مقارنة", "مركز القرار", "من نحن", "سياسة المحتوى", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "الشروط", "لوحة الإدارة"];
   function clean(title) { return String(title || "").replace(/\s*\|\s*Smart Choice\s*$/i, "").trim(); }
   var CORE = ["الأدوات الذكية", "أسعار اليوم", "مقارنة المنتجات", "مركز القرار", "من نحن", "سياسة المحتوى والتحرير", "إعلن معنا", "اتصل بنا", "خريطة الموقع", "سياسة الخصوصية", "شروط الاستخدام وإخلاء المسؤولية", "لوحة الإدارة"];
@@ -840,6 +842,7 @@
    without re-uploading the theme. The theme's own static home block stays as a no-JS fallback. */
 (function () {
   "use strict";
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   var isHome = location.pathname.replace(/index\.html$/, "") === "/";
   if (isHome) document.documentElement.classList.add("sc-home");
   var TOOLS = [
@@ -918,6 +921,7 @@
 /* Smart Choice — شريط التنقل السفلي للموبايل (يشبه التطبيقات) */
 (function () {
   "use strict";
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   function build(tools) {
     if (document.querySelector(".sc-bottombar")) return;
     var I = function (d) { return "<svg viewBox='0 0 24 24' width='22' height='22' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>" + d + "</svg>"; };
@@ -1171,6 +1175,7 @@
   "use strict";
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function addSearch() {
+    if (document.documentElement.classList.contains("sc2")) return;
     var inner = document.querySelector(".sc-headin");
     if (!inner || inner.querySelector(".sc-search")) return;
     var f = el("form", "sc-search"); f.action = "/search"; f.method = "get"; f.setAttribute("role", "search");
@@ -1191,8 +1196,9 @@
     var title = titleEl ? titleEl.textContent.trim() : document.title;
     var words = (body.innerText || "").trim().split(/\s+/).length;
     var mins = Math.max(1, Math.round(words / 180));
-    var meta = el("p", "sc-readtime", "⏱ وقت القراءة: " + mins + (mins === 1 ? " دقيقة" : " دقائق") + " · " + words + " كلمة");
-    body.parentNode.insertBefore(meta, body);
+    var SC2 = document.documentElement.classList.contains("sc2");
+    var meta = SC2 ? null : el("p", "sc-readtime", "⏱ وقت القراءة: " + mins + (mins === 1 ? " دقيقة" : " دقائق") + " · " + words + " كلمة");
+    if (meta) body.parentNode.insertBefore(meta, body);
     var url = location.href.split("?")[0].split("#")[0];
     var share = el("div", "sc-share"); share.appendChild(el("b", null, "شارك المقال: "));
     [["واتساب", "https://wa.me/?text=" + encodeURIComponent(title + " " + url)], ["فيسبوك", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url)], ["إكس", "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(title)]].forEach(function (x) {
@@ -1237,6 +1243,7 @@
    تحترم prefers-reduced-motion، ولا تُخفي أي محتوى بشكل دائم (احتياط زمني 8 ثوانٍ). */
 (function () {
   "use strict";
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var doc = document.documentElement;
   function init() {
@@ -1286,6 +1293,7 @@
 
 /* Smart Choice — الوضع الداكن (يُحفظ لكل جهاز، ويتبع إعداد الجهاز افتراضياً) */
 (function () {
+  if (document.documentElement.classList.contains("sc2")) return; /* القالب الجديد يبني الواجهة من الخادم */
   var K = "sc-theme-v3", cur = null;
   try { cur = localStorage.getItem(K); } catch (e) {}
   if (!cur) cur = "light";

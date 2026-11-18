@@ -3,7 +3,7 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 const root='/home/claude/smart-choice';
 const js=fs.readFileSync(root+'/assets/js/smart-choice.js','utf8');
 const tools=fs.readFileSync(root+'/pages/tools.md','utf8').split('---').slice(2).join('---');
-const css=fs.readFileSync(root+'/assets/css/smart-choice.css','utf8');
+const css=(await import('./lib.mjs')).skin;
 const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
 await p.route('https://x.test/feeds/pages/**',r=>r.fulfill({json:{feed:{entry:[{title:{$t:'الأدوات الذكية | Smart Choice'},summary:{$t:'short'},link:[{rel:'alternate',href:'https://x.test/p/tools.html'}]}]}}}));
 await p.route('https://raw.githubusercontent.com/**',r=>r.fulfill({json:{items:[{kind:'page',title:'الأدوات الذكية | Smart Choice',html:tools}]},headers:{'access-control-allow-origin':'*'}}));
