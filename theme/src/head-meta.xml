@@ -1,8 +1,0 @@
-  <meta expr:content='data:blog.pageTitle' property='og:title'/>
-  <meta expr:content='data:blog.url' property='og:url'/>
-  <meta content='website' property='og:type'/>
-  <meta content='Smart Choice' property='og:site_name'/>
-  <meta content='ar_EG' property='og:locale'/>
-  <meta content='summary' name='twitter:card'/>
-  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
-  <meta expr:content='data:blog.metaDescription' name='twitter:description'/>

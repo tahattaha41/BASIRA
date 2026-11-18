@@ -1,9 +1,0 @@
-OK    Home loads
-FAIL  Home shows hero
-FAIL  Theme v2 live: hero calculator present (if FAIL: upload new theme)
-OK    Theme v2 live: html.sc2 marker (if FAIL: old theme installed)
-INFO  Home style probe: font="IBM Plex Sans Arabic", "Segoe UI", Taho | button=
-OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
-OK    CDN serves latest front-end JS (self-heal present)
-FAIL  Test crashed: locator.innerText: Timeout 30000ms exceeded.
-failed=3
