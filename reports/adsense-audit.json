@@ -1,5 +1,5 @@
 {
- "score": 100,
+ "score": 89,
  "posts": 23,
  "avg_words": 744,
  "checks": [
@@ -100,15 +100,15 @@
    "fix": ""
   },
   {
-   "level": "pass",
+   "level": "fail",
    "title": "ملف ads.txt",
-   "detail": "",
+   "detail": "غير متاح/خاطئ (حالة 429).",
    "fix": "Blogger › الإعدادات › الأرباح › ads.txt مخصص، والصق: google.com, pub-1235197294708204, DIRECT, f08c47fec0942fa0"
   },
   {
-   "level": "pass",
+   "level": "warn",
    "title": "robots.txt متاح",
-   "detail": "",
+   "detail": "404",
    "fix": ""
   },
   {
