@@ -5,30 +5,21 @@ INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=r
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
 OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتأسعار اليوممقارنة المنتجاتمركز القرار
-OK    ads.txt يحتوي معرّف الناشر
+WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
 INFO  Pages feed entries: 43
-OK    Tools page loads
-OK    Hub: assistant visible
-OK    Hub: icon buttons (34)
-OK    Hub: icons carry page links (33)
-OK    Design font Tajawal loaded
-OK    Hub: assistant answers -> السعر بعد الخصم: ١٬٣٥٠ — قيمة التوفير: ٤٥٠ (الأداة: حاسبة ال
-OK    Discount tool page loads
-OK    Discount tool visible on its own page
-OK    Discount calculator works -> السعر بعد الخصم ١٬٦٠٠ قيمة التوفير ٤٠٠
-OK    Gold tool page loads
-OK    Gold reference line shown: سعر مرجعي للجرام (xaus.com، آخر تحديث ١٨‏/١١‏/٢٠٢٦، ٦:٠٩ ص): عيار 21 ≈ ٥٬٧٢٥٫١٩ عيار 24 ≈ 
+FAIL  Tools page loads
+FAIL  Hub: assistant NOT visible
+FAIL  Hub: icon buttons (0)
+FAIL  Hub: icons carry page links (0)
+WARN  Design font Tajawal loaded
+FAIL  Hub check error: page.fill: Timeout 30000ms exceeded.
+FAIL  Discount tool page link missing
 OK    Rates page loads
 OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
 OK    Rates board has no NaN/undefined
 INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٨‏/١١‏/٢٠٢٦، ٦:١٠ ص
-OK    Tool page opens with its tool visible: taxeg
-OK    Tool page guide text words (taxeg): 662
-OK    Tool page opens with its tool visible: percent
-OK    Tool page guide text words (percent): 478
-FAIL  About loads
-INFO  About url=https://smartchoicee1.blogspot.com/p/smart-choice.html status=302
-FAIL  About: body text length 0
+OK    About loads
+OK    About: body text length 2557
 OK    Contact loads
 OK    Contact: body text length 1440
 OK    Contact shows email
@@ -56,4 +47,4 @@ OK    Mobile: home content length 3288
 OK    Mobile: tools?m=1 loads
 OK    Mobile: tools hub rendered
 OK    Mobile: about content length 2564
-failed=8
+failed=6
