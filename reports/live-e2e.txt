@@ -1,50 +1,9 @@
 OK    Home loads
-OK    Home shows hero
-OK    Design v4 live: hero calculator present (if FAIL: new JS not loading)
-INFO  Home style probe: font=Tajawal, "Segoe UI", Tahoma, Arial, sans | button=rgb(43, 90, 74)
+FAIL  Home shows hero
+FAIL  Theme v2 live: hero calculator present (if FAIL: upload new theme)
+OK    Theme v2 live: html.sc2 marker (if FAIL: old theme installed)
+INFO  Home style probe: font="IBM Plex Sans Arabic", "Segoe UI", Taho | button=
 OK    Installed theme has the GitHub loader (if FAIL: upload theme/smart-choice-blogger.xml once)
 OK    CDN serves latest front-end JS (self-heal present)
-OK    Nav has no old-brand pages: الرئيسيةالأدوات الذكيةالمقالاتأسعار اليوممقارنة المنتجاتمركز القرار
-WARN  ads.txt غير مفعّل بعد في إعدادات بلوجر
-INFO  Pages feed entries: 43
-FAIL  Tools page loads
-FAIL  Hub: assistant NOT visible
-FAIL  Hub: icon buttons (0)
-FAIL  Hub: icons carry page links (0)
-WARN  Design font Tajawal loaded
-FAIL  Hub check error: page.fill: Timeout 30000ms exceeded.
-FAIL  Discount tool page link missing
-OK    Rates page loads
-OK    Rates board cards: 15 (عملات + ذهب + فضة؛ أقل من 8 = بيانات قديمة أو مصدر متوقف)
-OK    Rates board has no NaN/undefined
-INFO  Rates board meta: تتجدد تلقائياً | آخر فحص للمصادر: ١٨‏/١١‏/٢٠٢٦، ٦:١٠ ص
-OK    About loads
-OK    About: body text length 2557
-OK    Contact loads
-OK    Contact: body text length 1440
-OK    Contact shows email
-FAIL  Privacy loads
-INFO  Privacy url=https://smartchoicee1.blogspot.com/p/smart-choice_01636960364.html status=302
-FAIL  Privacy: body text length 0
-FAIL  Terms loads
-INFO  Terms url=https://smartchoicee1.blogspot.com/p/smart-choice_01037455191.html status=302
-FAIL  Terms: body text length 0
-FAIL  Decision page loads
-INFO  Decision page url=https://smartchoicee1.blogspot.com/p/smart-choice_01190848683.html status=302
-FAIL  Decision page: body text length 0
-OK    Compare page loads
-OK    Compare page: body text length 3098
-OK    Editorial page loads
-OK    Editorial page: body text length 1837
-OK    Admin page loads
-OK    Admin page: body text length 185
-OK    Admin: password gate shown and no data exposed before login
-OK    Posts in feed: 20
-OK    Latest post body length 3759
-OK    No JS errors
-OK    Mobile: home?m=1 loads
-OK    Mobile: home content length 3288
-OK    Mobile: tools?m=1 loads
-OK    Mobile: tools hub rendered
-OK    Mobile: about content length 2564
-failed=6
+FAIL  Test crashed: locator.innerText: Timeout 30000ms exceeded.
+failed=3
