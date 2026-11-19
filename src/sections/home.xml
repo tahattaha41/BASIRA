@@ -1,0 +1,27 @@
+<section class='hero'><div class='wrap'>
+<h1>اعرف أكثر، والعب لتتأكد</h1>
+<p class='lede'>مقالات عربية موثّقة بالمصادر في العلوم والتاريخ والجغرافيا وغيرها، وألعاب أسئلة تختبر ما عرفته. بلا تسجيل.</p>
+<form action='/search' class='find' method='get' role='search'>
+<label class='sr' for='q'>ابحث في الموقع</label>
+<input id='q' name='q' placeholder='ابحث عن موضوع' type='search'/>
+<button type='submit'>بحث</button>
+</form>
+</div></section>
+<div class='wrap'>
+<section class='sec' id='topics'><h2>أقسام المعرفة</h2>
+<ul class='topics'>{{TOPICS}}</ul></section>
+<section class='sec' id='games'><h2>الألعاب <span class='tag'>قيد الإعداد</span></h2>
+<p class='note'>لن تظهر لعبة هنا قبل أن تكتمل وتُختبر. هذه الخمس هي الأولى.</p>
+<ul class='games'>{{GAMES}}</ul></section>
+<section class='sec' id='latest'><h2>أحدث المقالات</h2>
+<ul class='posts'><b:loop values='data:posts' var='post'><li>
+<div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
+<p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
+<section class='sec'><h2>كيف نتحقق من المعلومات</h2>
+<div class='method'>
+<div><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></div>
+<div><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></div>
+<div><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></div>
+</div></section>
+</div>

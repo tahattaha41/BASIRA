@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' lang='ar' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:blog.pageTitle/></title>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <b:if cond='data:blog.pageType == &quot;error_page&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.searchQuery'>
+    <meta content='noindex,follow' name='robots'/>
+  </b:if>
+  <meta content='#f7f5f0' name='theme-color'/>
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
+  <script>//<![CDATA[
+  try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+  //]]></script>
+  <b:skin><![CDATA[
+{{CSS}}
+]]></b:skin>
+</head>
+<body>
+  <a class='skip' href='#main-content'>تجاوز إلى المحتوى</a>
+  <input aria-hidden='true' id='nav-t' tabindex='-1' type='checkbox'/>
+  <header class='top'>
+    <div class='wrap bar'>
+      <a class='brand' expr:href='data:blog.homepageUrl'>{{SITE}}</a>
+      <div class='bar-end'>
+        <button class='btn-quiet' id='theme-toggle' type='button'>الوضع الداكن</button>
+        <label class='btn-quiet menu-btn' for='nav-t'>القائمة</label>
+      </div>
+      <nav aria-label='القائمة الرئيسية' class='nav'>
+        <a expr:href='data:blog.homepageUrl'>الرئيسية</a>
+        <a href='#topics'>أقسام المعرفة</a>
+        <a href='#games'>الألعاب</a>
+        <a href='/p/about.html'>عن الموقع</a>
+      </nav>
+    </div>
+  </header>
+
+  <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+    <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
+      <b:widget-settings>
+        <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+        <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+        <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main' var='top'>
+<main id='main-content'>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+{{HOME}}
+<b:elseif cond='data:blog.pageType == &quot;error_page&quot;'/>
+{{ERROR}}
+<b:elseif cond='data:blog.pageType == &quot;item&quot;'/>
+{{ITEM}}
+<b:elseif cond='data:blog.pageType == &quot;static_page&quot;'/>
+{{STATIC}}
+<b:else/>
+{{LISTING}}
+</b:if>
+</main>
+      </b:includable>
+    </b:widget>
+  </b:section>
+
+  <footer class='foot'>
+    <div class='wrap'>
+      <div class='foot-grid'>
+        <div><div class='foot-brand'>{{SITE}}</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
+        <div><h4>أقسام المعرفة</h4><ul>{{FOOT_TOPICS}}</ul></div>
+        <div><h4>عن الموقع</h4><ul><li><a href='/p/about.html'>من نحن</a></li><li><a href='/p/editorial-policy.html'>سياسة التحرير</a></li><li><a href='/p/contact.html'>اتصل بنا</a></li><li><a href='/p/privacy-policy.html'>سياسة الخصوصية</a></li><li><a href='/p/terms.html'>شروط الاستخدام</a></li></ul></div>
+      </div>
+      <div class='foot-end'>© {{SITE}}</div>
+    </div>
+  </footer>
+  <script>//<![CDATA[
+{{JS}}
+  //]]></script>
+</body>
+</html>

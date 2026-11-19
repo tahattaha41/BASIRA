@@ -1,0 +1,5 @@
+<div class='wrap page'><b:loop values='data:posts' var='post'><article>
+<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <data:post.title/></nav>
+<h1><data:post.title/></h1>
+<div class='prose entry-content'><data:post.body/></div>
+</article></b:loop></div>
