@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' lang='ar' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:blog.pageTitle/></title>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <b:if cond='data:blog.pageType == &quot;error_page&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.searchQuery'>
+    <meta content='noindex,follow' name='robots'/>
+  <b:else/>
+    <meta content='index,follow,max-image-preview:large' name='robots'/>
+  </b:if>
+  <meta expr:content='data:blog.pageType' name='dq-pagetype'/>
+  <meta content='#f6f2ea' name='theme-color'/>
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+  <script type='application/ld+json'>
+  {"@context":"https://schema.org","@type":"WebSite","name":"دقّة","inLanguage":"ar","description":"أدوات عربية دقيقة للتواريخ والأرقام والوحدات، مع شرح طريقة كل حساب"}
+  </script>
+  <script>//<![CDATA[
+  try{if(localStorage.getItem('dq-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+  //]]></script>
+  <!-- AdSense: يُحمَّل فقط في المقالات وصفحات الأدوات والشروح ذات المحتوى الكافي. لا إعلانات في الرئيسية ولا الفهارس ولا البحث ولا 404. -->
+  <script>//<![CDATA[ /*DQ-AD-GATE*/
+  (function(){
+    var CLIENT='ca-pub-1235197294708204',MIN=350,tries=0,done=false;
+    function eligible(){
+      var m=document.querySelector('meta[name="dq-pagetype"]'),pt=m?m.getAttribute('content'):'';
+      if(pt!=='item'&&pt!=='static_page')return false;
+      var main=document.querySelector('#main-content');if(!main||main.querySelector('.hub'))return false;
+      var c=main.querySelector('.prose');if(!c)return false;c=c.cloneNode(true);
+      c.querySelectorAll('.tool,.related,script,style,nav').forEach(function(n){n.remove();});
+      return (c.textContent||'').split(/\s+/).filter(function(w){return w.length>1;}).length>=MIN;
+    }
+    function load(){if(done)return;done=true;var s=document.createElement('script');s.async=true;s.crossOrigin='anonymous';s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+CLIENT;document.head.appendChild(s);}
+    function check(){if(done)return;tries++;try{if(eligible()){load();return;}}catch(e){}if(tries<8)setTimeout(check,900);}
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(check,500);});else setTimeout(check,500);
+  })();
+  //]]></script>
+  <b:skin><![CDATA[
+/* دقّة — تصميم هادئ بطابع تحريري: ورق دافئ، حبر كحلي، لمسة طوب. بلا تدرجات ولا توهّج ولا أيقونات جاهزة. */
+:root{--paper:#f6f2ea;--card:#fffdf8;--ink:#1d2733;--soft:#4a5663;--faint:#7a828b;--rule:#d9d2c3;--rule2:#b9b09b;--brick:#9b3a1e;--steel:#28506f;--mark:#efe4c8;--ok:#2f6b4f;
+--ui:'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif;--read:'Noto Naskh Arabic','Traditional Arabic',Georgia,serif}
+html[data-theme=dark]{--paper:#14181d;--card:#1b2128;--ink:#ece7dc;--soft:#b9b4a8;--faint:#8b9097;--rule:#2d353e;--rule2:#47515c;--brick:#e08a68;--steel:#8fb5d3;--mark:#2a2f2a;--ok:#7fc4a0}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.9 var(--read);font-variant-numeric:lining-nums}
+a{color:var(--steel);text-underline-offset:3px}a:hover{color:var(--brick)}
+h1,h2,h3,h4,.ui{font-family:var(--ui);color:var(--ink);line-height:1.5;font-weight:700}
+.wrap{width:min(1080px,100% - 32px);margin-inline:auto}
+.skip{position:absolute;top:-60px;inset-inline-start:8px;background:var(--ink);color:var(--paper);padding:8px 14px;z-index:99}.skip:focus{top:8px}
+/* ترويسة */
+.top{border-bottom:2px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:20}
+.bar{display:flex;align-items:center;gap:20px;min-height:64px}
+.brand{font:700 28px/1 var(--ui);color:var(--ink);text-decoration:none;letter-spacing:0;display:flex;align-items:baseline;gap:10px}
+.brand small{font:500 13px/1.3 var(--ui);color:var(--faint)}
+.nav{display:flex;gap:4px;margin-inline-start:auto;align-items:center}
+.nav a{font:500 15px var(--ui);color:var(--ink);text-decoration:none;padding:8px 12px;border-bottom:2px solid transparent}
+.nav a:hover,.nav a[aria-current]{border-bottom-color:var(--brick);color:var(--ink)}
+.iconbtn{font:500 14px var(--ui);background:none;border:1px solid var(--rule2);color:var(--ink);padding:6px 12px;cursor:pointer;border-radius:3px}
+.iconbtn:hover{border-color:var(--ink)}
+.burger{display:none}
+#nav-t{display:none}
+/* شريط اليوم */
+.today{background:var(--ink);color:var(--paper);font:500 14px/1.4 var(--ui)}
+.today .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:9px 0;align-items:center}
+.today b{font-weight:700}.today span{opacity:.85}
+/* الصفحة الرئيسية */
+.intro{padding:52px 0 36px;border-bottom:1px solid var(--rule)}
+.intro h1{font-size:clamp(28px,5vw,46px);margin:0 0 14px;max-width:22ch;font-weight:700}
+.intro p{font-size:20px;color:var(--soft);max-width:60ch;margin:0}
+.intro .wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;align-items:center}
+.plate{border:1px solid var(--rule2);background:var(--card);min-height:248px}
+.plate>div{padding:20px 24px;display:grid;grid-template-columns:auto 1fr;gap:4px 20px;align-items:center}
+.plate>div+div{border-top:1px solid var(--rule2)}
+.plate small{grid-column:1/-1;font:600 13px var(--ui);color:var(--faint)}
+.plate .d{font:700 64px/1 var(--ui);color:var(--brick);font-variant-numeric:tabular-nums}
+.plate .m{font:600 20px/1.5 var(--ui);color:var(--ink)}.plate .m span{display:block;font:500 15px var(--ui);color:var(--soft)}
+.quick{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.sec{padding:40px 0 8px}.sec>h2{font-size:22px;margin:0 0 4px;display:flex;align-items:baseline;gap:14px}.sec>h2 small{font:500 14px var(--ui);color:var(--faint)}
+.sec>p.lead{color:var(--soft);margin:0 0 14px}
+.idx{list-style:none;margin:10px 0 0;padding:0;border-top:2px solid var(--ink)}
+.idx li{border-bottom:1px solid var(--rule)}
+.idx a{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:baseline;padding:16px 4px;text-decoration:none;color:var(--ink)}
+.idx a:hover{background:var(--mark)}
+.idx .n{font:700 15px var(--ui);color:var(--brick);font-variant-numeric:tabular-nums}
+.idx .t{font:700 18px/1.5 var(--ui)}.idx .d{display:block;font:400 16px/1.7 var(--read);color:var(--soft);margin-top:2px}
+.idx .go{font:500 14px var(--ui);color:var(--faint)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:0 56px}.cols .sec{padding-top:36px}
+.group{font:700 14px var(--ui);color:var(--steel);margin:30px 0 -4px;padding-bottom:6px}
+.posts{list-style:none;margin:10px 0 0;padding:0;border-top:2px solid var(--ink)}
+.posts li{border-bottom:1px solid var(--rule);padding:18px 4px}
+.posts a{font:700 19px/1.6 var(--ui);color:var(--ink);text-decoration:none}.posts a:hover{color:var(--brick)}
+.posts p{margin:4px 0 0;color:var(--soft);font-size:17px;line-height:1.8}
+.meta{font:500 13px var(--ui);color:var(--faint);display:flex;gap:14px;flex-wrap:wrap}
+.method{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:14px;border-top:2px solid var(--ink)}
+.method div{padding:20px 20px 20px 0;border-inline-start:1px solid var(--rule);padding-inline-start:20px}.method div:first-child{border-inline-start:0;padding-inline-start:0}
+.method h3{font-size:17px;margin:0 0 6px}.method p{margin:0;color:var(--soft);font-size:17px;line-height:1.8}
+/* صفحات المحتوى */
+.page{padding:30px 0 24px}
+.crumbs{font:500 13px var(--ui);color:var(--faint);margin-bottom:12px}.crumbs a{color:var(--faint)}
+.page h1{font-size:clamp(26px,4.4vw,38px);margin:0 0 10px;font-weight:700}
+.lede{font-size:20px;color:var(--soft);margin:0 0 20px;max-width:62ch}
+.layout{display:grid;grid-template-columns:minmax(0,720px) 250px;gap:64px;justify-content:start}
+.side{padding-top:6px;font:500 15px/1.7 var(--ui)}.side h4{font-size:14px;color:var(--faint);margin:0 0 8px;border-bottom:1px solid var(--rule);padding-bottom:6px}
+.side ul{list-style:none;padding:0;margin:0 0 26px}.side li{padding:5px 0}.side a{text-decoration:none;color:var(--ink)}.side a:hover{color:var(--brick)}
+#toc{margin:0 0 26px;padding:14px 18px;border:1px solid var(--rule);background:var(--card);font:500 15px/1.8 var(--ui)}#toc ol{margin:6px 0 0;padding-inline-start:22px}#toc[hidden]{display:none}
+.prose{max-width:none}.prose>p,.prose>ul,.prose>ol,.prose>blockquote{max-width:68ch}.prose h2{font-size:24px;margin:2em 0 .5em;padding-top:.3em;border-top:1px solid var(--rule)}.prose h3{font-size:19px;margin:1.6em 0 .3em}
+.prose p,.prose li{margin:.8em 0}.prose ul,.prose ol{padding-inline-start:1.5em}
+.prose table{border-collapse:collapse;width:100%;margin:1.2em 0;font:400 16px/1.6 var(--ui);display:table}
+.prose th,.prose td{border:1px solid var(--rule2);padding:9px 12px;text-align:start}.prose th{background:var(--mark);font-weight:700}
+.prose blockquote{margin:1.4em 0;padding:4px 18px;border-inline-start:4px solid var(--brick);background:var(--card);color:var(--soft)}
+.prose code{font:15px ui-monospace,monospace;background:var(--mark);padding:1px 6px;direction:ltr;unicode-bidi:embed}
+.prose .eq{display:block;direction:ltr;text-align:center;font:17px ui-monospace,monospace;background:var(--card);border:1px solid var(--rule);padding:12px;margin:1.2em 0;overflow-x:auto}
+.byline{font:500 14px var(--ui);color:var(--faint);display:flex;gap:16px;flex-wrap:wrap;padding:10px 0 18px;border-bottom:1px solid var(--rule);margin-bottom:20px}
+.related{margin-top:34px;border-top:2px solid var(--ink);padding-top:6px}.related h2{font-size:18px;margin:10px 0}
+.pager{display:flex;justify-content:space-between;gap:16px;margin:34px 0 0;font:500 15px var(--ui)}
+.labels{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}.labels a{font:500 13px var(--ui);border:1px solid var(--rule2);padding:2px 10px;text-decoration:none;color:var(--soft)}
+/* الأدوات */
+.tool{background:var(--card);border:1px solid var(--rule2);border-top:4px solid var(--brick);padding:22px;margin:8px 0 30px}
+.tool h3{margin:0 0 10px;font-size:17px}.tool h3:not(:first-child){margin-top:26px;padding-top:18px;border-top:1px dashed var(--rule2)}
+.grid2,.grid3{display:grid;gap:14px 18px}.grid2{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr 1fr}
+.fld{display:flex;flex-direction:column;gap:5px;margin:0 0 14px}.fld label,.chk{font:600 14px var(--ui);color:var(--soft)}.fld small{color:var(--faint);font:400 13px var(--ui)}
+.tool input,.tool select,.tool textarea{font:500 17px var(--ui);background:var(--paper);color:var(--ink);border:1px solid var(--rule2);border-radius:3px;padding:10px 12px;width:100%;min-height:46px}
+.tool input[type=checkbox]{width:18px;min-height:0;vertical-align:middle}
+.tool textarea{font-family:var(--read);line-height:1.8;resize:vertical}
+.tool input:focus,.tool select:focus,.tool textarea:focus,.btn:focus-visible,.iconbtn:focus-visible,a:focus-visible{outline:3px solid var(--steel);outline-offset:1px}
+.out{margin-top:10px;border-top:1px solid var(--rule);padding-top:12px}
+.big{font:700 clamp(22px,4.6vw,32px)/1.5 var(--ui);color:var(--brick);margin:4px 0 10px}.big.words{font:700 clamp(20px,3.6vw,26px)/1.9 var(--read)}
+.r{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--rule);font:400 16px/1.6 var(--ui)}.r .k{color:var(--soft)}.r .v{font-weight:600;text-align:end}
+.note{font:400 14px/1.8 var(--ui);color:var(--soft);background:var(--mark);padding:10px 14px;margin:12px 0 0}
+.sub{font:500 14px var(--ui);color:var(--faint);margin:10px 0 4px}
+.btn{font:600 15px var(--ui);background:var(--ink);color:var(--paper);border:0;padding:11px 20px;cursor:pointer;border-radius:3px;text-decoration:none;display:inline-block}.btn:hover{background:var(--brick);color:#fff}
+.btn.alt{background:none;color:var(--ink);border:1px solid var(--ink)}.btn.alt:hover{background:var(--ink);color:var(--paper)}
+table.mini{width:100%;border-collapse:collapse;font:400 15px var(--ui)}table.mini td{border-bottom:1px solid var(--rule);padding:6px 4px}table.mini td+td{text-align:end;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}.stats div{border:1px solid var(--rule);padding:10px;text-align:center;font-family:var(--ui)}.stats b{display:block;font-size:22px;color:var(--brick)}.stats span{font-size:13px;color:var(--soft)}
+.tags span{display:inline-block;border:1px solid var(--rule2);padding:2px 10px;margin:0 0 6px 6px;font:500 14px var(--ui)}
+.faq details{border-bottom:1px solid var(--rule);padding:12px 0}.faq summary{font:700 17px var(--ui);cursor:pointer}.faq p{margin:8px 0 0}
+/* تذييل */
+.foot{margin-top:60px;border-top:2px solid var(--ink);padding:36px 0 0;font:400 15px/1.9 var(--ui)}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}.foot h4{font-size:14px;margin:0 0 10px;color:var(--faint)}.foot ul{list-style:none;margin:0;padding:0}.foot li{padding:3px 0}.foot a{color:var(--ink);text-decoration:none}.foot a:hover{color:var(--brick);text-decoration:underline}
+.foot .b{font:700 24px var(--ui);margin-bottom:8px}.foot p{margin:0;color:var(--soft);max-width:34ch}
+.fb{border-top:1px solid var(--rule);margin-top:30px;padding:16px 0 26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--faint);font-size:14px}
+.err{padding:90px 0;text-align:center}.err h1{font-size:60px;margin:0;color:var(--brick)}
+[hidden]{display:none!important}
+@media(max-width:860px){.intro .wrap{grid-template-columns:1fr;gap:28px}.plate{min-height:0}.layout{grid-template-columns:1fr}.side{order:2}.cols,.method{grid-template-columns:1fr}.method div{border-inline-start:0;padding-inline-start:0;border-top:1px solid var(--rule)}.fg{grid-template-columns:1fr 1fr}.fg>div:first-child{grid-column:1/-1}}
+@media(max-width:700px){body{font-size:17px}.burger{display:inline-block}.nav{position:absolute;inset-inline:0;top:100%;background:var(--paper);border-bottom:2px solid var(--ink);flex-direction:column;align-items:stretch;padding:8px 16px;display:none}#nav-t:checked~.top .nav{display:flex}.nav a{padding:12px 4px;border-bottom:1px solid var(--rule)}.brand small{display:none}.intro{padding:34px 0 26px}.grid2,.grid3{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.tool{padding:16px}.idx a{grid-template-columns:34px 1fr}.idx .go{display:none}.bar{gap:10px}.nav-wrap{margin-inline-start:auto;display:flex;gap:8px}}
+@media print{.top,.today,.foot,.side,.tool .btn{display:none}body{background:#fff;font-size:12pt}}
+
+]]></b:skin>
+</head>
+<body>
+  <a class='skip' href='#main-content'>تجاوز إلى المحتوى</a>
+  <input aria-hidden='true' id='nav-t' tabindex='-1' type='checkbox'/>
+  <header class='top'>
+    <div class='wrap bar'>
+      <a class='brand' expr:href='data:blog.homepageUrl'>دقّة <small>أدوات وأدلة عربية</small></a>
+      <nav aria-label='القائمة الرئيسية' class='nav'>
+        <a href='/p/tools.html'>الأدوات</a>
+        <a expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>المقالات</a>
+        <a href='/p/about.html'>عن دقّة</a>
+      </nav>
+      <div class='nav-wrap'>
+        <button aria-label='تبديل الوضع الداكن' class='iconbtn' id='theme-toggle' type='button'>الوضع</button>
+        <label class='iconbtn burger' for='nav-t'>القائمة</label>
+      </div>
+    </div>
+  </header>
+  <div class='today'><div class='wrap'><b>اليوم</b><span data-today='g'></span><span data-today='h'></span></div></div>
+
+  <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+    <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
+      <b:widget-settings>
+        <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+        <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+        <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main' var='top'>
+<main id='main-content'>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+<section class='intro'><div class='wrap'><div>
+<h1>أدوات عربية دقيقة للتواريخ والأرقام والوحدات</h1>
+<p>تحسب بلا تسجيل وبلا إرسال بياناتك لأحد، وتشرح لك تحت كل أداة طريقة الحساب وحدودها وأمثلة يمكنك التحقق منها.</p>
+<div class='quick'><a class='btn' href='/p/age-calculator.html'>احسب عمرك</a><a class='btn alt' href='/p/numbers-to-words.html'>اكتب مبلغاً بالحروف</a><a class='btn alt' href='/p/tools.html'>كل الأدوات</a></div></div>
+<div class='plate' id='plate' aria-label='تاريخ اليوم'></div>
+</div></section>
+<div class='wrap'>
+<div class='cols'>
+<section class='sec'><h2>التواريخ والوقت <small>خمس أدوات</small></h2><ul class='idx'><li><a href='/p/age-calculator.html'><span class='n'>01</span><span><span class='t'>حاسبة العمر</span><span class='d'>عمرك بالسنين والأشهر والأيام، ميلادياً وهجرياً، وموعد عيد ميلادك القادم.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/date-difference.html'><span class='n'>02</span><span><span class='t'>الفرق بين تاريخين</span><span class='d'>عدد الأيام والأسابيع والأشهر بين أي تاريخين مع خيار احتساب يوم النهاية.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/hijri-converter.html'><span class='n'>03</span><span><span class='t'>تحويل التاريخ الهجري والميلادي</span><span class='d'>تحويل في الاتجاهين بتقويم أم القرى مع اسم اليوم.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/business-days.html'><span class='n'>04</span><span><span class='t'>حاسبة أيام العمل</span><span class='d'>أيام العمل بين تاريخين أو بعد عدد من الأيام، بعطلة الجمعة والسبت وإجازاتك.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/countdown.html'><span class='n'>05</span><span><span class='t'>كم باقي على رمضان والأعياد</span><span class='d'>العد التنازلي لرمضان والعيدين ورأس السنة الهجرية أو لأي تاريخ.</span></span><span class='go'>افتح ←</span></a></li></ul></section>
+<section class='sec'><h2>الأرقام والنصوص والوحدات <small>خمس أدوات</small></h2><ul class='idx'><li><a href='/p/numbers-to-words.html'><span class='n'>06</span><span><span class='t'>كتابة الأرقام والمبالغ بالحروف</span><span class='d'>تفقيط الجنيه والريال والدولار والدرهم بالإعراب المناسب.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/percentage-calculator.html'><span class='n'>07</span><span><span class='t'>حاسبة النسبة المئوية</span><span class='d'>ست عمليات: نسبة من رقم، التغير، الإضافة، الخصم، والعكس.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/word-counter.html'><span class='n'>08</span><span><span class='t'>عدّاد الكلمات والحروف</span><span class='d'>كلمات وحروف وجمل وزمن قراءة وأكثر الكلمات تكراراً.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/unit-converter.html'><span class='n'>09</span><span><span class='t'>محوّل الوحدات والمساحات المصرية</span><span class='d'>الفدان والقيراط والسهم والقصبة والرطل بجانب الوحدات العالمية.</span></span><span class='go'>افتح ←</span></a></li><li><a href='/p/time-calculator.html'><span class='n'>10</span><span><span class='t'>حاسبة ساعات العمل</span><span class='d'>مدة الدوام بالساعات العشرية وأجر اليوم مع خصم الاستراحة.</span></span><span class='go'>افتح ←</span></a></li></ul></section>
+</div>
+<section class='sec'><h2>أحدث المقالات <small>شروح بأمثلة محسوبة</small></h2>
+<ul class='posts'><b:loop values='data:posts' var='post'><li><div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
+<p><a href='/search?max-results=24'>كل المقالات ←</a></p></section>
+<section class='sec'><h2>كيف نعمل</h2>
+<div class='method'>
+<div><h3>كل أداة مشروحة</h3><p>تحت كل أداة طريقة الحساب بالمعادلة وأمثلة محسوبة وأسئلة شائعة، حتى تفهم النتيجة لا أن تصدّقها فقط.</p></div>
+<div><h3>اختبار الحالات الحدّية</h3><p>نختبر الأدوات على نهاية الشهر والسنة الكبيسة والإعراب والكسور، وهي مواضع الخطأ المعتادة.</p></div>
+<div><h3>خصوصيتك محفوظة</h3><p>يجري الحساب كله في متصفحك. لا تُرسل التواريخ ولا النصوص إلى أي خادم.</p></div>
+</div></section>
+</div>
+<b:elseif cond='data:blog.pageType == &quot;error_page&quot;'/>
+<div class='wrap err'><h1>404</h1><h2>هذه الصفحة غير موجودة</h2><p>ربما تغيّر الرابط. ابدأ من الأدوات أو ارجع إلى الرئيسية.</p><p><a class='btn' expr:href='data:blog.homepageUrl'>الرئيسية</a> <a class='btn alt' href='/p/tools.html'>الأدوات</a></p></div>
+<b:elseif cond='data:blog.pageType == &quot;item&quot;'/>
+<div class='wrap page'><b:loop values='data:posts' var='post'><article>
+<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <a expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>المقالات</a></nav>
+<div class='labels'><b:loop values='data:post.labels' var='label'><a expr:href='data:label.url' rel='tag'><data:label.name/></a></b:loop></div>
+<h1 class='entry-title' itemprop='headline'><data:post.title/></h1>
+<div class='byline'><span>بقلم <data:post.author.name/></span><time expr:datetime='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></time><span id='rt'></span></div>
+<div class='layout'><div>
+<nav hidden='hidden' id='toc'></nav>
+<div class='prose entry-content' data-toc='1' itemprop='articleBody'><data:post.body/></div>
+<nav aria-label='التنقل بين المقالات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>→ المقال الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>المقال الأقدم ←</a></b:if></nav>
+</div>
+<aside class='side'><h4>الأدوات</h4><ul><li><a href='/p/age-calculator.html'>حاسبة العمر</a></li><li><a href='/p/date-difference.html'>الفرق بين تاريخين</a></li><li><a href='/p/hijri-converter.html'>تحويل التاريخ الهجري والميلادي</a></li><li><a href='/p/business-days.html'>حاسبة أيام العمل</a></li><li><a href='/p/countdown.html'>كم باقي على رمضان والأعياد</a></li><li><a href='/p/numbers-to-words.html'>كتابة الأرقام والمبالغ بالحروف</a></li><li><a href='/p/percentage-calculator.html'>حاسبة النسبة المئوية</a></li><li><a href='/p/word-counter.html'>عدّاد الكلمات والحروف</a></li><li><a href='/p/unit-converter.html'>محوّل الوحدات والمساحات المصرية</a></li><li><a href='/p/time-calculator.html'>حاسبة ساعات العمل</a></li></ul><h4>اقرأ أيضاً</h4><ul><li><a expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>كل المقالات</a></li><li><a href='/p/editorial-policy.html'>سياسة التحرير</a></li></ul></aside>
+</div></article></b:loop></div>
+<b:elseif cond='data:blog.pageType == &quot;static_page&quot;'/>
+<div class='wrap page'><b:loop values='data:posts' var='post'><article>
+<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <data:post.title/></nav>
+<h1><data:post.title/></h1>
+<div class='layout'><div class='prose entry-content'><data:post.body/></div>
+<aside class='side'><h4>الأدوات</h4><ul><li><a href='/p/age-calculator.html'>حاسبة العمر</a></li><li><a href='/p/date-difference.html'>الفرق بين تاريخين</a></li><li><a href='/p/hijri-converter.html'>تحويل التاريخ الهجري والميلادي</a></li><li><a href='/p/business-days.html'>حاسبة أيام العمل</a></li><li><a href='/p/countdown.html'>كم باقي على رمضان والأعياد</a></li><li><a href='/p/numbers-to-words.html'>كتابة الأرقام والمبالغ بالحروف</a></li><li><a href='/p/percentage-calculator.html'>حاسبة النسبة المئوية</a></li><li><a href='/p/word-counter.html'>عدّاد الكلمات والحروف</a></li><li><a href='/p/unit-converter.html'>محوّل الوحدات والمساحات المصرية</a></li><li><a href='/p/time-calculator.html'>حاسبة ساعات العمل</a></li></ul></aside></div></article></b:loop></div>
+<b:else/>
+<div class='wrap page'>
+<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › المقالات</nav>
+<b:if cond='data:blog.searchLabel'><h1><data:blog.searchLabel/></h1><b:if cond='data:blog.searchLabel == &quot;التقويم والتواريخ&quot;'><p class='lede'>شروح التقويمين الهجري والميلادي وحساب الأعمار والفروق بين التواريخ.</p></b:if><b:if cond='data:blog.searchLabel == &quot;الأرقام واللغة&quot;'><p class='lede'>كتابة الأرقام والمبالغ بالحروف وقواعد العدد والمعدود.</p></b:if><b:if cond='data:blog.searchLabel == &quot;الوحدات والمقاييس&quot;'><p class='lede'>الوحدات المصرية التقليدية وتحويلها إلى الوحدات العالمية.</p></b:if><b:if cond='data:blog.searchLabel == &quot;الحساب اليومي&quot;'><p class='lede'>النسب وأيام العمل وساعات الدوام: حساب بلا التباس.</p></b:if>
+<b:elseif cond='data:blog.searchQuery'/><h1>نتائج البحث: <data:blog.searchQuery/></h1><p class='lede'>المقالات المطابقة لبحثك.</p>
+<b:else/><h1>كل المقالات</h1><p class='lede'>شروح بأمثلة محسوبة، كل مقال مرتبط بالأداة المناسبة.</p></b:if>
+<ul class='posts'><b:loop values='data:posts' var='post'><li><div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
+<nav aria-label='التنقل بين الصفحات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>→ الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم ←</a></b:if></nav>
+</div>
+</b:if>
+</main>
+      </b:includable>
+    </b:widget>
+  </b:section>
+
+  <footer class='foot'>
+    <div class='wrap'>
+      <div class='fg'>
+        <div><div class='b'>دقّة</div><p>أدوات حساب عربية للتواريخ والأرقام والوحدات، تعرض طريقة الحساب وحدودها، وتجري كلها داخل متصفحك.</p></div>
+        <div><h4>التواريخ والوقت</h4><ul><li><a href='/p/age-calculator.html'>حاسبة العمر</a></li><li><a href='/p/date-difference.html'>الفرق بين تاريخين</a></li><li><a href='/p/hijri-converter.html'>تحويل التاريخ الهجري والميلادي</a></li><li><a href='/p/business-days.html'>حاسبة أيام العمل</a></li><li><a href='/p/countdown.html'>كم باقي على رمضان والأعياد</a></li></ul></div>
+        <div><h4>الأرقام والوحدات</h4><ul><li><a href='/p/numbers-to-words.html'>كتابة الأرقام والمبالغ بالحروف</a></li><li><a href='/p/percentage-calculator.html'>حاسبة النسبة المئوية</a></li><li><a href='/p/word-counter.html'>عدّاد الكلمات والحروف</a></li><li><a href='/p/unit-converter.html'>محوّل الوحدات والمساحات المصرية</a></li><li><a href='/p/time-calculator.html'>حاسبة ساعات العمل</a></li></ul></div>
+        <div><h4>عن الموقع</h4><ul><li><a href='/p/about.html'>عن دقّة</a></li><li><a href='/p/editorial-policy.html'>سياسة التحرير</a></li><li><a href='/p/contact.html'>اتصل بنا</a></li><li><a href='/p/privacy-policy.html'>سياسة الخصوصية</a></li><li><a href='/p/terms.html'>شروط الاستخدام</a></li></ul></div>
+      </div>
+      <div class='fb'><span>© دقّة — جميع الحقوق محفوظة</span><span>الأدوات للإرشاد والتخطيط، وليست استشارة قانونية أو مالية أو دينية.</span></div>
+    </div>
+  </footer>
+  <script>//<![CDATA[
+/* دقّة — منطق الحساب (بلا واجهة). يعمل في المتصفح وفي Node للاختبار. */
+var DaqqaCore = (function () {
+  'use strict';
+  var MS = 86400000;
+
+  /* ---------- التواريخ ---------- */
+  function utc(y, m, d) { var t = new Date(0); t.setUTCFullYear(y, m - 1, d); t.setUTCHours(12, 0, 0, 0); return t; } // ظهراً لتفادي مشاكل التوقيت
+  function parseISO(s) { var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ''); if (!m) return null; var d = utc(+m[1], +m[2], +m[3]); return d.getUTCMonth() === +m[2] - 1 ? d : null; }
+  function iso(d) { return d.getUTCFullYear().toString().padStart(4, '0') + '-' + String(d.getUTCMonth() + 1).padStart(2, '0') + '-' + String(d.getUTCDate()).padStart(2, '0'); }
+  function diffDays(a, b) { return Math.round((b - a) / MS); }
+  function addDays(d, n) { return new Date(d.getTime() + n * MS); }
+  function isLeap(y) { return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0; }
+  function monthLen(y, m) { return [31, isLeap(y) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1]; }
+
+  /* فرق بالسنين والأشهر والأيام (ميلادي) */
+  function addMonths(d, n) { var t = d.getUTCFullYear() * 12 + d.getUTCMonth() + n, y = Math.floor(t / 12), m = t % 12; return utc(y, m + 1, Math.min(d.getUTCDate(), monthLen(y, m + 1))); }
+  function ymd(a, b) { // أكبر عدد أشهر كاملة (مع قصّ نهاية الشهر) ثم الأيام المتبقية
+    var total = (b.getUTCFullYear() - a.getUTCFullYear()) * 12 + b.getUTCMonth() - a.getUTCMonth();
+    while (total > 0 && addMonths(a, total) > b) total--;
+    return { y: Math.floor(total / 12), m: total % 12, d: diffDays(addMonths(a, total), b) };
+  }
+
+  /* ---------- الهجري (أم القرى عبر Intl) ---------- */
+  var HF = null;
+  function hfmt() { if (!HF) HF = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { year: 'numeric', month: 'numeric', day: 'numeric', timeZone: 'UTC' }); return HF; }
+  function toHijri(d) {
+    var o = {}; hfmt().formatToParts(d).forEach(function (p) { if (p.type !== 'literal' && p.type !== 'era') o[p.type] = parseInt(p.value, 10); });
+    return { y: o.year, m: o.month, d: o.day };
+  }
+  function hcmp(a, b) { return a.y !== b.y ? a.y - b.y : a.m !== b.m ? a.m - b.m : a.d - b.d; }
+  function fromHijri(y, m, d) {
+    var g = new Date(Date.UTC(622, 6, 16, 12) + ((y - 1) * 354.367 + (m - 1) * 29.5306 + (d - 1)) * MS);
+    for (var i = 0; i < 80; i++) {
+      var h = toHijri(g), c = hcmp(h, { y: y, m: m, d: d });
+      if (c === 0) return g;
+      g = addDays(g, c > 0 ? -1 : 1);
+      if (i > 60) { /* تاريخ غير موجود (مثلاً يوم 30 في شهر من 29) */ }
+    }
+    return null;
+  }
+  function hijriMonthLen(y, m) { var a = fromHijri(y, m, 1), ny = m === 12 ? y + 1 : y, nm = m === 12 ? 1 : m + 1, b = fromHijri(ny, nm, 1); return diffDays(a, b); }
+  function validHijri(y, m, d) { if (m < 1 || m > 12 || d < 1) return false; var g = fromHijri(y, m, d); if (!g) return false; var h = toHijri(g); return h.y === y && h.m === m && h.d === d; }
+  function ymdHijri(a, b) { // a, b: تواريخ ميلادية؛ الفرق بحساب الهجري
+    var ha = toHijri(a), hb = toHijri(b), y = hb.y - ha.y, m = hb.m - ha.m, d = hb.d - ha.d;
+    if (d < 0) { m--; var pm = hb.m === 1 ? 12 : hb.m - 1, py = hb.m === 1 ? hb.y - 1 : hb.y; d += hijriMonthLen(py, pm); }
+    if (m < 0) { y--; m += 12; }
+    return { y: y, m: m, d: d };
+  }
+  var HM = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
+  var GM = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  var DN = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+
+  /* أقرب تاريخ هجري قادم (شهر/يوم) بدءاً من تاريخ معيّن */
+  function nextHijriOccurrence(from, hm, hd) {
+    var h = toHijri(from), y = h.y;
+    var g = fromHijri(y, hm, hd);
+    if (!g || g < from) g = fromHijri(y + 1, hm, hd);
+    return g;
+  }
+
+  /* ---------- أيام العمل ---------- */
+  function businessDays(a, b, weekend, holidays) { // يشمل a ويستبعد b (عدد الأيام التي تمرّ)، weekend مصفوفة أرقام JS (0=أحد)
+    var n = 0, hs = {}; (holidays || []).forEach(function (h) { hs[h] = 1; });
+    var s = a <= b ? a : b, e = a <= b ? b : a;
+    for (var d = s; d < e; d = addDays(d, 1)) { if (weekend.indexOf(d.getUTCDay()) < 0 && !hs[iso(d)]) n++; }
+    return a <= b ? n : -n;
+  }
+  function addBusinessDays(a, n, weekend, holidays) {
+    var hs = {}; (holidays || []).forEach(function (h) { hs[h] = 1; });
+    var d = a, step = n >= 0 ? 1 : -1, left = Math.abs(n);
+    while (left > 0) { d = addDays(d, step); if (weekend.indexOf(d.getUTCDay()) < 0 && !hs[iso(d)]) left--; }
+    return d;
+  }
+
+  /* ---------- الأرقام بالحروف ---------- */
+  var M1 = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة'];
+  var F1 = ['', 'واحدة', 'اثنتان', 'ثلاث', 'أربع', 'خمس', 'ست', 'سبع', 'ثمان', 'تسع', 'عشر'];
+  var TEEN_M = ['عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+  var TEEN_F = ['عشر', 'إحدى عشرة', 'اثنتا عشرة', 'ثلاث عشرة', 'أربع عشرة', 'خمس عشرة', 'ست عشرة', 'سبع عشرة', 'ثماني عشرة', 'تسع عشرة'];
+  var TENS = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+  var HUND = ['', 'مائة', 'مائتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+
+  function acc(s) { // تحويل المرفوع إلى منصوب/مجرور
+    return s.replace(/اثنان/g, 'اثنين').replace(/اثنتان/g, 'اثنتين').replace(/اثنا /g, 'اثني ').replace(/اثنتا /g, 'اثنتي ')
+      .replace(/(عشر|ثلاث|أربع|خمس|ست|سبع|ثمان|تسع)ون/g, '$1ين').replace(/مائتان/g, 'مائتين').replace(/مائتا /g, 'مائتي ').replace(/(ألف|مليون|مليار)ان/g, '$1ين');
+  }
+  function words3(n, fem) { // 1..999
+    var parts = [], h = Math.floor(n / 100), r = n % 100;
+    if (h) parts.push(HUND[h]);
+    if (r) {
+      if (r <= 10) parts.push((fem ? F1 : M1)[r]);
+      else if (r < 20) parts.push((fem ? TEEN_F : TEEN_M)[r - 10]);
+      else { var u = r % 10, t = Math.floor(r / 10); parts.push(u ? ((fem ? F1 : M1)[u] + ' و' + TENS[t]) : TENS[t]); }
+    }
+    return parts.join(' و');
+  }
+  var SCALES = [
+    { one: 'ألف', two: 'ألفان', pl: 'آلاف', sg: 'ألف' },
+    { one: 'مليون', two: 'مليونان', pl: 'ملايين', sg: 'مليون' },
+    { one: 'مليار', two: 'ملياران', pl: 'مليارات', sg: 'مليار' }
+  ];
+  function intWords(n, opts) {
+    opts = opts || {};
+    if (n === 0) return 'صفر';
+    if (n >= 1e12 || n < 0 || Math.floor(n) !== n) return null;
+    var groups = [], x = n; while (x > 0) { groups.push(x % 1000); x = Math.floor(x / 1000); }
+    var out = [];
+    for (var i = groups.length - 1; i >= 0; i--) {
+      var g = groups[i]; if (!g) continue;
+      if (i === 0) { out.push(words3(g, opts.fem)); continue; }
+      var sc = SCALES[i - 1], r = g % 100, w;
+      if (g === 1) w = sc.one; else if (g === 2) w = sc.two;
+      else if (r >= 3 && r <= 10) w = words3(g, false) + ' ' + sc.pl; else if (g === 200) w = 'مائتا ' + sc.sg; else w = words3(g, false) + ' ' + sc.sg;
+      out.push(w);
+    }
+    var s = out.join(' و');
+    return opts.acc ? acc(s) : s;
+  }
+  var CUR = {
+    EGP: { one: 'جنيه واحد', two: ['جنيهان', 'جنيهين'], pl: 'جنيهات', sg: ['جنيهاً', 'جنيه'], fem: false, sub: { one: 'قرش واحد', two: ['قرشان', 'قرشين'], pl: 'قروش', sg: ['قرشاً', 'قرش'], fem: false } },
+    SAR: { one: 'ريال واحد', two: ['ريالان', 'ريالين'], pl: 'ريالات', sg: ['ريالاً', 'ريال'], fem: false, sub: { one: 'هللة واحدة', two: ['هللتان', 'هللتين'], pl: 'هللات', sg: ['هللة', 'هللة'], fem: true } },
+    USD: { one: 'دولار واحد', two: ['دولاران', 'دولارين'], pl: 'دولارات', sg: ['دولاراً', 'دولار'], fem: false, sub: { one: 'سنت واحد', two: ['سنتان', 'سنتين'], pl: 'سنتات', sg: ['سنتاً', 'سنت'], fem: false } },
+    AED: { one: 'درهم واحد', two: ['درهمان', 'درهمين'], pl: 'دراهم', sg: ['درهماً', 'درهم'], fem: false, sub: { one: 'فلس واحد', two: ['فلسان', 'فلسين'], pl: 'فلوس', sg: ['فلساً', 'فلس'], fem: false } }
+  };
+  function counted(n, c, accCase) { // عبارة: العدد + المعدود
+    var ai = accCase ? 1 : 0;
+    if (n === 1) return c.one;
+    if (n === 2) return c.two[ai];
+    var r = n % 100, w = intWords(n, { fem: c.fem, acc: accCase });
+    // المثنى المضاف إلى المعدود يفقد نونه: ألفا جنيه، مائتا جنيه، مليونا جنيه
+    var dual = accCase ? [[/(^| )ألفين$/, '$1ألفي'], [/(^| )مائتين$/, '$1مائتي'], [/(^| )مليونين$/, '$1مليوني'], [/(^| )مليارين$/, '$1ملياري']] : [[/(^| )ألفان$/, '$1ألفا'], [/(^| )مائتان$/, '$1مائتا'], [/(^| )مليونان$/, '$1مليونا'], [/(^| )ملياران$/, '$1مليارا']];
+    dual.forEach(function (d) { w = w.replace(d[0], d[1]); });
+    if (r >= 3 && r <= 10) return w + ' ' + c.pl;
+    return w + ' ' + (r === 0 ? c.sg[1] : c.sg[0]);
+  }
+  function moneyWords(amount, code, accCase) {
+    var c = CUR[code]; if (!c) return null;
+    var cents = Math.round(amount * 100), whole = Math.floor(cents / 100), sub = cents % 100;
+    if (whole >= 1e12) return null;
+    var parts = [];
+    if (whole > 0 || sub === 0) parts.push(whole === 0 ? 'صفر ' + c.sg[1] : counted(whole, c, accCase));
+    if (sub > 0) parts.push(counted(sub, c.sub, accCase));
+    return parts.join(' و') + ' فقط لا غير';
+  }
+
+  /* ---------- الوحدات ---------- */
+  var UNITS = {
+    length: { name: 'الطول', base: 'م', u: [['mm', 'مليمتر', 0.001], ['cm', 'سنتيمتر', 0.01], ['m', 'متر', 1], ['km', 'كيلومتر', 1000], ['in', 'بوصة', 0.0254], ['ft', 'قدم', 0.3048], ['yd', 'ياردة', 0.9144], ['mi', 'ميل', 1609.344], ['dhb', 'ذراع بلدي', 0.58], ['dhm', 'ذراع معماري', 0.75], ['qs', 'قصبة', 3.55]] },
+    area: { name: 'المساحة', base: 'م²', u: [['m2', 'متر مربع', 1], ['km2', 'كيلومتر مربع', 1e6], ['ha', 'هكتار', 10000], ['ac', 'إيكر (أكر)', 4046.8564224], ['ft2', 'قدم مربع', 0.09290304], ['qs2', 'قصبة مربعة', 12.6025], ['fd', 'فدان', 4200.8333333], ['qr', 'قيراط', 175.0347222], ['sh', 'سهم', 7.2931134]] },
+    mass: { name: 'الوزن', base: 'كجم', u: [['g', 'جرام', 0.001], ['kg', 'كيلوجرام', 1], ['t', 'طن', 1000], ['oz', 'أونصة', 0.028349523125], ['lb', 'رطل إنجليزي (باوند)', 0.45359237], ['ratl', 'رطل مصري', 0.44928], ['qn', 'قنطار مصري', 44.928]] },
+    volume: { name: 'الحجم', base: 'لتر', u: [['ml', 'مليلتر', 0.001], ['l', 'لتر', 1], ['m3', 'متر مكعب', 1000], ['cup', 'كوب أمريكي', 0.2365882365], ['floz', 'أونصة سائلة أمريكية', 0.0295735296], ['gal', 'جالون أمريكي', 3.785411784], ['galuk', 'جالون بريطاني', 4.54609]] },
+    speed: { name: 'السرعة', base: 'كم/س', u: [['kmh', 'كيلومتر/ساعة', 1], ['ms', 'متر/ثانية', 3.6], ['mph', 'ميل/ساعة', 1.609344], ['kn', 'عقدة بحرية', 1.852]] },
+    temp: { name: 'درجة الحرارة', base: '', u: [['c', 'سلزيوس °م', 0], ['f', 'فهرنهايت °ف', 0], ['k', 'كلفن', 0]] }
+  };
+  function convert(cat, from, to, v) {
+    if (cat === 'temp') {
+      var c = from === 'c' ? v : from === 'f' ? (v - 32) * 5 / 9 : v - 273.15;
+      return to === 'c' ? c : to === 'f' ? c * 9 / 5 + 32 : c + 273.15;
+    }
+    var g = UNITS[cat].u, fa = null, ta = null;
+    g.forEach(function (x) { if (x[0] === from) fa = x[2]; if (x[0] === to) ta = x[2]; });
+    return v * fa / ta;
+  }
+
+  /* ---------- النسب ---------- */
+  function pct(mode, a, b) {
+    switch (mode) {
+      case 'of': return a / 100 * b;                // a% من b
+      case 'is': return b === 0 ? NaN : a / b * 100; // a كم % من b
+      case 'chg': return a === 0 ? NaN : (b - a) / Math.abs(a) * 100; // التغير من a إلى b
+      case 'add': return b * (1 + a / 100);
+      case 'sub': return b * (1 - a / 100);
+      case 'rev': return 1 + a / 100 === 0 ? NaN : b / (1 + a / 100); // السعر قبل زيادة a%
+    }
+  }
+
+  /* ---------- الوقت ---------- */
+  function minutesBetween(s, e, brk) { // "HH:MM"
+    var p = function (x) { var m = /^(\d{1,2}):(\d{2})$/.exec(x || ''); return m ? +m[1] * 60 + +m[2] : null; };
+    var a = p(s), b = p(e); if (a === null || b === null) return null;
+    var t = b - a; if (t <= 0) t += 1440; t -= (brk || 0); return t < 0 ? null : t;
+  }
+
+  /* ---------- النص ---------- */
+  function textStats(t) {
+    var words = (t.match(/[ء-ي٠-٩A-Za-z0-9]+/g) || []);
+    var noDia = t.replace(/[ً-ٰٟ]/g, '');
+    var freq = {}; words.forEach(function (w) { var k = w.replace(/[ً-ٰٟ]/g, ''); if (k.length >= 3) freq[k] = (freq[k] || 0) + 1; });
+    var top = Object.keys(freq).sort(function (a, b) { return freq[b] - freq[a] || a.localeCompare(b); }).filter(function (k) { return freq[k] > 1; }).slice(0, 8).map(function (k) { return [k, freq[k]]; });
+    return {
+      words: words.length, chars: noDia.length, charsNoSpace: noDia.replace(/\s/g, '').length,
+      sentences: (t.match(/[^.!؟?!۔\n]+[.!؟?!۔]?/g) || []).filter(function (s) { return /\S/.test(s); }).length,
+      paragraphs: t.split(/\n\s*\n/).filter(function (p) { return /\S/.test(p); }).length,
+      diacritics: (t.match(/[ً-ٰٟ]/g) || []).length,
+      readMin: words.length / 180, speakMin: words.length / 130, top: top
+    };
+  }
+
+  return {
+    utc: utc, parseISO: parseISO, iso: iso, diffDays: diffDays, addDays: addDays, isLeap: isLeap, monthLen: monthLen, ymd: ymd,
+    toHijri: toHijri, fromHijri: fromHijri, hijriMonthLen: hijriMonthLen, validHijri: validHijri, ymdHijri: ymdHijri, nextHijriOccurrence: nextHijriOccurrence,
+    HM: HM, GM: GM, DN: DN, businessDays: businessDays, addBusinessDays: addBusinessDays,
+    intWords: intWords, moneyWords: moneyWords, CUR: CUR, UNITS: UNITS, convert: convert, pct: pct, minutesBetween: minutesBetween, textStats: textStats
+  };
+})();
+if (typeof module !== 'undefined') module.exports = DaqqaCore;
+
+/* دقّة — واجهة الأدوات. تعتمد على DaqqaCore. */
+(function () {
+  'use strict';
+  var C = window.DaqqaCore; if (!C) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var fmtN = function (n, d) { return Number(n).toLocaleString('en-US', { maximumFractionDigits: d === undefined ? 2 : d }); };
+  var AR = '٠١٢٣٤٥٦٧٨٩';
+  function num(s) { return parseFloat(String(s).replace(/[٠-٩]/g, function (c) { return AR.indexOf(c); }).replace(/[٫]/g, '.').replace(/[,،٬\s]/g, '')); }
+  function h(tag, props) {
+    var e = document.createElement(tag), i, k, a = Array.prototype.slice.call(arguments, 2);
+    for (k in (props || {})) { if (k === 'class') e.className = props[k]; else if (k === 'text') e.textContent = props[k]; else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), props[k]); else e.setAttribute(k, props[k]); }
+    a.forEach(function f(c) { if (c == null) return; if (Array.isArray(c)) c.forEach(f); else e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+  var uid = 0;
+  function field(label, input, hint) { var id = 'f' + (++uid); input.id = id; return h('div', { class: 'fld' }, h('label', { for: id, text: label }), input, hint ? h('small', { text: hint }) : null); }
+  function inp(type, val, extra) { var e = h('input', Object.assign({ type: type, autocomplete: 'off' }, extra || {})); if (val !== undefined) e.value = val; return e; }
+  function sel(opts, val) { var e = h('select'); opts.forEach(function (o) { e.appendChild(h('option', { value: o[0], text: o[1] })); }); if (val !== undefined) e.value = val; return e; }
+  function out() { return h('div', { class: 'out', 'aria-live': 'polite' }); }
+  function row(k, v) { return h('div', { class: 'r' }, h('span', { class: 'k', text: k }), h('b', { class: 'v', text: v })); }
+  function note(t) { return h('p', { class: 'note', text: t }); }
+  function today() { var n = new Date(); return C.utc(n.getFullYear(), n.getMonth() + 1, n.getDate()); }
+  function gname(d) { return C.DN[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + C.GM[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + ' م'; }
+  function hname(d) { var x = C.toHijri(d); return x.d + ' ' + C.HM[x.m - 1] + ' ' + x.y + ' هـ'; }
+  function bind(box, els, fn) { els.forEach(function (e) { e.addEventListener('input', fn); e.addEventListener('change', fn); }); fn(); }
+  function ymdTxt(r) { var p = []; if (r.y) p.push(r.y + (r.y > 10 ? ' سنة' : r.y === 1 ? ' سنة' : r.y === 2 ? ' سنتان' : ' سنوات')); if (r.m) p.push(r.m + (r.m > 10 ? ' شهراً' : r.m === 1 ? ' شهر' : r.m === 2 ? ' شهران' : ' أشهر')); if (r.d || !p.length) p.push(r.d + (r.d > 10 ? ' يوماً' : r.d === 1 ? ' يوم' : r.d === 2 ? ' يومان' : r.d === 0 ? ' يوم' : ' أيام')); return p.join(' و'); }
+
+  var T = {};
+
+  T.age = function (root) {
+    var b = inp('date'), t = inp('date', C.iso(today()));
+    var o = out();
+    root.append(h('div', { class: 'grid2' }, field('تاريخ الميلاد (ميلادي)', b), field('احسب العمر حتى تاريخ', t)), o);
+    bind(root, [b, t], function () {
+      o.textContent = ''; var a = C.parseISO(b.value), z = C.parseISO(t.value);
+      if (!a || !z) { o.append(note('اختر تاريخ الميلاد ليظهر العمر.')); return; }
+      if (a > z) { o.append(note('تاريخ الميلاد بعد تاريخ الحساب. راجع التواريخ.')); return; }
+      var r = C.ymd(a, z), days = C.diffDays(a, z);
+      var nb = C.utc(z.getUTCFullYear(), a.getUTCMonth() + 1, Math.min(a.getUTCDate(), C.monthLen(z.getUTCFullYear(), a.getUTCMonth() + 1)));
+      if (nb <= z && C.iso(nb) !== C.iso(z)) nb = C.utc(z.getUTCFullYear() + 1, a.getUTCMonth() + 1, Math.min(a.getUTCDate(), C.monthLen(z.getUTCFullYear() + 1, a.getUTCMonth() + 1)));
+      var hr = C.ymdHijri(a, z);
+      o.append(h('div', { class: 'big', text: ymdTxt(r) }),
+        row('بالتقويم الهجري', ymdTxt(hr)), row('إجمالي الأيام', fmtN(days, 0)), row('بالأسابيع', fmtN(Math.floor(days / 7), 0) + ' أسبوعاً و ' + (days % 7) + ' أيام'),
+        row('بالأشهر الميلادية الكاملة', fmtN(r.y * 12 + r.m, 0)), row('بالساعات تقريباً', fmtN(days * 24, 0)),
+        row('عيد الميلاد القادم', C.iso(nb) === C.iso(z) ? 'اليوم' : 'بعد ' + C.diffDays(z, nb) + ' يوماً — ' + gname(nb)),
+        row('يوم الميلاد كان', C.DN[a.getUTCDay()]), row('تاريخ الميلاد هجرياً', hname(a)));
+    });
+  };
+
+  T.datediff = function (root) {
+    var a = inp('date'), b = inp('date', C.iso(today())), inc = h('input', { type: 'checkbox' }), o = out();
+    root.append(h('div', { class: 'grid2' }, field('من تاريخ', a), field('إلى تاريخ', b)), h('label', { class: 'chk' }, inc, ' احسب يوم النهاية أيضاً (+1 يوم)'), o);
+    bind(root, [a, b, inc], function () {
+      o.textContent = ''; var x = C.parseISO(a.value), y = C.parseISO(b.value);
+      if (!x || !y) { o.append(note('أدخل التاريخين.')); return; }
+      var s = x <= y ? x : y, e = x <= y ? y : x, days = C.diffDays(s, e) + (inc.checked ? 1 : 0), r = C.ymd(s, inc.checked ? C.addDays(e, 1) : e);
+      o.append(h('div', { class: 'big', text: fmtN(days, 0) + ' يوم' }), row('بالسنين والأشهر والأيام', ymdTxt(r)), row('بالأسابيع', Math.floor(days / 7) + ' أسبوعاً و ' + (days % 7) + ' أيام'), row('بالساعات', fmtN(days * 24, 0)),
+        row('الفرق بالأشهر الهجرية تقريباً', fmtN(days / 29.5306, 1) + ' شهراً'), x > y ? note('التاريخ الأول لاحق للثاني؛ حُسب الفرق بينهما بغضّ النظر عن الترتيب.') : null);
+    });
+  };
+
+  T.hijri = function (root) {
+    var g = inp('date', C.iso(today())), og = out();
+    var hy = inp('number', C.toHijri(today()).y, { min: 1300, max: 1600 }), hm = sel(C.HM.map(function (m, i) { return [i + 1, m]; }), C.toHijri(today()).m), hd = inp('number', C.toHijri(today()).d, { min: 1, max: 30 }), oh = out();
+    root.append(h('h3', { text: 'من ميلادي إلى هجري' }), field('التاريخ الميلادي', g), og, h('h3', { text: 'من هجري إلى ميلادي' }), h('div', { class: 'grid3' }, field('السنة الهجرية', hy), field('الشهر', hm), field('اليوم', hd)), oh,
+      note('الحساب بتقويم أم القرى (المعتمد في السعودية). قد يختلف يوم بداية الشهر في مصر يوماً واحداً لأن دار الإفتاء تعتمد رؤية الهلال فعلياً.'));
+    bind(root, [g], function () { og.textContent = ''; var d = C.parseISO(g.value); if (!d) { og.append(note('أدخل تاريخاً صحيحاً.')); return; } og.append(h('div', { class: 'big', text: hname(d) }), row('اليوم', C.DN[d.getUTCDay()]), row('الميلادي', gname(d))); });
+    bind(root, [hy, hm, hd], function () {
+      oh.textContent = ''; var y = parseInt(hy.value, 10), m = parseInt(hm.value, 10), d = parseInt(hd.value, 10);
+      if (!(y >= 1300 && y <= 1600) || !(d >= 1)) { oh.append(note('أدخل سنة بين 1300 و1600 ويوماً صحيحاً.')); return; }
+      if (!C.validHijri(y, m, d)) { oh.append(note('هذا اليوم غير موجود في ذلك الشهر (الشهر الهجري 29 أو 30 يوماً).')); return; }
+      var r = C.fromHijri(y, m, d); oh.append(h('div', { class: 'big', text: gname(r) }), row('هجرياً', d + ' ' + C.HM[m - 1] + ' ' + y + ' هـ'));
+    });
+  };
+
+  T.words = function (root) {
+    var v = inp('text', '1250.50', { inputmode: 'decimal' }), cur = sel([['EGP', 'جنيه مصري'], ['SAR', 'ريال سعودي'], ['USD', 'دولار أمريكي'], ['AED', 'درهم إماراتي'], ['', 'رقم فقط (بدون عملة)']], 'EGP');
+    var cs = sel([['0', 'مرفوع (جاء ... / فقط)'], ['1', 'منصوب أو مجرور (دفعتُ ... / بمبلغ ...)']], '1'), gd = sel([['m', 'مذكر'], ['f', 'مؤنث']], 'm'), o = out();
+    var cp = h('button', { type: 'button', class: 'btn', text: 'نسخ النص' });
+    root.append(h('div', { class: 'grid2' }, field('الرقم', v), field('العملة', cur)), h('div', { class: 'grid2' }, field('إعراب العدد', cs), field('جنس المعدود (عند اختيار بدون عملة)', gd)), o, cp);
+    var last = '';
+    cp.addEventListener('click', function () { if (last && navigator.clipboard) navigator.clipboard.writeText(last).then(function () { cp.textContent = 'تم النسخ'; setTimeout(function () { cp.textContent = 'نسخ النص'; }, 1400); }); });
+    bind(root, [v, cur, cs, gd], function () {
+      o.textContent = ''; last = ''; var n = num(v.value);
+      if (isNaN(n) || n < 0) { o.append(note('أدخل رقماً موجباً.')); return; }
+      var acc = cs.value === '1', t;
+      if (cur.value) t = C.moneyWords(n, cur.value, acc);
+      else { if (Math.floor(n) !== n) { o.append(note('بدون عملة يُقبل عدد صحيح فقط. اختر عملة لكتابة الكسور.')); return; } t = C.intWords(n, { fem: gd.value === 'f', acc: acc }); }
+      if (!t) { o.append(note('الحد الأقصى أقل من تريليون (999,999,999,999).')); return; }
+      last = t; o.append(h('div', { class: 'big words', text: t }), row('الرقم', fmtN(n, 2)));
+    });
+  };
+
+  T.units = function (root) {
+    var cat = sel(Object.keys(C.UNITS).map(function (k) { return [k, C.UNITS[k].name]; }), 'area'), v = inp('text', '1', { inputmode: 'decimal' }), f = sel([]), t = sel([]), o = out();
+    function fill() { [f, t].forEach(function (s) { s.textContent = ''; C.UNITS[cat.value].u.forEach(function (u) { s.appendChild(h('option', { value: u[0], text: u[1] })); }); }); var u = C.UNITS[cat.value].u; f.value = u[cat.value === 'area' ? 6 : 0][0]; t.value = u[cat.value === 'area' ? 0 : 1][0]; }
+    fill(); cat.addEventListener('change', function () { fill(); calc(); });
+    root.append(field('نوع القياس', cat), h('div', { class: 'grid3' }, field('القيمة', v), field('من', f), field('إلى', t)), o);
+    function calc() {
+      o.textContent = ''; var x = num(v.value); if (isNaN(x)) { o.append(note('أدخل رقماً.')); return; }
+      var r = C.convert(cat.value, f.value, t.value, x), nm = function (s) { return s.options[s.selectedIndex].text; };
+      o.append(h('div', { class: 'big', text: fmtN(r, 6) + ' ' + nm(t) }), h('p', { class: 'sub', text: fmtN(x, 6) + ' ' + nm(f) + ' تساوي' }));
+      var tb = h('table', { class: 'mini' }); C.UNITS[cat.value].u.forEach(function (u) { if (u[0] === f.value) return; tb.appendChild(h('tr', null, h('td', { text: u[1] }), h('td', { text: fmtN(C.convert(cat.value, f.value, u[0], x), 6) }))); });
+      o.append(h('p', { class: 'sub', text: 'كل التحويلات من ' + nm(f) + ':' }), tb);
+      if (cat.value === 'area' || cat.value === 'length' || cat.value === 'mass') o.append(note('الوحدات المصرية التقليدية (الفدان والقيراط والسهم والقصبة والذراع والرطل والقنطار) قيم معتمدة عرفياً وقد تختلف قليلاً بين المناطق. للتعاملات الرسمية اعتمد المساحة المسجّلة في العقد أو المساحة الرسمية.'));
+    }
+    bind(root, [v, f, t], calc);
+  };
+
+  T.percent = function (root) {
+    var M = {
+      of: ['كم يساوي X% من Y؟', 'النسبة X (%)', 'الرقم Y', function (a, b) { return fmtN(C.pct('of', a, b), 4); }],
+      is: ['X تمثّل كم % من Y؟', 'الرقم X', 'الرقم Y', function (a, b) { return fmtN(C.pct('is', a, b), 4) + '%'; }],
+      chg: ['نسبة التغيّر من X إلى Y', 'القيمة القديمة X', 'القيمة الجديدة Y', function (a, b) { return fmtN(C.pct('chg', a, b), 4) + '%'; }],
+      add: ['إضافة X% إلى Y (مثل الضريبة)', 'النسبة X (%)', 'القيمة Y', function (a, b) { return fmtN(C.pct('add', a, b), 4); }],
+      sub: ['خصم X% من Y', 'النسبة X (%)', 'القيمة Y', function (a, b) { return fmtN(C.pct('sub', a, b), 4); }],
+      rev: ['القيمة قبل إضافة X% (الاستخراج العكسي)', 'النسبة X (%)', 'القيمة بعد الإضافة Y', function (a, b) { return fmtN(C.pct('rev', a, b), 4); }]
+    };
+    var mo = sel(Object.keys(M).map(function (k) { return [k, M[k][0]]; }), 'of'), a = inp('text', '15', { inputmode: 'decimal' }), b = inp('text', '200', { inputmode: 'decimal' }), o = out();
+    var la = h('label'), lb = h('label'), fa = h('div', { class: 'fld' }, la, a), fb = h('div', { class: 'fld' }, lb, b); a.id = 'pa'; b.id = 'pb'; la.setAttribute('for', 'pa'); lb.setAttribute('for', 'pb');
+    root.append(field('نوع الحساب', mo), h('div', { class: 'grid2' }, fa, fb), o);
+    bind(root, [mo, a, b], function () {
+      var m = M[mo.value]; la.textContent = m[1]; lb.textContent = m[2]; o.textContent = '';
+      var x = num(a.value), y = num(b.value); if (isNaN(x) || isNaN(y)) { o.append(note('أدخل الرقمين.')); return; }
+      var r = m[3](x, y); if (/NaN/.test(r)) { o.append(note('لا يمكن الحساب بهذه القيم (قسمة على صفر).')); return; }
+      o.append(h('div', { class: 'big', text: r }));
+      if (mo.value === 'add' || mo.value === 'sub' || mo.value === 'rev') o.append(row('مقدار التغيّر', fmtN(Math.abs(mo.value === 'rev' ? y - C.pct('rev', x, y) : C.pct(mo.value, x, y) - y), 4)));
+    });
+  };
+
+  T.bizdays = function (root) {
+    var mode = sel([['between', 'عدد أيام العمل بين تاريخين'], ['add', 'إضافة عدد من أيام العمل لتاريخ']], 'between'), a = inp('date', C.iso(today())), b = inp('date'), n = inp('number', '10'), wk = sel([['5,6', 'الجمعة والسبت (مصر)'], ['6,0', 'السبت والأحد'], ['5', 'الجمعة فقط']], '5,6'),
+      hol = h('textarea', { rows: 2, placeholder: '2026-12-25, 2027-01-07' }), o = out();
+    var fb = field('إلى تاريخ', b), fn = field('عدد أيام العمل (سالب للرجوع)', n);
+    root.append(field('نوع الحساب', mode), h('div', { class: 'grid2' }, field('من تاريخ', a), fb, fn), field('عطلة نهاية الأسبوع', wk), field('إجازات رسمية إضافية (اختياري، بصيغة سنة-شهر-يوم وتفصل بينها فاصلة)', hol), o);
+    bind(root, [mode, a, b, n, wk, hol], function () {
+      fb.style.display = mode.value === 'between' ? '' : 'none'; fn.style.display = mode.value === 'add' ? '' : 'none'; o.textContent = '';
+      var x = C.parseISO(a.value), w = wk.value.split(',').map(Number), hs = hol.value.split(/[,\n،\s]+/).filter(function (s) { return C.parseISO(s); });
+      if (!x) { o.append(note('أدخل تاريخ البداية.')); return; }
+      if (mode.value === 'between') { var y = C.parseISO(b.value); if (!y) { o.append(note('أدخل تاريخ النهاية.')); return; } var r = C.businessDays(x, y, w, hs); o.append(h('div', { class: 'big', text: fmtN(Math.abs(r), 0) + ' يوم عمل' }), row('إجمالي الأيام التقويمية', fmtN(Math.abs(C.diffDays(x, y)), 0)), note('يُحسب يوم البداية ولا يُحسب يوم النهاية.')); }
+      else { var k = parseInt(n.value, 10); if (isNaN(k) || Math.abs(k) > 5000) { o.append(note('أدخل عدداً صحيحاً.')); return; } var z = C.addBusinessDays(x, k, w, hs); o.append(h('div', { class: 'big', text: gname(z) }), row('هجرياً', hname(z))); }
+    });
+  };
+
+  T.timecalc = function (root) {
+    var s = inp('time', '09:00'), e = inp('time', '17:30'), br = inp('number', '30', { min: 0 }), rate = inp('text', '', { inputmode: 'decimal', placeholder: 'اختياري' }), o = out();
+    root.append(h('div', { class: 'grid2' }, field('وقت البدء', s), field('وقت الانتهاء', e)), h('div', { class: 'grid2' }, field('استراحة (دقيقة)', br), field('سعر الساعة', rate)), o);
+    bind(root, [s, e, br, rate], function () {
+      o.textContent = ''; var m = C.minutesBetween(s.value, e.value, parseInt(br.value, 10) || 0);
+      if (m === null) { o.append(note('أدخل وقتين صحيحين (والاستراحة أقل من المدة).')); return; }
+      var hh = Math.floor(m / 60), mm = m % 60, dec = m / 60, rt = num(rate.value);
+      o.append(h('div', { class: 'big', text: hh + ' ساعة و ' + mm + ' دقيقة' }), row('بالساعات العشرية', fmtN(dec, 2)), row('بالدقائق', fmtN(m, 0)));
+      if (!isNaN(rt)) o.append(row('الأجر عن اليوم', fmtN(dec * rt, 2)), row('لـ 22 يوم عمل', fmtN(dec * rt * 22, 2)));
+      if (e.value <= s.value) o.append(note('وقت الانتهاء أقل من البدء، فاعتُبر أن الدوام يعبر منتصف الليل.'));
+    });
+  };
+
+  T.textcount = function (root) {
+    var t = h('textarea', { rows: 9, placeholder: 'الصق نصك هنا…' }), o = out();
+    root.append(field('النص', t), o);
+    bind(root, [t], function () {
+      o.textContent = ''; var s = C.textStats(t.value);
+      var g = h('div', { class: 'stats' }); [['كلمة', s.words], ['حرف (مع المسافات)', s.chars], ['حرف (بلا مسافات)', s.charsNoSpace], ['جملة', s.sentences], ['فقرة', s.paragraphs], ['تشكيل', s.diacritics]].forEach(function (p) { g.append(h('div', null, h('b', { text: fmtN(p[1], 0) }), h('span', { text: p[0] }))); });
+      o.append(g, row('زمن القراءة تقريباً', s.words ? Math.max(1, Math.round(s.readMin)) + ' دقيقة (180 كلمة/دقيقة)' : '—'), row('زمن الإلقاء تقريباً', s.words ? Math.max(1, Math.round(s.speakMin)) + ' دقيقة (130 كلمة/دقيقة)' : '—'));
+      if (s.top.length) o.append(h('p', { class: 'sub', text: 'الكلمات الأكثر تكراراً' }), h('p', { class: 'tags' }, s.top.map(function (k) { return h('span', { text: k[0] + ' × ' + k[1] }); })));
+    });
+  };
+
+  T.countdown = function (root) {
+    var ev = sel([['9-1', 'بداية رمضان'], ['10-1', 'عيد الفطر'], ['12-10', 'عيد الأضحى (10 ذو الحجة)'], ['1-1', 'رأس السنة الهجرية'], ['custom', 'تاريخ ميلادي أختاره']], '9-1'), c = inp('date'), o = out(), fc = field('التاريخ', c);
+    root.append(field('الحدث', ev), fc, o);
+    bind(root, [ev, c], function () {
+      fc.style.display = ev.value === 'custom' ? '' : 'none'; o.textContent = ''; var td = today(), tgt, label = ev.options[ev.selectedIndex].text;
+      if (ev.value === 'custom') { tgt = C.parseISO(c.value); if (!tgt) { o.append(note('اختر تاريخاً.')); return; } label = 'التاريخ المحدد'; } else { var p = ev.value.split('-'); tgt = C.nextHijriOccurrence(td, +p[0], +p[1]); }
+      var d = C.diffDays(td, tgt), r = d >= 0 ? C.ymd(td, tgt) : null;
+      o.append(h('div', { class: 'big', text: d === 0 ? 'هو اليوم' : d > 0 ? 'باقي ' + fmtN(d, 0) + ' يوماً' : 'مضى ' + fmtN(-d, 0) + ' يوماً' }), row(label, gname(tgt)), row('هجرياً', hname(tgt)), r ? row('أي', Math.floor(d / 7) + ' أسبوعاً و ' + (d % 7) + ' أيام') : null,
+        ev.value !== 'custom' ? note('الموعد محسوب بتقويم أم القرى. الإعلان الرسمي في مصر يتبع رؤية الهلال فقد يتأخر يوماً.') : null);
+    });
+  };
+
+  document.querySelectorAll('.tool[data-tool]').forEach(function (r) { var f = T[r.getAttribute('data-tool')]; if (f && !r.hasAttribute('data-ready')) { r.setAttribute('data-ready', '1'); try { f(r); } catch (e) { r.append(h('p', { class: 'note', text: 'تعذّر تحميل الأداة. حدّث الصفحة.' })); } } });
+
+  /* تاريخ اليوم في الرئيسية والترويسة */
+  var n = today(); document.querySelectorAll('[data-today="g"]').forEach(function (e) { e.textContent = gname(n); }); document.querySelectorAll('[data-today="h"]').forEach(function (e) { e.textContent = hname(n); });
+  /* لوحة اليوم في الرئيسية */
+  var pl = $('#plate'); if (pl) {
+    var hj = C.toHijri(n);
+    var cell = function (lab, day, mon, sub) { return h('div', null, h('small', { text: lab }), h('span', { class: 'd', text: String(day) }), h('span', { class: 'm' }, mon, h('span', { text: sub }))); };
+    pl.append(cell('اليوم بالتقويم الميلادي', n.getUTCDate(), C.GM[n.getUTCMonth()] + ' ' + n.getUTCFullYear(), C.DN[n.getUTCDay()]), cell('اليوم بالتقويم الهجري (أم القرى)', hj.d, C.HM[hj.m - 1] + ' ' + hj.y, 'هـ'));
+  }
+  /* عينات حيّة في فهرس الأدوات */
+  var S = { age: function () { return '36 سنة'; }, hijri: function () { return C.toHijri(n).y + ' هـ'; }, words: function () { return 'ألف ومائتان'; } };
+  document.querySelectorAll('[data-sample]').forEach(function (e) { var f = S[e.getAttribute('data-sample')]; if (f && e.getAttribute('data-sample') === 'hijri') e.textContent = f(); });
+
+  /* وضع الإضاءة */
+  var tg = $('#theme-toggle'); if (tg) tg.addEventListener('click', function () { var d = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark'); try { localStorage.setItem('dq-theme', d ? 'light' : 'dark'); } catch (e) { } });
+
+  /* فهرس المقال + زمن القراءة */
+  var post = $('.prose[data-toc]');
+  if (post) {
+    var hs = post.querySelectorAll('h2'), toc = $('#toc');
+    if (toc && hs.length > 2) { var ul = h('ol'); hs.forEach(function (x, i) { x.id = x.id || 'h' + i; ul.append(h('li', null, h('a', { href: '#' + x.id, text: x.textContent }))); }); toc.append(h('b', { text: 'في هذه الصفحة' }), ul); toc.hidden = false; }
+    var rt = $('#rt'); if (rt) rt.textContent = Math.max(1, Math.round((post.textContent.split(/\s+/).length) / 180)) + ' دقائق قراءة';
+  }
+})();
+
+  //]]></script>
+</body>
+</html>

@@ -27,4 +27,7 @@ eq(+C.convert('mass', 'qn', 'kg', 1).toFixed(3), 44.928, 'qantar');
 eq(C.pct('of', 15, 200), 30, 'pct of'); eq(C.pct('is', 30, 200), 15, 'pct is'); eq(C.pct('chg', 80, 100), 25, 'chg'); eq(+C.pct('add', 14, 100).toFixed(6), 114, 'vat'); eq(+C.pct('rev', 14, 114).toFixed(2), 100, 'rev');
 eq(C.minutesBetween('09:00', '17:30', 30), 480, 'time'); eq(C.minutesBetween('22:00', '06:00', 0), 480, 'overnight');
 const ts = C.textStats('هذا نص تجريبي. هذا نص ثانٍ؟\n\nفقرة جديدة'); eq([ts.words, ts.sentences, ts.paragraphs], [8, 3, 2], 'text');
+eq(C.moneyWords(2000, 'EGP'), 'ألفا جنيه فقط لا غير', '2000'); eq(C.moneyWords(2000, 'EGP', true), 'ألفي جنيه فقط لا غير', '2000acc'); eq(C.moneyWords(200, 'EGP'), 'مائتا جنيه فقط لا غير', '200');
+eq(C.moneyWords(200000, 'EGP'), 'مائتا ألف جنيه فقط لا غير', '200000'); eq(C.moneyWords(200000, 'EGP', true), 'مائتي ألف جنيه فقط لا غير', '200000acc'); eq(C.moneyWords(250, 'EGP'), 'مائتان وخمسون جنيهاً فقط لا غير', '250');
+eq(C.moneyWords(2000000, 'EGP'), 'مليونا جنيه فقط لا غير', '2e6'); eq(W(2000), 'ألفان', 'plain 2000');
 console.log(fail ? 'FAILED ' + fail : 'CORE OK'); process.exit(fail ? 1 : 0);

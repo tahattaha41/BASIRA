@@ -82,7 +82,7 @@ var DaqqaCore = (function () {
 
   function acc(s) { // تحويل المرفوع إلى منصوب/مجرور
     return s.replace(/اثنان/g, 'اثنين').replace(/اثنتان/g, 'اثنتين').replace(/اثنا /g, 'اثني ').replace(/اثنتا /g, 'اثنتي ')
-      .replace(/(عشر|ثلاث|أربع|خمس|ست|سبع|ثمان|تسع)ون/g, '$1ين').replace(/مائتان/g, 'مائتين').replace(/(ألف|مليون|مليار)ان/g, '$1ين');
+      .replace(/(عشر|ثلاث|أربع|خمس|ست|سبع|ثمان|تسع)ون/g, '$1ين').replace(/مائتان/g, 'مائتين').replace(/مائتا /g, 'مائتي ').replace(/(ألف|مليون|مليار)ان/g, '$1ين');
   }
   function words3(n, fem) { // 1..999
     var parts = [], h = Math.floor(n / 100), r = n % 100;
@@ -110,7 +110,7 @@ var DaqqaCore = (function () {
       if (i === 0) { out.push(words3(g, opts.fem)); continue; }
       var sc = SCALES[i - 1], r = g % 100, w;
       if (g === 1) w = sc.one; else if (g === 2) w = sc.two;
-      else if (r >= 3 && r <= 10) w = words3(g, false) + ' ' + sc.pl; else w = words3(g, false) + ' ' + sc.sg;
+      else if (r >= 3 && r <= 10) w = words3(g, false) + ' ' + sc.pl; else if (g === 200) w = 'مائتا ' + sc.sg; else w = words3(g, false) + ' ' + sc.sg;
       out.push(w);
     }
     var s = out.join(' و');
@@ -127,6 +127,9 @@ var DaqqaCore = (function () {
     if (n === 1) return c.one;
     if (n === 2) return c.two[ai];
     var r = n % 100, w = intWords(n, { fem: c.fem, acc: accCase });
+    // المثنى المضاف إلى المعدود يفقد نونه: ألفا جنيه، مائتا جنيه، مليونا جنيه
+    var dual = accCase ? [[/(^| )ألفين$/, '$1ألفي'], [/(^| )مائتين$/, '$1مائتي'], [/(^| )مليونين$/, '$1مليوني'], [/(^| )مليارين$/, '$1ملياري']] : [[/(^| )ألفان$/, '$1ألفا'], [/(^| )مائتان$/, '$1مائتا'], [/(^| )مليونان$/, '$1مليونا'], [/(^| )ملياران$/, '$1مليارا']];
+    dual.forEach(function (d) { w = w.replace(d[0], d[1]); });
     if (r >= 3 && r <= 10) return w + ' ' + c.pl;
     return w + ' ' + (r === 0 ? c.sg[1] : c.sg[0]);
   }

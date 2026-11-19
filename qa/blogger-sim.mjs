@@ -7,7 +7,7 @@ export function render(xml, S) {
   t = t.replace(/<b:skin><!\[CDATA\[([\s\S]*?)\]\]><\/b:skin>/, '<style>$1</style>');
   t = t.replace(/<b:widget-settings>[\s\S]*?<\/b:widget-settings>/g, '');
   t = t.replace(/<\/?b:(section|widget|includable)[^>]*>/g, '');
-  t = t.replace(/<html[^>]*>/, `<html lang="ar" dir="rtl" class="v2 sc2">`);
+  t = t.replace(/<html[^>]*>/, `<html lang="ar" dir="rtl" class="v2">`);
   const toks = t.split(/(<\/?b:(?:if|loop)[^>]*>|<b:else\/>|<b:elseif[^>]*\/>)/);
   let i = 0;
   const ev = (expr, sc) => { const e = expr.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/data:([A-Za-z_][\w.]*)/g, (m, p) => `$.${p}`).replace(/\band\b/g, '&&').replace(/\bor\b/g, '||').replace(/\bnot\b/g, '!'); try { return new Function('$', `return (${e})`)(sc); } catch (er) { return undefined; } };
