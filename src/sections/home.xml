@@ -1,24 +1,31 @@
-<section class='hero'><div class='wrap'>
-<h1>اعرف أكثر، والعب لتتأكد</h1>
-<p class='lede'>مقالات عربية موثّقة بالمصادر في العلوم والتاريخ والجغرافيا وغيرها، وألعاب أسئلة تختبر ما عرفته. بلا تسجيل.</p>
-<form action='/search' class='find' method='get' role='search'>
-<label class='sr' for='q'>ابحث في الموقع</label>
-<input id='q' name='q' placeholder='ابحث عن موضوع' type='search'/>
-<button type='submit'>بحث</button>
-</form>
+<section class='hero'><div class='wrap hero-in'>
+<div class='hero-txt'>
+<p class='eyebrow'>معرفة وتحدٍّ بالعربية</p>
+<h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
+<p class='lede'>مقالات موثّقة بالمصادر في العلوم والتاريخ والجغرافيا وغيرها، وألعاب أسئلة تختبر ما عرفته. تستخدمها بلا حساب.</p>
+<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn play' href='#games'>ابدأ اللعب</a></div>
+</div>
+<div class='hero-vis'>{{HERO_ART}}</div>
 </div></section>
 <div class='wrap'>
-<section class='sec' id='topics'><h2>أقسام المعرفة</h2>
+<section class='sec' id='games'><div class='sec-h'><h2>الألعاب</h2><span class='tag'>قيد التنفيذ</span></div>
+<p class='note'>الصفحات التالية نماذج تصميم لشاشات اللعب، وتتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
+<ul class='games'>{{GAME_CARDS}}</ul></section>
+<section class='sec' id='daily'><div class='daily'>
+<div><p class='eyebrow'>التحدي اليومي</p><h2>ما العدد التالي: 2، 6، 12، 20، ؟</h2><p class='note'>سؤال منطقي يتجدد كل يوم في النسخة التفاعلية.</p></div>
+<div class='daily-end'><span class='lvl lvl-2'>متوسط</span>{{DAILY_BTN}}</div>
+</div></section>
+<section class='sec' id='topics'><div class='sec-h'><h2>أقسام المعرفة</h2></div>
 <ul class='topics'>{{TOPICS}}</ul></section>
-<section class='sec' id='games'><h2>الألعاب <span class='tag'>قيد الإعداد</span></h2>
-<p class='note'>لن تظهر لعبة هنا قبل أن تكتمل وتُختبر. هذه الخمس هي الأولى.</p>
-<ul class='games'>{{GAMES}}</ul></section>
-<section class='sec' id='latest'><h2>أحدث المقالات</h2>
-<ul class='posts'><b:loop values='data:posts' var='post'><li>
-<div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
+<section class='sec' id='latest'><div class='sec-h'><h2>أحدث المقالات</h2></div>
+<ul class='posts cards'><b:loop values='data:posts' var='post'><li>
+<a class='thumb' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/>{{THUMB}}</b:if></a>
+<div class='pc-body'><div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<a class='pt' expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></div></li></b:loop></ul>
 <p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec'><h2>كيف نتحقق من المعلومات</h2>
+<section class='sec' id='progress'><div class='sec-h'><h2>التقدم والإنجازات</h2><span class='tag'>نموذج</span></div>
+{{PROGRESS}}</section>
+<section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
 <div class='method'>
 <div><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></div>
 <div><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></div>

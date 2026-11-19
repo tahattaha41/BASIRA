@@ -39,8 +39,13 @@ for key, fn in PAGES.items():
     check(f'[{key}] نموذج بحث', ('action="/search"' in h and 'name="q"' in h) or key in ('item', 'static'))
 h = rendered['home']
 check('الرئيسية: كل أقسام المعرفة الثمانية', all(n in h for n, _ in SITE['topics']))
-check('الرئيسية: الألعاب الخمس مع وسم قيد الإعداد', all(n in h for n, _ in SITE['games']) and 'قيد الإعداد' in h)
-check('الرئيسية: لا روابط لألعاب غير موجودة', not re.search(r'href="/p/games', h.split('id="games"')[1].split('id="latest"')[0]))
+check('الرئيسية: الألعاب الخمس مع وسم قيد الإعداد', all(g[1] in h for g in SITE['games']) and 'قيد التنفيذ' in h)
+games_html = h.split('id="games"')[1].split('id="daily"')[0]
+check('الألعاب: لا زر/رابط لصفحة غير منشورة', all(f'/p/game-{g[0]}.html' in SITE.get('published', []) or f'/p/game-{g[0]}.html' not in games_html for g in SITE['games']))
+check('الألعاب: لكل لعبة مستوى صعوبة وأيقونة', games_html.count('class="glyph"') == 5 and all(l in games_html for l in ('سهل', 'متوسط', 'صعب')))
+check('الرئيسية: الأقسام بالترتيب المطلوب', [h.find(x) for x in ('class="hero"', 'id="games"', 'id="daily"', 'id="topics"', 'id="latest"', 'id="progress"')] == sorted(h.find(x) for x in ('class="hero"', 'id="games"', 'id="daily"', 'id="topics"', 'id="latest"', 'id="progress"')))
+check('الرأس: بحث وحساب وقائمة جانبية', 'class="sdrop"' in h and 'aria-label="الحساب والتقدم"' in h and 'class="drawer"' in h)
+check('الهيرو: زرّان (استكشف + ابدأ اللعب) وعنصر بصري', 'href="#topics"' in h and 'href="#games"' in h and 'class="hero-art"' in h)
 check('الرئيسية: المقالات الأربعة', all(p['title'] in h for p in POSTS))
 check('البحث: noindex', 'noindex' in rendered['search'] and 'noindex' in rendered['error'] and 'noindex' not in rendered['home'])
 check('الاسم: عنصر نائب غير نهائي من site.json', SITE['name'] in h)
@@ -52,23 +57,24 @@ class L(HTMLParser):
         d = dict(a)
         if t == 'a' and d.get('href'): s.hrefs.append(d['href'])
         if t == 'form' and d.get('action'): s.hrefs.append(d['action'])
-known = {'/search', '/search?max-results=24', '/search?updated-max=x'} | {p['url'] for p in POSTS} | set(SITE['pending_pages'])
+known = {'/search', '/search?max-results=24', '/search?updated-max=x'} | {p['url'] for p in POSTS} | set(SITE.get('published', []))
 bad, pend = set(), set()
 from urllib.parse import unquote
 for key, hh in rendered.items():
     p = L(); p.feed(hh)
     for href in p.hrefs:
-        if href.startswith('#') or href.startswith('http'): continue
+        if href.startswith('#') or href.startswith('/#') or href.startswith('http'): continue
         u = unquote(href)
         if u.startswith('/search/label/') and u.split('/search/label/')[1] in [t for t, _ in SITE['topics']] + ['اللغة والأدب']: continue
-        if u in SITE['pending_pages']: pend.add(u); continue
-        if u not in known and href != BASE_HOME if (BASE_HOME := 'https://example.blogspot.com/') else False: bad.add(href)
+        if u in SITE.get('published', []): continue
+        if u.startswith('/p/'): bad.add(u); continue
+        if u not in known and href not in ('', '/'): bad.add(href)
 check('الروابط الداخلية كلها معروفة', not bad, str(bad))
-print('INFO صفحات لم تُنشأ بعد (مرحلة لاحقة):', sorted(pend))
+
 # المراسي
 home_ids = set(re.findall(r'id="([^"]+)"', h))
 p = L(); p.feed(h)
-check('المراسي #topics/#games/#latest موجودة', all(a in home_ids for a in ('topics', 'games', 'latest', 'main-content')))
+check('المراسي كلها لها أهداف', all(a in home_ids for a in re.findall(r'href="#([^"]+)"', h)) and all(a in home_ids for a in re.findall(r'href="/?#([a-z]+)"', h)), str(set(re.findall(r'href="#([^"]+)"', h)) - home_ids))
 
 # 4) تباين الألوان (WCAG)
 def lum(hexc):
@@ -81,7 +87,7 @@ css = open(os.path.join(ROOT, 'src/style.css'), encoding='utf-8').read()
 light = dict(re.findall(r'--([\w-]+):(#[0-9a-f]{6})', css.split('html[data-theme=dark]')[0]))
 dark = dict(re.findall(r'--([\w-]+):(#[0-9a-f]{6})', css.split('html[data-theme=dark]')[1].split('}')[0]))
 for mode, t in (('فاتح', light), ('داكن', dark)):
-    for fg, bg in (('ink', 'paper'), ('soft', 'paper'), ('faint', 'paper'), ('accent', 'paper'), ('accent-ink', 'accent'), ('soft', 'card'), ('warn', 'paper')):
+    for fg, bg in (('ink', 'paper'), ('soft', 'paper'), ('faint', 'paper'), ('accent', 'paper'), ('accent-ink', 'accent'), ('soft', 'card'), ('warn', 'paper'), ('play', 'paper'), ('play-ink', 'play'), ('ok', 'ok-bg'), ('bad', 'bad-bg'), ('accent', 'accent-bg'), ('play', 'play-bg'), ('ink', 'play-bg'), ('soft', 'play-bg'), ('faint', 'card')):
         r = ratio(t[fg], t[bg]); check(f'تباين {mode} {fg}/{bg} ≥ 4.5', r >= 4.5, f'{r:.2f}')
 
 print('\nFAILED: %d' % len(fails) if fails else '\nALL PASS')

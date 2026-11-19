@@ -30,26 +30,36 @@ with sync_playwright() as pw:
                 pg.route('**/*', lambda r: r.abort() if r.request.url.startswith('http') else r.continue_())
                 pg.goto('file://' + path)
                 if theme == 'dark':
-                    pg.evaluate("document.getElementById('theme-toggle').click()")
+                    pg.evaluate("document.querySelector('.js-theme').click()")
                 tag = f'{key}/{vname}/{theme}'
                 sw = pg.evaluate('document.documentElement.scrollWidth'); cw = pg.evaluate('document.documentElement.clientWidth')
                 check(f'[{tag}] لا تمرير أفقي', sw <= cw, f'{sw}>{cw}')
                 check(f'[{tag}] لا أخطاء JS', not errs, errs)
                 if vname != 'desktop':
-                    small = pg.evaluate("""()=>[...document.querySelectorAll('button,input:not([type=checkbox]),.nav a,.btn,.btn-quiet')].filter(e=>e.offsetParent!==null).map(e=>[e.className||e.tagName,e.getBoundingClientRect().height]).filter(x=>x[1]<44)""")
+                    small = pg.evaluate("""()=>[...document.querySelectorAll('button,input:not([type=checkbox]),.nav a,.btn,.btn-quiet,.icon-btn,.drawer nav a')].filter(e=>e.offsetParent!==null).map(e=>[e.className||e.tagName,e.getBoundingClientRect().height]).filter(x=>x[1]<44)""")
                     check(f'[{tag}] أهداف اللمس ≥ 44px', not small, small)
                     fs = pg.evaluate("()=>[...document.querySelectorAll('input[type=search]')].map(e=>parseFloat(getComputedStyle(e).fontSize)).filter(x=>x<16)")
                     check(f'[{tag}] خط حقل البحث ≥ 16px (لا تكبير تلقائي في iOS)', not fs, fs)
-                if key == 'home' or (key == 'item' and vname == 'phone' and theme == 'light'):
+                if key == 'home' or key.startswith('game-') and vname == 'phone' and theme == 'light' or (key == 'item' and vname == 'phone' and theme == 'light'):
                     pg.screenshot(path=os.path.join(OUT, f'{key}-{vname}-{theme}.png'), full_page=True)
                 ctx.close()
-    # قائمة الجوال تفتح
-    ctx = br.new_context(**VIEWS[0][1]); pg = ctx.new_page(); pg.goto('file://' + os.path.join(OUT, 'home.html'))
-    before = pg.evaluate("getComputedStyle(document.querySelector('.nav')).display")
-    pg.click('label.menu-btn'); after = pg.evaluate("getComputedStyle(document.querySelector('.nav')).display")
-    check('قائمة الجوال تُفتح بالنقر', before == 'none' and after == 'flex', (before, after))
-    pg.screenshot(path=os.path.join(OUT, 'home-phone-menu.png'))
-    # البحث الفارغ لا يُرسل
-    pg.click('label.menu-btn'); pg.click('form.find button'); check('بحث فارغ لا يغادر الصفحة', pg.url.startswith('file://'))
+    ctx = br.new_context(**VIEWS[0][1]); pg = ctx.new_page(); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
+    pg.goto('file://' + os.path.join(OUT, 'home.html'))
+    vis = lambda: pg.evaluate("getComputedStyle(document.querySelector('.drawer')).visibility")
+    check('القائمة الجانبية مغلقة افتراضياً', vis() == 'hidden')
+    pg.click('label.menu-btn'); pg.wait_for_timeout(350)
+    check('القائمة الجانبية تُفتح', vis() == 'visible')
+    pg.screenshot(path=os.path.join(OUT, 'home-phone-drawer.png'))
+    pg.click('.drawer nav a[href$="#topics"]'); pg.wait_for_timeout(350)
+    check('الضغط على رابط في القائمة يغلقها', vis() == 'hidden')
+    pg.click('.sdrop summary'); pg.wait_for_timeout(100)
+    check('زر البحث يفتح حقل البحث', pg.evaluate("document.querySelector('.sdrop').open") is True)
+    pg.screenshot(path=os.path.join(OUT, 'home-phone-search.png'))
+    pg.click('.sdrop form.find button'); check('بحث فارغ لا يغادر الصفحة', pg.url.startswith('file://'))
+    pg.keyboard.press('Escape'); check('Escape يغلق البحث', pg.evaluate("document.querySelector('.sdrop').open") is False)
+    check('لا أخطاء JS أثناء التفاعل', not errs, errs)
+    # زر الحساب يقود إلى قسم موجود
+    check('زر الحساب يشير إلى #progress موجود', pg.evaluate("!!document.querySelector('#progress') && document.querySelector('a[aria-label=\"الحساب والتقدم\"]').getAttribute('href').endsWith('#progress')"))
+    ctx.close()
     br.close()
 print('\nFAILED: %d' % len(fails) if fails else '\nALL PASS'); sys.exit(1 if fails else 0)

@@ -47,6 +47,8 @@ class Sim:
     def node(self, el, scope):
         t = el.tag
         if t.startswith(D):
+            if local(t).endswith('.body'):
+                return str(self.lookup(local(t), scope))  # بلوجر يُخرج جسم المقال HTML خاماً
             return escape(str(self.lookup(local(t), scope)), quote=False)
         if t == B + 'include':
             return ''

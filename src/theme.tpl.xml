@@ -25,19 +25,35 @@
   <input aria-hidden='true' id='nav-t' tabindex='-1' type='checkbox'/>
   <header class='top'>
     <div class='wrap bar'>
-      <a class='brand' expr:href='data:blog.homepageUrl'>{{SITE}}</a>
-      <div class='bar-end'>
-        <button class='btn-quiet' id='theme-toggle' type='button'>الوضع الداكن</button>
-        <label class='btn-quiet menu-btn' for='nav-t'>القائمة</label>
-      </div>
+      <label aria-label='فتح القائمة' class='icon-btn menu-btn' for='nav-t' role='button' tabindex='0'>{{I_MENU}}</label>
+      <a class='brand' expr:href='data:blog.homepageUrl'><span class='mark' aria-hidden='true'></span>{{SITE}}</a>
       <nav aria-label='القائمة الرئيسية' class='nav'>
-        <a expr:href='data:blog.homepageUrl'>الرئيسية</a>
-        <a href='#topics'>أقسام المعرفة</a>
-        <a href='#games'>الألعاب</a>
-        <a href='/p/about.html'>عن الموقع</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+        <a href='/search?max-results=24'>المقالات</a>
       </nav>
+      <div class='bar-end'>
+        <details class='sdrop'><summary aria-label='بحث' class='icon-btn'>{{I_SEARCH}}</summary>
+          <form action='/search' class='find' method='get' role='search'><label class='sr' for='q'>ابحث في الموقع</label><input id='q' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
+        </details>
+        <a aria-label='الحساب والتقدم' class='icon-btn' expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>{{I_USER}}</a>
+      </div>
     </div>
   </header>
+  <label class='scrim' for='nav-t'></label>
+  <aside aria-label='القائمة الجانبية' class='drawer'>
+    <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>{{SITE}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
+    <nav aria-label='القائمة الجانبية'>
+      <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>أقسام المعرفة</a>
+      <a href='/search?max-results=24'>المقالات</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>التقدم والحساب</a>
+      {{DR_ABOUT}}
+    </nav>
+    <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
+  </aside>
 
   <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
     <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
@@ -69,9 +85,9 @@
       <div class='foot-grid'>
         <div><div class='foot-brand'>{{SITE}}</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
         <div><h4>أقسام المعرفة</h4><ul>{{FOOT_TOPICS}}</ul></div>
-        <div><h4>عن الموقع</h4><ul><li><a href='/p/about.html'>من نحن</a></li><li><a href='/p/editorial-policy.html'>سياسة التحرير</a></li><li><a href='/p/contact.html'>اتصل بنا</a></li><li><a href='/p/privacy-policy.html'>سياسة الخصوصية</a></li><li><a href='/p/terms.html'>شروط الاستخدام</a></li></ul></div>
+        <div><h4>عن الموقع</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>
-      <div class='foot-end'>© {{SITE}}</div>
+      <div class='foot-end'><span>© {{SITE}}</span><button class='btn-quiet js-theme' type='button'>الوضع الداكن</button></div>
     </div>
   </footer>
   <script>//<![CDATA[

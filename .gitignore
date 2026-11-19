@@ -3,3 +3,6 @@
 *.key
 node_modules/
 .dev.vars
+__pycache__/
+*.pyc
+dist/preview/
