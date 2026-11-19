@@ -1,4 +1,5 @@
-client_secret.json
-token.json
-__pycache__/
-*.pyc
+.env
+.env.*
+*.key
+node_modules/
+.dev.vars
