@@ -1,6 +1,5 @@
 {
-  "name": "اسم الموقع",
-  "name_note": "الاسم مؤجل بقرار المالك. يُستبدل من هذا الملف فقط.",
+  "name": "BASIRA",
   "topics": [
     [
       "العلوم",
@@ -143,5 +142,9 @@
       "x": "المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته.",
       "l": "سهل"
     }
-  ]
+  ],
+  "name_ar": "بصيرة",
+  "tagline": "Think. Discover. Play.",
+  "tagline_ar": "فكّر. اكتشف. العب.",
+  "brand_description": "A modern Arabic knowledge and brain-games platform."
 }

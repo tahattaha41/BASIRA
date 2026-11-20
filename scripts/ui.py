@@ -181,3 +181,14 @@ def method_block():
              ('تاريخ تحديث ظاهر', 'المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.'),
              ('مراجعة بشرية', 'لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.')]
     return ''.join(f"<li><span class='mn'>{i + 1}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>" for i, (t, p) in enumerate(items))
+
+
+# ---------- BASIRA brand identity ----------
+def brand_lockup(site):
+    """Inline, self-contained BASIRA lockup for Blogger's single-file theme."""
+    mark = svg('0 0 48 48',
+        "<path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/>",
+        'brand-symbol')
+    ar = e(site.get('name_ar', 'بصيرة'))
+    en = e(site.get('name', 'BASIRA'))
+    return f"<span class='brand-lockup'>{mark}<span class='brand-names'><b>{en}</b><small>{ar}</small></span></span>"

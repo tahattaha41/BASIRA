@@ -1,8 +1,8 @@
 <section class='hero'><div class='wrap hero-in'>
 <div class='hero-txt'>
-<p class='eyebrow'>معرفة وتحدٍّ بالعربية</p>
+<p class='eyebrow'>Think. Discover. Play. <span class='eyebrow-ar'>فكّر. اكتشف. العب.</span></p>
 <h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
-<p class='lede'>مقالات موثّقة بالمصادر، وأسئلة تختبر ما عرفته. بلا حساب.</p>
+<p class='lede'>منصة عربية تجمع المعرفة الموثّقة والألعاب الذهنية والتحديات الممتعة. اكتشف فكرة جديدة واختبر قدراتك.</p>
 <div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn alt' href='#games'>الألعاب</a></div>
 </div>
 <div class='live' id='live' aria-live='polite'>

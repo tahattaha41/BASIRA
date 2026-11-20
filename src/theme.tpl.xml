@@ -10,6 +10,8 @@
     <meta content='noindex,follow' name='robots'/>
   </b:if>
   <meta content='#f7f5f0' name='theme-color'/>
+  <meta content='BASIRA' name='application-name'/>
+  <meta content='BASIRA | بصيرة' property='og:site_name'/>
   <link href='https://fonts.googleapis.com' rel='preconnect'/>
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
@@ -26,7 +28,7 @@
   <header class='top'>
     <div class='wrap bar'>
       <label aria-label='فتح القائمة' class='icon-btn menu-btn' for='nav-t' role='button' tabindex='0'>{{I_MENU}}</label>
-      <a class='brand' expr:href='data:blog.homepageUrl'><span class='mark' aria-hidden='true'></span>{{SITE}}</a>
+      <a class='brand' expr:href='data:blog.homepageUrl'>{{BRAND_LOCKUP}}</a>
       <nav aria-label='القائمة الرئيسية' class='nav'>
         <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
         <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
@@ -43,7 +45,7 @@
   </header>
   <label class='scrim' for='nav-t'></label>
   <aside aria-label='القائمة الجانبية' class='drawer'>
-    <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>{{SITE}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
+    <div class='dr-top'><span class='brand'>{{BRAND_LOCKUP}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
     <nav aria-label='القائمة الجانبية'>
       <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
       <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
@@ -83,7 +85,7 @@
   <footer class='foot'>
     <div class='wrap'>
       <div class='foot-grid'>
-        <div><div class='foot-brand'>{{SITE}}</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
+        <div><div class='foot-brand'>{{BRAND_LOCKUP}}</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
         <div><h4>أقسام المعرفة</h4><ul>{{FOOT_TOPICS}}</ul></div>
         <div><h4>عن الموقع</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>

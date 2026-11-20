@@ -29,12 +29,12 @@ def build():
     foot_about = ''.join(f"<li>{plink(p_, t)}</li>" for p_, t in about if p_ in pub) or "<li>الصفحات التعريفية قيد الإعداد</li>"
     dr_about = plink('/p/about.html', 'من نحن')
     daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else "<span class='soon'>يُفعَّل مع الألعاب</span>")
-    css = read('style.css') + ui.stage_css(site)
+    css = read('style.css') + read('brand.css') + ui.stage_css(site)
     js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False))
     for name, txt in (('css', css), ('js', js)):
         assert ']]>' not in txt, name + ' contains CDATA terminator'
     t = read('theme.tpl.xml')
-    rep = {'{{CSS}}': css, '{{JS}}': js,
+    rep = {'{{CSS}}': css, '{{JS}}': js, '{{BRAND_LOCKUP}}': ui.brand_lockup(site),
            '{{HOME}}': read('sections/home.xml').replace('{{TOPICS}}', topics).replace('{{STAGE}}', ui.stage(site)).replace('{{FAHRAS}}', ui.fahras(site)).replace('{{QUIZ_FALLBACK}}', ui.quiz_fallback(site)).replace('{{METHOD}}', ui.method_block()).replace('{{PROGRESS}}', ui.progress_block()).replace('{{THUMB}}', ui.svg('0 0 48 48', "<path d='M8 10h14a4 4 0 014 4v24a3 3 0 00-3-3H8z M40 10H26v25h12a2 2 0 002-2z' class='g-l'/>", 'glyph')),
            '{{FOOT_ABOUT}}': foot_about, '{{DR_ABOUT}}': dr_about, '{{DAILY_BTN}}': daily_btn,
            '{{I_MENU}}': ui.icon('menu'), '{{I_SEARCH}}': ui.icon('search'), '{{I_USER}}': ui.icon('user'), '{{I_CLOSE}}': ui.icon('close'),
