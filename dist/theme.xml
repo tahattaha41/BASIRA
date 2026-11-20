@@ -18,10 +18,10 @@
   //]]></script>
   <b:skin><![CDATA[
 :root{--paper:#f7f5f0;--card:#fffefb;--ink:#1b2430;--soft:#475260;--faint:#66707c;--rule:#dcd7cb;--rule2:#b7b0a0;--mark:#ebe6d8;
---accent:#0f6b66;--accent-ink:#ffffff;--accent-bg:#e1efec;--play:#a8441c;--play-ink:#ffffff;--play-bg:#f6e6dc;--ok:#1f7a4d;--ok-bg:#e0f0e6;--bad:#a3262a;--bad-bg:#f6e0e0;--warn:#8a5a00;
+--accent:#0f6b66;--accent-ink:#ffffff;--accent-bg:#e1efec;--play:#a8441c;--play-ink:#ffffff;--play-bg:#f6e6dc;--play-on-deep:#f0906a;--deep:#10302e;--deep-ink:#f3efe6;--deep-soft:#b9cdca;--deep-rule:#2f504d;--ok:#1f7a4d;--ok-bg:#e0f0e6;--bad:#a3262a;--bad-bg:#f6e0e0;--warn:#8a5a00;
 --r:10px;--ui:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif}
 html[data-theme=dark]{--paper:#14181c;--card:#1b2025;--ink:#ece8de;--soft:#b8b4a8;--faint:#989ea6;--rule:#2c333a;--rule2:#47505a;--mark:#232a2e;
---accent:#6cc5bd;--accent-ink:#0d1517;--accent-bg:#1b2e2c;--play:#f0906a;--play-ink:#1a0e08;--play-bg:#33251e;--ok:#7fd3a2;--ok-bg:#1b2e24;--bad:#f09a9c;--bad-bg:#35201f;--warn:#e0b45a}
+--accent:#6cc5bd;--accent-ink:#0d1517;--accent-bg:#1b2e2c;--play:#f0906a;--play-ink:#1a0e08;--play-bg:#33251e;--play-on-deep:#f0906a;--deep:#0c1a19;--deep-ink:#ece8de;--deep-soft:#a9bdba;--deep-rule:#27403d;--ok:#7fd3a2;--ok-bg:#1b2e24;--bad:#f09a9c;--bad-bg:#35201f;--warn:#e0b45a}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.8 var(--ui)}
 a{color:var(--accent);text-underline-offset:3px}
@@ -76,25 +76,9 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
 .hero h1{font-size:clamp(30px,8vw,52px);line-height:1.3}
 .hero .lede{font-size:18px;color:var(--soft);max-width:52ch;margin:12px 0 22px}
 .cta-row{display:flex;gap:10px;flex-wrap:wrap}.cta-row .btn{flex:1 1 150px}
-.hero-art{width:100%;max-width:420px;height:auto;display:block;margin-inline:auto}
-.a-card{fill:var(--card);stroke:var(--rule);stroke-width:2}.a-track{fill:var(--mark)}.a-acc{fill:var(--accent)}.a-line{fill:var(--rule)}
-.a-opt{fill:var(--paper);stroke:var(--rule);stroke-width:2}.a-ok{fill:var(--accent-bg);stroke:var(--accent);stroke-width:2}
-.a-chk{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.a-play{fill:var(--play)}.a-star{fill:var(--play-ink)}
 /* الألعاب */
-.games{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.gcard{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px;display:grid;gap:6px;align-content:start;transition:border-color .15s,transform .15s}
-.gcard:hover{border-color:var(--gc,var(--accent));transform:translateY(-2px)}
-.gcard h3{font-size:18px}.gcard p{margin:0;color:var(--soft);font-size:15px;line-height:1.7}
-.gc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.gcard .btn{margin-top:10px;min-height:44px;font-size:15px}
-.glyph{width:52px;height:52px;padding:6px;border-radius:14px;background:var(--gb,var(--accent-bg))}
-.g-mcq{--gc:var(--accent);--gb:var(--accent-bg)}.g-truefalse{--gc:var(--play);--gb:var(--play-bg)}.g-order{--gc:var(--warn);--gb:var(--mark)}.g-memory{--gc:var(--play);--gb:var(--accent-bg)}.g-word{--gc:var(--accent);--gb:var(--play-bg)}
-.glyph .g-l{fill:none;stroke:var(--faint);stroke-width:2.5}.glyph .g-f{fill:var(--gc,var(--accent))}.glyph .g-w{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.glyph .g-s{fill:none;stroke:var(--faint);stroke-width:3;stroke-linecap:round}
 .soon{margin-top:10px;font:600 14px var(--ui);color:var(--faint)}
 /* التحدي اليومي */
-.daily{display:grid;gap:16px;background:var(--play-bg);border:1px solid var(--play);border-radius:16px;padding:22px}
-.daily h2{font-size:22px;direction:rtl}.daily .note{margin:6px 0 0}
-.daily-end{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 /* المعرفة */
 .topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .topics a{display:block;height:100%;padding:14px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);text-decoration:none;color:var(--ink);transition:border-color .15s,background .15s}
@@ -104,12 +88,8 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
 .posts{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
 .posts:empty{border:0}.posts:empty::after{content:attr(data-empty);display:block;padding:28px;text-align:center;color:var(--soft);background:var(--card);border:1px dashed var(--rule2);border-radius:var(--r)}
 .posts li{padding:16px 0;border-bottom:1px solid var(--rule)}
-.posts a.pt,.posts>li>a{font-weight:700;font-size:18px;line-height:1.6;color:var(--ink);text-decoration:none}.posts a.pt:hover,.posts>li>a:hover{color:var(--accent)}
 .posts p{margin:4px 0 0;color:var(--soft);font-size:15px;line-height:1.7}
 .meta{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:13px;color:var(--faint)}.meta span:first-child{color:var(--accent);font-weight:600}
-.cards{border:0;display:grid;gap:12px}
-.cards li{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:12px;border:1px solid var(--rule);border-radius:14px;background:var(--card)}
-.thumb{display:block;border-radius:10px;background:var(--accent-bg);overflow:hidden;align-self:start;aspect-ratio:1}.thumb img{width:100%;height:100%;object-fit:cover}.thumb .glyph{width:100%;height:100%;background:none;padding:22%}
 .more{margin:14px 0 0}
 /* التقدم */
 .prog{display:grid;gap:14px}
@@ -178,19 +158,99 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
 .foot h4{font-size:14px;color:var(--faint);margin-bottom:6px}.foot ul{list-style:none;margin:0;padding:0;columns:2;column-gap:16px}
 .foot li a{display:inline-block;padding:6px 0;color:var(--ink);text-decoration:none}.foot li a:hover{color:var(--accent);text-decoration:underline}
 .foot-end{border-top:1px solid var(--rule);margin-top:24px;padding:16px 0 24px;color:var(--faint);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-@media(min-width:620px){.games{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.badges{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:900px){
- .menu-btn,.drawer,.scrim{display:none}.nav{display:flex;gap:2px;margin-inline-end:auto}
- .nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-radius:var(--r)}.nav a:hover{background:var(--mark)}
- .brand{margin-inline-end:24px}.hero{padding:64px 0 56px}.hero-in{grid-template-columns:1.1fr .9fr;gap:48px}
- .games{grid-template-columns:repeat(3,1fr)}.topics{grid-template-columns:repeat(4,1fr);gap:12px}
- .daily{grid-template-columns:1fr auto;align-items:center;padding:28px 32px}
- .cards{grid-template-columns:repeat(3,1fr)}.cards li{grid-template-columns:1fr;gap:12px}.thumb{aspect-ratio:16/9}.thumb .glyph{padding:8% 36%}
- .prog{grid-template-columns:1fr 1.4fr;align-items:start}.method{grid-template-columns:repeat(3,1fr);gap:28px}.method div{border:0}
- .foot-grid{grid-template-columns:1.4fr 1.4fr 1fr}.foot ul{columns:1}.foot-grid>div:nth-child(2) ul{columns:2}
-}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.top,.foot,.drawer,.find{display:none}}
+
+/* ====== هوية تحريرية جديدة ====== */
+.glyph{width:34px;height:34px;flex:none}
+.glyph .g-l{fill:none;stroke:currentColor;stroke-width:2.5;opacity:.6}.glyph .g-f{fill:var(--play)}.glyph .g-w{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.glyph .g-s{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;opacity:.6}
+.thumb-g{width:100%;height:100%}
+.hero{padding:28px 0 36px;border-bottom:2px solid var(--ink)}
+.hero-in{display:grid;gap:26px;align-items:start}
+.hero h1{font-size:clamp(36px,10vw,68px);line-height:1.2;letter-spacing:0;font-weight:700}
+.hl{background:linear-gradient(transparent 62%,var(--play-bg) 62%);color:inherit;padding:0 2px;box-decoration-break:clone}
+html[data-theme=dark] .hl{background:linear-gradient(transparent 62%,var(--play-bg) 62%)}
+.hero .lede{font-size:19px;max-width:30ch;margin:14px 0 20px}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}.cta-row .btn{flex:1 1 140px}
+/* السؤال الحي */
+.live{border:2px solid var(--ink);border-radius:16px;background:var(--card);padding:18px;display:grid;gap:14px}
+.live-h{display:flex;justify-content:space-between;font:600 13px var(--ui);color:var(--play)}.live-h span:last-child{color:var(--faint);font-variant-numeric:tabular-nums}
+.live-q{font-size:22px;line-height:1.55}
+.live-o{display:grid;gap:8px}
+.lo{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 14px;border:1px solid var(--rule2);border-radius:12px;background:var(--paper);color:var(--ink);font:500 17px var(--ui);cursor:pointer;text-align:start;transition:border-color .15s,background .15s,transform .1s}
+.lo:hover:not([disabled]){border-color:var(--accent);background:var(--accent-bg)}.lo:active:not([disabled]){transform:scale(.99)}
+.lo .ol{width:28px;height:28px;border-radius:50%;background:var(--mark);display:grid;place-items:center;font-size:14px;font-weight:700;flex:none}
+.lo[disabled]{cursor:default}.lo.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}.lo.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}.lo.dim{opacity:.55}
+.live-fb{border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.75}.live-fb b{display:block}.live-fb.ok{background:var(--ok-bg);border:1px solid var(--ok)}.live-fb.ok b{color:var(--ok)}.live-fb.bad{background:var(--bad-bg);border:1px solid var(--bad)}.live-fb.bad b{color:var(--bad)}.live-fb p{margin:2px 0 0}
+.live-f{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-height:20px}#lv-score{font:600 14px var(--ui);color:var(--soft)}
+.live-end{text-align:center;display:grid;gap:10px;justify-items:center;padding:8px 0}.live-end h2{font-size:24px}.live-end p{margin:0;color:var(--soft)}
+/* مسرح الألعاب */
+.stage{background:var(--deep);color:var(--deep-ink);margin-top:44px;padding:40px 0 44px}
+.stage .sec-h h2{color:var(--deep-ink)}.stage .tag{color:#f0b98f;border-color:#f0b98f}
+html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
+.stage-note{margin:-4px 0 20px;color:var(--deep-soft);font-size:15px}
+.stage-grid{display:grid;gap:20px}
+.tabs{display:grid;gap:0;border-top:1px solid var(--deep-rule)}
+.tab{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-bottom:1px solid var(--deep-rule);cursor:pointer;color:var(--deep-ink);border-radius:0;transition:background .15s,color .15s}
+.tab:hover{background:var(--deep-rule)}
+.tn{font:700 14px var(--ui);color:var(--deep-soft);font-variant-numeric:tabular-nums}.tt{font:600 17px var(--ui)}
+.tab .lvl{background:transparent;border:1px solid var(--deep-rule);color:inherit;font-size:12px}
+.panes .pane{display:none;gap:22px;align-items:center}
+.pane h3{font-size:clamp(26px,6vw,38px);line-height:1.3}.pane p{color:var(--deep-soft);font-size:18px;margin:8px 0 14px}
+.pane-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.pane .lvl{background:var(--deep-rule);color:var(--deep-ink)}
+.pane .soon{color:var(--deep-soft)}
+.pane .screen figcaption{color:var(--deep-soft)}
+.pane .phone{min-height:0;max-height:430px;overflow:hidden}
+/* فهرس المواضيع */
+.fahras{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.fahras a{display:grid;grid-template-columns:44px 1fr 24px;gap:10px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none;transition:padding .18s,background .15s}
+.fahras a:hover{background:var(--accent-bg);padding-inline-start:14px}
+.fn{font:700 15px var(--ui);color:var(--play);font-variant-numeric:tabular-nums}.ft{display:block;font:700 24px/1.4 var(--ui)}.fd{display:block;color:var(--soft);font-size:15px;line-height:1.6}.fg{color:var(--faint);transition:transform .18s}
+.fahras a:hover .fg{transform:translateX(-6px)}html[dir=ltr] .fahras a:hover .fg{transform:translateX(6px)}
+/* مقال مميز وقائمة */
+.feat{display:grid;gap:14px;padding-bottom:22px;border-bottom:2px solid var(--ink)}
+.feat-img{display:block;border-radius:14px;background:var(--accent-bg);overflow:hidden;aspect-ratio:16/10;color:var(--accent)}.feat-img img{width:100%;height:100%;object-fit:cover}.feat-img .glyph{width:100%;height:100%;padding:28%}
+.feat h3{font-size:clamp(26px,6vw,36px);line-height:1.4;margin:6px 0}.feat h3 a{color:var(--ink);text-decoration:none}.feat h3 a:hover{color:var(--accent)}.feat p{color:var(--soft);margin:0 0 10px}
+.tag-feat{color:var(--play)!important;font-weight:700}
+.read{font-weight:700}
+.feat-wrap:empty::after{content:attr(data-empty);display:block;padding:28px;text-align:center;color:var(--soft);background:var(--card);border:1px dashed var(--rule2);border-radius:var(--r)}
+.rows-list{list-style:none;margin:0;padding:0}
+.rl{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none}
+.rl:hover .rl-t{color:var(--accent)}
+.rl-n{font:700 28px/1.2 var(--ui);color:var(--rule2);font-variant-numeric:tabular-nums}.rl-b{display:grid;gap:2px}.rl-t{font:700 19px/1.55 var(--ui)}.rl-s{color:var(--soft);font-size:15px;line-height:1.7}
+/* المنهج */
+.method{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink);display:grid}
+.method li{display:grid;grid-template-columns:44px 1fr;column-gap:10px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.mn{grid-row:span 2;font:700 34px/1 var(--ui);color:var(--play)}.method h3{font-size:18px}.method p{margin:2px 0 0;color:var(--soft);font-size:15px}
+.method div{border:0}
+@media(min-width:900px){
+ .menu-btn,.drawer,.scrim{display:none}.nav{display:flex;gap:2px;margin-inline-end:auto}
+ .nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid transparent}.nav a:hover{border-bottom-color:var(--play)}
+ .brand{margin-inline-end:24px}
+ .hero{padding:64px 0 64px}.hero-in{grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+ .live{padding:26px}.live-q{font-size:25px}
+ .stage{padding:64px 0 72px}.stage-grid{grid-template-columns:340px 1fr;gap:56px;align-items:start}
+ .panes .pane{grid-template-columns:1fr 340px}
+ .pane .phone{max-height:none}
+ .fahras{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+ .feat{grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}.feat-img{aspect-ratio:4/3}
+ .rows-list{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+ .prog{grid-template-columns:1fr 1.4fr;align-items:start}.badges{grid-template-columns:repeat(4,1fr)}
+ .method{grid-template-columns:repeat(3,1fr);gap:0 36px}.method li{border-bottom:0;padding:20px 0}
+ .foot-grid{grid-template-columns:1.4fr 1.4fr 1fr}.foot ul{columns:1}.foot-grid>div:nth-child(2) ul{columns:2}
+}
+@media(min-width:620px) and (max-width:899px){.badges{grid-template-columns:repeat(4,1fr)}}
+.stage .btn.play{background:var(--play-on-deep);border-color:var(--play-on-deep);color:#1a0e08}
+.stage .tab .tn{color:var(--deep-soft)}
+[hidden]{display:none!important}
+.pane .phone{color:var(--ink)}.pane .phone .q,.pane .phone h3{color:var(--ink)}.pane .phone .end p{color:var(--soft)}
+.feat-img{display:grid;place-items:center}.feat-img .glyph{width:88px;height:88px;padding:0;background:none}
+.pane .phone .q{font-size:19px;line-height:1.6}.pane .phone .end h3{font-size:24px}
+#gm-mcq:checked~.tabs [for=gm-mcq]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-mcq:checked~.tabs [for=gm-mcq] .tn{color:var(--play)}#gm-mcq:checked~.panes .p-mcq{display:grid}#gm-mcq:focus-visible~.tabs [for=gm-mcq]{outline:3px solid var(--play-on-deep);outline-offset:2px}
+#gm-truefalse:checked~.tabs [for=gm-truefalse]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-truefalse:checked~.tabs [for=gm-truefalse] .tn{color:var(--play)}#gm-truefalse:checked~.panes .p-truefalse{display:grid}#gm-truefalse:focus-visible~.tabs [for=gm-truefalse]{outline:3px solid var(--play-on-deep);outline-offset:2px}
+#gm-order:checked~.tabs [for=gm-order]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-order:checked~.tabs [for=gm-order] .tn{color:var(--play)}#gm-order:checked~.panes .p-order{display:grid}#gm-order:focus-visible~.tabs [for=gm-order]{outline:3px solid var(--play-on-deep);outline-offset:2px}
+#gm-memory:checked~.tabs [for=gm-memory]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-memory:checked~.tabs [for=gm-memory] .tn{color:var(--play)}#gm-memory:checked~.panes .p-memory{display:grid}#gm-memory:focus-visible~.tabs [for=gm-memory]{outline:3px solid var(--play-on-deep);outline-offset:2px}
+#gm-word:checked~.tabs [for=gm-word]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-word:checked~.tabs [for=gm-word] .tn{color:var(--play)}#gm-word:checked~.panes .p-word{display:grid}#gm-word:focus-visible~.tabs [for=gm-word]{outline:3px solid var(--play-on-deep);outline-offset:2px}
 
 ]]></b:skin>
 </head>
@@ -204,7 +264,7 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
       <nav aria-label='القائمة الرئيسية' class='nav'>
         <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
         <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
-        <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
         <a href='/search?max-results=24'>المقالات</a>
       </nav>
       <div class='bar-end'>
@@ -220,7 +280,7 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
     <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>اسم الموقع</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M6 6l12 12M18 6L6 18'/></svg></label></div>
     <nav aria-label='القائمة الجانبية'>
       <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
-      <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
       <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>أقسام المعرفة</a>
       <a href='/search?max-results=24'>المقالات</a>
       <a expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>التقدم والحساب</a>
@@ -242,36 +302,39 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
 <section class='hero'><div class='wrap hero-in'>
 <div class='hero-txt'>
 <p class='eyebrow'>معرفة وتحدٍّ بالعربية</p>
-<h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
-<p class='lede'>مقالات موثّقة بالمصادر في العلوم والتاريخ والجغرافيا وغيرها، وألعاب أسئلة تختبر ما عرفته. تستخدمها بلا حساب.</p>
-<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn play' href='#games'>ابدأ اللعب</a></div>
+<h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
+<p class='lede'>مقالات موثّقة بالمصادر، وأسئلة تختبر ما عرفته. بلا حساب.</p>
+<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn alt' href='#games'>الألعاب</a></div>
 </div>
-<div class='hero-vis'><svg class='hero-art' viewBox='0 0 360 300' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='12' y='12' width='336' height='276' rx='28' class='a-card'/><rect x='130' y='44' width='190' height='10' rx='5' class='a-track'/><rect x='194' y='44' width='126' height='10' rx='5' class='a-acc'/><rect x='70' y='76' width='250' height='12' rx='6' class='a-line'/><rect x='150' y='98' width='170' height='12' rx='6' class='a-line'/><rect x='40' y='134' width='280' height='36' rx='12' class='a-opt'/><rect x='40' y='180' width='280' height='36' rx='12' class='a-ok'/><path d='M276 198l8 8 14-16' class='a-chk'/><rect x='40' y='226' width='280' height='36' rx='12' class='a-opt'/><circle cx='48' cy='42' r='24' class='a-play'/><g transform='translate(-264 0)'><path d='M312 28l4.2 8.6 9.5 1.4-6.9 6.7 1.6 9.4-8.4-4.4-8.4 4.4 1.6-9.4-6.9-6.7 9.5-1.4z' class='a-star'/></g></svg></div>
+<div class='live' id='live' aria-live='polite'>
+<div class='live-h'><span>سؤال اليوم</span><span id='lv-n'>1 من 6</span></div>
+<h2 class='live-q' id='lv-q'>ما العدد التالي: 2، 6، 12، 20، ؟</h2><div class='live-o' id='lv-o'><button class='lo' type='button'><span class='ol'>أ</span><span>28</span></button><button class='lo' type='button'><span class='ol'>ب</span><span>30</span></button><button class='lo' type='button'><span class='ol'>ج</span><span>32</span></button><button class='lo' type='button'><span class='ol'>د</span><span>24</span></button></div>
+<div class='live-fb' id='lv-fb' hidden='hidden'></div>
+<div class='live-f'><button class='btn' id='lv-next' type='button' hidden='hidden'>سؤال آخر</button><span id='lv-score'></span></div>
+<noscript><p class='note'>يحتاج هذا السؤال إلى تفعيل JavaScript.</p></noscript>
+</div>
+</div></section>
+<section class='stage' id='games'><div class='wrap'>
+<div class='sec-h'><h2>العب</h2><span class='tag'>قيد التنفيذ</span></div>
+<p class='stage-note'>اختر لعبة لترى شاشتها. هذه نماذج تصميم تتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
+<div class='stage-grid'><input class='sr' type='radio' name='gm' id='gm-mcq' checked='checked'/><input class='sr' type='radio' name='gm' id='gm-truefalse'/><input class='sr' type='radio' name='gm' id='gm-order'/><input class='sr' type='radio' name='gm' id='gm-memory'/><input class='sr' type='radio' name='gm' id='gm-word'/><div class='tabs'><label class='tab' for='gm-mcq'><span class='tn'>01</span><span class='tt'>اختبارات متعددة الخيارات</span><span class='lvl lvl-2'>متوسط</span></label><label class='tab' for='gm-truefalse'><span class='tn'>02</span><span class='tt'>صح أم خطأ</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-order'><span class='tn'>03</span><span class='tt'>ترتيب الأحداث</span><span class='lvl lvl-3'>صعب</span></label><label class='tab' for='gm-memory'><span class='tn'>04</span><span class='tt'>لعبة الذاكرة</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-word'><span class='tn'>05</span><span class='tt'>خمّن الكلمة</span><span class='lvl lvl-2'>متوسط</span></label></div><div class='panes'><div class='pane p-mcq'><div class='pane-txt'><h3>اختبارات متعددة الخيارات</h3><p>أربع إجابات وتفسير بعد كل سؤال</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:30%'></i></div><div class='g-row'><span>السؤال 3 من 10</span></div></div><h3 class='q'>ما أكبر كواكب المجموعة الشمسية؟</h3><div class='opts'><div class='opt '><span class='ol'>أ</span><span>زحل</span></div><div class='opt '><span class='ol'>ب</span><span>المشتري</span></div><div class='opt '><span class='ol'>ج</span><span>نبتون</span></div><div class='opt '><span class='ol'>د</span><span>الأرض</span></div></div></div><figcaption>سؤال</figcaption></figure></div></div><div class='pane p-truefalse'><div class='pane-txt'><h3>صح أم خطأ</h3><p>جمل سريعة تختبر دقة معلوماتك</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:25%'></i></div><div class='g-row'><span>السؤال 5 من 20</span><span class='timer'>0:12</span></div></div><h3 class='q'>يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.</h3><div class='tf'><div class='opt big '>صح</div><div class='opt big '>خطأ</div></div></div><figcaption>سؤال بمؤقت</figcaption></figure></div></div><div class='pane p-order'><div class='pane-txt'><h3>ترتيب الأحداث</h3><p>رتّب وقائع بالتسلسل الصحيح</p><div class='pane-meta'><span class='lvl lvl-3'>صعب</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:25%'></i></div><div class='g-row'><span>السؤال 2 من 8</span></div></div><h3 class='q'>رتّب الأحداث من الأقدم إلى الأحدث</h3><div class='rows'><div class='row '><span class='grip'>⋮⋮</span><span>سقوط جدار برلين</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>الثورة الفرنسية</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>أول إنسان على سطح القمر</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>اختراع الطباعة بالحروف المتحركة في أوروبا</span><span class='num'></span></div></div><div class='cta'><span class='btn'>تحقق</span></div></div><figcaption>رتّب من الأقدم إلى الأحدث</figcaption></figure></div></div><div class='pane p-memory'><div class='pane-txt'><h3>لعبة الذاكرة</h3><p>اكتشف الأزواج بأقل عدد من المحاولات</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-row'><span>المحاولات 7</span><span class='timer'>0:48</span></div></div><div class='mgrid'><div class='mc done'><span>ب</span></div><div class='mc up'><span>س</span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc up'><span>ك</span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc done'><span>ب</span></div></div><div class='msg err'><b>غير متطابقتين</b><p>ستنقلبان تلقائياً.</p></div></div><figcaption>بطاقتان مكشوفتان</figcaption></figure></div></div><div class='pane p-word'><div class='pane-txt'><h3>خمّن الكلمة</h3><p>كلمة مخفية وتلميح يساعدك</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-row'><span>المحاولات المتبقية 5</span><span class='timer'>0:40</span></div></div><p class='hint'>تلميح: تجمع هائل من النجوم والغاز والغبار</p><div class='tiles'><span class='tile on'>م</span><span class='tile '></span><span class='tile on'>ر</span><span class='tile '></span></div><div class='keys'><span class='key '>ا</span><span class='key bad'>ب</span><span class='key '>ت</span><span class='key '>ث</span><span class='key '>ج</span><span class='key '>ح</span><span class='key '>خ</span><span class='key '>د</span><span class='key '>ذ</span><span class='key ok'>ر</span><span class='key '>ز</span><span class='key bad'>س</span><span class='key '>ش</span><span class='key '>ص</span><span class='key '>ض</span><span class='key '>ط</span><span class='key '>ظ</span><span class='key '>ع</span><span class='key '>غ</span><span class='key '>ف</span><span class='key '>ق</span><span class='key '>ك</span><span class='key '>ل</span><span class='key ok'>م</span><span class='key '>ن</span><span class='key '>ه</span><span class='key '>و</span><span class='key '>ي</span></div></div><figcaption>لعبة جارية</figcaption></figure></div></div></div></div>
 </div></section>
 <div class='wrap'>
-<section class='sec' id='games'><div class='sec-h'><h2>الألعاب</h2><span class='tag'>قيد التنفيذ</span></div>
-<p class='note'>الصفحات التالية نماذج تصميم لشاشات اللعب، وتتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
-<ul class='games'><li class='gcard g-mcq'><div class='gc-top'><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='36' height='8' rx='4' class='g-l'/><rect x='6' y='20' width='36' height='8' rx='4' class='g-f'/><path d='M12 24l3 3 5-6' class='g-w'/><rect x='6' y='32' width='36' height='8' rx='4' class='g-l'/></svg><span class='lvl lvl-2'>متوسط</span></div><h3>اختبارات متعددة الخيارات</h3><p>أربع إجابات وتفسير بعد كل سؤال</p><span class='soon'>قريباً</span></li><li class='gcard g-truefalse'><div class='gc-top'><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><circle cx='15' cy='24' r='10' class='g-f'/><path d='M10.5 24.5l3.2 3.2 6-6.5' class='g-w'/><circle cx='35' cy='24' r='10' class='g-l'/><path d='M31 20l8 8M39 20l-8 8' class='g-s'/></svg><span class='lvl lvl-1'>سهل</span></div><h3>صح أم خطأ</h3><p>جمل سريعة تختبر دقة معلوماتك</p><span class='soon'>قريباً</span></li><li class='gcard g-order'><div class='gc-top'><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='20' height='8' rx='4' class='g-f'/><rect x='14' y='20' width='20' height='8' rx='4' class='g-l'/><rect x='22' y='32' width='20' height='8' rx='4' class='g-l'/></svg><span class='lvl lvl-3'>صعب</span></div><h3>ترتيب الأحداث</h3><p>رتّب وقائع بالتسلسل الصحيح</p><span class='soon'>قريباً</span></li><li class='gcard g-memory'><div class='gc-top'><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='6' width='16' height='16' rx='5' class='g-f'/><rect x='26' y='6' width='16' height='16' rx='5' class='g-l'/><rect x='6' y='26' width='16' height='16' rx='5' class='g-l'/><rect x='26' y='26' width='16' height='16' rx='5' class='g-f'/></svg><span class='lvl lvl-1'>سهل</span></div><h3>لعبة الذاكرة</h3><p>اكتشف الأزواج بأقل عدد من المحاولات</p><span class='soon'>قريباً</span></li><li class='gcard g-word'><div class='gc-top'><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='4' y='14' width='9' height='20' rx='3' class='g-f'/><rect x='15' y='14' width='9' height='20' rx='3' class='g-l'/><rect x='26' y='14' width='9' height='20' rx='3' class='g-f'/><rect x='37' y='14' width='9' height='20' rx='3' class='g-l'/></svg><span class='lvl lvl-2'>متوسط</span></div><h3>خمّن الكلمة</h3><p>كلمة مخفية وتلميح يساعدك</p><span class='soon'>قريباً</span></li></ul></section>
-<section class='sec' id='daily'><div class='daily'>
-<div><p class='eyebrow'>التحدي اليومي</p><h2>ما العدد التالي: 2، 6، 12، 20، ؟</h2><p class='note'>سؤال منطقي يتجدد كل يوم في النسخة التفاعلية.</p></div>
-<div class='daily-end'><span class='lvl lvl-2'>متوسط</span><span class='soon'>يُفعَّل مع الألعاب</span></div>
-</div></section>
-<section class='sec' id='topics'><div class='sec-h'><h2>أقسام المعرفة</h2></div>
-<ul class='topics'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><b>العلوم</b><span>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><b>التاريخ والحضارات</b><span>أحداث وشعوب وتواريخ موثقة بالمصادر</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><b>الجغرافيا والدول</b><span>بلدان ومدن وخرائط وحقائق مرجعية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><b>التكنولوجيا</b><span>شرح مبسط لما نستخدمه كل يوم</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><b>الثقافة العامة</b><span>معلومات متنوعة تستحق أن تُعرف</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><b>الرياضيات والمنطق</b><span>أفكار وألغاز بخطوات حل واضحة</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><b>اللغة والأدب</b><span>قواعد ومفردات ونصوص وأعلام</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><b>الفضاء والفلك</b><span>الكواكب والنجوم وأحدث الاكتشافات</span></a></li></ul></section>
-<section class='sec' id='latest'><div class='sec-h'><h2>أحدث المقالات</h2></div>
-<ul class='posts cards'><b:loop values='data:posts' var='post'><li>
-<a class='thumb' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M8 10h14a4 4 0 014 4v24a3 3 0 00-3-3H8z M40 10H26v25h12a2 2 0 002-2z' class='g-l'/></svg></b:if></a>
-<div class='pc-body'><div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<a class='pt' expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></div></li></b:loop></ul>
+<section class='sec' id='topics'><div class='sec-h'><h2>تصفّح بالموضوع</h2></div>
+<ol class='fahras'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><span class='fn'>01</span><span class='fb'><span class='ft'>العلوم</span><span class='fd'>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><span class='fn'>02</span><span class='fb'><span class='ft'>التاريخ والحضارات</span><span class='fd'>أحداث وشعوب وتواريخ موثقة بالمصادر</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><span class='fn'>03</span><span class='fb'><span class='ft'>الجغرافيا والدول</span><span class='fd'>بلدان ومدن وخرائط وحقائق مرجعية</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><span class='fn'>04</span><span class='fb'><span class='ft'>التكنولوجيا</span><span class='fd'>شرح مبسط لما نستخدمه كل يوم</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><span class='fn'>05</span><span class='fb'><span class='ft'>الثقافة العامة</span><span class='fd'>معلومات متنوعة تستحق أن تُعرف</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><span class='fn'>06</span><span class='fb'><span class='ft'>الرياضيات والمنطق</span><span class='fd'>أفكار وألغاز بخطوات حل واضحة</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><span class='fn'>07</span><span class='fb'><span class='ft'>اللغة والأدب</span><span class='fd'>قواعد ومفردات ونصوص وأعلام</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><span class='fn'>08</span><span class='fb'><span class='ft'>الفضاء والفلك</span><span class='fd'>الكواكب والنجوم وأحدث الاكتشافات</span></span><span class='fg' aria-hidden='true'>←</span></a></li></ol></section>
+<section class='sec' id='latest'><div class='sec-h'><h2>من المقالات</h2></div>
+<div class='feat-wrap' data-empty='لا توجد مقالات منشورة بعد.'>
+<b:loop index='i' values='data:posts' var='post'><b:if cond='data:i == 0'><article class='feat'>
+<a class='feat-img' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M8 10h14a4 4 0 014 4v24a3 3 0 00-3-3H8z M40 10H26v25h12a2 2 0 002-2z' class='g-l'/></svg></b:if></a>
+<div class='feat-body'><div class='meta'><span class='tag-feat'>مقال مميز</span><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<h3><a expr:href='data:post.url'><data:post.title/></a></h3><p><data:post.snippet/></p><a class='read' expr:href='data:post.url'>اقرأ المقال</a></div></article></b:if></b:loop>
+</div>
+<ol class='rows-list' data-empty=''><b:loop index='i' values='data:posts' var='post'><b:if cond='data:i &gt; 0'><li><a class='rl' expr:href='data:post.url'><span class='rl-n'><data:i/></span><span class='rl-b'><span class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></span><span class='rl-t'><data:post.title/></span><span class='rl-s'><data:post.snippet/></span></span></a></li></b:if></b:loop></ol>
 <p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec' id='progress'><div class='sec-h'><h2>التقدم والإنجازات</h2><span class='tag'>نموذج</span></div>
+<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2><span class='tag'>نموذج</span></div>
 <div class='prog'><div class='lvlcard'><div class='lv-top'><b>المستوى 3</b><span>240 من 400 نقطة</span></div><div class='g-prog big'><i style='width:60%'></i></div><p>تبقّى 160 نقطة للمستوى الرابع.</p></div><ul class='badges'><li class='badge earned'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M24 6l5.2 10.6 11.8 1.7-8.5 8.3 2 11.7L24 32.8l-10.5 5.5 2-11.7L7 18.3l11.8-1.7z' class='b-f'/></svg><span>أول اختبار</span></li><li class='badge earned'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M26 4L10 27h12l-2 17 16-23H24z' class='b-f'/></svg><span>خمس إجابات متتالية</span></li><li class='badge '><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M12 6v38' class='b-s'/><path d='M12 8h26l-6 9 6 9H12z' class='b-f'/></svg><span>مستكشف الأقسام</span></li><li class='badge locked'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='22' width='28' height='20' rx='6' class='b-l'/><path d='M16 22v-5a8 8 0 0116 0v5' class='b-s'/></svg><span>تحدٍّ أسبوعي</span></li></ul></div><p class='note'>نموذج توضيحي. تعمل كل الألعاب بلا حساب، وإنشاء حساب اختياري لحفظ النقاط بين الأجهزة.</p></section>
 <section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
-<div class='method'>
-<div><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></div>
-<div><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></div>
-<div><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></div>
-</div></section>
+<ol class='method'><li><span class='mn'>1</span><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></li><li><span class='mn'>2</span><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></li><li><span class='mn'>3</span><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></li></ol></section>
 </div>
 
 <b:elseif cond='data:blog.pageType == &quot;error_page&quot;'/>
@@ -347,6 +410,44 @@ html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform
     if(q&&!q.value.trim()){e.preventDefault();q.focus();return;}
     var b=this.querySelector('button');if(b){b.classList.add('busy');b.setAttribute('aria-busy','true');}
   });
+
+  /* سؤال اليوم: أسئلة مراجَعة مخزنة في القالب. بلا خادم وبلا نقاط، والنتيجة لهذه الجلسة فقط. */
+  var Q=[{"q": "ما العدد التالي: 2، 6، 12، 20، ؟", "o": ["28", "30", "32", "24"], "a": 1, "x": "الفروق بين الأعداد المتتالية هي 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30. وكل حدّ هو n × (n+1).", "l": "متوسط"}, {"q": "ما أكبر كواكب المجموعة الشمسية؟", "o": ["زحل", "المشتري", "نبتون", "الأرض"], "a": 1, "x": "المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة.", "l": "سهل"}, {"q": "أي هذه الأنهار يصب في البحر المتوسط؟", "o": ["الأمازون", "الدانوب", "النيل", "المسيسيبي"], "a": 2, "x": "يصب النيل في البحر المتوسط شمال مصر. أما الأمازون فيصب في المحيط الأطلسي، والدانوب في البحر الأسود، والمسيسيبي في خليج المكسيك.", "l": "سهل"}, {"q": "ما أصغر عدد أولي؟", "o": ["0", "1", "2", "3"], "a": 2, "x": "العدد الأولي له قاسمان بالضبط هما 1 ونفسه. العدد 1 له قاسم واحد فقط فليس أولياً، والعدد 2 هو أصغر عدد يحقق الشرط.", "l": "متوسط"}, {"q": "كم يوماً في السنة الكبيسة؟", "o": ["365", "364", "367", "366"], "a": 3, "x": "السنة الكبيسة في التقويم الميلادي 366 يوماً، لأن شهر فبراير فيها 29 يوماً.", "l": "سهل"}, {"q": "أي كوكب يُعرف بالكوكب الأحمر؟", "o": ["المريخ", "الزهرة", "عطارد", "أورانوس"], "a": 0, "x": "المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته.", "l": "سهل"}],live=document.getElementById('live');
+  if(live&&Q.length){
+    var $=function(id){return document.getElementById(id);},qe=$('lv-q'),oe=$('lv-o'),fb=$('lv-fb'),nx=$('lv-next'),sc=$('lv-score'),nn=$('lv-n');
+    var day=Math.floor(new Date().getTime()/86400000),idx=day%Q.length,done=0,right=0,locked=false;
+    var AR='أبجد';
+    function show(){
+      var q=Q[idx];locked=false;qe.textContent=q.q;oe.innerHTML='';fb.hidden=true;fb.className='live-fb';nx.hidden=true;
+      nn.textContent=(done+1)+' من '+Q.length;sc.textContent=done?('الصحيحة: '+right+' من '+done):'';
+      q.o.forEach(function(t,i){
+        var b=document.createElement('button');b.type='button';b.className='lo';
+        var l=document.createElement('span');l.className='ol';l.textContent=AR.charAt(i);
+        var s2=document.createElement('span');s2.textContent=t;b.appendChild(l);b.appendChild(s2);
+        b.addEventListener('click',function(){pick(i,b);});oe.appendChild(b);
+      });
+    }
+    function pick(i,btn){
+      if(locked)return;locked=true;var q=Q[idx],ok=i===q.a,bs=oe.children;done++;if(ok)right++;
+      for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(k===q.a)bs[k].classList.add('ok');else if(k===i)bs[k].classList.add('bad');else bs[k].classList.add('dim');}
+      fb.hidden=false;fb.className='live-fb '+(ok?'ok':'bad');
+      fb.innerHTML='';var t=document.createElement('b');t.textContent=ok?'إجابة صحيحة':'إجابة خاطئة';var p=document.createElement('p');p.textContent=q.x;fb.appendChild(t);fb.appendChild(p);
+      sc.textContent='الصحيحة: '+right+' من '+done;
+      nx.hidden=false;nx.textContent=done>=Q.length?'النتيجة':'سؤال آخر';nx.focus();
+    }
+    nx.addEventListener('click',function(){
+      if(done>=Q.length){
+        live.innerHTML='';var w=document.createElement('div');w.className='live-end';
+        var h=document.createElement('h2');h.textContent='أكملت الجولة: '+right+' من '+Q.length;
+        var p=document.createElement('p');p.textContent='النتيجة لهذه الجلسة فقط ولا تُحفظ.';
+        var r=document.createElement('button');r.className='btn';r.type='button';r.textContent='أعد الجولة';
+        r.addEventListener('click',function(){location.reload();});
+        w.appendChild(h);w.appendChild(p);w.appendChild(r);live.appendChild(w);r.focus();return;
+      }
+      idx=(idx+1)%Q.length;show();
+    });
+    show();
+  }
 })();
 
   //]]></script>

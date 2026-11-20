@@ -30,7 +30,7 @@
       <nav aria-label='القائمة الرئيسية' class='nav'>
         <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
         <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
-        <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
         <a href='/search?max-results=24'>المقالات</a>
       </nav>
       <div class='bar-end'>
@@ -46,7 +46,7 @@
     <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>{{SITE}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
     <nav aria-label='القائمة الجانبية'>
       <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
-      <a expr:href='data:blog.homepageUrl + &quot;#daily&quot;'>التحدي اليومي</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
       <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>أقسام المعرفة</a>
       <a href='/search?max-results=24'>المقالات</a>
       <a expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>التقدم والحساب</a>

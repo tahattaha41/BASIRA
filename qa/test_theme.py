@@ -40,12 +40,13 @@ for key, fn in PAGES.items():
 h = rendered['home']
 check('الرئيسية: كل أقسام المعرفة الثمانية', all(n in h for n, _ in SITE['topics']))
 check('الرئيسية: الألعاب الخمس مع وسم قيد الإعداد', all(g[1] in h for g in SITE['games']) and 'قيد التنفيذ' in h)
-games_html = h.split('id="games"')[1].split('id="daily"')[0]
+games_html = h.split('id="games"')[1].split('id="topics"')[0]
 check('الألعاب: لا زر/رابط لصفحة غير منشورة', all(f'/p/game-{g[0]}.html' in SITE.get('published', []) or f'/p/game-{g[0]}.html' not in games_html for g in SITE['games']))
-check('الألعاب: لكل لعبة مستوى صعوبة وأيقونة', games_html.count('class="glyph"') == 5 and all(l in games_html for l in ('سهل', 'متوسط', 'صعب')))
-check('الرئيسية: الأقسام بالترتيب المطلوب', [h.find(x) for x in ('class="hero"', 'id="games"', 'id="daily"', 'id="topics"', 'id="latest"', 'id="progress"')] == sorted(h.find(x) for x in ('class="hero"', 'id="games"', 'id="daily"', 'id="topics"', 'id="latest"', 'id="progress"')))
+check('الألعاب: لكل لعبة مستوى صعوبة وأيقونة', games_html.count('class="tab"') == 5 and games_html.count('class="pane p-') == 5 and all(l in games_html for l in ('سهل', 'متوسط', 'صعب')))
+check('الرئيسية: الأقسام بالترتيب المطلوب', [h.find(x) for x in ('class="hero"', 'id="games"', 'id="topics"', 'id="latest"', 'id="progress"')] == sorted(h.find(x) for x in ('class="hero"', 'id="games"', 'id="topics"', 'id="latest"', 'id="progress"')))
+check('الرئيسية: مقال مميز واحد وبقية المقالات في القائمة', h.count('class="feat"') == 1 and h.count('class="rl"') == len(POSTS) - 1 and 'مقال مميز' in h)
 check('الرأس: بحث وحساب وقائمة جانبية', 'class="sdrop"' in h and 'aria-label="الحساب والتقدم"' in h and 'class="drawer"' in h)
-check('الهيرو: زرّان (استكشف + ابدأ اللعب) وعنصر بصري', 'href="#topics"' in h and 'href="#games"' in h and 'class="hero-art"' in h)
+check('الهيرو: زرّان (استكشف + ابدأ اللعب) وعنصر بصري', 'href="#topics"' in h and 'href="#games"' in h and 'id="live"' in h and h.count("class=\"lo\"") == 4)
 check('الرئيسية: المقالات الأربعة', all(p['title'] in h for p in POSTS))
 check('البحث: noindex', 'noindex' in rendered['search'] and 'noindex' in rendered['error'] and 'noindex' not in rendered['home'])
 check('الاسم: عنصر نائب غير نهائي من site.json', SITE['name'] in h)
@@ -87,7 +88,7 @@ css = open(os.path.join(ROOT, 'src/style.css'), encoding='utf-8').read()
 light = dict(re.findall(r'--([\w-]+):(#[0-9a-f]{6})', css.split('html[data-theme=dark]')[0]))
 dark = dict(re.findall(r'--([\w-]+):(#[0-9a-f]{6})', css.split('html[data-theme=dark]')[1].split('}')[0]))
 for mode, t in (('فاتح', light), ('داكن', dark)):
-    for fg, bg in (('ink', 'paper'), ('soft', 'paper'), ('faint', 'paper'), ('accent', 'paper'), ('accent-ink', 'accent'), ('soft', 'card'), ('warn', 'paper'), ('play', 'paper'), ('play-ink', 'play'), ('ok', 'ok-bg'), ('bad', 'bad-bg'), ('accent', 'accent-bg'), ('play', 'play-bg'), ('ink', 'play-bg'), ('soft', 'play-bg'), ('faint', 'card')):
+    for fg, bg in (('ink', 'paper'), ('soft', 'paper'), ('faint', 'paper'), ('accent', 'paper'), ('accent-ink', 'accent'), ('soft', 'card'), ('warn', 'paper'), ('play', 'paper'), ('play-ink', 'play'), ('ok', 'ok-bg'), ('bad', 'bad-bg'), ('accent', 'accent-bg'), ('play', 'play-bg'), ('ink', 'play-bg'), ('soft', 'play-bg'), ('faint', 'card'), ('deep-ink', 'deep'), ('deep-soft', 'deep'), ('deep-ink', 'deep-rule'), ('play-on-deep', 'deep')):
         r = ratio(t[fg], t[bg]); check(f'تباين {mode} {fg}/{bg} ≥ 4.5', r >= 4.5, f'{r:.2f}')
 
 print('\nFAILED: %d' % len(fails) if fails else '\nALL PASS')

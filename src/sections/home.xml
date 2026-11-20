@@ -1,34 +1,37 @@
 <section class='hero'><div class='wrap hero-in'>
 <div class='hero-txt'>
 <p class='eyebrow'>معرفة وتحدٍّ بالعربية</p>
-<h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
-<p class='lede'>مقالات موثّقة بالمصادر في العلوم والتاريخ والجغرافيا وغيرها، وألعاب أسئلة تختبر ما عرفته. تستخدمها بلا حساب.</p>
-<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn play' href='#games'>ابدأ اللعب</a></div>
+<h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
+<p class='lede'>مقالات موثّقة بالمصادر، وأسئلة تختبر ما عرفته. بلا حساب.</p>
+<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn alt' href='#games'>الألعاب</a></div>
 </div>
-<div class='hero-vis'>{{HERO_ART}}</div>
+<div class='live' id='live' aria-live='polite'>
+<div class='live-h'><span>سؤال اليوم</span><span id='lv-n'>1 من 6</span></div>
+{{QUIZ_FALLBACK}}
+<div class='live-fb' id='lv-fb' hidden='hidden'></div>
+<div class='live-f'><button class='btn' id='lv-next' type='button' hidden='hidden'>سؤال آخر</button><span id='lv-score'></span></div>
+<noscript><p class='note'>يحتاج هذا السؤال إلى تفعيل JavaScript.</p></noscript>
+</div>
+</div></section>
+<section class='stage' id='games'><div class='wrap'>
+<div class='sec-h'><h2>العب</h2><span class='tag'>قيد التنفيذ</span></div>
+<p class='stage-note'>اختر لعبة لترى شاشتها. هذه نماذج تصميم تتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
+{{STAGE}}
 </div></section>
 <div class='wrap'>
-<section class='sec' id='games'><div class='sec-h'><h2>الألعاب</h2><span class='tag'>قيد التنفيذ</span></div>
-<p class='note'>الصفحات التالية نماذج تصميم لشاشات اللعب، وتتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
-<ul class='games'>{{GAME_CARDS}}</ul></section>
-<section class='sec' id='daily'><div class='daily'>
-<div><p class='eyebrow'>التحدي اليومي</p><h2>ما العدد التالي: 2، 6، 12، 20، ؟</h2><p class='note'>سؤال منطقي يتجدد كل يوم في النسخة التفاعلية.</p></div>
-<div class='daily-end'><span class='lvl lvl-2'>متوسط</span>{{DAILY_BTN}}</div>
-</div></section>
-<section class='sec' id='topics'><div class='sec-h'><h2>أقسام المعرفة</h2></div>
-<ul class='topics'>{{TOPICS}}</ul></section>
-<section class='sec' id='latest'><div class='sec-h'><h2>أحدث المقالات</h2></div>
-<ul class='posts cards'><b:loop values='data:posts' var='post'><li>
-<a class='thumb' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/>{{THUMB}}</b:if></a>
-<div class='pc-body'><div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<a class='pt' expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></div></li></b:loop></ul>
+<section class='sec' id='topics'><div class='sec-h'><h2>تصفّح بالموضوع</h2></div>
+<ol class='fahras'>{{FAHRAS}}</ol></section>
+<section class='sec' id='latest'><div class='sec-h'><h2>من المقالات</h2></div>
+<div class='feat-wrap' data-empty='لا توجد مقالات منشورة بعد.'>
+<b:loop index='i' values='data:posts' var='post'><b:if cond='data:i == 0'><article class='feat'>
+<a class='feat-img' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/>{{THUMB}}</b:if></a>
+<div class='feat-body'><div class='meta'><span class='tag-feat'>مقال مميز</span><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<h3><a expr:href='data:post.url'><data:post.title/></a></h3><p><data:post.snippet/></p><a class='read' expr:href='data:post.url'>اقرأ المقال</a></div></article></b:if></b:loop>
+</div>
+<ol class='rows-list' data-empty=''><b:loop index='i' values='data:posts' var='post'><b:if cond='data:i &gt; 0'><li><a class='rl' expr:href='data:post.url'><span class='rl-n'><data:i/></span><span class='rl-b'><span class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></span><span class='rl-t'><data:post.title/></span><span class='rl-s'><data:post.snippet/></span></span></a></li></b:if></b:loop></ol>
 <p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec' id='progress'><div class='sec-h'><h2>التقدم والإنجازات</h2><span class='tag'>نموذج</span></div>
+<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2><span class='tag'>نموذج</span></div>
 {{PROGRESS}}</section>
 <section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
-<div class='method'>
-<div><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></div>
-<div><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></div>
-<div><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></div>
-</div></section>
+<ol class='method'>{{METHOD}}</ol></section>
 </div>

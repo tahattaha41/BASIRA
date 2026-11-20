@@ -26,7 +26,7 @@ class Sim:
 
     def ev(self, expr, scope):
         py = re.sub(r'data:([A-Za-z0-9_.]+)', lambda m: 'L(%r)' % m.group(1), expr)
-        py = py.replace('&quot;', '"')
+        py = py.replace('&quot;', '"').replace('&gt;', '>')
         return eval(py, {'__builtins__': {}}, {'L': lambda p: self.lookup(p, scope)})
 
     def html(self, page_ctx):
@@ -61,7 +61,8 @@ class Sim:
             return self.nodes(inc[0], scope) if inc else ''
         if t == B + 'loop':
             var, vals = el.get('var'), self.ev(el.get('values'), scope)
-            return ''.join(self.nodes(el, dict(scope, **{var: v})) for v in vals)
+            ix = el.get('index')
+            return ''.join(self.nodes(el, dict(scope, **{var: v}, **({ix: n} if ix else {}))) for n, v in enumerate(vals))
         if t == B + 'if':
             return self.branch(el, scope)
         if t in (B + 'else', B + 'elseif'):

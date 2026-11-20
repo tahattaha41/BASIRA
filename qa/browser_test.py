@@ -36,7 +36,7 @@ with sync_playwright() as pw:
                 check(f'[{tag}] لا تمرير أفقي', sw <= cw, f'{sw}>{cw}')
                 check(f'[{tag}] لا أخطاء JS', not errs, errs)
                 if vname != 'desktop':
-                    small = pg.evaluate("""()=>[...document.querySelectorAll('button,input:not([type=checkbox]),.nav a,.btn,.btn-quiet,.icon-btn,.drawer nav a')].filter(e=>e.offsetParent!==null).map(e=>[e.className||e.tagName,e.getBoundingClientRect().height]).filter(x=>x[1]<44)""")
+                    small = pg.evaluate("""()=>[...document.querySelectorAll('button,input:not([type=checkbox]):not(.sr),.tab,.lo,.nav a,.btn,.btn-quiet,.icon-btn,.drawer nav a')].filter(e=>e.offsetParent!==null).map(e=>[e.className||e.tagName,e.getBoundingClientRect().height]).filter(x=>x[1]<44)""")
                     check(f'[{tag}] أهداف اللمس ≥ 44px', not small, small)
                     fs = pg.evaluate("()=>[...document.querySelectorAll('input[type=search]')].map(e=>parseFloat(getComputedStyle(e).fontSize)).filter(x=>x<16)")
                     check(f'[{tag}] خط حقل البحث ≥ 16px (لا تكبير تلقائي في iOS)', not fs, fs)
@@ -58,6 +58,34 @@ with sync_playwright() as pw:
     pg.click('.sdrop form.find button'); check('بحث فارغ لا يغادر الصفحة', pg.url.startswith('file://'))
     pg.keyboard.press('Escape'); check('Escape يغلق البحث', pg.evaluate("document.querySelector('.sdrop').open") is False)
     check('لا أخطاء JS أثناء التفاعل', not errs, errs)
+    # السؤال التفاعلي
+    pg.goto('file://' + os.path.join(OUT, 'home.html'))
+    first = pg.evaluate("document.getElementById('lv-q').textContent")
+    pg.evaluate("localStorage.clear()")
+    n_opts = pg.evaluate("document.querySelectorAll('#lv-o .lo').length")
+    check('السؤال الحي: أربع إجابات', n_opts == 4, n_opts)
+    # اختر إجابة خاطئة عمداً: ابحث عن زر ليس .ok بعد النقر
+    pg.click('#lv-o .lo >> nth=0')
+    st = pg.evaluate("({ok:document.querySelectorAll('#lv-o .ok').length,bad:document.querySelectorAll('#lv-o .bad').length,dis:[...document.querySelectorAll('#lv-o .lo')].every(b=>b.disabled),fb:!document.getElementById('lv-fb').hidden,next:!document.getElementById('lv-next').hidden,score:document.getElementById('lv-score').textContent})")
+    check('السؤال الحي: بعد الإجابة يظهر الصحيح والتفسير وزر التالي', st['ok'] == 1 and st['bad'] <= 1 and st['dis'] and st['fb'] and st['next'] and 'من 1' in st['score'], st)
+    pg.click('#lv-next'); second = pg.evaluate("document.getElementById('lv-q').textContent")
+    check('السؤال الحي: السؤال التالي مختلف', second != first)
+    for _ in range(5):
+        pg.click('#lv-o .lo >> nth=0'); pg.click('#lv-next')
+    check('السؤال الحي: شاشة النهاية بعد ست أسئلة', pg.evaluate("!!document.querySelector('.live-end')"))
+    # إجابة صحيحة تُحسب
+    pg.goto('file://' + os.path.join(OUT, 'home.html'))
+    ans = pg.evaluate("""()=>{var s=document.getElementById('lv-q').textContent;return s}""")
+    import json as _j
+    site = _j.load(open(os.path.join(ROOT, 'src/site.json'), encoding='utf-8'))
+    q = next(x for x in site['quiz'] if x['q'] == ans)
+    pg.click(f"#lv-o .lo >> nth={q['a']}")
+    check('السؤال الحي: الإجابة الصحيحة تُسجَّل', pg.evaluate("document.getElementById('lv-fb').className") == 'live-fb ok' and 'الصحيحة: 1 من 1' in pg.evaluate("document.getElementById('lv-score').textContent"))
+    # تبديل ألعاب المسرح
+    vis = lambda sl: pg.evaluate(f"getComputedStyle(document.querySelector('.p-{sl}')).display")
+    check('المسرح: اللعبة الأولى ظاهرة والثانية مخفية', vis('mcq') != 'none' and vis('truefalse') == 'none')
+    pg.click('label[for=gm-order]'); check('المسرح: النقر على تبويب يبدّل اللعبة', vis('order') != 'none' and vis('mcq') == 'none')
+    pg.keyboard.press('Tab')
     # زر الحساب يقود إلى قسم موجود
     check('زر الحساب يشير إلى #progress موجود', pg.evaluate("!!document.querySelector('#progress') && document.querySelector('a[aria-label=\"الحساب والتقدم\"]').getAttribute('href').endsWith('#progress')"))
     ctx.close()

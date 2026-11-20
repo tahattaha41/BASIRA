@@ -134,3 +134,50 @@ def progress_block():
             "<p>تبقّى 160 نقطة للمستوى الرابع.</p></div>"
             "<ul class='badges'>" + badge('earned', 'أول اختبار', star) + badge('earned', 'خمس إجابات متتالية', bolt) + badge('', 'مستكشف الأقسام', flag) + badge('locked', 'تحدٍّ أسبوعي', lock) + "</ul></div>"
             "<p class='note'>نموذج توضيحي. تعمل كل الألعاب بلا حساب، وإنشاء حساب اختياري لحفظ النقاط بين الأجهزة.</p>")
+
+
+# ---------- التصميم التحريري الجديد ----------
+def quiz_fallback(site):
+    q = site['quiz'][0]
+    o = ''.join(f"<button class='lo' type='button'><span class='ol'>{'أبجد'[i]}</span><span>{e(t)}</span></button>" for i, t in enumerate(q['o']))
+    return f"<h2 class='live-q' id='lv-q'>{e(q['q'])}</h2><div class='live-o' id='lv-o'>{o}</div>"
+
+
+def stage(site):
+    gs = site['games']
+    pub = site.get('published', [])
+    inputs = ''.join(f"<input class='sr' type='radio' name='gm' id='gm-{g[0]}'{" checked='checked'" if i == 0 else ''}/>" for i, g in enumerate(gs))
+    tabs = ''.join(f"<label class='tab' for='gm-{g[0]}'><span class='tn'>{i + 1:02d}</span><span class='tt'>{e(g[1])}</span>{level_chip(g[3])}</label>" for i, g in enumerate(gs))
+    panes = ''
+    for g in gs:
+        slug, name, desc, lvl = g
+        act = (f"<a class='btn play' href='/p/game-{slug}.html'>{e(site['play_label'])}</a>" if f'/p/game-{slug}.html' in pub else "<span class='soon'>قريباً</span>")
+        panes += (f"<div class='pane p-{slug}'><div class='pane-txt'><h3>{e(name)}</h3><p>{e(desc)}</p><div class='pane-meta'>{level_chip(lvl)}<span class='tag'>قيد التنفيذ</span></div>{act}</div>"
+                  f"<div class='pane-vis'>{model(slug)[0]}</div></div>")
+    return f"<div class='stage-grid'>{inputs}<div class='tabs'>{tabs}</div><div class='panes'>{panes}</div></div>"
+
+
+def stage_css(site):
+    css = ''
+    for g in site['games']:
+        s = g[0]
+        css += (f"#gm-{s}:checked~.tabs [for=gm-{s}]{{background:var(--paper);color:var(--ink);border-color:var(--paper)}}"
+                f"#gm-{s}:checked~.tabs [for=gm-{s}] .tn{{color:var(--play)}}"
+                f"#gm-{s}:checked~.panes .p-{s}{{display:grid}}"
+                f"#gm-{s}:focus-visible~.tabs [for=gm-{s}]{{outline:3px solid var(--play-on-deep);outline-offset:2px}}\n")
+    return css
+
+
+def fahras(site):
+    out = ''
+    for i, (n, d) in enumerate(site['topics']):
+        from urllib.parse import quote
+        out += f"<li><a href='/search/label/{quote(n)}'><span class='fn'>{i + 1:02d}</span><span class='fb'><span class='ft'>{e(n)}</span><span class='fd'>{e(d)}</span></span><span class='fg' aria-hidden='true'>←</span></a></li>"
+    return out
+
+
+def method_block():
+    items = [('مصدر لكل معلومة', 'كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.'),
+             ('تاريخ تحديث ظاهر', 'المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.'),
+             ('مراجعة بشرية', 'لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.')]
+    return ''.join(f"<li><span class='mn'>{i + 1}</span><h3>{e(t)}</h3><p>{e(p)}</p></li>" for i, (t, p) in enumerate(items))
