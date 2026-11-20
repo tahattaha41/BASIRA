@@ -4,7 +4,7 @@ on:
   push:
     branches: [basira-publish-readiness]
   pull_request:
-    branches: [platform-dev]
+    branches: [platform-dev, basira-brand-identity]
   workflow_dispatch:
     inputs:
       strict_release_check:
