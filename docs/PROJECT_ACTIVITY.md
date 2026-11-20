@@ -1,14 +1,14 @@
 # نشاط المستودع — تحديث آلي
 
 - **الفرع:** basira-reference-platform
-- **آخر commit:** 6a2e557dca97
-- **التاريخ:** 2026-11-20T12:59:41+02:00
-- **الرسالة:** fix: update existing request log row on issue edits
-- **وقت تحديث التقرير:** 2026-11-20T10:59:50.922570+00:00
+- **آخر commit:** 7f4add2e3942
+- **التاريخ:** 2026-11-20T10:59:50Z
+- **الرسالة:** docs: automatically refresh BASIRA project reference [skip ci]
+- **وقت تحديث التقرير:** 2026-11-20T11:00:00.874604+00:00
 
 ## الملفات التي تغيرت في آخر commit
 
-- scripts/update_project_reference.py
+- docs/PROJECT_ACTIVITY.md
 
 ## مصدر الحالة
 
