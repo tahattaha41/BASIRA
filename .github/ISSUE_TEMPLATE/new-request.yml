@@ -1,0 +1,37 @@
+name: طلب أو تعديل جديد في BASIRA
+description: سجّل أي طلب جديد حتى يدخل سجل المشروع ولا يضيع بين المحادثات.
+title: "[طلب جديد] "
+labels: ["project-request"]
+body:
+  - type: textarea
+    id: request
+    attributes:
+      label: ما المطلوب؟
+      description: اشرح النتيجة التي تريدها، لا طريقة التنفيذ فقط.
+      placeholder: أريد أن...
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: لماذا نحتاجه؟
+      placeholder: المشكلة أو الفائدة المتوقعة
+    validations:
+      required: false
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: كيف نعرف أنه اكتمل؟
+      description: اكتب ما يجب أن تراه أو تجربه عند الانتهاء.
+      placeholder: أعتبره مكتملًا عندما...
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: مراجعة السلامة
+      options:
+        - label: لا أطلب حذف بيانات أو محتوى قائم دون مراجعة.
+          required: false
+        - label: أفهم أن الطلب سيُراجع ويُختبر قبل اعتباره منفذًا.
+          required: true
