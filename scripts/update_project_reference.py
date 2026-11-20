@@ -65,7 +65,7 @@ def append_issue(event_path: str | None) -> None:
     url = issue.get("html_url", "")
     state = issue.get("state", "open")
     action = os.environ.get("GITHUB_EVENT_NAME", "issue")
-    marker = f"| GitHub Issue #{number} |"
+    marker = f"GitHub Issue #{number} ("
     old_lines = REQUESTS.read_text(encoding="utf-8").splitlines()
     row = f"| {datetime.now(timezone.utc).date().isoformat()} | GitHub Issue #{number} ({action}) — {url} | {title} | {state} — يحتاج فرزًا | لم يُنفذ بعد |"
     found = False
