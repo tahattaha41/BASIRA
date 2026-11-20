@@ -1,4 +1,4 @@
-name: دقّة | بناء واختبار
+name: BASIRA | Build and test
 on:
   push: { branches: [main] }
   pull_request:
@@ -22,7 +22,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
-          for f in ('dist/daqqa-theme.xml', 'dist/daqqa-import.xml'): ET.parse(f)
+          for f in ('dist/basira-theme.xml', 'dist/basira-import.xml'): ET.parse(f)
           ns = {'b': 'http://www.google.com/2005/gml/b'}
           root = ET.parse('dist/daqqa-theme.xml').getroot()
           body = root.find('{http://www.w3.org/1999/xhtml}body')
@@ -32,5 +32,17 @@ jobs:
           for k in ("id='main-content'", 'DQ-AD-GATE', "name='description'"): assert k in t, k
           print('theme OK')
           PY
-      - name: لا أسماء قديمة
-        run: "! grep -rIil 'smart.choice\\|utilit[y]ra' src scripts dist qa || true"
+      - name: Reject legacy brand references
+        run: |
+          if grep -rInE 'دقّة|daqqa-theme|daqqa-import|Smart Choice' src scripts dist qa docs; then
+            echo 'Legacy brand reference found'; exit 1;
+          fi
+      - name: Upload Blogger release files
+        uses: actions/upload-artifact@v4
+        with:
+          name: basira-blogger-release
+          path: |
+            dist/basira-theme.xml
+            dist/basira-import.xml
+          if-no-files-found: error
+          retention-days: 14
