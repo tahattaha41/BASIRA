@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""بناء موقع دقّة: يولّد dist/daqqa-theme.xml (قالب بلوجر) و dist/daqqa-import.xml (مقالات وصفحات للاستيراد) و dist/fixtures.json (للاختبار)."""
+"""بناء موقع BASIRA | بصيرة: يولّد dist/basira-theme.xml (قالب بلوجر) و dist/basira-import.xml (مقالات وصفحات للاستيراد) و dist/fixtures.json (للاختبار)."""
 import html, json, os, re, sys, datetime
 import markdown
 
@@ -7,7 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC, DIST = os.path.join(ROOT, 'src'), os.path.join(ROOT, 'dist')
 os.makedirs(DIST, exist_ok=True)
 ADSENSE_CLIENT = 'ca-pub-1235197294708204'
-GA_ID = os.environ.get('DAQQA_GA_ID', '')  # اتركه فارغاً حتى تنشئ خاصية Analytics للموقع الجديد
+GA_ID = os.environ.get('BASIRA_GA_ID', '')  # اتركه فارغاً حتى تنشئ خاصية Analytics للموقع الجديد
 AUTHOR = 'طه'
 
 # (slug, title, group, short description, sample)
@@ -31,7 +31,7 @@ LABEL_DESC = {
     'الحساب اليومي': 'النسب وأيام العمل وساعات الدوام: حساب بلا التباس.',
 }
 PAGES = [  # slug, title, file
-    ('about', 'عن دقّة', 'about.html'), ('contact', 'اتصل بنا', 'contact.html'), ('editorial-policy', 'سياسة التحرير', 'editorial-policy.html'),
+    ('about', 'عن بصيرة', 'about.html'), ('contact', 'اتصل بنا', 'contact.html'), ('editorial-policy', 'سياسة التحرير', 'editorial-policy.html'),
     ('privacy-policy', 'سياسة الخصوصية', 'privacy-policy.html'), ('terms', 'شروط الاستخدام', 'terms.html')]
 
 
@@ -76,7 +76,7 @@ def tools_hub():
         rows += f"<h2>{name}</h2><ul class='idx'>" + ''.join(
             f"<li><a href='/p/{s}.html'><span class='n'>{i + 1:02d}</span><span><span class='t'>{html.escape(t)}</span><span class='d'>{html.escape(d)}</span></span><span class='go'>افتح الأداة ←</span></a></li>"
             for i, (s, t, gg, d) in enumerate(TOOLS) if gg == g) + '</ul>'
-    return "<p class='lede'>كل أدوات دقّة في مكان واحد. تعمل كلها داخل متصفحك دون تسجيل، وتحت كل أداة شرح لطريقة الحساب وحدودها.</p><div class='hub'>" + rows + '</div>'
+    return "<p class='lede'>كل أدوات بصيرة في مكان واحد. تعمل كلها داخل متصفحك دون تسجيل، وتحت كل أداة شرح لطريقة الحساب وحدودها.</p><div class='hub'>" + rows + '</div>'
 
 
 # ---------- القوالب ----------
@@ -203,7 +203,7 @@ def build_import(ps, tp):
     for slug, title, fn in PAGES:
         entries.append(atom_entry('PAGE', i, title, read('pages/' + fn), base, slug)); i += 1
     xml = (f"<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:blogger='http://schemas.google.com/blogger/2018' xmlns:gd='http://schemas.google.com/g/2005' xmlns:thr='http://purl.org/syndication/thread/1.0'>"
-           f"<id>tag:blogger.com,1999:blog-1.archive</id><updated>{now}</updated><title type='text'>دقّة</title><generator version='7.00' uri='https://www2.blogger.com'>Blogger</generator>" + ''.join(entries) + '</feed>')
+           f"<id>tag:blogger.com,1999:blog-1.archive</id><updated>{now}</updated><title type='text'>BASIRA | بصيرة</title><generator version='7.00' uri='https://www2.blogger.com'>Blogger</generator>" + ''.join(entries) + '</feed>')
     with open(os.path.join(DIST, 'daqqa-import.xml'), 'w', encoding='utf-8') as f:
         f.write(xml)
     return len(entries)
