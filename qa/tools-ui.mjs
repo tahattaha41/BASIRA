@@ -1,7 +1,7 @@
 // يختبر واجهة كل أداة داخل الصفحة المعروضة بالقالب: يدخل مدخلات ويتحقق من النتائج المعروفة.
 import fs from 'node:fs'; import path from 'node:path'; import { createRequire } from 'node:module'; import { render } from './blogger-sim.mjs';
 const { chromium } = createRequire('/opt/npm-tools/')('playwright');
-const root = path.resolve(import.meta.dirname, '..'), xml = fs.readFileSync(root + '/dist/daqqa-theme.xml', 'utf8'), fx = JSON.parse(fs.readFileSync(root + '/dist/fixtures.json', 'utf8'));
+const root = path.resolve(import.meta.dirname, '..'), xml = fs.readFileSync(root + '/dist/basira-theme.xml', 'utf8'), fx = JSON.parse(fs.readFileSync(root + '/dist/fixtures.json', 'utf8'));
 const blog = { homepageUrl: 'http://t.test/', url: 'http://t.test/p/x.html', pageType: 'static_page', pageTitle: 't', metaDescription: '', languageDirection: 'rtl', searchQuery: '', searchLabel: '' };
 const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 420, height: 900 } }); const page = await ctx.newPage(); let fail = 0;
 const errs = []; page.on('pageerror', e => errs.push(e.message));
