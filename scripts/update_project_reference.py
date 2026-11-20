@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh repository activity and append newly opened/edited GitHub issues."""
+"""Refresh repository activity and append/update GitHub issue requests."""
 from __future__ import annotations
 import json
 import os
@@ -21,11 +21,13 @@ def refresh_activity() -> None:
     short = sha[:12]
     subject = git("log", "-1", "--pretty=%s")
     stamp = git("log", "-1", "--date=iso-strict", "--pretty=%cI")
+    branch = os.environ.get("GITHUB_REF_NAME", "unknown")
     changed = git("diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD")
     paths = [p for p in changed.splitlines() if p]
     lines = [
         "# نشاط المستودع — تحديث آلي",
         "",
+        f"- **الفرع:** {branch}",
         f"- **آخر commit:** {short}",
         f"- **التاريخ:** {stamp}",
         f"- **الرسالة:** {subject}",
@@ -64,11 +66,17 @@ def append_issue(event_path: str | None) -> None:
     state = issue.get("state", "open")
     action = os.environ.get("GITHUB_EVENT_NAME", "issue")
     marker = f"| GitHub Issue #{number} |"
-    old = REQUESTS.read_text(encoding="utf-8")
-    if marker in old:
-        return
-    row = f"| {datetime.now(timezone.utc).date().isoformat()} | [Issue #{number}]({url}) ({action}) | {title} | {state} — يحتاج فرزًا | لم يُنفذ بعد |"
-    REQUESTS.write_text(old.rstrip() + "\n" + row + "\n", encoding="utf-8")
+    old_lines = REQUESTS.read_text(encoding="utf-8").splitlines()
+    row = f"| {datetime.now(timezone.utc).date().isoformat()} | GitHub Issue #{number} ({action}) — {url} | {title} | {state} — يحتاج فرزًا | لم يُنفذ بعد |"
+    found = False
+    for index, line in enumerate(old_lines):
+        if marker in line:
+            old_lines[index] = row
+            found = True
+            break
+    if not found:
+        old_lines.append(row)
+    REQUESTS.write_text("\n".join(old_lines).rstrip() + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
