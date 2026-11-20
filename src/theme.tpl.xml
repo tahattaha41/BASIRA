@@ -43,7 +43,7 @@
   </header>
   <label class='scrim' for='nav-t'></label>
   <aside aria-label='القائمة الجانبية' class='drawer'>
-    <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>{{SITE}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
+    <div class='dr-top'><span class='brand'>{{BRAND_LOCKUP}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
     <nav aria-label='القائمة الجانبية'>
       <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
       <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
