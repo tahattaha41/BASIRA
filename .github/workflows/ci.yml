@@ -32,6 +32,13 @@ jobs:
           for k in ("id='main-content'", 'DQ-AD-GATE', "name='description'"): assert k in t, k
           print('theme OK')
           PY
+      - name: Verify existing Blogger API connection (read-only)
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: python3 scripts/check_blogger_connection.py
       - name: Reject legacy brand references
         run: |
           if grep -rInE 'دقّة|daqqa-theme|daqqa-import|Smart Choice' src scripts dist qa docs; then
