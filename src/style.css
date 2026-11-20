@@ -1,4 +1,4 @@
-/* دقّة — تصميم هادئ بطابع تحريري: ورق دافئ، حبر كحلي، لمسة طوب. بلا تدرجات ولا توهّج ولا أيقونات جاهزة. */
+/* BASIRA | بصيرة — تصميم هادئ بطابع تحريري: ورق دافئ، حبر كحلي، لمسة طوب. بلا تدرجات ولا توهّج ولا أيقونات جاهزة. */
 :root{--paper:#f6f2ea;--card:#fffdf8;--ink:#1d2733;--soft:#4a5663;--faint:#7a828b;--rule:#d9d2c3;--rule2:#b9b09b;--brick:#9b3a1e;--steel:#28506f;--mark:#efe4c8;--ok:#2f6b4f;
 --ui:'Noto Kufi Arabic','Segoe UI',Tahoma,sans-serif;--read:'Noto Naskh Arabic','Traditional Arabic',Georgia,serif}
 html[data-theme=dark]{--paper:#14181d;--card:#1b2128;--ink:#ece7dc;--soft:#b9b4a8;--faint:#8b9097;--rule:#2d353e;--rule2:#47515c;--brick:#e08a68;--steel:#8fb5d3;--mark:#2a2f2a;--ok:#7fc4a0}
