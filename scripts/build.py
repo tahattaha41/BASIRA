@@ -175,7 +175,7 @@ def build_theme():
     for k, v in rep.items():
         t = t.replace(k, v)
     assert '{{' not in t, 'placeholder left'
-    with open(os.path.join(DIST, 'daqqa-theme.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(DIST, 'basira-theme.xml'), 'w', encoding='utf-8') as f:
         f.write(t)
     return len(t.encode())
 
@@ -204,7 +204,7 @@ def build_import(ps, tp):
         entries.append(atom_entry('PAGE', i, title, read('pages/' + fn), base, slug)); i += 1
     xml = (f"<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:blogger='http://schemas.google.com/blogger/2018' xmlns:gd='http://schemas.google.com/g/2005' xmlns:thr='http://purl.org/syndication/thread/1.0'>"
            f"<id>tag:blogger.com,1999:blog-1.archive</id><updated>{now}</updated><title type='text'>BASIRA | بصيرة</title><generator version='7.00' uri='https://www2.blogger.com'>Blogger</generator>" + ''.join(entries) + '</feed>')
-    with open(os.path.join(DIST, 'daqqa-import.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(DIST, 'basira-import.xml'), 'w', encoding='utf-8') as f:
         f.write(xml)
     return len(entries)
 
