@@ -1,8 +1,8 @@
 // يعرض القالب الحقيقي عبر المحاكي ببيانات الموقع الفعلية، ويصوّر الصفحات ويفحص التخطيط والأدوات.
 import fs from 'node:fs'; import path from 'node:path'; import { createRequire } from 'node:module'; const { chromium } = createRequire('/opt/npm-tools/')('playwright'); import { render } from './blogger-sim.mjs';
-const root = path.resolve(import.meta.dirname, '..'), xml = fs.readFileSync(root + '/dist/daqqa-theme.xml', 'utf8'), fx = JSON.parse(fs.readFileSync(root + '/dist/fixtures.json', 'utf8'));
+const root = path.resolve(import.meta.dirname, '..'), xml = fs.readFileSync(root + '/dist/basira-theme.xml', 'utf8'), fx = JSON.parse(fs.readFileSync(root + '/dist/fixtures.json', 'utf8'));
 const outDir = process.argv[2] || '/tmp/claude-0/shots'; fs.mkdirSync(outDir, { recursive: true });
-const blog = (o) => ({ homepageUrl: 'http://t.test/', url: 'http://t.test/', pageType: 'index', pageTitle: 'دقّة', metaDescription: 'وصف', languageDirection: 'rtl', searchQuery: '', searchLabel: '', ...o });
+const blog = (o) => ({ homepageUrl: 'http://t.test/', url: 'http://t.test/', pageType: 'index', pageTitle: 'BASIRA | بصيرة', metaDescription: 'وصف', languageDirection: 'rtl', searchQuery: '', searchLabel: '', ...o });
 const post = (p) => ({ title: p.title, url: `/2026/${p.date.slice(5, 7)}/${p.slug}.html`, snippet: p.summary, body: p.body, timestamp: p.date, timestampISO8601: p.date, labels: p.labels.map(n => ({ name: n, url: '/search/label/' + n })), author: { name: 'طه' } });
 const posts = fx.posts.map(post);
 const S = {
