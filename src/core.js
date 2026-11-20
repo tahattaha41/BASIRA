@@ -1,5 +1,5 @@
-/* دقّة — منطق الحساب (بلا واجهة). يعمل في المتصفح وفي Node للاختبار. */
-var DaqqaCore = (function () {
+/* BASIRA | بصيرة — منطق الحساب (بلا واجهة). يعمل في المتصفح وفي Node للاختبار. */
+var BasiraCore = (function () {
   'use strict';
   var MS = 86400000;
 
@@ -203,4 +203,4 @@ var DaqqaCore = (function () {
     intWords: intWords, moneyWords: moneyWords, CUR: CUR, UNITS: UNITS, convert: convert, pct: pct, minutesBetween: minutesBetween, textStats: textStats
   };
 })();
-if (typeof module !== 'undefined') module.exports = DaqqaCore;
+if (typeof module !== 'undefined') module.exports = BasiraCore;
