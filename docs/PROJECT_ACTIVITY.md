@@ -1,14 +1,14 @@
 # نشاط المستودع — تحديث آلي
 
 - **الفرع:** basira-reference-platform
-- **آخر commit:** 8970d0c1b138
-- **التاريخ:** 2026-11-20T13:00:04+02:00
-- **الرسالة:** docs: clarify automatic reference update coverage
-- **وقت تحديث التقرير:** 2026-11-20T11:00:18.311368+00:00
+- **آخر commit:** 60d05af6ddaa
+- **التاريخ:** 2026-11-20T13:02:54+02:00
+- **الرسالة:** docs: add BASIRA project entry point
+- **وقت تحديث التقرير:** 2026-11-20T11:03:01.880247+00:00
 
 ## الملفات التي تغيرت في آخر commit
 
-- docs/PROJECT_ACTIVITY.md
+- README.md
 
 ## مصدر الحالة
 
