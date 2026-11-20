@@ -1,10 +1,10 @@
 # نشاط المستودع — تحديث آلي
 
 - **الفرع:** basira-reference-platform
-- **آخر commit:** 852c31e358b7
-- **التاريخ:** 2026-11-20T13:04:33+02:00
-- **الرسالة:** docs: point project reference to active BASIRA work
-- **وقت تحديث التقرير:** 2026-11-20T11:04:40.879325+00:00
+- **آخر commit:** 218af97cfb87
+- **التاريخ:** 2026-11-20T13:05:42+02:00
+- **الرسالة:** docs: state request automation readiness accurately
+- **وقت تحديث التقرير:** 2026-11-20T11:05:45.231417+00:00
 
 ## الملفات التي تغيرت في آخر commit
 
