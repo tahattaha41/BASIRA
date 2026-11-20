@@ -1,7 +1,7 @@
-/* دقّة — واجهة الأدوات. تعتمد على DaqqaCore. */
+/* BASIRA | بصيرة — واجهة الأدوات. تعتمد على BasiraCore. */
 (function () {
   'use strict';
-  var C = window.DaqqaCore; if (!C) return;
+  var C = window.BasiraCore; if (!C) return;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var fmtN = function (n, d) { return Number(n).toLocaleString('en-US', { maximumFractionDigits: d === undefined ? 2 : d }); };
   var AR = '٠١٢٣٤٥٦٧٨٩';
