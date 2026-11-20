@@ -185,9 +185,9 @@ BASIRA منصة عربية للمعرفة والألعاب الذهنية وال
 ## 14. روابط المشروع
 
 - المستودع: https://github.com/tahattaha41/BASIRA
-- فرع المنصة السابق: https://github.com/tahattaha41/BASIRA/tree/platform-dev
-- PR #2 — إعادة البدء وخطة المنصة: https://github.com/tahattaha41/BASIRA/pull/2
-- PR #3 — هوية وقالب منصة المعرفة والألعاب: https://github.com/tahattaha41/BASIRA/pull/3
+- فرع منصة المعرفة والألعاب: https://github.com/tahattaha41/BASIRA/tree/platform-dev
+- PR #3 — قالب منصة المعرفة والألعاب: https://github.com/tahattaha41/BASIRA/pull/3
+- PR #5 — المرجع الرسمي الموحد: https://github.com/tahattaha41/BASIRA/pull/5
 - التشغيل الآلي: .github/workflows/project-reference.yml
 
 ---
