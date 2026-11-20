@@ -10,8 +10,8 @@
 
 ## النشر (يدوي، لا API في بلوجر للقالب)
 1. مدونة Blogger باسم «BASIRA | بصيرة» (اللغة العربية).
-2. القالب: Theme ← Restore ← ارفع `dist/daqqa-theme.xml`.
-3. المحتوى: Settings ← Manage blog ← Import content ← `dist/daqqa-import.xml` (يضم 10 مقالات و16 صفحة منها `tools`). إن فشل الاستيراد أنشئ الصفحات يدوياً بنفس الروابط `/p/<slug>.html`.
+2. القالب: Theme ← Restore ← ارفع `dist/basira-theme.xml`.
+3. المحتوى: Settings ← Manage blog ← Import content ← `dist/basira-import.xml` (يضم 10 مقالات و16 صفحة منها `tools`). إن فشل الاستيراد أنشئ الصفحات يدوياً بنفس الروابط `/p/<slug>.html`.
 4. تأكد أن روابط الصفحات تطابق: `/p/age-calculator.html` ... و`/p/tools.html` و`/p/about.html`.
 5. Search Console: أضف الموقع وأرسل `sitemap.xml`. AdSense: أضف الموقع الجديد من الحساب نفسه، و`ads.txt` من الإعدادات.
 6. Google Analytics: أنشئ خاصية جديدة وشغّل `BASIRA_GA_ID=G-XXXX python3 scripts/build.py` ثم أعد رفع القالب.
