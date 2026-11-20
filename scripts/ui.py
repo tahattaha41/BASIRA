@@ -125,15 +125,15 @@ def model_page(site, slug):
             f"<div class='screens'>{shots}</div><p><a href='/#games'>العودة إلى الألعاب</a></p></div>")
 
 def progress_block():
-    badge = lambda cls, t, g: f"<li class='badge {cls}'>{svg('0 0 48 48', g, 'bd')}<span>{t}</span></li>"
-    star = "<path d='M24 6l5.2 10.6 11.8 1.7-8.5 8.3 2 11.7L24 32.8l-10.5 5.5 2-11.7L7 18.3l11.8-1.7z' class='b-f'/>"
-    bolt = "<path d='M26 4L10 27h12l-2 17 16-23H24z' class='b-f'/>"
-    flag = "<path d='M12 6v38' class='b-s'/><path d='M12 8h26l-6 9 6 9H12z' class='b-f'/>"
-    lock = "<rect x='10' y='22' width='28' height='20' rx='6' class='b-l'/><path d='M16 22v-5a8 8 0 0116 0v5' class='b-s'/>"
-    return ("<div class='prog'><div class='lvlcard'><div class='lv-top'><b>المستوى 3</b><span>240 من 400 نقطة</span></div><div class='g-prog big'><i style='width:60%'></i></div>"
-            "<p>تبقّى 160 نقطة للمستوى الرابع.</p></div>"
-            "<ul class='badges'>" + badge('earned', 'أول اختبار', star) + badge('earned', 'خمس إجابات متتالية', bolt) + badge('', 'مستكشف الأقسام', flag) + badge('locked', 'تحدٍّ أسبوعي', lock) + "</ul></div>"
-            "<p class='note'>نموذج توضيحي. تعمل كل الألعاب بلا حساب، وإنشاء حساب اختياري لحفظ النقاط بين الأجهزة.</p>")
+    return (
+        "<div class='lvlcard'>"
+        "<h3>حفظ التقدم والإنجازات</h3>"
+        "<p>هذه الميزة لم تُفعّل بعد. يمكنك تجربة المحتوى والألعاب المتاحة دون حساب، "
+        "لكن النقاط والمستويات لا تُحفظ حالياً ولا تنتقل بين الأجهزة.</p>"
+        "<p class='note'>لن نعرض نقاطاً أو شارات تجريبية على أنها إنجازات حقيقية. "
+        "سيظهر نظام التقدم هنا بعد تنفيذ الحفظ واختباره.</p>"
+        "</div>"
+    )
 
 
 # ---------- التصميم التحريري الجديد ----------
