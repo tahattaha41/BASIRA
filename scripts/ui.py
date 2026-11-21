@@ -1,4 +1,4 @@
-"""مكوّنات الواجهة المولَّدة: رسوم SVG أصلية، بطاقات الألعاب، نماذج شاشات اللعب (غير تفاعلية)."""
+"""مكوّنات الواجهة المولَّدة: رسوم SVG أصلية، بطاقات الألعاب، صفحات الألعاب."""
 import html
 e = html.escape
 
@@ -42,98 +42,28 @@ def game_cards(site):
     out = ''
     for slug, name, desc, lvl in site['games']:
         pub = f'/p/game-{slug}.html' in site.get('published', [])
-        act = (f"<a class='btn play' href='/p/game-{slug}.html'>{e(site['play_label'])}</a>" if pub else "<span class='soon'>قريباً</span>")
+        act = (f"<a class='btn play' href='/p/game-{slug}.html'>{e(site['play_label'])}</a>" if pub else "<a class='btn play' href='/#games'>" + e(site['play_label']) + "</a>")
         out += (f"<li class='gcard g-{slug}'><div class='gc-top'>{glyph(slug)}{level_chip(lvl)}</div><h3>{e(name)}</h3><p>{e(desc)}</p>{act}</li>")
     return out
 
-# ---------- نماذج شاشات اللعب (inert) ----------
-def head(n, total, timer=None):
-    t = f"<span class='timer'>{timer}</span>" if timer else ''
-    return (f"<div class='g-head'><div class='g-prog' role='presentation'><i style='width:{n*100//total}%'></i></div>"
-            f"<div class='g-row'><span>السؤال {n} من {total}</span>{t}</div></div>")
 
-def frame(title, inner):
-    return f"<figure class='screen'><div class='phone' inert='inert' aria-hidden='true'>{inner}</div><figcaption>{e(title)}</figcaption></figure>"
+def game_page(site, slug):
+    name, desc, lvl = next((g[1], g[2], g[3]) for g in site['games'] if g[0] == slug)
+    about = GAME_ABOUT[slug]
+    return (f"<div class='game-page'><div class='bsr-game' data-game='{slug}'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript في المتصفح.</p></noscript></div>"
+            f"<div class='game-about'><h2>عن «{e(name)}»</h2><p>{e(desc)}.</p><p>{e(about)}</p>"
+            f"<p>جميع الأسئلة مراجَعة ومخزّنة مسبقاً داخل الموقع، ولا يستعين اللعب بأي ذكاء اصطناعي. تُحفظ نتائجك على جهازك فقط. <a href='/#games'>العودة إلى الألعاب</a></p></div></div>")
 
-def opts(items, state=None):
-    s = ''
-    for i, (t, st) in enumerate(items):
-        mark = {'ok': "<b class='mk'>✓</b>", 'bad': "<b class='mk'>✕</b>"}.get(st, '')
-        s += f"<div class='opt {st or ''}'><span class='ol'>{'أبجد'[i]}</span><span>{e(t)}</span>{mark}</div>"
-    return f"<div class='opts'>{s}</div>"
-
-def explain(ok, text):
-    cls, ttl = ('ok', 'إجابة صحيحة') if ok else ('err', 'إجابة خاطئة')
-    return f"<div class='msg {cls}'><b>{ttl}</b><p>{e(text)}</p></div><div class='cta'><span class='btn'>السؤال التالي</span></div>"
-
-def endscreen(score, total, pts, extra=''):
-    return (f"<div class='end'><div class='ring' style='--p:{score*100//total}'><b>{score}/{total}</b></div><h3>أحسنت</h3><p>حصلت على {pts} نقطة في هذه الجولة.</p>{extra}"
-            f"<div class='lvlbar'><span>المستوى 2</span><div class='g-prog'><i style='width:62%'></i></div></div>"
-            f"<div class='cta'><span class='btn play'>أعد اللعب</span><span class='btn alt'>راجع الإجابات</span></div></div>")
-
-def model(slug):
-    Q = 'ما أكبر كواكب المجموعة الشمسية؟'
-    EX = 'المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة.'
-    if slug == 'mcq':
-        o = [('زحل', ''), ('المشتري', ''), ('نبتون', ''), ('الأرض', '')]
-        return [frame('سؤال', head(3, 10) + f"<h3 class='q'>{Q}</h3>" + opts(o)),
-                frame('إجابة صحيحة وتفسير', head(3, 10) + f"<h3 class='q'>{Q}</h3>" + opts([('زحل', ''), ('المشتري', 'ok'), ('نبتون', ''), ('الأرض', '')]) + explain(True, EX)),
-                frame('إجابة خاطئة', head(3, 10) + f"<h3 class='q'>{Q}</h3>" + opts([('زحل', 'bad'), ('المشتري', 'ok'), ('نبتون', ''), ('الأرض', '')]) + explain(False, EX)),
-                frame('نهاية اللعبة', endscreen(8, 10, 80))]
-    if slug == 'truefalse':
-        S = 'يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.'
-        tf = lambda a, b: f"<div class='tf'><div class='opt big {a}'>صح</div><div class='opt big {b}'>خطأ</div></div>"
-        return [frame('سؤال بمؤقت', head(5, 20, '0:12') + f"<h3 class='q'>{S}</h3>" + tf('', '')),
-                frame('إجابة صحيحة', head(5, 20, '0:12') + f"<h3 class='q'>{S}</h3>" + tf('ok', '') + explain(True, 'يتغير ذلك مع الارتفاع، إذ ينخفض الضغط فتنخفض درجة الغليان.')),
-                frame('نهاية اللعبة', endscreen(16, 20, 160))]
-    if slug == 'order':
-        ev = ['سقوط جدار برلين', 'الثورة الفرنسية', 'أول إنسان على سطح القمر', 'اختراع الطباعة بالحروف المتحركة في أوروبا']
-        def lst(states, nums=False):
-            s = ''
-            for i, (t, st) in enumerate(zip(ev, states)):
-                s += f"<div class='row {st}'><span class='grip'>⋮⋮</span><span>{e(t)}</span><span class='num'>{(i + 1) if nums else ''}</span></div>"
-            return f"<div class='rows'>{s}</div>"
-        return [frame('رتّب من الأقدم إلى الأحدث', head(2, 8) + "<h3 class='q'>رتّب الأحداث من الأقدم إلى الأحدث</h3>" + lst(['', '', '', '']) + "<div class='cta'><span class='btn'>تحقق</span></div>"),
-                frame('نتيجة التحقق', head(2, 8) + "<h3 class='q'>رتّب الأحداث من الأقدم إلى الأحدث</h3>" + lst(['bad', 'bad', 'ok', 'ok'], True) + explain(False, 'المطبعة (منتصف القرن 15) ثم الثورة الفرنسية 1789 ثم الهبوط على القمر 1969 ثم سقوط الجدار 1989.')),
-                frame('نهاية اللعبة', endscreen(6, 8, 90))]
-    if slug == 'memory':
-        faces = ['ب', 'س', 'ن', 'م', 'ر', 'ج', 'ك', 'ل']
-        def grid(flip, done):
-            s = ''
-            for i, f in enumerate(faces + faces[::-1]):
-                st = 'done' if i in done else ('up' if i in flip else '')
-                s += f"<div class='mc {st}'><span>{f if st else ''}</span></div>"
-            return f"<div class='mgrid'>{s}</div>"
-        stat = "<div class='g-row'><span>المحاولات 7</span><span class='timer'>0:48</span></div>"
-        return [frame('بطاقتان مكشوفتان', "<div class='g-head'>" + stat + "</div>" + grid({1, 9}, {0, 15}) + "<div class='msg err'><b>غير متطابقتين</b><p>ستنقلبان تلقائياً.</p></div>"),
-                frame('تطابق', "<div class='g-head'>" + stat + "</div>" + grid(set(), {0, 15, 2, 13}) + "<div class='msg ok'><b>تطابق</b><p>تبقّت 6 أزواج.</p></div>"),
-                frame('نهاية اللعبة', endscreen(1, 1, 120, "<p class='sub'>أكملتها في 14 محاولة.</p>"))]
-    if slug == 'word':
-        def tiles(letters):
-            return "<div class='tiles'>" + ''.join(f"<span class='tile {'on' if l else ''}'>{l}</span>" for l in letters) + '</div>'
-        keys = lambda used: "<div class='keys'>" + ''.join(f"<span class='key {used.get(k, '')}'>{k}</span>" for k in 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي') + '</div>'
-        hint = "<p class='hint'>تلميح: تجمع هائل من النجوم والغاز والغبار</p>"
-        return [frame('لعبة جارية', "<div class='g-head'><div class='g-row'><span>المحاولات المتبقية 5</span><span class='timer'>0:40</span></div></div>" + hint + tiles(['م', '', 'ر', '']) + keys({'م': 'ok', 'ر': 'ok', 'ب': 'bad', 'س': 'bad'})),
-                frame('إجابة صحيحة', "<div class='g-head'><div class='g-row'><span>المحاولات المتبقية 3</span></div></div>" + hint + tiles(['م', 'ج', 'ر', 'ة']) + "<div class='msg ok'><b>أحسنت: «مجرة»</b><p>المجرة تجمّع من النجوم والغاز والغبار تربطه الجاذبية.</p></div><div class='cta'><span class='btn'>الكلمة التالية</span></div>"),
-                frame('نهاية اللعبة', endscreen(7, 10, 70))]
-
-def model_page(site, slug):
-    name = next(g[1] for g in site['games'] if g[0] == slug)
-    lvl = next(g[3] for g in site['games'] if g[0] == slug)
-    shots = ''.join(model(slug))
-    return (f"<div class='board'><p class='lede'>هذه صفحة نموذج تصميم: لقطات ثابتة لشاشات «{e(name)}» (مستوى {e(lvl)}). اللعبة نفسها لم تُنفَّذ بعد، والعناصر داخل الإطارات غير تفاعلية عن قصد.</p>"
-            f"<div class='screens'>{shots}</div><p><a href='/#games'>العودة إلى الألعاب</a></p></div>")
+GAME_ABOUT = {
+ 'mcq': 'تتألف الجولة من عشرة أسئلة من أقسام المعرفة الثمانية، لكل سؤال أربع إجابات واحدة منها صحيحة. تُمنح 10 نقاط للسهل و15 للمتوسط و20 للصعب عن كل إجابة صحيحة، ويتطلب النجاح 70% فأكثر. في المستوى الصعب مؤقت قدره 20 ثانية لكل سؤال.',
+ 'truefalse': 'عشر جمل قصيرة تحكم على كل منها بأنها صحيحة أو خاطئة، ثم يوضح الموقع السبب. النقاط والنجاح كما في الاختبارات متعددة الخيارات، وفي المستوى الصعب مؤقت 20 ثانية.',
+ 'order': 'خمسة أسئلة ترتيب، تحرّك فيها العناصر بالأسهم ثم تتحقق مرة واحدة. تُمنح النقاط كاملة عند صحة الترتيب كله، ويعرض الموقع الترتيب الصحيح بعد التحقق.',
+ 'memory': 'لوحة بطاقات تتطابق أزواجها بين مفهوم وما يقابله، مثل دولة وعاصمتها. المستوى السهل أربعة أزواج، والمتوسط ستة، والصعب ستة بحد أقصى 14 محاولة وإلا خسرت. كلما قلّت محاولاتك زادت نقاطك.',
+ 'word': 'خمس كلمات مخفية في كل جولة، لكل منها تلميح. تضغط على الحروف لتكشف الكلمة، وكل حرف خاطئ يستهلك محاولة من المحاولات المسموحة. في المستوى الصعب يكلفك التلميح محاولة.',
+}
 
 def progress_block():
-    return (
-        "<div class='lvlcard'>"
-        "<h3>حفظ التقدم والإنجازات</h3>"
-        "<p>هذه الميزة لم تُفعّل بعد. يمكنك تجربة المحتوى والألعاب المتاحة دون حساب، "
-        "لكن النقاط والمستويات لا تُحفظ حالياً ولا تنتقل بين الأجهزة.</p>"
-        "<p class='note'>لن نعرض نقاطاً أو شارات تجريبية على أنها إنجازات حقيقية. "
-        "سيظهر نظام التقدم هنا بعد تنفيذ الحفظ واختباره.</p>"
-        "</div>"
-    )
+    return ("<div class='lvlcard'><div id='bsr-progress'><p>يحتاج عرض تقدّمك إلى JavaScript.</p></div></div>")
 
 
 # ---------- التصميم التحريري الجديد ----------
@@ -151,9 +81,9 @@ def stage(site):
     panes = ''
     for g in gs:
         slug, name, desc, lvl = g
-        act = (f"<a class='btn play' href='/p/game-{slug}.html'>{e(site['play_label'])}</a>" if f'/p/game-{slug}.html' in pub else "<span class='soon'>قريباً</span>")
-        panes += (f"<div class='pane p-{slug}'><div class='pane-txt'><h3>{e(name)}</h3><p>{e(desc)}</p><div class='pane-meta'>{level_chip(lvl)}<span class='tag'>قيد التنفيذ</span></div>{act}</div>"
-                  f"<div class='pane-vis'>{model(slug)[0]}</div></div>")
+        more = (f"<a class='btn alt' href='/p/game-{slug}.html'>صفحة اللعبة</a>" if f'/p/game-{slug}.html' in pub else '')
+        panes += (f"<div class='pane p-{slug}'><div class='pane-txt'><h3>{e(name)}</h3><p>{e(desc)}</p><div class='pane-meta'>{level_chip(lvl)}</div>{more}</div>"
+                  f"<div class='pane-vis'><div class='bsr-game' data-game='{slug}'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div>")
     return f"<div class='stage-grid'>{inputs}<div class='tabs'>{tabs}</div><div class='panes'>{panes}</div></div>"
 
 

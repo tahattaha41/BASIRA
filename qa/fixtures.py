@@ -29,4 +29,4 @@ _site = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.absp
 for _g in _site['games']:
     _f = os.path.join(_pg, f'game-{_g[0]}.html')
     if os.path.exists(_f):
-        PAGES['game-' + _g[0]] = (lambda f=_f, g=_g: ctx('static_page', [dict(POSTS[0], title='نموذج: ' + g[1], url=f'/p/game-{g[0]}.html', labels=[], body=open(f, encoding='utf-8').read())]))
+        PAGES['game-' + _g[0]] = (lambda f=_f, g=_g: ctx('static_page', [dict(POSTS[0], title=g[1], url=f'/p/game-{g[0]}.html', labels=[], body=open(f, encoding='utf-8').read())]))

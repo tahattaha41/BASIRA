@@ -28,9 +28,12 @@ def build():
     about = [('/p/about.html', 'من نحن'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'), ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
     foot_about = ''.join(f"<li>{plink(p_, t)}</li>" for p_, t in about if p_ in pub) or "<li>الصفحات التعريفية قيد الإعداد</li>"
     dr_about = plink('/p/about.html', 'من نحن')
-    daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else "<span class='soon'>يُفعَّل مع الألعاب</span>")
-    css = read('style.css') + read('brand.css') + ui.stage_css(site)
-    js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False))
+    daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else f"<a class='btn play' href='/#games'>{e(site['play_label'])}</a>")
+    css = read('style.css') + read('brand.css') + read('games.css') + ui.stage_css(site)
+    bank = json.dumps(json.loads(read('data/bank.json')), ensure_ascii=False, separators=(',', ':'))
+    meta = json.dumps([[g[0], g[1]] for g in site['games']], ensure_ascii=False, separators=(',', ':'))
+    games_js = read('js/games.js').replace('{{BANK_JSON}}', bank).replace('{{GAMES_META}}', meta)
+    js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False)) + '\n' + games_js
     for name, txt in (('css', css), ('js', js)):
         assert ']]>' not in txt, name + ' contains CDATA terminator'
     t = read('theme.tpl.xml')
@@ -48,7 +51,7 @@ def build():
     pg = os.path.join(DIST, 'pages'); os.makedirs(pg, exist_ok=True)
     for g in site['games']:
         with open(os.path.join(pg, f'game-{g[0]}.html'), 'w', encoding='utf-8') as f:
-            f.write(ui.model_page(site, g[0]))
+            f.write(ui.game_page(site, g[0]))
     titles = {'about': 'من نحن', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا', 'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
     mail = site.get('contact_email') or '[يُضاف البريد قبل النشر]'
     for slug in titles:
