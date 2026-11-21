@@ -14,8 +14,11 @@
 - «الأكثر شعبية» غير منفَّذ: يحتاج ودجة PopularPosts في بلوجر ولم تُجرَّب.
 - حقل `data:post.featuredImage` مفترض ولم يُجرَّب على بلوجر الحقيقي.
 
-## ما لم يُنفَّذ بعد
-منطق الألعاب، الحسابات، النقاط الفعلية، المقالات الحقيقية، الإعلانات، `contact_email` (فارغ في site.json).
+## تحديث 2026-11-21 (فرع basira-complete-platform)
+- الألعاب الخمس حقيقية: `src/js/games.js` + `src/games.css` + `src/data/bank.json`، وتُركَّب على الصفحة الرئيسية وفي صفحات `/p/game-*.html`. الحفظ في localStorage فقط (مفتاح `basira.v1`).
+- مسودات 8 مقالات في `content/articles/` (index.json فيه المصادر)، وتُبنى إلى `dist/articles/`. لم تُنشر.
+- الفحوص: `scripts/release_preflight.py` و`qa/*.py` وworkflow واحد `basira-ci.yml`. النشر: `scripts/blogger_pages.py` (صفحات فقط).
+- لم يُنفَّذ: الحسابات والمزامنة، الإعلانات، `contact_email`، نشر حي، أي اختبار على بلوجر الحقيقي.
 
 ## هوية BASIRA
 - الاسم والشعار محفوظان في `src/site.json`.

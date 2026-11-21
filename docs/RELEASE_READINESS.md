@@ -1,28 +1,29 @@
-# BASIRA release readiness gate
+# بوابة جاهزية النشر — BASIRA
 
-This branch adds a repeatable preflight for the Blogger release package. It does not publish, merge, change Blogger settings, delete pages, or upload a theme.
+الأمر: `python3 scripts/release_preflight.py` (عادي) أو `--strict` (صارم). للقراءة فقط: لا ينشر ولا يغيّر بلوجر ولا يحذف.
 
-## Automated checks
-- Build the Blogger XML and static HTML pages from source.
-- Parse the generated XML.
-- Verify the five required editorial/legal/contact page source files and built outputs.
-- Verify exactly eight approved knowledge sections and five game concepts.
-- Warn during ordinary CI when contact email or Blogger page routes are not confirmed.
-- Fail a strict release check when contact email is absent/invalid or the five Blogger page routes are not confirmed in `src/site.json`.
+## ما تفحصه
+1. نجاح `scripts/build.py` وأن `dist/` المرفوع يطابق ناتج البناء (يفشل إن كان قديماً).
+2. سلامة XML للقالب ووجود عناصر بلوجر الأساسية وعدم بقاء `{{`.
+3. وجود الصفحات الأساسية الخمس (مصدر + مبني) وعدم بقاء عناصر نائبة.
+4. ثمانية أقسام بالضبط وخمس ألعاب؛ كل لعبة لها نقطة تركيب تفاعلية وقواعد في JS، وبنك الأسئلة يطابق الأقسام ولا يقل عن الحد الأدنى.
+5. عدم وجود علامات «نموذج/قيد التنفيذ/قريباً» في الناتج (أي لعبة غير مكتملة).
+6. روابط `/p/...` الداخلية موجودة، وأن كل مسار في `published` له صفحة مصدرية.
+7. لكل قسم مسودة مقال مبنية (تحذير: مسودات تنتظر مراجعة المالك).
+8. لا معرّف AdSense ولا كود إعلانات، ولا أنماط أسرار.
+في الوضع الصارم يفشل أيضاً: بريد التواصل غير صالح، أو صفحات أساسية غير مؤكدة في `published`.
 
-## Required owner inputs before strict release
-1. Set GitHub Actions secret `BASIRA_CONTACT_EMAIL` to the real public contact email. Do not commit an email or credential into source.
-2. Create/verify the five Blogger static pages and their actual URLs. Only then add those exact paths to `src/site.json` under `published`.
-3. Review the five game pages: current `scripts/ui.py` explicitly generates inert, static design mockups. They must not be marked as playable or published until real game logic is implemented and tested.
-4. Run `BASIRA release readiness` with `strict_release_check=true`.
+## الاختبارات المرافقة (تعمل في `.github/workflows/basira-ci.yml`)
+`qa/test_theme.py` (بنية وتباين) · `qa/browser_test.py` (Chromium: تخطيط وتفاعل) · `qa/game_test.py` (لعب فعلي للألعاب الخمس) · `qa/content_test.py` (المحتوى والحسابات) · `qa/publish_test.py` (مسار النشر بدون شبكة).
 
-## Publishing limitation
-The official Blogger API v3 manages pages and posts but has no Theme XML upload/update method. GitHub Actions cannot safely automate the theme upload through that API. The theme must be uploaded through Blogger's Theme interface. Do not use Google account passwords or browser-login workarounds in GitHub Actions.
+## مدخلات مطلوبة من المالك قبل النشر الصارم
+1. سر GitHub `BASIRA_CONTACT_EMAIL` (أو حقل `contact_email`) ببريد حقيقي.
+2. إنشاء صفحات بلوجر الخمس (يدوياً أو بـ `scripts/blogger_pages.py`) ثم إضافة روابطها الفعلية إلى `published`.
+3. مراجعة مسودات المقالات في `content/articles/`.
 
-## Tested vs not tested
-- CI validates generated XML syntax and generated page files.
-- This is not a live Blogger integration test.
-- It does not prove that the theme renders correctly on Blogger.
-- It does not publish any page or theme.
-- It does not implement game logic, user accounts, cross-device progress, points, badges, or original articles.
-- No Blogger content or settings are modified by this workflow.
+## حدود النشر
+Blogger API v3 فيه موارد: blogs, posts, pages, comments, users, pageViews، **ولا يحتوي أي مورد للقوالب** (تحققنا من مواصفات الـ API الرسمية). لذلك رفع `dist/theme.xml` يدوي من «السمة» في لوحة بلوجر. `scripts/blogger_pages.py` ينشئ الصفحات المفقودة فقط عبر OAuth (أسرار GitHub، لا كلمة مرور)، وهو مجرَّب بمحاكاة بلا شبكة فقط، ولم يُشغَّل على بلوجر حقيقي.
+الرابط النهائي للصفحة يولّده بلوجر من العنوان، فتحقق منه قبل تسجيله في `published`.
+
+## ما لا تثبته هذه الفحوص
+لا تثبت أن القالب يعرض صحيحاً على بلوجر الحقيقي، ولا على أجهزة حقيقية، ولا تضمن قبول AdSense.

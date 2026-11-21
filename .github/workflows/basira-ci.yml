@@ -1,0 +1,55 @@
+name: BASIRA CI
+
+on:
+  push:
+    branches: [platform-dev, basira-brand-identity, basira-publish-readiness, basira-complete-platform]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      strict_release_check:
+        description: "Strict release check (needs verified contact email and confirmed Blogger page routes)"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build theme and pages
+        run: python scripts/build.py
+      - name: Release preflight (XML, pages, sections, games, links, secrets, stale dist)
+        env:
+          BASIRA_RELEASE_STRICT: ${{ inputs.strict_release_check && '1' || '0' }}
+          BASIRA_CONTACT_EMAIL: ${{ secrets.BASIRA_CONTACT_EMAIL }}
+        run: python scripts/release_preflight.py
+      - name: Static theme tests
+        run: python qa/test_theme.py
+      - name: Content tests (8 sections, 500+ words, sources, computed examples)
+        run: python qa/content_test.py
+      - name: Publish-path tests (offline)
+        run: python qa/publish_test.py
+      - name: Install browser test dependencies
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+      - name: Browser tests (layout, interaction)
+        run: python qa/browser_test.py
+      - name: Game tests (real play-through)
+        run: python qa/game_test.py
+      - name: Package for review
+        run: |
+          mkdir -p release && cp dist/theme.xml release/basira-theme.xml && cp -R dist/pages release/pages
+          cd release && zip -r ../basira-release.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: basira-release
+          path: basira-release.zip
+          retention-days: 14

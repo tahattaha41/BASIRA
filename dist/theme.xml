@@ -10,6 +10,8 @@
     <meta content='noindex,follow' name='robots'/>
   </b:if>
   <meta content='#f7f5f0' name='theme-color'/>
+  <meta content='BASIRA' name='application-name'/>
+  <meta content='BASIRA | بصيرة' property='og:site_name'/>
   <link href='https://fonts.googleapis.com' rel='preconnect'/>
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
@@ -45,8 +47,6 @@ h1,h2,h3,h4{margin:0;font-weight:700;line-height:1.45}
 .top{background:var(--paper);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:30}
 .bar{display:flex;align-items:center;gap:8px;min-height:64px;position:relative}
 .brand{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--ink);text-decoration:none;margin-inline-end:auto}
-.mark{width:22px;height:22px;border-radius:7px;background:var(--accent);position:relative;flex:none}
-.mark::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--play)}
 .nav{display:none}
 .bar-end{display:flex;gap:2px}
 .sdrop{position:static}
@@ -246,6 +246,90 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
 .pane .phone{color:var(--ink)}.pane .phone .q,.pane .phone h3{color:var(--ink)}.pane .phone .end p{color:var(--soft)}
 .feat-img{display:grid;place-items:center}.feat-img .glyph{width:88px;height:88px;padding:0;background:none}
 .pane .phone .q{font-size:19px;line-height:1.6}.pane .phone .end h3{font-size:24px}
+/* BASIRA identity layer — appended after the base theme. */
+:root{--brand-ink:#152d43;--brand-accent:#0f766e;--brand-spark:#e6a23c;}
+html[data-theme=dark]{--brand-ink:#e9f1f4;--brand-accent:#72c9bd;--brand-spark:#f2bd68;}
+.brand-lockup{display:inline-flex;align-items:center;gap:9px;direction:ltr;white-space:nowrap;}
+.brand-symbol{width:34px;height:34px;display:block;flex:none;overflow:visible;}
+.brand-symbol .bs-line{fill:none;stroke:var(--brand-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+.brand-symbol .bs-core{fill:var(--brand-spark);stroke:var(--brand-ink);stroke-width:1.2;stroke-linejoin:round;}
+.brand-symbol .bs-ray{fill:none;stroke:var(--brand-ink);stroke-width:2;stroke-linecap:round;}
+.brand-names{display:flex;flex-direction:column;line-height:1.05;gap:3px;text-align:start;}
+.brand-names b{font:800 17px/1.05 'Segoe UI',Arial,sans-serif;letter-spacing:1.4px;color:var(--brand-ink);}
+.brand-names small{font:700 12px/1.2 'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;color:var(--brand-accent);}
+.foot-brand .brand-symbol{width:38px;height:38px;}
+.foot-brand .brand-names b{font-size:19px;}
+.hero .eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.eyebrow-ar{font-family:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;}
+/* واجهة الألعاب الحقيقية */
+.bsr-game{min-height:120px}
+.bg{display:block}
+.bsr-game{background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:16px;padding:18px;max-width:640px}
+.bsr-game button{font-family:var(--ui)}
+.bg-rules{margin:0 0 14px;font-size:16px;color:var(--soft);line-height:1.8}
+.bg-lvs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.bg-lv{min-height:48px;border:1px solid var(--rule2);background:var(--paper);color:var(--ink);border-radius:var(--r);font-size:16px;font-weight:600;cursor:pointer}
+.bg-lv[aria-checked=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.bg-lvd,.bg-best{margin:0 0 6px;font-size:15px;color:var(--soft)}
+.bg-go{margin-top:12px;width:100%}
+.bg-head{margin-bottom:14px}
+.bg-bar{height:6px;background:var(--mark);border-radius:3px;overflow:hidden}
+.bg-bar i{display:block;height:100%;background:var(--accent)}
+.bg-row{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:14px;color:var(--soft);font-weight:600}
+.bg-q{font-size:20px;line-height:1.7;margin:0 0 14px}
+.bg-q2{margin:0 0 10px;font-size:14px;color:var(--soft)}
+.bg-opts{display:grid;gap:10px}
+.bg-opt{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;padding:10px 14px;text-align:start;background:var(--paper);color:var(--ink);border:1px solid var(--rule2);border-radius:var(--r);font-size:17px;cursor:pointer}
+.bg-opt:hover:not(:disabled){border-color:var(--ink)}
+.bg-opt:disabled{cursor:default}
+.bg-ol{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mark);font-weight:700;font-size:14px;flex:none}
+.bg-opt.ok{border:2px solid var(--ok);background:var(--accent-bg)}
+.bg-opt.bad{border:2px solid var(--play);background:var(--play-bg)}
+.bg-opt.dim{opacity:.6}
+.bg-mk{margin-inline-start:auto;font-size:18px}
+.bg-tf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bg-big{justify-content:center;font-size:20px;font-weight:700;min-height:64px}
+.bg-fb{margin-top:14px;padding:12px 14px;border-radius:var(--r);border:1px solid var(--rule2)}
+.bg-fb.ok{border-color:var(--ok);background:var(--accent-bg)}
+.bg-fb.bad{border-color:var(--play);background:var(--play-bg)}
+.bg-fb p{margin:4px 0 12px;font-size:16px;line-height:1.7}
+.bg-fb[hidden],.bsr-game [hidden]{display:none!important}
+.bg-rows{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.bg-row2{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 12px;background:var(--paper);border:1px solid var(--rule2);border-radius:var(--r)}
+.bg-row2.ok{border:2px solid var(--ok)}.bg-row2.bad{border:2px solid var(--play)}
+.bg-rt{flex:1;font-size:16px;line-height:1.6}
+.bg-mv{width:44px;height:44px;border:1px solid var(--rule2);background:var(--card);color:var(--ink);border-radius:var(--r);cursor:pointer;font-size:14px}
+.bg-mv:disabled{opacity:.35;cursor:default}
+.bg-hint{margin:0 0 12px;font-size:17px;min-height:1.6em}
+.bg-tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 12px;direction:rtl}
+.bg-tile{display:grid;place-items:center;width:46px;height:56px;border:2px solid var(--rule2);border-radius:10px;font-size:26px;font-weight:700;background:var(--paper)}
+.bg-tile.on{border-color:var(--accent);background:var(--accent-bg)}
+.bg-left{margin:0 0 10px;text-align:center;font-size:14px;color:var(--soft)}
+.bg-keys{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;direction:rtl}
+.bg-key{min-height:44px;border:1px solid var(--rule2);background:var(--paper);color:var(--ink);border-radius:8px;font-size:18px;font-weight:600;cursor:pointer;padding:0}
+.bg-key.ok{background:var(--accent-bg);border-color:var(--ok)}.bg-key.bad{background:var(--play-bg);border-color:var(--play);text-decoration:line-through}
+.bg-key:disabled{cursor:default}
+.bg-hintbtn{margin-bottom:12px;min-height:44px}
+.bg-grid{display:grid;gap:8px}.bg-grid.g2{grid-template-columns:repeat(2,1fr)}.bg-grid.g3{grid-template-columns:repeat(3,1fr)}
+.bg-card{min-height:72px;padding:6px;border:2px solid var(--rule2);border-radius:12px;background:var(--deep);color:var(--deep-ink);font-size:15px;font-weight:600;cursor:pointer;line-height:1.4}
+.bg-card.up{background:var(--paper);color:var(--ink);border-color:var(--accent)}
+.bg-card.done{background:var(--accent-bg);color:var(--ink);border-color:var(--ok);opacity:1}
+.bg-card:disabled{cursor:default}
+.bg-end{text-align:center}
+.bg-big2{font-size:40px;font-weight:700;line-height:1.3}
+.bg-end.win .bg-big2{color:var(--ok)}.bg-end.lose .bg-big2{color:var(--play)}
+.bg-end h3{margin:4px 0 8px;font-size:22px}.bg-end p{margin:4px 0}
+.bg-meta{font-size:14px;color:var(--soft)}.bg-record{font-weight:700;color:var(--ok)}
+.bg-rev{text-align:start;margin:14px 0;font-size:15px}.bg-rev summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}
+.bg-rev ul{margin:0;padding-inline-start:20px}.bg-rev li{margin-bottom:8px}
+.bg-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.bg-stats{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:12px}
+.bg-stats caption{text-align:start;font-weight:700;margin-bottom:6px}
+.bg-stats th,.bg-stats td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:start}
+.stage .bsr-game{max-width:none}
+.game-page .bsr-game{margin:0 auto 24px}
+.game-page .game-about{max-width:640px;margin:0 auto}
+@media(max-width:380px){.bg-key{font-size:16px}.bg-tile{width:40px;height:50px}}
 #gm-mcq:checked~.tabs [for=gm-mcq]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-mcq:checked~.tabs [for=gm-mcq] .tn{color:var(--play)}#gm-mcq:checked~.panes .p-mcq{display:grid}#gm-mcq:focus-visible~.tabs [for=gm-mcq]{outline:3px solid var(--play-on-deep);outline-offset:2px}
 #gm-truefalse:checked~.tabs [for=gm-truefalse]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-truefalse:checked~.tabs [for=gm-truefalse] .tn{color:var(--play)}#gm-truefalse:checked~.panes .p-truefalse{display:grid}#gm-truefalse:focus-visible~.tabs [for=gm-truefalse]{outline:3px solid var(--play-on-deep);outline-offset:2px}
 #gm-order:checked~.tabs [for=gm-order]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-order:checked~.tabs [for=gm-order] .tn{color:var(--play)}#gm-order:checked~.panes .p-order{display:grid}#gm-order:focus-visible~.tabs [for=gm-order]{outline:3px solid var(--play-on-deep);outline-offset:2px}
@@ -260,7 +344,7 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
   <header class='top'>
     <div class='wrap bar'>
       <label aria-label='فتح القائمة' class='icon-btn menu-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M4 7h16M4 12h16M4 17h16'/></svg></label>
-      <a class='brand' expr:href='data:blog.homepageUrl'><span class='mark' aria-hidden='true'></span>اسم الموقع</a>
+      <a class='brand' expr:href='data:blog.homepageUrl'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></a>
       <nav aria-label='القائمة الرئيسية' class='nav'>
         <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
         <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
@@ -277,7 +361,7 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
   </header>
   <label class='scrim' for='nav-t'></label>
   <aside aria-label='القائمة الجانبية' class='drawer'>
-    <div class='dr-top'><span class='brand'><span class='mark' aria-hidden='true'></span>اسم الموقع</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M6 6l12 12M18 6L6 18'/></svg></label></div>
+    <div class='dr-top'><span class='brand'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M6 6l12 12M18 6L6 18'/></svg></label></div>
     <nav aria-label='القائمة الجانبية'>
       <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
       <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
@@ -299,11 +383,11 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
       <b:includable id='main' var='top'>
 <main id='main-content'>
 <b:if cond='data:blog.url == data:blog.homepageUrl'>
-<section class='hero'><div class='wrap hero-in'>
+<section class='hero' itemscope='itemscope' itemtype='https://schema.org/WebSite'><meta content='BASIRA | بصيرة' itemprop='name'/><link expr:href='data:blog.homepageUrl' itemprop='url'/><div class='wrap hero-in'>
 <div class='hero-txt'>
-<p class='eyebrow'>معرفة وتحدٍّ بالعربية</p>
+<p class='eyebrow'>Think. Discover. Play. <span class='eyebrow-ar'>فكّر. اكتشف. العب.</span></p>
 <h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
-<p class='lede'>مقالات موثّقة بالمصادر، وأسئلة تختبر ما عرفته. بلا حساب.</p>
+<p class='lede'>منصة عربية تجمع المعرفة الموثّقة والألعاب الذهنية والتحديات الممتعة. اكتشف فكرة جديدة واختبر قدراتك.</p>
 <div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn alt' href='#games'>الألعاب</a></div>
 </div>
 <div class='live' id='live' aria-live='polite'>
@@ -315,9 +399,9 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
 </div>
 </div></section>
 <section class='stage' id='games'><div class='wrap'>
-<div class='sec-h'><h2>العب</h2><span class='tag'>قيد التنفيذ</span></div>
-<p class='stage-note'>اختر لعبة لترى شاشتها. هذه نماذج تصميم تتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
-<div class='stage-grid'><input class='sr' type='radio' name='gm' id='gm-mcq' checked='checked'/><input class='sr' type='radio' name='gm' id='gm-truefalse'/><input class='sr' type='radio' name='gm' id='gm-order'/><input class='sr' type='radio' name='gm' id='gm-memory'/><input class='sr' type='radio' name='gm' id='gm-word'/><div class='tabs'><label class='tab' for='gm-mcq'><span class='tn'>01</span><span class='tt'>اختبارات متعددة الخيارات</span><span class='lvl lvl-2'>متوسط</span></label><label class='tab' for='gm-truefalse'><span class='tn'>02</span><span class='tt'>صح أم خطأ</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-order'><span class='tn'>03</span><span class='tt'>ترتيب الأحداث</span><span class='lvl lvl-3'>صعب</span></label><label class='tab' for='gm-memory'><span class='tn'>04</span><span class='tt'>لعبة الذاكرة</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-word'><span class='tn'>05</span><span class='tt'>خمّن الكلمة</span><span class='lvl lvl-2'>متوسط</span></label></div><div class='panes'><div class='pane p-mcq'><div class='pane-txt'><h3>اختبارات متعددة الخيارات</h3><p>أربع إجابات وتفسير بعد كل سؤال</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:30%'></i></div><div class='g-row'><span>السؤال 3 من 10</span></div></div><h3 class='q'>ما أكبر كواكب المجموعة الشمسية؟</h3><div class='opts'><div class='opt '><span class='ol'>أ</span><span>زحل</span></div><div class='opt '><span class='ol'>ب</span><span>المشتري</span></div><div class='opt '><span class='ol'>ج</span><span>نبتون</span></div><div class='opt '><span class='ol'>د</span><span>الأرض</span></div></div></div><figcaption>سؤال</figcaption></figure></div></div><div class='pane p-truefalse'><div class='pane-txt'><h3>صح أم خطأ</h3><p>جمل سريعة تختبر دقة معلوماتك</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:25%'></i></div><div class='g-row'><span>السؤال 5 من 20</span><span class='timer'>0:12</span></div></div><h3 class='q'>يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.</h3><div class='tf'><div class='opt big '>صح</div><div class='opt big '>خطأ</div></div></div><figcaption>سؤال بمؤقت</figcaption></figure></div></div><div class='pane p-order'><div class='pane-txt'><h3>ترتيب الأحداث</h3><p>رتّب وقائع بالتسلسل الصحيح</p><div class='pane-meta'><span class='lvl lvl-3'>صعب</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-prog' role='presentation'><i style='width:25%'></i></div><div class='g-row'><span>السؤال 2 من 8</span></div></div><h3 class='q'>رتّب الأحداث من الأقدم إلى الأحدث</h3><div class='rows'><div class='row '><span class='grip'>⋮⋮</span><span>سقوط جدار برلين</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>الثورة الفرنسية</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>أول إنسان على سطح القمر</span><span class='num'></span></div><div class='row '><span class='grip'>⋮⋮</span><span>اختراع الطباعة بالحروف المتحركة في أوروبا</span><span class='num'></span></div></div><div class='cta'><span class='btn'>تحقق</span></div></div><figcaption>رتّب من الأقدم إلى الأحدث</figcaption></figure></div></div><div class='pane p-memory'><div class='pane-txt'><h3>لعبة الذاكرة</h3><p>اكتشف الأزواج بأقل عدد من المحاولات</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-row'><span>المحاولات 7</span><span class='timer'>0:48</span></div></div><div class='mgrid'><div class='mc done'><span>ب</span></div><div class='mc up'><span>س</span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc up'><span>ك</span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc '><span></span></div><div class='mc done'><span>ب</span></div></div><div class='msg err'><b>غير متطابقتين</b><p>ستنقلبان تلقائياً.</p></div></div><figcaption>بطاقتان مكشوفتان</figcaption></figure></div></div><div class='pane p-word'><div class='pane-txt'><h3>خمّن الكلمة</h3><p>كلمة مخفية وتلميح يساعدك</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span><span class='tag'>قيد التنفيذ</span></div><span class='soon'>قريباً</span></div><div class='pane-vis'><figure class='screen'><div class='phone' inert='inert' aria-hidden='true'><div class='g-head'><div class='g-row'><span>المحاولات المتبقية 5</span><span class='timer'>0:40</span></div></div><p class='hint'>تلميح: تجمع هائل من النجوم والغاز والغبار</p><div class='tiles'><span class='tile on'>م</span><span class='tile '></span><span class='tile on'>ر</span><span class='tile '></span></div><div class='keys'><span class='key '>ا</span><span class='key bad'>ب</span><span class='key '>ت</span><span class='key '>ث</span><span class='key '>ج</span><span class='key '>ح</span><span class='key '>خ</span><span class='key '>د</span><span class='key '>ذ</span><span class='key ok'>ر</span><span class='key '>ز</span><span class='key bad'>س</span><span class='key '>ش</span><span class='key '>ص</span><span class='key '>ض</span><span class='key '>ط</span><span class='key '>ظ</span><span class='key '>ع</span><span class='key '>غ</span><span class='key '>ف</span><span class='key '>ق</span><span class='key '>ك</span><span class='key '>ل</span><span class='key ok'>م</span><span class='key '>ن</span><span class='key '>ه</span><span class='key '>و</span><span class='key '>ي</span></div></div><figcaption>لعبة جارية</figcaption></figure></div></div></div></div>
+<div class='sec-h'><h2>العب</h2></div>
+<p class='stage-note'>اختر لعبة وابدأ فوراً، بلا تسجيل. أسئلتها مراجَعة ومخزّنة، وتُحفظ نتائجك على جهازك.</p>
+<div class='stage-grid'><input class='sr' type='radio' name='gm' id='gm-mcq' checked='checked'/><input class='sr' type='radio' name='gm' id='gm-truefalse'/><input class='sr' type='radio' name='gm' id='gm-order'/><input class='sr' type='radio' name='gm' id='gm-memory'/><input class='sr' type='radio' name='gm' id='gm-word'/><div class='tabs'><label class='tab' for='gm-mcq'><span class='tn'>01</span><span class='tt'>اختبارات متعددة الخيارات</span><span class='lvl lvl-2'>متوسط</span></label><label class='tab' for='gm-truefalse'><span class='tn'>02</span><span class='tt'>صح أم خطأ</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-order'><span class='tn'>03</span><span class='tt'>ترتيب الأحداث</span><span class='lvl lvl-3'>صعب</span></label><label class='tab' for='gm-memory'><span class='tn'>04</span><span class='tt'>لعبة الذاكرة</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-word'><span class='tn'>05</span><span class='tt'>خمّن الكلمة</span><span class='lvl lvl-2'>متوسط</span></label></div><div class='panes'><div class='pane p-mcq'><div class='pane-txt'><h3>اختبارات متعددة الخيارات</h3><p>أربع إجابات وتفسير بعد كل سؤال</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='mcq'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-truefalse'><div class='pane-txt'><h3>صح أم خطأ</h3><p>جمل سريعة تختبر دقة معلوماتك</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='truefalse'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-order'><div class='pane-txt'><h3>ترتيب الأحداث</h3><p>رتّب وقائع بالتسلسل الصحيح</p><div class='pane-meta'><span class='lvl lvl-3'>صعب</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='order'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-memory'><div class='pane-txt'><h3>لعبة الذاكرة</h3><p>اكتشف الأزواج بأقل عدد من المحاولات</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='memory'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-word'><div class='pane-txt'><h3>خمّن الكلمة</h3><p>كلمة مخفية وتلميح يساعدك</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='word'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div></div></div>
 </div></section>
 <div class='wrap'>
 <section class='sec' id='topics'><div class='sec-h'><h2>تصفّح بالموضوع</h2></div>
@@ -331,8 +415,8 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
 </div>
 <ol class='rows-list' data-empty=''><b:loop index='i' values='data:posts' var='post'><b:if cond='data:i &gt; 0'><li><a class='rl' expr:href='data:post.url'><span class='rl-n'><data:i/></span><span class='rl-b'><span class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></span><span class='rl-t'><data:post.title/></span><span class='rl-s'><data:post.snippet/></span></span></a></li></b:if></b:loop></ol>
 <p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2><span class='tag'>نموذج</span></div>
-<div class='prog'><div class='lvlcard'><div class='lv-top'><b>المستوى 3</b><span>240 من 400 نقطة</span></div><div class='g-prog big'><i style='width:60%'></i></div><p>تبقّى 160 نقطة للمستوى الرابع.</p></div><ul class='badges'><li class='badge earned'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M24 6l5.2 10.6 11.8 1.7-8.5 8.3 2 11.7L24 32.8l-10.5 5.5 2-11.7L7 18.3l11.8-1.7z' class='b-f'/></svg><span>أول اختبار</span></li><li class='badge earned'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M26 4L10 27h12l-2 17 16-23H24z' class='b-f'/></svg><span>خمس إجابات متتالية</span></li><li class='badge '><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M12 6v38' class='b-s'/><path d='M12 8h26l-6 9 6 9H12z' class='b-f'/></svg><span>مستكشف الأقسام</span></li><li class='badge locked'><svg class='bd' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='22' width='28' height='20' rx='6' class='b-l'/><path d='M16 22v-5a8 8 0 0116 0v5' class='b-s'/></svg><span>تحدٍّ أسبوعي</span></li></ul></div><p class='note'>نموذج توضيحي. تعمل كل الألعاب بلا حساب، وإنشاء حساب اختياري لحفظ النقاط بين الأجهزة.</p></section>
+<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2></div>
+<div class='lvlcard'><div id='bsr-progress'><p>يحتاج عرض تقدّمك إلى JavaScript.</p></div></div></section>
 <section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
 <ol class='method'><li><span class='mn'>1</span><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></li><li><span class='mn'>2</span><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></li><li><span class='mn'>3</span><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></li></ol></section>
 </div>
@@ -343,11 +427,11 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
 <p><a class='btn' expr:href='data:blog.homepageUrl'>الرئيسية</a></p></div>
 
 <b:elseif cond='data:blog.pageType == &quot;item&quot;'/>
-<div class='wrap page'><b:loop values='data:posts' var='post'><article>
+<div class='wrap page'><b:loop values='data:posts' var='post'><article itemscope='itemscope' itemtype='https://schema.org/Article'><link expr:href='data:post.url' itemprop='mainEntityOfPage'/><meta content='BASIRA | بصيرة' itemprop='publisher'/>
 <nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <a href='/search?max-results=24'>المقالات</a></nav>
 <div class='labels'><b:loop values='data:post.labels' var='label'><a expr:href='data:label.url' rel='tag'><data:label.name/></a></b:loop></div>
-<h1 class='entry-title'><data:post.title/></h1>
-<div class='byline'><span><data:post.author.name/></span><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<h1 class='entry-title' itemprop='headline'><data:post.title/></h1>
+<div class='byline'><span itemprop='author'><data:post.author.name/></span><time itemprop='datePublished' expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
 <div class='prose entry-content'><data:post.body/></div>
 <nav aria-label='التنقل بين المقالات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>المقال الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>المقال الأقدم</a></b:if></nav>
 </article></b:loop></div>
@@ -381,11 +465,11 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
   <footer class='foot'>
     <div class='wrap'>
       <div class='foot-grid'>
-        <div><div class='foot-brand'>اسم الموقع</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
+        <div><div class='foot-brand'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
         <div><h4>أقسام المعرفة</h4><ul><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'>العلوم</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'>التاريخ والحضارات</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'>الجغرافيا والدول</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'>التكنولوجيا</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'>الثقافة العامة</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'>الرياضيات والمنطق</a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'>اللغة والأدب</a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'>الفضاء والفلك</a></li></ul></div>
         <div><h4>عن الموقع</h4><ul><li>الصفحات التعريفية قيد الإعداد</li></ul></div>
       </div>
-      <div class='foot-end'><span>© اسم الموقع</span><button class='btn-quiet js-theme' type='button'>الوضع الداكن</button></div>
+      <div class='foot-end'><span>© BASIRA</span><button class='btn-quiet js-theme' type='button'>الوضع الداكن</button></div>
     </div>
   </footer>
   <script>//<![CDATA[
@@ -448,6 +532,328 @@ html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
     });
     show();
   }
+})();
+
+/* محرك ألعاب BASIRA: أسئلة مراجَعة مخزنة داخل القالب، بلا خادم ولا ذكاء اصطناعي أثناء اللعب.
+   الحفظ محلي (localStorage) على هذا الجهاز فقط. */
+(function(){
+  var B={"topics":["العلوم","التاريخ والحضارات","الجغرافيا والدول","التكنولوجيا","الثقافة العامة","الرياضيات والمنطق","اللغة والأدب","الفضاء والفلك"],"mcq":[{"id":"m1","t":"العلوم","l":1,"q":"أي غاز تمتصه النباتات أثناء البناء الضوئي؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],"a":2,"x":"تمتص النباتات ثاني أكسيد الكربون وتستخدمه مع الماء وضوء الشمس لصنع الغذاء، وتطلق الأكسجين."},{"id":"m2","t":"العلوم","l":2,"q":"ما الرمز الكيميائي للذهب؟","o":["Ag","Au","Fe","Go"],"a":1,"x":"الرمز Au مأخوذ من الاسم اللاتيني aurum. أما Ag فللفضة وFe للحديد."},{"id":"m3","t":"العلوم","l":2,"q":"كم عدد العظام في جسم الإنسان البالغ تقريباً؟","o":["150","206","300","412"],"a":1,"x":"للبالغ 206 عظمة، بينما يولد الطفل بعدد أكبر تلتحم بعض عظامه مع النمو."},{"id":"m4","t":"العلوم","l":1,"q":"ما أسرع حيوان بري في العالم؟","o":["الأسد","الحصان","الفهد","الغزال"],"a":2,"x":"الفهد (الشيتا) أسرع الحيوانات البرية، ويستطيع الركض بسرعات تفوق 100 كم/س لمسافات قصيرة."},{"id":"m5","t":"العلوم","l":2,"q":"ما الغاز الأكثر وفرة في الغلاف الجوي للأرض؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الأرجون"],"a":1,"x":"يشكل النيتروجين نحو 78% من حجم الهواء، والأكسجين نحو 21%."},{"id":"m6","t":"العلوم","l":2,"q":"ما وحدة قياس القوة في النظام الدولي للوحدات؟","o":["الجول","الواط","النيوتن","الباسكال"],"a":2,"x":"النيوتن وحدة القوة، والجول للطاقة، والواط للقدرة، والباسكال للضغط."},{"id":"m7","t":"العلوم","l":1,"q":"ما أصلب مادة طبيعية معروفة؟","o":["الحديد","الألماس","الذهب","الكوارتز"],"a":1,"x":"الألماس أصلب المواد الطبيعية على مقياس موس للصلادة."},{"id":"m8","t":"التاريخ والحضارات","l":2,"q":"في أي عام سقطت القسطنطينية بيد العثمانيين؟","o":["1204","1453","1517","1683"],"a":1,"x":"فتح السلطان محمد الفاتح القسطنطينية عام 1453م."},{"id":"m9","t":"التاريخ والحضارات","l":2,"q":"من الفرعون الذي يُنسب إليه بناء الهرم الأكبر في الجيزة؟","o":["خوفو","خفرع","رمسيس الثاني","توت عنخ آمون"],"a":0,"x":"يُنسب الهرم الأكبر إلى الملك خوفو من الأسرة الرابعة."},{"id":"m10","t":"التاريخ والحضارات","l":2,"q":"في أي عام بدأت الحرب العالمية الأولى؟","o":["1905","1914","1918","1939"],"a":1,"x":"بدأت الحرب العالمية الأولى عام 1914 وانتهت عام 1918."},{"id":"m11","t":"التاريخ والحضارات","l":1,"q":"في أي عام انتهت الحرب العالمية الثانية؟","o":["1939","1941","1945","1950"],"a":2,"x":"انتهت الحرب العالمية الثانية عام 1945."},{"id":"m12","t":"التاريخ والحضارات","l":3,"q":"من الذي نجح في فكّ رموز حجر رشيد؟","o":["هوارد كارتر","جان فرانسوا شامبليون","نابليون بونابرت","ماريت"],"a":1,"x":"فكّ شامبليون رموز الكتابة الهيروغليفية عام 1822 بالاستعانة بحجر رشيد."},{"id":"m13","t":"التاريخ والحضارات","l":2,"q":"أي حضارة بنت مدينة البتراء؟","o":["الرومان","الفرس","الأنباط","الفينيقيون"],"a":2,"x":"بنى الأنباط البتراء في جنوب الأردن ونحتوا واجهاتها في الصخر."},{"id":"m14","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة أستراليا؟","o":["سيدني","ملبورن","كانبرا","بيرث"],"a":2,"x":"عاصمة أستراليا كانبرا، وليست سيدني التي هي أكبر مدنها."},{"id":"m15","t":"الجغرافيا والدول","l":1,"q":"ما أكبر محيطات العالم مساحة؟","o":["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],"a":2,"x":"المحيط الهادئ أكبر المحيطات، ويغطي نحو ثلث سطح الأرض."},{"id":"m16","t":"الجغرافيا والدول","l":1,"q":"ما أطول نهر في قارة أفريقيا؟","o":["الكونغو","النيجر","النيل","الزمبيزي"],"a":2,"x":"نهر النيل أطول أنهار أفريقيا."},{"id":"m17","t":"الجغرافيا والدول","l":1,"q":"ما أعلى قمة جبلية فوق مستوى سطح البحر؟","o":["كي تو","إفرست","كليمنجارو","مون بلان"],"a":1,"x":"قمة إفرست في جبال الهيمالايا أعلى قمة فوق مستوى سطح البحر."},{"id":"m18","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة كندا؟","o":["تورونتو","فانكوفر","أوتاوا","مونتريال"],"a":2,"x":"عاصمة كندا أوتاوا."},{"id":"m19","t":"الجغرافيا والدول","l":2,"q":"ما أصغر دولة في العالم مساحة؟","o":["موناكو","الفاتيكان","سان مارينو","ليختنشتاين"],"a":1,"x":"الفاتيكان أصغر دولة مساحة، ومساحتها نحو 0.44 كم²."},{"id":"m20","t":"التكنولوجيا","l":1,"q":"ماذا يعني الاختصار CPU؟","o":["وحدة المعالجة المركزية","ذاكرة الوصول العشوائي","وحدة التخزين","بطاقة الشاشة"],"a":0,"x":"CPU اختصار Central Processing Unit أي وحدة المعالجة المركزية، وهي عقل الحاسوب."},{"id":"m21","t":"التكنولوجيا","l":1,"q":"من الذي أسس شركة مايكروسوفت مع بول ألين؟","o":["ستيف جوبز","بيل غيتس","مارك زوكربيرغ","لاري بيج"],"a":1,"x":"أسس بيل غيتس وبول ألين مايكروسوفت عام 1975."},{"id":"m22","t":"التكنولوجيا","l":1,"q":"ما النظام العددي الذي تعتمد عليه الحواسيب داخلياً؟","o":["العشري","الثنائي","الروماني","الثماني فقط"],"a":1,"x":"تعمل الحواسيب بالنظام الثنائي المكوَّن من 0 و1."},{"id":"m23","t":"التكنولوجيا","l":2,"q":"ماذا يرمز الاختصار HTTP؟","o":["بروتوكول نقل النص التشعبي","لغة ترميز الصفحات","عنوان الموقع","نظام أسماء النطاقات"],"a":0,"x":"HTTP هو بروتوكول نقل النص التشعبي، وبه يتبادل المتصفح والخادم صفحات الويب."},{"id":"m24","t":"الثقافة العامة","l":1,"q":"كم عدد ألوان قوس قزح التقليدية؟","o":["5","6","7","8"],"a":2,"x":"يُقسَّم قوس قزح تقليدياً إلى سبعة ألوان."},{"id":"m25","t":"الثقافة العامة","l":1,"q":"ما أكبر حيوان ثديي في العالم؟","o":["الفيل الأفريقي","الحوت الأزرق","القرش الحوتي","الزرافة"],"a":1,"x":"الحوت الأزرق أكبر الثدييات، بل أكبر حيوان عاش على الأرض."},{"id":"m26","t":"الثقافة العامة","l":1,"q":"كم عدد لاعبي فريق كرة القدم داخل الملعب؟","o":["9","10","11","12"],"a":2,"x":"يلعب كل فريق بأحد عشر لاعباً داخل الملعب."},{"id":"m27","t":"الثقافة العامة","l":1,"q":"في أي دولة يقع برج بيزا المائل؟","o":["فرنسا","إيطاليا","إسبانيا","اليونان"],"a":1,"x":"يقع برج بيزا المائل في مدينة بيزا بإيطاليا."},{"id":"m28","t":"الرياضيات والمنطق","l":1,"q":"ما ناتج 12 × 12؟","o":["124","132","144","156"],"a":2,"x":"12 × 12 = 144."},{"id":"m29","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 2، 6، 12، 20، ؟","o":["28","30","32","24"],"a":1,"x":"الفروق بين الأعداد 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30."},{"id":"m30","t":"الرياضيات والمنطق","l":1,"q":"ما قيمة النسبة التقريبية π (باي)؟","o":["2.14","3.14","4.13","3.41"],"a":1,"x":"قيمة π تقريباً 3.14159."},{"id":"m31","t":"الرياضيات والمنطق","l":1,"q":"ما مجموع زوايا المثلث؟","o":["90 درجة","180 درجة","270 درجة","360 درجة"],"a":1,"x":"مجموع زوايا أي مثلث مستوٍ 180 درجة."},{"id":"m32","t":"الرياضيات والمنطق","l":2,"q":"ما الجذر التربيعي للعدد 169؟","o":["11","12","13","14"],"a":2,"x":"13 × 13 = 169."},{"id":"m33","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 1، 1، 2، 3، 5، 8، ؟","o":["11","12","13","15"],"a":2,"x":"كل عدد هو مجموع العددين السابقين له (متتالية فيبوناتشي): 5 + 8 = 13."},{"id":"m34","t":"اللغة والأدب","l":1,"q":"ما جمع كلمة «كتاب»؟","o":["كتّاب","كتب","أكتاب","كاتبون"],"a":1,"x":"جمع «كتاب» هو «كتب»."},{"id":"m35","t":"اللغة والأدب","l":1,"q":"ما ضد كلمة «كريم»؟","o":["بخيل","شجاع","ذكي","قوي"],"a":0,"x":"ضد الكريم هو البخيل."},{"id":"m36","t":"اللغة والأدب","l":1,"q":"كم عدد حروف الأبجدية العربية؟","o":["26","28","29","30"],"a":1,"x":"تتكون الأبجدية العربية من 28 حرفاً."},{"id":"m37","t":"اللغة والأدب","l":2,"q":"من مؤلف سيرة «الأيام» الذاتية؟","o":["طه حسين","العقاد","توفيق الحكيم","المازني"],"a":0,"x":"«الأيام» سيرة ذاتية للأديب طه حسين."},{"id":"m38","t":"اللغة والأدب","l":2,"q":"من كاتب «الثلاثية» (بين القصرين، قصر الشوق، السكرية)؟","o":["نجيب محفوظ","يوسف إدريس","إحسان عبد القدوس","جمال الغيطاني"],"a":0,"x":"«الثلاثية» رواية لنجيب محفوظ، وقد نال جائزة نوبل في الأدب عام 1988."},{"id":"m39","t":"الفضاء والفلك","l":1,"q":"كم عدد كواكب المجموعة الشمسية؟","o":["7","8","9","10"],"a":1,"x":"ثمانية كواكب بعد أن صُنِّف بلوتو كوكباً قزماً عام 2006."},{"id":"m40","t":"الفضاء والفلك","l":1,"q":"ما أكبر كواكب المجموعة الشمسية؟","o":["زحل","المشتري","نبتون","الأرض"],"a":1,"x":"المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة."},{"id":"m41","t":"الفضاء والفلك","l":1,"q":"أي كوكب يُعرف بالكوكب الأحمر؟","o":["المريخ","الزهرة","عطارد","أورانوس"],"a":0,"x":"المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته."},{"id":"m42","t":"الفضاء والفلك","l":1,"q":"ما اسم المجرة التي تقع فيها المجموعة الشمسية؟","o":["أندروميدا","درب التبانة","المثلث","الدوامة"],"a":1,"x":"مجرتنا هي درب التبانة."},{"id":"m43","t":"الفضاء والفلك","l":1,"q":"أي كوكب يشتهر بحلقاته الواضحة؟","o":["زحل","المريخ","عطارد","الزهرة"],"a":0,"x":"يشتهر زحل بحلقاته، وللمشتري وأورانوس ونبتون حلقات خافتة أيضاً."},{"id":"m44","t":"الفضاء والفلك","l":2,"q":"ما أقرب كواكب المجموعة الشمسية إلى الشمس؟","o":["الزهرة","الأرض","عطارد","المريخ"],"a":2,"x":"عطارد أقرب الكواكب إلى الشمس."},{"id":"m45","t":"الفضاء والفلك","l":2,"q":"من أول إنسان وطئت قدماه سطح القمر؟","o":["بز ألدرين","نيل أرمسترونغ","يوري غاغارين","مايكل كولينز"],"a":1,"x":"وطئ نيل أرمسترونغ سطح القمر في 20 يوليو 1969 ضمن مهمة أبولو 11."}],"tf":[{"id":"t1","t":"العلوم","l":1,"s":"يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.","v":true,"x":"يتغير ذلك مع الارتفاع، إذ ينخفض الضغط فتنخفض درجة الغليان."},{"id":"t2","t":"الفضاء والفلك","l":1,"s":"الشمس كوكب.","v":false,"x":"الشمس نجم، والكواكب تدور حول النجوم."},{"id":"t3","t":"العلوم","l":1,"s":"للقلب البشري أربع حجرات.","v":true,"x":"أذينان وبطينان."},{"id":"t4","t":"العلوم","l":1,"s":"الخفاش من الطيور.","v":false,"x":"الخفاش من الثدييات، وهو الثديي الوحيد القادر على الطيران الحقيقي."},{"id":"t5","t":"العلوم","l":2,"s":"كثافة الذهب أكبر من كثافة الحديد.","v":true,"x":"كثافة الذهب نحو 19.3 غ/سم³ وكثافة الحديد نحو 7.9 غ/سم³."},{"id":"t6","t":"العلوم","l":1,"s":"العنكبوت حشرة.","v":false,"x":"العنكبوت من العنكبيات وله ثماني أرجل، أما الحشرات فلها ست أرجل."},{"id":"t7","t":"الفضاء والفلك","l":1,"s":"القمر يدور حول الأرض.","v":true,"x":"القمر تابع طبيعي للأرض."},{"id":"t8","t":"الجغرافيا والدول","l":2,"s":"تقع مصر في قارة آسيا بالكامل.","v":false,"x":"معظم مصر في أفريقيا، وتقع شبه جزيرة سيناء في آسيا."},{"id":"t9","t":"الجغرافيا والدول","l":1,"s":"أستراليا قارة ودولة في آن واحد.","v":true,"x":"أستراليا دولة تشغل قارة كاملة."},{"id":"t10","t":"الجغرافيا والدول","l":2,"s":"تطل الصين على المحيط الأطلسي.","v":false,"x":"تطل الصين على المحيط الهادئ، ولا ساحل لها على الأطلسي."},{"id":"t11","t":"الرياضيات والمنطق","l":2,"s":"العدد 1 عدد أولي.","v":false,"x":"العدد الأولي له قاسمان بالضبط، والعدد 1 له قاسم واحد فقط."},{"id":"t12","t":"الرياضيات والمنطق","l":2,"s":"العدد 2 هو العدد الأولي الزوجي الوحيد.","v":true,"x":"كل عدد زوجي أكبر من 2 يقبل القسمة على 2، فليس أولياً."},{"id":"t13","t":"الرياضيات والمنطق","l":1,"s":"مجموع زوايا أي مثلث مستوٍ 180 درجة.","v":true,"x":"هذه خاصية المثلث في الهندسة المستوية."},{"id":"t14","t":"الرياضيات والمنطق","l":2,"s":"الصفر عدد زوجي.","v":true,"x":"الصفر يقبل القسمة على 2 بلا باقٍ فهو عدد زوجي."},{"id":"t15","t":"التاريخ والحضارات","l":2,"s":"بدأت الثورة الفرنسية عام 1789.","v":true,"x":"بدأت الثورة الفرنسية بسقوط سجن الباستيل في يوليو 1789."},{"id":"t16","t":"التاريخ والحضارات","l":1,"s":"بُنيت أهرامات الجيزة في عهد الدولة العثمانية.","v":false,"x":"بُنيت قبل ذلك بنحو أربعة آلاف سنة في عصر الدولة القديمة."},{"id":"t17","t":"التاريخ والحضارات","l":2,"s":"اخترع غوتنبرغ الطباعة بالحروف المعدنية المتحركة في أوروبا.","v":true,"x":"اخترعها يوهان غوتنبرغ في منتصف القرن الخامس عشر."},{"id":"t18","t":"التكنولوجيا","l":1,"s":"يعتمد الحاسوب داخلياً على النظام الثنائي.","v":true,"x":"كل المعلومات تُمثَّل بسلاسل من 0 و1."},{"id":"t19","t":"التكنولوجيا","l":2,"s":"تحتفظ ذاكرة RAM بمحتواها بعد إطفاء الجهاز.","v":false,"x":"ذاكرة RAM مؤقتة وتفقد محتواها عند انقطاع الكهرباء."},{"id":"t20","t":"اللغة والأدب","l":2,"s":"التاء المربوطة (ة) تأتي في أول الكلمة.","v":false,"x":"التاء المربوطة لا تأتي إلا في آخر الكلمة."},{"id":"t21","t":"الفضاء والفلك","l":1,"s":"المشتري أكبر من الأرض.","v":true,"x":"قطر المشتري نحو 11 ضعف قطر الأرض."},{"id":"t22","t":"العلوم","l":1,"s":"الضوء أسرع من الصوت.","v":true,"x":"يقطع الضوء نحو 300 ألف كم كل ثانية، والصوت في الهواء نحو 343 م/ث."},{"id":"t23","t":"الفضاء والفلك","l":1,"s":"تدور الأرض حول الشمس دورة كاملة كل 24 ساعة.","v":false,"x":"الدورة حول الشمس تستغرق نحو 365 يوماً، أما 24 ساعة فمدة دورانها حول نفسها."},{"id":"t24","t":"العلوم","l":3,"s":"تسقط الريشة والحجر بالتسارع نفسه في الفراغ.","v":true,"x":"في الفراغ لا توجد مقاومة هواء، فيتساوى تسارع السقوط لكل الأجسام."},{"id":"t25","t":"العلوم","l":1,"s":"الحوت سمكة.","v":false,"x":"الحوت من الثدييات يتنفس الهواء ويرضع صغاره."},{"id":"t26","t":"اللغة والأدب","l":2,"s":"نال نجيب محفوظ جائزة نوبل في الأدب.","v":true,"x":"نالها عام 1988."},{"id":"t27","t":"الجغرافيا والدول","l":2,"s":"عاصمة تركيا هي إسطنبول.","v":false,"x":"عاصمة تركيا أنقرة، وإسطنبول أكبر مدنها."},{"id":"t28","t":"الجغرافيا والدول","l":3,"s":"يُعد البحر الميت أخفض منطقة على سطح اليابسة.","v":true,"x":"يقع شاطئه على نحو 430 متراً تحت مستوى سطح البحر."},{"id":"t29","t":"العلوم","l":2,"s":"تحمي طبقة الأوزون الأرض من معظم الأشعة فوق البنفسجية الضارة.","v":true,"x":"تمتص طبقة الأوزون الجزء الأكبر من هذه الأشعة."},{"id":"t30","t":"العلوم","l":3,"s":"الألماس والجرافيت مكوَّنان من عنصر الكربون.","v":true,"x":"يختلفان في ترتيب ذرات الكربون فقط."},{"id":"t31","t":"العلوم","l":2,"s":"يتكوَّن جزيء الماء من ذرتي أكسجين وذرة هيدروجين.","v":false,"x":"العكس صحيح: ذرتا هيدروجين وذرة أكسجين (H₂O)."},{"id":"t32","t":"العلوم","l":1,"s":"ينتقل الصوت عبر الفراغ.","v":false,"x":"يحتاج الصوت إلى وسط مادي كالهواء أو الماء."},{"id":"t33","t":"الرياضيات والمنطق","l":1,"s":"تحتوي السنة الكبيسة على 366 يوماً.","v":true,"x":"يضاف يوم 29 فبراير في السنة الكبيسة."},{"id":"t34","t":"الفضاء والفلك","l":2,"s":"قطر المشتري أكبر من قطر الأرض بأكثر من عشرة أضعاف.","v":true,"x":"نحو 11.2 ضعفاً."},{"id":"t35","t":"الرياضيات والمنطق","l":1,"s":"عدد أضلاع المسدس سبعة.","v":false,"x":"للمسدس ستة أضلاع."},{"id":"t36","t":"اللغة والأدب","l":3,"s":"الخليل بن أحمد الفراهيدي هو واضع علم العروض.","v":true,"x":"وضع الخليل علم العروض لضبط أوزان الشعر العربي."},{"id":"t37","t":"العلوم","l":2,"s":"كان ابن الهيثم من علماء البصريات المسلمين.","v":true,"x":"ألّف «كتاب المناظر» وأسهم في تأسيس علم البصريات."},{"id":"t38","t":"التاريخ والحضارات","l":3,"s":"فُتحت مصر على يد عمرو بن العاص في القرن السابع الميلادي.","v":true,"x":"جرى الفتح نحو عام 640م."},{"id":"t39","t":"التكنولوجيا","l":2,"s":"يمكن لمتصفح الويب فتح الصفحات دون استخدام بروتوكول HTTP أو HTTPS.","v":false,"x":"تُحمَّل صفحات الويب عبر HTTP أو HTTPS، مع وجود بروتوكولات أخرى لخدمات مختلفة."}],"order":[{"id":"o1","t":"التاريخ والحضارات","l":2,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["اختراع الطباعة بالحروف المتحركة في أوروبا","الثورة الفرنسية","أول هبوط بشري على القمر","سقوط جدار برلين"],"x":"منتصف القرن 15، ثم 1789، ثم 1969، ثم 1989."},{"id":"o2","t":"الفضاء والفلك","l":1,"q":"رتّب الكواكب من الأقرب إلى الشمس إلى الأبعد","items":["عطارد","الزهرة","الأرض","المريخ"],"x":"عطارد ثم الزهرة ثم الأرض ثم المريخ."},{"id":"o3","t":"الرياضيات والمنطق","l":1,"q":"رتّب الوحدات من الأصغر إلى الأكبر","items":["مليمتر","سنتيمتر","متر","كيلومتر"],"x":"1 سم = 10 مم، و1 م = 100 سم، و1 كم = 1000 م."},{"id":"o4","t":"العلوم","l":1,"q":"رتّب مراحل دورة حياة الفراشة","items":["بيضة","يرقة","شرنقة","فراشة بالغة"],"x":"تمر الفراشة بتحوّل كامل: بيضة فيرقة فشرنقة فبالغة."},{"id":"o5","t":"التاريخ والحضارات","l":3,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["بناء الهرم الأكبر (نحو 2560 ق.م)","تأسيس الإسكندرية (332 ق.م)","فتح مصر على يد عمرو بن العاص (نحو 640م)","بناء الجامع الأزهر (نحو 970م)"],"x":"الأحداث موزعة على نحو أربعة آلاف سنة من التاريخ المصري."},{"id":"o6","t":"الرياضيات والمنطق","l":1,"q":"رتّب الأعداد من الأصغر إلى الأكبر","items":["0.5","3/4","1","1.25"],"x":"0.5 ثم 0.75 ثم 1 ثم 1.25."},{"id":"o7","t":"التكنولوجيا","l":2,"q":"رتّب من الأقدم إلى الأحدث","items":["حاسوب IBM الشخصي (1981)","إطلاق شبكة الويب للجمهور (1991)","إطلاق هاتف آيفون الأول (2007)","إطلاق ChatGPT (2022)"],"x":"1981 ثم 1991 ثم 2007 ثم 2022."},{"id":"o8","t":"العلوم","l":1,"q":"رتّب حالات الماء أثناء التسخين","items":["جليد","ماء سائل","بخار ماء"],"x":"يذوب الجليد فيصير ماءً، ثم يتبخر الماء بالتسخين."},{"id":"o9","t":"الرياضيات والمنطق","l":2,"q":"رتّب الأرقام الرومانية من الأصغر إلى الأكبر","items":["V","X","L","C"],"x":"V = 5 ثم X = 10 ثم L = 50 ثم C = 100."},{"id":"o10","t":"اللغة والأدب","l":1,"q":"رتّب الأشهر الهجرية كما تأتي في السنة","items":["محرم","صفر","ربيع الأول","ربيع الآخر"],"x":"هذه أول أربعة أشهر في التقويم الهجري."}],"word":[{"id":"w1","t":"الفضاء والفلك","w":"مجرة","h":"تجمع هائل من النجوم والغاز والغبار"},{"id":"w2","t":"الفضاء والفلك","w":"كوكب","h":"جرم يدور حول نجم"},{"id":"w3","t":"الفضاء والفلك","w":"تلسكوب","h":"جهاز يُقرِّب الأجرام البعيدة"},{"id":"w4","t":"الجغرافيا والدول","w":"بركان","h":"جبل يقذف حمماً ورماداً"},{"id":"w5","t":"الجغرافيا والدول","w":"محيط","h":"أوسع مسطح مائي على الأرض"},{"id":"w6","t":"الجغرافيا والدول","w":"جزيرة","h":"يابسة تحيط بها المياه"},{"id":"w7","t":"الجغرافيا والدول","w":"خريطة","h":"رسم يمثل سطح الأرض"},{"id":"w8","t":"الجغرافيا والدول","w":"عاصمة","h":"المدينة التي تقع فيها الحكومة"},{"id":"w9","t":"العلوم","w":"ذرة","h":"أصغر وحدة بناء للعنصر"},{"id":"w10","t":"العلوم","w":"خلية","h":"وحدة بناء الكائن الحي"},{"id":"w11","t":"العلوم","w":"طاقة","h":"القدرة على إنجاز شغل"},{"id":"w12","t":"العلوم","w":"مجهر","h":"جهاز يُكبِّر الأشياء الدقيقة"},{"id":"w13","t":"العلوم","w":"جاذبية","h":"قوة تشدّ الأجسام نحو الأرض"},{"id":"w14","t":"التكنولوجيا","w":"حاسوب","h":"جهاز يعالج البيانات"},{"id":"w15","t":"التكنولوجيا","w":"برمجة","h":"كتابة تعليمات للحاسوب"},{"id":"w16","t":"التكنولوجيا","w":"شبكة","h":"أجهزة متصلة ببعضها"},{"id":"w17","t":"التكنولوجيا","w":"معالج","h":"عقل الحاسوب"},{"id":"w18","t":"الرياضيات والمنطق","w":"مثلث","h":"شكل له ثلاثة أضلاع"},{"id":"w19","t":"الرياضيات والمنطق","w":"دائرة","h":"شكل كل نقاطه على بعد واحد من مركزه"},{"id":"w20","t":"الرياضيات والمنطق","w":"معادلة","h":"تساوٍ بين تعبيرين يحوي مجهولاً"},{"id":"w21","t":"اللغة والأدب","w":"قصيدة","h":"نص شعري"},{"id":"w22","t":"اللغة والأدب","w":"ديوان","h":"مجموعة قصائد"},{"id":"w23","t":"اللغة والأدب","w":"مكتبة","h":"مكان الكتب"},{"id":"w24","t":"اللغة والأدب","w":"رواية","h":"عمل أدبي سردي طويل"},{"id":"w25","t":"التاريخ والحضارات","w":"حضارة","h":"مجتمع متقدم عمرانياً وثقافياً"},{"id":"w26","t":"التاريخ والحضارات","w":"تاريخ","h":"علم دراسة الماضي"},{"id":"w27","t":"التاريخ والحضارات","w":"فرعون","h":"لقب ملك مصر القديمة"},{"id":"w28","t":"التاريخ والحضارات","w":"قلعة","h":"حصن محصَّن"}],"mem":[{"id":"p1","title":"عواصم","kind":"الدولة والعاصمة","pairs":[["مصر","القاهرة"],["فرنسا","باريس"],["اليابان","طوكيو"],["إيطاليا","روما"],["ألمانيا","برلين"],["إسبانيا","مدريد"]]},{"id":"p2","title":"عواصم عربية","kind":"الدولة والعاصمة","pairs":[["السعودية","الرياض"],["المغرب","الرباط"],["الأردن","عمّان"],["العراق","بغداد"],["لبنان","بيروت"],["السودان","الخرطوم"]]},{"id":"p3","title":"عناصر","kind":"العنصر ورمزه","pairs":[["الذهب","Au"],["الحديد","Fe"],["الأكسجين","O"],["الهيدروجين","H"],["الصوديوم","Na"],["الكربون","C"]]},{"id":"p4","title":"علماء","kind":"العالم وإسهامه","pairs":[["الخوارزمي","الجبر"],["ابن سينا","القانون في الطب"],["ابن الهيثم","المناظر"],["ابن النفيس","الدورة الدموية الصغرى"],["نيوتن","الجاذبية"],["أينشتاين","النسبية"]]}]},META=[["mcq","اختبارات متعددة الخيارات"],["truefalse","صح أم خطأ"],["order","ترتيب الأحداث"],["memory","لعبة الذاكرة"],["word","خمّن الكلمة"]],KEY='basira.v1',PTS=[0,10,15,20],LVN=['','سهل','متوسط','صعب'],PASS=0.7;
+  var KB='ابتثجحخدذرزسشصضطظعغفقكلمنهويةء',NORM={'أ':'ا','إ':'ا','آ':'ا','ؤ':'و','ئ':'ي','ى':'ي'};
+  var RULES={
+    mcq:['اختر الإجابة الصحيحة من أربع. يظهر التفسير بعد كل سؤال.',['أسئلة مباشرة، بلا مؤقت.','أسئلة أصعب قليلاً، بلا مؤقت.','أصعب الأسئلة، و20 ثانية لكل سؤال.']],
+    truefalse:['احكم على كل جملة بأنها صح أو خطأ. يظهر التفسير بعد كل جملة.',['جمل مباشرة، بلا مؤقت.','جمل أدق، بلا مؤقت.','أدق الجمل، و20 ثانية لكل جملة.']],
+    order:['رتّب العناصر بالتسلسل الصحيح باستعمال أزرار الأسهم ثم اضغط «تحقق». المحاولة الواحدة لكل سؤال.',['تسلسلات واضحة.','تسلسلات متوسطة.','أصعب التسلسلات المتاحة.']],
+    memory:['اقلب بطاقتين في كل محاولة وطابق كل عنصر مع ما يقابله. كل محاولة هي قلب بطاقتين.',['4 أزواج.','6 أزواج.','6 أزواج بحدّ أقصى 14 محاولة، وإلا تخسر.']],
+    word:['خمّن الكلمة المخفية بالضغط على الحروف. كل حرف خاطئ يستهلك محاولة. خمس كلمات في كل جولة.',['8 محاولات خاطئة مسموحة والتلميح ظاهر.','6 محاولات والتلميح ظاهر.','4 محاولات والتلميح يكلّف محاولة.']]
+  };
+  var ROUND={mcq:10,truefalse:10,order:5,word:5};
+
+  /* ---- أدوات ---- */
+  function E(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n;}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object'){s.g=s.g||{};s.seen=s.seen||{};s.lv=s.lv||{};return s;}}catch(e){}return {g:{},seen:{},lv:{}};}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s));return true;}catch(e){return false;}}
+  function nrm(c){return NORM[c]||c;}
+  function stop(root){(root.__iv||[]).forEach(clearInterval);(root.__to||[]).forEach(clearTimeout);root.__iv=[];root.__to=[];}
+  function later(root,fn,ms){var t=setTimeout(fn,ms);(root.__to=root.__to||[]).push(t);return t;}
+  function every(root,fn,ms){var t=setInterval(fn,ms);(root.__iv=root.__iv||[]).push(t);return t;}
+  function fmt(n){return Math.floor(n/60)+':'+('0'+(n%60)).slice(-2);}
+  function choose(key,arr,n,lv){
+    var seen=load().seen[key]||[],tiers=lv===1?[[1],[2],[3]]:lv===2?[[2],[1],[3]]:[[3,2],[1]],out=[];
+    tiers.forEach(function(t){
+      if(out.length>=n)return;
+      var c=arr.filter(function(q){return t.indexOf(q.l)>-1;});
+      out=out.concat(shuffle(c.filter(function(q){return seen.indexOf(q.id)<0;})),shuffle(c.filter(function(q){return seen.indexOf(q.id)>-1;})));
+    });
+    out=out.slice(0,n);
+    var s=load(),sn=(s.seen[key]||[]).concat(out.map(function(q){return q.id;}));s.seen[key]=sn.slice(-60);save(s);
+    return out;
+  }
+
+  /* ---- الشاشة الأولى ---- */
+  function intro(root,key){
+    stop(root);root.textContent='';root.__lv=load().lv[key]||1;
+    var r=RULES[key],box=E('div','bg-intro');
+    box.appendChild(E('p','bg-rules',r[0]));
+    var grp=E('div','bg-lvs');grp.setAttribute('role','radiogroup');grp.setAttribute('aria-label','المستوى');
+    var best=E('p','bg-best'),desc=E('p','bg-lvd');
+    function paint(){
+      var s=load(),b=(s.g[key]&&s.g[key].best&&s.g[key].best[root.__lv])||0;
+      desc.textContent=r[1][root.__lv-1];
+      best.textContent=b?('أفضل نتيجة لك في هذا المستوى: '+b+' نقطة (محفوظة على هذا الجهاز)'):'لا توجد نتيجة محفوظة لهذا المستوى بعد.';
+      for(var i=0;i<grp.children.length;i++){var on=(i+1)===root.__lv;grp.children[i].setAttribute('aria-checked',on?'true':'false');grp.children[i].tabIndex=on?0:-1;}
+    }
+    [1,2,3].forEach(function(l){
+      var b=E('button','bg-lv',LVN[l]);b.type='button';b.setAttribute('role','radio');
+      b.addEventListener('click',function(){root.__lv=l;paint();});
+      b.addEventListener('keydown',function(e){
+        var d=e.key==='ArrowLeft'?1:e.key==='ArrowRight'?-1:0;if(!d)return;e.preventDefault();
+        root.__lv=Math.min(3,Math.max(1,root.__lv+d));paint();grp.children[root.__lv-1].focus();
+      });
+      grp.appendChild(b);
+    });
+    var go=E('button','btn play bg-go','ابدأ اللعب');go.type='button';
+    go.addEventListener('click',function(){var s=load();s.lv[key]=root.__lv;save(s);start(root,key);});
+    box.appendChild(grp);box.appendChild(desc);box.appendChild(best);box.appendChild(go);root.appendChild(box);paint();
+  }
+
+  /* ---- بدء جولة ---- */
+  function start(root,key){
+    stop(root);var lv=root.__lv;
+    var st={key:key,lv:lv,i:0,score:0,right:0,answered:0,log:[],locked:false,done:false};
+    if(key==='memory'){memory(root,st);return;}
+    var pool={mcq:B.mcq,truefalse:B.tf,order:B.order,word:B.word}[key];
+    if(key==='word')pool=B.word.map(function(w){return {id:w.id,l:w.w.length<=4?1:w.w.length===5?2:3,w:w.w,h:w.h,t:w.t};});
+    st.qs=choose(key,pool,ROUND[key],lv);st.n=st.qs.length;
+    question(root,st);
+  }
+  function head(root,st,label){
+    var h=E('div','bg-head'),bar=E('div','bg-bar'),i=E('i');i.style.width=Math.round(st.i*100/(st.n||1))+'%';bar.appendChild(i);
+    var row=E('div','bg-row');row.appendChild(E('span',null,label));row.appendChild(E('span','bg-sc','النقاط: '+st.score));
+    var tm=E('span','bg-timer');row.appendChild(tm);h.appendChild(bar);h.appendChild(row);return {el:h,timer:tm};
+  }
+  function question(root,st){
+    stop(root);root.textContent='';st.locked=false;
+    var q=st.qs[st.i],h=head(root,st,'السؤال '+(st.i+1)+' من '+st.n);root.appendChild(h.el);
+    var body=E('div','bg-body'),fb=E('div','bg-fb');fb.setAttribute('aria-live','polite');fb.hidden=true;
+    root.appendChild(body);root.appendChild(fb);
+    function settle(ok,detail,extra){
+      if(st.locked)return;st.locked=true;stop(root);h.timer.textContent='';
+      st.answered++;if(ok){st.right++;st.score+=PTS[st.lv]+(extra||0);}
+      h.el.querySelector('.bg-sc').textContent='النقاط: '+st.score;
+      fb.hidden=false;fb.className='bg-fb '+(ok?'ok':'bad');fb.textContent='';
+      fb.appendChild(E('b',null,detail.title));if(detail.text)fb.appendChild(E('p',null,detail.text));
+      st.log.push({q:detail.q,ok:ok,a:detail.a});
+      var last=st.i+1>=st.n,nx=E('button','btn bg-next',last?'عرض النتيجة':'التالي');nx.type='button';
+      nx.addEventListener('click',function(){if(last)finish(root,st);else{st.i++;question(root,st);}});
+      fb.appendChild(nx);nx.focus();
+    }
+    if(st.key==='mcq')buildMcq(body,q,settle,st);
+    else if(st.key==='truefalse')buildTf(body,q,settle,st);
+    else if(st.key==='order')buildOrder(body,q,settle,st);
+    else buildWord(body,q,settle,st);
+    if(st.lv===3&&(st.key==='mcq'||st.key==='truefalse')){
+      var left=20;h.timer.textContent='⏱ '+fmt(left);
+      every(root,function(){left--;h.timer.textContent='⏱ '+fmt(Math.max(left,0));if(left<=0)expire();},1000);
+      var expire=function(){
+        var btns=body.querySelectorAll('button');for(var i=0;i<btns.length;i++)btns[i].disabled=true;
+        settle(false,{title:'انتهى الوقت',text:'الإجابة الصحيحة: '+(st.key==='mcq'?q.o[q.a]:(q.v?'صح':'خطأ'))+'. '+q.x,q:q.q||q.s,a:'انتهى الوقت'});
+      };
+    }
+  }
+
+  /* ---- اختيار من متعدد ---- */
+  function buildMcq(body,q,settle,st){
+    body.appendChild(E('h3','bg-q',q.q));
+    var opts=shuffle(q.o.map(function(t,i){return {t:t,c:i===q.a};})),list=E('div','bg-opts'),bs=[];
+    opts.forEach(function(o,i){
+      var b=E('button','bg-opt');b.type='button';b.appendChild(E('span','bg-ol','أبجد'.charAt(i)));b.appendChild(E('span',null,o.t));bs.push(b);
+      b.addEventListener('click',function(){
+        if(st.locked)return;
+        bs.forEach(function(x,k){x.disabled=true;if(opts[k].c){x.classList.add('ok');x.appendChild(E('b','bg-mk','✓'));}else if(x===b){x.classList.add('bad');x.appendChild(E('b','bg-mk','✕'));}else x.classList.add('dim');});
+        settle(o.c,{title:o.c?'إجابة صحيحة':'إجابة خاطئة',text:q.x,q:q.q,a:o.t});
+      });
+      list.appendChild(b);
+    });
+    body.appendChild(list);
+  }
+  /* ---- صح أم خطأ ---- */
+  function buildTf(body,q,settle,st){
+    body.appendChild(E('h3','bg-q',q.s));
+    var row=E('div','bg-tf');
+    [[true,'صح'],[false,'خطأ']].forEach(function(p){
+      var b=E('button','bg-opt bg-big',p[1]);b.type='button';
+      b.addEventListener('click',function(){
+        if(st.locked)return;var ok=p[0]===q.v,all=row.children;
+        for(var i=0;i<all.length;i++)all[i].disabled=true;
+        b.classList.add(ok?'ok':'bad');b.appendChild(E('b','bg-mk',ok?'✓':'✕'));
+        settle(ok,{title:ok?'إجابة صحيحة':'إجابة خاطئة',text:'الجملة '+(q.v?'صحيحة':'خاطئة')+'. '+q.x,q:q.s,a:p[1]});
+      });
+      row.appendChild(b);
+    });
+    body.appendChild(row);
+  }
+  /* ---- ترتيب ---- */
+  function buildOrder(body,q,settle,st){
+    body.appendChild(E('h3','bg-q',q.q));
+    var cur=q.items.map(function(t,i){return {t:t,k:i};}),tries=0;
+    do{cur=shuffle(cur);tries++;}while(tries<20&&cur.every(function(c,i){return c.k===i;}));
+    var list=E('ol','bg-rows'),checked=false;
+    function paint(res){
+      list.textContent='';
+      cur.forEach(function(c,i){
+        var li=E('li','bg-row2'+(res?(c.k===i?' ok':' bad'):''));li.appendChild(E('span','bg-rt',c.t));
+        if(!res){
+          var up=E('button','bg-mv','▲'),dn=E('button','bg-mv','▼');up.type=dn.type='button';
+          up.setAttribute('aria-label','حرّك «'+c.t+'» للأعلى');dn.setAttribute('aria-label','حرّك «'+c.t+'» للأسفل');
+          up.disabled=i===0;dn.disabled=i===cur.length-1;
+          up.addEventListener('click',function(){var t=cur[i-1];cur[i-1]=cur[i];cur[i]=t;paint();var b=list.children[i-1].children[1];if(b)b.focus();});
+          dn.addEventListener('click',function(){var t=cur[i+1];cur[i+1]=cur[i];cur[i]=t;paint();var b=list.children[i+1].children[2];if(b)b.focus();});
+          li.appendChild(up);li.appendChild(dn);
+        }else li.appendChild(E('b','bg-mk',c.k===i?'✓':'✕'));
+        list.appendChild(li);
+      });
+    }
+    paint(false);body.appendChild(list);
+    var chk=E('button','btn bg-check','تحقق');chk.type='button';
+    chk.addEventListener('click',function(){
+      if(checked||st.locked)return;checked=true;paint(true);chk.hidden=true;
+      var ok=cur.every(function(c,i){return c.k===i;}),mine=cur.map(function(c){return c.t;}).join(' ← ');
+      settle(ok,{title:ok?'ترتيب صحيح':'الترتيب غير صحيح',text:(ok?'':'الترتيب الصحيح: '+q.items.join(' ← ')+'. ')+q.x,q:q.q,a:mine});
+    });
+    body.appendChild(chk);
+  }
+  /* ---- خمّن الكلمة ---- */
+  function buildWord(body,q,settle,st){
+    var max=[0,8,6,4][st.lv],wrong=0,got={},hintShown=st.lv<3,over=false;
+    var letters=q.w.split(''),info=E('p','bg-hint'),tiles=E('div','bg-tiles'),left=E('p','bg-left'),keys=E('div','bg-keys');
+    tiles.setAttribute('dir','rtl');
+    body.appendChild(E('p','bg-q2','الكلمة من قسم «'+q.t+'»'));body.appendChild(info);body.appendChild(tiles);body.appendChild(left);body.appendChild(keys);
+    var hintBtn=null;
+    function paint(reveal){
+      info.textContent=hintShown?('تلميح: '+q.h):'';
+      tiles.textContent='';
+      letters.forEach(function(c){var on=reveal||got[nrm(c)],t=E('span','bg-tile'+(on?' on':''),on?c:'');tiles.appendChild(t);});
+      tiles.setAttribute('aria-label','الكلمة: '+letters.map(function(c){return got[nrm(c)]?c:'_';}).join(' '));
+      left.textContent='المحاولات الخاطئة المتبقية: '+(max-wrong);
+    }
+    function check(){
+      if(over)return;
+      var won=letters.every(function(c){return got[nrm(c)];});
+      if(won){over=true;lock();paint(false);settle(true,{title:'أحسنت: «'+q.w+'»',text:'الكلمة من قسم '+q.t+'.',q:q.h,a:q.w},2*(max-wrong));}
+      else if(wrong>=max){over=true;lock();paint(true);settle(false,{title:'نفدت المحاولات',text:'الكلمة هي «'+q.w+'».',q:q.h,a:q.w});}
+    }
+    function lock(){var b=keys.querySelectorAll('button');for(var i=0;i<b.length;i++)b[i].disabled=true;if(hintBtn)hintBtn.disabled=true;}
+    KB.split('').forEach(function(c){
+      var b=E('button','bg-key',c);b.type='button';
+      b.addEventListener('click',function(){
+        if(over||b.disabled)return;b.disabled=true;
+        if(letters.some(function(x){return nrm(x)===c;})){got[c]=true;b.classList.add('ok');}else{wrong++;b.classList.add('bad');}
+        paint(false);check();
+      });
+      keys.appendChild(b);
+    });
+    if(!hintShown){
+      hintBtn=E('button','btn alt bg-hintbtn','أظهر التلميح (يكلّف محاولة)');hintBtn.type='button';
+      hintBtn.addEventListener('click',function(){if(over||hintShown)return;hintShown=true;wrong++;hintBtn.hidden=true;paint(false);check();});
+      body.insertBefore(hintBtn,tiles);
+    }
+    paint(false);
+  }
+
+  /* ---- لعبة الذاكرة ---- */
+  function memory(root,st){
+    stop(root);root.textContent='';
+    var lv=st.lv,np=lv===1?4:6,limit=lv===3?14:0,set=B.mem[Math.floor(Math.random()*B.mem.length)];
+    var pairs=shuffle(set.pairs).slice(0,np),cards=[];
+    pairs.forEach(function(p,i){cards.push({p:i,t:p[0]});cards.push({p:i,t:p[1]});});
+    cards=shuffle(cards);
+    var moves=0,matched=0,open=[],lock=false,fin=false;
+    var h=E('div','bg-head'),row=E('div','bg-row'),mv=E('span',null),info=E('span','bg-sc');row.appendChild(mv);row.appendChild(info);h.appendChild(row);
+    root.appendChild(h);root.appendChild(E('p','bg-q2','«'+set.title+'»: طابق '+set.kind));
+    var grid=E('div','bg-grid g'+(np===4?'2':'3')),fb=E('div','bg-fb');fb.setAttribute('aria-live','polite');fb.hidden=true;
+    var btns=[];
+    function stat(){mv.textContent='المحاولات: '+moves+(limit?' من '+limit:'');info.textContent='الأزواج: '+matched+' من '+np;}
+    function paint(i){var c=cards[i],b=btns[i];b.className='bg-card'+(c.done?' done':c.up?' up':'');b.firstChild.textContent=(c.up||c.done)?c.t:'';b.setAttribute('aria-label',(c.up||c.done)?c.t+(c.done?' (متطابقة)':''):'بطاقة مغلقة '+(i+1));b.disabled=!!c.done;}
+    cards.forEach(function(c,i){
+      var b=E('button','bg-card');b.type='button';b.appendChild(E('span'));btns.push(b);
+      b.addEventListener('click',function(){
+        if(fin||lock||c.up||c.done)return;
+        c.up=true;open.push(i);paint(i);
+        if(open.length<2)return;
+        moves++;var a=cards[open[0]],bb=cards[open[1]],oi=open.slice();open=[];
+        if(a.p===bb.p){
+          a.done=bb.done=true;a.up=bb.up=false;matched++;paint(oi[0]);paint(oi[1]);stat();
+          if(matched===np)end(true);
+        }else{
+          lock=true;stat();
+          later(root,function(){a.up=bb.up=false;paint(oi[0]);paint(oi[1]);lock=false;if(limit&&moves>=limit)end(false);},900);
+        }
+      });
+      grid.appendChild(b);paint(i);
+    });
+    function end(win){
+      if(fin)return;fin=true;
+      var pts=win?Math.max(0,np*PTS[lv]-(moves-np)*2):0;st.score=pts;st.n=1;st.answered=0;
+      finish(root,st,{win:win,headline:win?'أكملت اللعبة':'انتهت المحاولات',
+        lines:[win?('أطابقت كل الأزواج في '+moves+' محاولة.'):('لم تكتمل الأزواج: طابقت '+matched+' من '+np+' ضمن '+limit+' محاولة.'),'الحد الأدنى الممكن للمحاولات: '+np+'.'],points:pts,max:np*PTS[lv]});
+    }
+    root.appendChild(grid);root.appendChild(fb);stat();
+  }
+
+  /* ---- النهاية والحفظ ---- */
+  function finish(root,st,custom){
+    if(st.done)return;st.done=true;stop(root);root.textContent='';
+    var key=st.key,max=custom?custom.max:st.n*PTS[st.lv],win,head,lines=[];
+    if(custom){win=custom.win;head=custom.headline;lines=custom.lines;}
+    else{
+      var pct=st.n?st.right/st.n:0;win=pct>=PASS;
+      head=win?'نجحت في الجولة':'لم تبلغ حدّ النجاح';
+      lines=['الإجابات الصحيحة: '+st.right+' من '+st.n+' ('+Math.round(pct*100)+'%).',win?'حدّ النجاح 70% وقد بلغته.':'حدّ النجاح 70%. جرّب مجدداً بأسئلة جديدة.'];
+    }
+    var s=load(),g=s.g[key]=s.g[key]||{plays:0,right:0,answered:0,best:{}},prev=g.best[st.lv]||0;
+    g.plays++;g.right+=st.right||0;g.answered+=st.answered||0;
+    var record=st.score>prev;if(record)g.best[st.lv]=st.score;
+    var saved=save(s);
+    var end=E('div','bg-end '+(win?'win':'lose'));
+    end.appendChild(E('div','bg-big2',st.score+' نقطة'));
+    end.appendChild(E('h3',null,head));
+    lines.forEach(function(l){end.appendChild(E('p',null,l));});
+    end.appendChild(E('p','bg-meta','المستوى: '+LVN[st.lv]+(max?' · الحد الأقصى: '+max+' نقطة':'')));
+    if(record&&st.score>0)end.appendChild(E('p','bg-record','رقم قياسي جديد لك في هذا المستوى'));
+    else if(prev)end.appendChild(E('p','bg-meta','أفضل نتيجة سابقة: '+prev+' نقطة'));
+    end.appendChild(E('p','bg-meta',saved?'تُحفظ نتائجك على هذا الجهاز فقط ولا تنتقل بين الأجهزة.':'تعذّر الحفظ في هذا المتصفح (قد يمنعه وضع التصفح الخاص).'));
+    if(st.log&&st.log.length){
+      var d=E('details','bg-rev'),sm=E('summary',null,'راجع إجاباتك');d.appendChild(sm);
+      var ul=E('ul');st.log.forEach(function(r){var li=E('li',r.ok?'ok':'bad');li.appendChild(E('b',null,(r.ok?'✓ ':'✕ ')+r.q));li.appendChild(E('span',null,' — إجابتك: '+r.a));ul.appendChild(li);});
+      d.appendChild(ul);end.appendChild(d);
+    }
+    var row=E('div','bg-actions'),again=E('button','btn play','العب مجدداً'),chg=E('button','btn alt','غيّر المستوى');again.type=chg.type='button';
+    again.addEventListener('click',function(){start(root,key);});chg.addEventListener('click',function(){intro(root,key);});
+    row.appendChild(again);row.appendChild(chg);end.appendChild(row);root.appendChild(end);
+    again.focus();fillProgress();
+  }
+
+  /* ---- لوحة التقدم على الصفحة الرئيسية ---- */
+  function fillProgress(){
+    var box=document.getElementById('bsr-progress');if(!box)return;
+    var s=load(),keys=Object.keys(s.g),tot=0;box.textContent='';
+    keys.forEach(function(k){tot+=s.g[k].plays||0;});
+    if(!tot){box.appendChild(E('p',null,'لم تلعب أي جولة بعد على هذا الجهاز. ابدأ بأي لعبة وسيظهر تقدّمك هنا.'));}
+    else{
+      var tb=E('table','bg-stats'),cap=E('caption',null,'نتائجك على هذا الجهاز'),thead=E('tr');
+      tb.appendChild(cap);['اللعبة','الجولات','أفضل نتيجة','الدقة'].forEach(function(t){var th=E('th',null,t);th.scope='col';thead.appendChild(th);});tb.appendChild(thead);
+      META.forEach(function(m){
+        var g=s.g[m[0]];if(!g)return;var best=0;for(var l in g.best)best=Math.max(best,g.best[l]);
+        var tr=E('tr');tr.appendChild(E('th',null,m[1]));tr.children[0].scope='row';tr.appendChild(E('td',null,String(g.plays)));tr.appendChild(E('td',null,best+' نقطة'));
+        tr.appendChild(E('td',null,g.answered?Math.round(g.right*100/g.answered)+'%':'—'));tb.appendChild(tr);
+      });
+      box.appendChild(tb);
+      var clr=E('button','btn-quiet','مسح بيانات هذا الجهاز');clr.type='button';
+      clr.addEventListener('click',function(){if(confirm('سيُحذف تقدّمك المحفوظ على هذا الجهاز. هل تريد المتابعة؟')){try{localStorage.removeItem(KEY);}catch(e){}fillProgress();}});
+      box.appendChild(clr);
+    }
+    box.appendChild(E('p','note','التقدم محفوظ في متصفحك فقط، ولا يوجد حساب ولا مزامنة بين الأجهزة بعد. مسح بيانات المتصفح يحذفه.'));
+  }
+
+  function mount(root){
+    if(root.__bsr)return;var key=root.getAttribute('data-game');if(!RULES[key])return;
+    root.__bsr=1;root.__reset=function(){intro(root,key);};intro(root,key);
+  }
+  function init(){
+    var gs=document.querySelectorAll('.bsr-game');
+    for(var i=0;i<gs.length;i++){if(!gs[i].closest('.pane'))mount(gs[i]);}
+    var rs=document.querySelectorAll('input[name=gm]');
+    function sync(){
+      for(var i=0;i<rs.length;i++){
+        var m=document.querySelector('.pane.p-'+rs[i].id.slice(3)+' .bsr-game');if(!m)continue;
+        if(rs[i].checked)mount(m);else if(m.__bsr)m.__reset();
+      }
+    }
+    for(var j=0;j<rs.length;j++)rs[j].addEventListener('change',sync);
+    sync();fillProgress();
+  }
+  init();
 })();
 
   //]]></script>

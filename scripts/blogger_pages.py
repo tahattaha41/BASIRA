@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+"""نشر/تحديث «صفحات» بلوجر عبر Blogger API v3 (pages.insert / pages.patch). لا يرفع القالب أبداً:
+الواجهة الرسمية لا تحتوي أي مورد للقوالب، فرفع dist/theme.xml يدوي من لوحة بلوجر.
+
+الأوضاع:
+  plan   (الافتراضي) يطبع ما سيحدث، بلا أي اتصال.
+  apply  يتصل ببلوجر؛ يتطلب --confirm ومتغيرات بيئة: BLOGGER_BLOG_ID, GOOGLE_CLIENT_ID,
+         GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN (من أسرار GitHub، لا كلمة مرور جوجل أبداً).
+         ينشئ الصفحات المفقودة فقط. أضف --update لتحديث محتوى صفحات موجودة بنفس العنوان. لا يحذف شيئاً.
+ملاحظة: رابط الصفحة يولّده بلوجر من العنوان؛ تحقق من الرابط الفعلي ثم أضفه إلى "published" في src/site.json."""
+import json, os, sys, urllib.parse, urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+API = "https://blogger.googleapis.com/v3/blogs/{blog}/pages"
+TOKEN_URL = "https://oauth2.googleapis.com/token"
+TITLES = {"about": "من نحن", "editorial-policy": "سياسة التحرير", "contact": "اتصل بنا",
+          "privacy-policy": "سياسة الخصوصية", "terms": "شروط الاستخدام"}
+
+def wanted():
+    site = json.loads((ROOT / "src/site.json").read_text(encoding="utf-8"))
+    items = [(s, t) for s, t in TITLES.items()]
+    items += [(f"game-{g[0]}", g[1]) for g in site["games"]]
+    out = []
+    for slug, title in items:
+        f = ROOT / "dist/pages" / f"{slug}.html"
+        if not f.is_file(): raise SystemExit(f"missing built page {f}; run scripts/build.py")
+        out.append((slug, title, f.read_text(encoding="utf-8")))
+    return site, out
+
+def http(method, url, token=None, body=None, form=None):
+    data = None; headers = {}
+    if body is not None: data = json.dumps(body).encode(); headers["Content-Type"] = "application/json"
+    if form is not None: data = urllib.parse.urlencode(form).encode()
+    if token: headers["Authorization"] = "Bearer " + token
+    req = urllib.request.Request(url, data=data, headers=headers, method=method)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read().decode() or "{}")
+
+def run(mode="plan", confirm=False, update=False, _http=http):
+    site, pages = wanted()
+    if site.get("contact_email", "") == "" and not os.getenv("BASIRA_CONTACT_EMAIL"):
+        print("تحذير: لا يوجد بريد تواصل؛ صفحة اتصل بنا ستحمل نص البريد البديل. لا تنشرها قبل إضافته.")
+    if mode == "plan":
+        for slug, title, html in pages: print(f"[plan] {slug}: '{title}' ({len(html)} chars)")
+        print("[plan] لم يُرسل شيء إلى بلوجر."); return 0
+    if not confirm: print("apply يتطلب --confirm صريحاً."); return 2
+    need = ["BLOGGER_BLOG_ID", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN"]
+    miss = [k for k in need if not os.getenv(k)]
+    if miss: print("متغيرات ناقصة:", ", ".join(miss)); return 2
+    tok = _http("POST", TOKEN_URL, form={"client_id": os.environ["GOOGLE_CLIENT_ID"], "client_secret": os.environ["GOOGLE_CLIENT_SECRET"],
+                                         "refresh_token": os.environ["GOOGLE_REFRESH_TOKEN"], "grant_type": "refresh_token"})["access_token"]
+    base = API.format(blog=os.environ["BLOGGER_BLOG_ID"])
+    existing = {p["title"]: p for p in _http("GET", base + "?fetchBodies=false&maxResults=100", token=tok).get("items", [])}
+    for slug, title, html in pages:
+        if title in existing:
+            if update:
+                r = _http("PATCH", f"{base}/{existing[title]['id']}", token=tok, body={"title": title, "content": html})
+                print(f"[updated] {slug} -> {r.get('url')}")
+            else:
+                print(f"[skip] {slug}: صفحة بنفس العنوان موجودة ({existing[title].get('url')}); استخدم --update لتحديثها.")
+        else:
+            r = _http("POST", base, token=tok, body={"kind": "blogger#page", "title": title, "content": html})
+            print(f"[created] {slug} -> {r.get('url')}")
+    print("راجع الروابط الفعلية وحدّث published في src/site.json."); return 0
+
+if __name__ == "__main__":
+    a = sys.argv[1:]
+    mode = "apply" if "apply" in a else "plan"
+    sys.exit(run(mode, "--confirm" in a, "--update" in a))

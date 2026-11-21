@@ -25,7 +25,7 @@ for needle, name in [("b:version='2'", 'b:version=2'), ("<b:skin>", 'b:skin'), (
     check('بنية: ' + name, needle in THEME)
 check('بلا سكربتات خارجية', not re.search(r"<script[^>]+src=", THEME))
 check('بلا أسرار/مفاتيح', not re.search(r'(AIza|sk-[A-Za-z0-9]{20}|ca-pub-|api[_-]?key\s*[=:])', THEME, re.I))
-check('الحجم < 60KB', len(THEME.encode()) < 60000, str(len(THEME.encode())))
+check('الحجم < 300KB (حدّ داخلي تحفظي، غير رسمي)', len(THEME.encode()) < 300000, str(len(THEME.encode())))
 
 # 2) التصيير لكل نوع صفحة
 sim = Sim(THEME)
@@ -39,7 +39,7 @@ for key, fn in PAGES.items():
     check(f'[{key}] نموذج بحث', ('action="/search"' in h and 'name="q"' in h) or key in ('item', 'static'))
 h = rendered['home']
 check('الرئيسية: كل أقسام المعرفة الثمانية', all(n in h for n, _ in SITE['topics']))
-check('الرئيسية: الألعاب الخمس مع وسم قيد الإعداد', all(g[1] in h for g in SITE['games']) and 'قيد التنفيذ' in h)
+check('الرئيسية: الألعاب الخمس لها حاوية لعب حقيقية', all(f"data-game=\"{g[0]}\"" in h for g in SITE['games']) and 'قيد التنفيذ' not in h)
 games_html = h.split('id="games"')[1].split('id="topics"')[0]
 check('الألعاب: لا زر/رابط لصفحة غير منشورة', all(f'/p/game-{g[0]}.html' in SITE.get('published', []) or f'/p/game-{g[0]}.html' not in games_html for g in SITE['games']))
 check('الألعاب: لكل لعبة مستوى صعوبة وأيقونة', games_html.count('class="tab"') == 5 and games_html.count('class="pane p-') == 5 and all(l in games_html for l in ('سهل', 'متوسط', 'صعب')))

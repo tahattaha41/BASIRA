@@ -28,9 +28,12 @@ def build():
     about = [('/p/about.html', 'من نحن'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'), ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
     foot_about = ''.join(f"<li>{plink(p_, t)}</li>" for p_, t in about if p_ in pub) or "<li>الصفحات التعريفية قيد الإعداد</li>"
     dr_about = plink('/p/about.html', 'من نحن')
-    daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else "<span class='soon'>يُفعَّل مع الألعاب</span>")
-    css = read('style.css') + read('brand.css') + ui.stage_css(site)
-    js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False))
+    daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else f"<a class='btn play' href='/#games'>{e(site['play_label'])}</a>")
+    css = read('style.css') + read('brand.css') + read('games.css') + ui.stage_css(site)
+    bank = json.dumps(json.loads(read('data/bank.json')), ensure_ascii=False, separators=(',', ':'))
+    meta = json.dumps([[g[0], g[1]] for g in site['games']], ensure_ascii=False, separators=(',', ':'))
+    games_js = read('js/games.js').replace('{{BANK_JSON}}', bank).replace('{{GAMES_META}}', meta)
+    js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False)) + '\n' + games_js
     for name, txt in (('css', css), ('js', js)):
         assert ']]>' not in txt, name + ' contains CDATA terminator'
     t = read('theme.tpl.xml')
@@ -48,12 +51,20 @@ def build():
     pg = os.path.join(DIST, 'pages'); os.makedirs(pg, exist_ok=True)
     for g in site['games']:
         with open(os.path.join(pg, f'game-{g[0]}.html'), 'w', encoding='utf-8') as f:
-            f.write(ui.model_page(site, g[0]))
+            f.write(ui.game_page(site, g[0]))
     titles = {'about': 'من نحن', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا', 'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
     mail = site.get('contact_email') or '[يُضاف البريد قبل النشر]'
     for slug in titles:
         with open(os.path.join(pg, slug + '.html'), 'w', encoding='utf-8') as f:
             f.write(read(f'pages/{slug}.html').replace('{{EMAIL}}', mail))
+    # مسودات المقالات: تُبنى إلى dist/articles مع المصادر، ولا تُنشر تلقائياً
+    ad = os.path.join(DIST, 'articles'); os.makedirs(ad, exist_ok=True)
+    idx = json.loads(read('../content/articles/index.json'))
+    for a in idx['articles']:
+        body = open(os.path.join(ROOT, 'content/articles', a['file']), encoding='utf-8').read()
+        srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
+        with open(os.path.join(ad, a['file']), 'w', encoding='utf-8') as f:
+            f.write(body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
     if not site.get('contact_email'):
         print('تحذير: contact_email فارغ في src/site.json. أضفه قبل نشر صفحة اتصل بنا.')
     out = os.path.join(DIST, 'theme.xml')

@@ -1,4 +1,4 @@
-<section class='hero'><div class='wrap hero-in'>
+<section class='hero' itemscope='itemscope' itemtype='https://schema.org/WebSite'><meta content='BASIRA | بصيرة' itemprop='name'/><link expr:href='data:blog.homepageUrl' itemprop='url'/><div class='wrap hero-in'>
 <div class='hero-txt'>
 <p class='eyebrow'>Think. Discover. Play. <span class='eyebrow-ar'>فكّر. اكتشف. العب.</span></p>
 <h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
@@ -14,8 +14,8 @@
 </div>
 </div></section>
 <section class='stage' id='games'><div class='wrap'>
-<div class='sec-h'><h2>العب</h2><span class='tag'>قيد التنفيذ</span></div>
-<p class='stage-note'>اختر لعبة لترى شاشتها. هذه نماذج تصميم تتحول إلى ألعاب قابلة للعب بعد المراجعة.</p>
+<div class='sec-h'><h2>العب</h2></div>
+<p class='stage-note'>اختر لعبة وابدأ فوراً، بلا تسجيل. أسئلتها مراجَعة ومخزّنة، وتُحفظ نتائجك على جهازك.</p>
 {{STAGE}}
 </div></section>
 <div class='wrap'>
@@ -30,7 +30,7 @@
 </div>
 <ol class='rows-list' data-empty=''><b:loop index='i' values='data:posts' var='post'><b:if cond='data:i &gt; 0'><li><a class='rl' expr:href='data:post.url'><span class='rl-n'><data:i/></span><span class='rl-b'><span class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></span><span class='rl-t'><data:post.title/></span><span class='rl-s'><data:post.snippet/></span></span></a></li></b:if></b:loop></ol>
 <p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2><span class='tag'>نموذج</span></div>
+<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2></div>
 {{PROGRESS}}</section>
 <section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
 <ol class='method'>{{METHOD}}</ol></section>

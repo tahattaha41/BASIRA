@@ -1,8 +1,8 @@
-<div class='wrap page'><b:loop values='data:posts' var='post'><article>
+<div class='wrap page'><b:loop values='data:posts' var='post'><article itemscope='itemscope' itemtype='https://schema.org/Article'><link expr:href='data:post.url' itemprop='mainEntityOfPage'/><meta content='BASIRA | بصيرة' itemprop='publisher'/>
 <nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <a href='/search?max-results=24'>المقالات</a></nav>
 <div class='labels'><b:loop values='data:post.labels' var='label'><a expr:href='data:label.url' rel='tag'><data:label.name/></a></b:loop></div>
-<h1 class='entry-title'><data:post.title/></h1>
-<div class='byline'><span><data:post.author.name/></span><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<h1 class='entry-title' itemprop='headline'><data:post.title/></h1>
+<div class='byline'><span itemprop='author'><data:post.author.name/></span><time itemprop='datePublished' expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
 <div class='prose entry-content'><data:post.body/></div>
 <nav aria-label='التنقل بين المقالات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>المقال الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>المقال الأقدم</a></b:if></nav>
 </article></b:loop></div>
