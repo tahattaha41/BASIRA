@@ -3,27 +3,21 @@
 <html b:version='2' class='v2' expr:dir='data:blog.languageDirection' lang='ar' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
-  <meta content='IE=edge' http-equiv='X-UA-Compatible'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
   <meta expr:content='data:blog.metaDescription' name='description'/>
   <b:if cond='data:blog.pageType == &quot;error_page&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.searchQuery'>
     <meta content='noindex,follow' name='robots'/>
-  <b:else/>
-    <meta content='index,follow,max-image-preview:large' name='robots'/>
   </b:if>
-  <meta expr:content='data:blog.pageType' name='dq-pagetype'/>
-  <meta content='#f6f2ea' name='theme-color'/>
+  <meta content='#f7f5f0' name='theme-color'/>
+  <meta content='BASIRA' name='application-name'/>
+  <meta content='BASIRA | بصيرة' property='og:site_name'/>
   <link href='https://fonts.googleapis.com' rel='preconnect'/>
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
-  <link href='https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;600;700;800&amp;family=Noto+Naskh+Arabic:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
-  <script type='application/ld+json'>
-  {"@context":"https://schema.org","@type":"WebSite","name":"دقّة","inLanguage":"ar","description":"أدوات عربية دقيقة للتواريخ والأرقام والوحدات، مع شرح طريقة كل حساب"}
-  </script>
+  <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
-  try{if(localStorage.getItem('dq-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+  try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
   //]]></script>
-{{HEAD_SCRIPTS}}
   <b:skin><![CDATA[
 {{CSS}}
 ]]></b:skin>
@@ -33,19 +27,35 @@
   <input aria-hidden='true' id='nav-t' tabindex='-1' type='checkbox'/>
   <header class='top'>
     <div class='wrap bar'>
-      <a class='brand' expr:href='data:blog.homepageUrl'>دقّة <small>أدوات وأدلة عربية</small></a>
+      <label aria-label='فتح القائمة' class='icon-btn menu-btn' for='nav-t' role='button' tabindex='0'>{{I_MENU}}</label>
+      <a class='brand' expr:href='data:blog.homepageUrl'>{{BRAND_LOCKUP}}</a>
       <nav aria-label='القائمة الرئيسية' class='nav'>
-        <a href='/p/tools.html'>الأدوات</a>
-        <a expr:href='data:blog.homepageUrl + &quot;search?max-results=24&quot;'>المقالات</a>
-        <a href='/p/about.html'>عن دقّة</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
+        <a href='/search?max-results=24'>المقالات</a>
       </nav>
-      <div class='nav-wrap'>
-        <button aria-label='تبديل الوضع الداكن' class='iconbtn' id='theme-toggle' type='button'>الوضع</button>
-        <label class='iconbtn burger' for='nav-t'>القائمة</label>
+      <div class='bar-end'>
+        <details class='sdrop'><summary aria-label='بحث' class='icon-btn'>{{I_SEARCH}}</summary>
+          <form action='/search' class='find' method='get' role='search'><label class='sr' for='q'>ابحث في الموقع</label><input id='q' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
+        </details>
+        <a aria-label='الحساب والتقدم' class='icon-btn' expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>{{I_USER}}</a>
       </div>
     </div>
   </header>
-  <div class='today'><div class='wrap'><b>اليوم</b><span data-today='g'></span><span data-today='h'></span></div></div>
+  <label class='scrim' for='nav-t'></label>
+  <aside aria-label='القائمة الجانبية' class='drawer'>
+    <div class='dr-top'><span class='brand'>{{BRAND_LOCKUP}}</span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'>{{I_CLOSE}}</label></div>
+    <nav aria-label='القائمة الجانبية'>
+      <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>أقسام المعرفة</a>
+      <a href='/search?max-results=24'>المقالات</a>
+      <a expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>التقدم والحساب</a>
+      {{DR_ABOUT}}
+    </nav>
+    <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
+  </aside>
 
   <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
     <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
@@ -74,18 +84,16 @@
 
   <footer class='foot'>
     <div class='wrap'>
-      <div class='fg'>
-        <div><div class='b'>دقّة</div><p>أدوات حساب عربية للتواريخ والأرقام والوحدات، تعرض طريقة الحساب وحدودها، وتجري كلها داخل متصفحك.</p></div>
-        <div><h4>التواريخ والوقت</h4><ul>{{FOOT_A}}</ul></div>
-        <div><h4>الأرقام والوحدات</h4><ul>{{FOOT_B}}</ul></div>
-        <div><h4>عن الموقع</h4><ul><li><a href='/p/about.html'>عن دقّة</a></li><li><a href='/p/editorial-policy.html'>سياسة التحرير</a></li><li><a href='/p/contact.html'>اتصل بنا</a></li><li><a href='/p/privacy-policy.html'>سياسة الخصوصية</a></li><li><a href='/p/terms.html'>شروط الاستخدام</a></li></ul></div>
+      <div class='foot-grid'>
+        <div><div class='foot-brand'>{{BRAND_LOCKUP}}</div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
+        <div><h4>أقسام المعرفة</h4><ul>{{FOOT_TOPICS}}</ul></div>
+        <div><h4>عن الموقع</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>
-      <div class='fb'><span>© دقّة — جميع الحقوق محفوظة</span><span>الأدوات للإرشاد والتخطيط، وليست استشارة قانونية أو مالية أو دينية.</span></div>
+      <div class='foot-end'><span>© {{SITE}}</span><button class='btn-quiet js-theme' type='button'>الوضع الداكن</button></div>
     </div>
   </footer>
   <script>//<![CDATA[
-{{CORE}}
-{{APP}}
+{{JS}}
   //]]></script>
 </body>
 </html>

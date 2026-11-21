@@ -1,0 +1,33 @@
+{
+  "status_note": "مسودات كتبها Claude وتحتاج مراجعة المالك قبل النشر. لا شيء منها منشور على بلوجر.",
+  "articles": [
+    {"file": "01-science-thunder.html", "title": "كم يبعد البرق؟ كيف تحسب المسافة من تأخر الرعد", "label": "العلوم", "checked": "2026-11-21",
+     "sources": [
+       {"title": "OpenStax University Physics Vol. 1 — 17.2 Speed of Sound", "url": "https://openstax.org/books/university-physics-volume-1/pages/17-2-speed-of-sound"},
+       {"title": "NIST — Speed of light in vacuum (exact)", "url": "https://physics.nist.gov/cuu/Constants/Value/c.html"}]},
+    {"file": "02-history-rosetta.html", "title": "حجر رشيد: كيف فُتح باب الهيروغليفية", "label": "التاريخ والحضارات", "checked": "2026-11-21",
+     "sources": [
+       {"title": "Encyclopaedia Britannica — Rosetta Stone", "url": "https://www.britannica.com/print/article/509988"},
+       {"title": "LiveScience — Rosetta stone is deciphered, Sept. 27, 1822", "url": "https://www.livescience.com/archaeology/science-history-rosetta-stone-is-deciphered-opening-a-window-into-ancient-egyptian-civilization-sept-27-1822"}]},
+    {"file": "03-geography-time.html", "title": "خط الطول والوقت: لماذا كل 15 درجة ساعة؟", "label": "الجغرافيا والدول", "checked": "2026-11-21",
+     "sources": [
+       {"title": "NOAA JetStream — Time zones", "url": "https://www.noaa.gov/jetstream/time"}]},
+    {"file": "04-tech-binary.html", "title": "النظام الثنائي: كيف نحسب حجم صورة قبل ضغطها", "label": "التكنولوجيا", "checked": "2026-11-21",
+     "sources": [
+       {"title": "NIST — Prefixes for binary multiples", "url": "https://www.physics.nist.gov/cgi-bin/cuu/Info/Units/binary.html"}]},
+    {"file": "05-culture-calendar.html", "title": "السنة الكبيسة: لماذا 1900 ليست كبيسة و2000 كبيسة؟", "label": "الثقافة العامة", "checked": "2026-11-21",
+     "sources": [
+       {"title": "U.S. Naval Observatory — Leap Years", "url": "https://aa.usno.navy.mil/faq/leap_years"}]},
+    {"file": "06-math-koenigsberg.html", "title": "جسور كونيغسبرغ السبعة: لماذا لا حل لها؟", "label": "الرياضيات والمنطق", "checked": "2026-11-21",
+     "sources": [
+       {"title": "Encyclopaedia Britannica — Königsberg bridge problem", "url": "https://britannica.com/science/Konigsberg-bridge-problem"}]},
+    {"file": "07-language-roots.html", "title": "الجذر والوزن: كيف تتوالد الكلمات في العربية", "label": "اللغة والأدب", "checked": "2026-11-21",
+     "sources": [
+       {"title": "Encyclopaedia Britannica — Arabic language", "url": "https://www.britannica.com/print/article/31677"}]},
+    {"file": "08-space-sunlight.html", "title": "كم يستغرق ضوء الشمس ليصل إلينا؟ حساب 8 دقائق و19 ثانية", "label": "الفضاء والفلك", "checked": "2026-11-21",
+     "sources": [
+       {"title": "NIST — Speed of light in vacuum (exact)", "url": "https://physics.nist.gov/cuu/Constants/Value/c.html"},
+       {"title": "NASA JPL SSD — Astronomical unit (au)", "url": "https://ssd.jpl.nasa.gov/glossary/au.html"},
+       {"title": "Nature News (2012) — Astronomical unit: from slippery equation to single number", "url": "https://www.nature.com/articles/nature.2012.11416"}]}
+  ]
+}

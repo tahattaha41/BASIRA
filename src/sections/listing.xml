@@ -1,0 +1,11 @@
+<div class='wrap page'>
+<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › المقالات</nav>
+<b:if cond='data:blog.searchLabel'><h1><data:blog.searchLabel/></h1>
+<b:elseif cond='data:blog.searchQuery'/><h1>نتائج البحث: <data:blog.searchQuery/></h1>
+<b:else/><h1>كل المقالات</h1></b:if>
+<form action='/search' class='find' method='get' role='search'><label class='sr' for='q3'>ابحث في الموقع</label><input expr:value='data:blog.searchQuery' id='q3' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
+<ul class='posts' data-empty='لا توجد مقالات مطابقة. جرّب كلمة أخرى أو تصفّح الأقسام من الرئيسية.'><b:loop values='data:posts' var='post'><li>
+<div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
+<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
+<nav aria-label='التنقل بين الصفحات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if></nav>
+</div>

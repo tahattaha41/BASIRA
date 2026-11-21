@@ -1,0 +1,3 @@
+<div class='wrap err'><h1>الصفحة غير موجودة</h1><p>ربما تغيّر الرابط. ابحث عن الموضوع أو ارجع إلى الرئيسية.</p>
+<form action='/search' class='find' method='get' role='search'><label class='sr' for='q2'>ابحث في الموقع</label><input id='q2' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
+<p><a class='btn' expr:href='data:blog.homepageUrl'>الرئيسية</a></p></div>
