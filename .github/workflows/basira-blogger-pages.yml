@@ -1,0 +1,50 @@
+name: BASIRA publish Blogger pages (manual)
+
+# Manual only. Creates missing static pages through the Blogger API (OAuth refresh token in
+# repository secrets). It never uploads the theme (the API has no theme endpoint) and never deletes.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "plan = no network; apply = call Blogger"
+        type: choice
+        options: [plan, apply]
+        default: plan
+      confirm:
+        description: "Type YES to allow apply"
+        type: string
+        default: "NO"
+      update_existing:
+        description: "Also overwrite content of existing pages with the same title"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    environment: blogger-production   # configure required reviewers on this environment
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/build.py
+      - run: python scripts/release_preflight.py
+      - name: Publish pages
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          BASIRA_CONTACT_EMAIL: ${{ secrets.BASIRA_CONTACT_EMAIL }}
+          MODE: ${{ inputs.mode }}
+          CONFIRM: ${{ inputs.confirm }}
+          UPDATE: ${{ inputs.update_existing }}
+        run: |
+          ARGS="$MODE"
+          if [ "$MODE" = "apply" ] && [ "$CONFIRM" = "YES" ]; then ARGS="$ARGS --confirm"; fi
+          if [ "$UPDATE" = "true" ]; then ARGS="$ARGS --update"; fi
+          python scripts/blogger_pages.py $ARGS

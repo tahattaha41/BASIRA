@@ -1,4 +1,4 @@
-<section class='hero'><div class='wrap hero-in'>
+<section class='hero' itemscope='itemscope' itemtype='https://schema.org/WebSite'><meta content='BASIRA | بصيرة' itemprop='name'/><link expr:href='data:blog.homepageUrl' itemprop='url'/><div class='wrap hero-in'>
 <div class='hero-txt'>
 <p class='eyebrow'>Think. Discover. Play. <span class='eyebrow-ar'>فكّر. اكتشف. العب.</span></p>
 <h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>

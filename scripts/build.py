@@ -57,6 +57,14 @@ def build():
     for slug in titles:
         with open(os.path.join(pg, slug + '.html'), 'w', encoding='utf-8') as f:
             f.write(read(f'pages/{slug}.html').replace('{{EMAIL}}', mail))
+    # مسودات المقالات: تُبنى إلى dist/articles مع المصادر، ولا تُنشر تلقائياً
+    ad = os.path.join(DIST, 'articles'); os.makedirs(ad, exist_ok=True)
+    idx = json.loads(read('../content/articles/index.json'))
+    for a in idx['articles']:
+        body = open(os.path.join(ROOT, 'content/articles', a['file']), encoding='utf-8').read()
+        srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
+        with open(os.path.join(ad, a['file']), 'w', encoding='utf-8') as f:
+            f.write(body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
     if not site.get('contact_email'):
         print('تحذير: contact_email فارغ في src/site.json. أضفه قبل نشر صفحة اتصل بنا.')
     out = os.path.join(DIST, 'theme.xml')
