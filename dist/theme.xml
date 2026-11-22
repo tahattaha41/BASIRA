@@ -99,7 +99,7 @@ button,.btn{font:inherit;cursor:pointer}
     </div>
   </header>
 
-  <b:if cond='data:blog.url == data:blog.homepageUrl'>
+  <b:if cond='data:view.isHomepage'>
 <section class='hero'><div class='wrap'>
 <p class='eyebrow'>Think. Discover. Play. · فكّر. اكتشف. العب.</p>
 <h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
