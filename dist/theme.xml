@@ -373,8 +373,8 @@ html[data-theme=dark]{--brand-ink:#e9f1f4;--brand-accent:#72c9bd;--brand-spark:#
     <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
   </aside>
 
-  <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
-    <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
+  <b:section class='main' id='main' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2' visible='true'>
       <b:widget-settings>
         <b:widget-setting name='showDateHeader'>false</b:widget-setting>
         <b:widget-setting name='showShareButtons'>false</b:widget-setting>
