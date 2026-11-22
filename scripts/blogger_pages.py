@@ -4,8 +4,8 @@
 
 الأوضاع:
   plan   (الافتراضي) يطبع ما سيحدث، بلا أي اتصال.
-  apply  يتصل ببلوجر؛ يتطلب --confirm ومتغيرات بيئة: BLOGGER_BLOG_ID, GOOGLE_CLIENT_ID,
-         GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN (من أسرار GitHub، لا كلمة مرور جوجل أبداً).
+  apply  يتصل ببلوجر؛ يتطلب --confirm ومتغيرات بيئة: BLOGGER_BLOG_ID, BLOGGER_CLIENT_ID,
+         BLOGGER_CLIENT_SECRET, BLOGGER_REFRESH_TOKEN (من أسرار GitHub، لا كلمة مرور جوجل أبداً).
          ينشئ الصفحات المفقودة فقط. أضف --update لتحديث محتوى صفحات موجودة بنفس العنوان. لا يحذف شيئاً.
 ملاحظة: رابط الصفحة يولّده بلوجر من العنوان؛ تحقق من الرابط الفعلي ثم أضفه إلى "published" في src/site.json."""
 import json, os, sys, urllib.parse, urllib.request
@@ -45,11 +45,11 @@ def run(mode="plan", confirm=False, update=False, _http=http):
         for slug, title, html in pages: print(f"[plan] {slug}: '{title}' ({len(html)} chars)")
         print("[plan] لم يُرسل شيء إلى بلوجر."); return 0
     if not confirm: print("apply يتطلب --confirm صريحاً."); return 2
-    need = ["BLOGGER_BLOG_ID", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "GOOGLE_REFRESH_TOKEN"]
-    miss = [k for k in need if not os.getenv(k)]
+    cid, sec, rt = (os.getenv("BLOGGER_CLIENT_ID") or os.getenv("GOOGLE_CLIENT_ID"), os.getenv("BLOGGER_CLIENT_SECRET") or os.getenv("GOOGLE_CLIENT_SECRET"),
+                    os.getenv("BLOGGER_REFRESH_TOKEN") or os.getenv("GOOGLE_REFRESH_TOKEN"))
+    miss = [n for n, v in (("BLOGGER_BLOG_ID", os.getenv("BLOGGER_BLOG_ID")), ("BLOGGER_CLIENT_ID", cid), ("BLOGGER_CLIENT_SECRET", sec), ("BLOGGER_REFRESH_TOKEN", rt)) if not v]
     if miss: print("متغيرات ناقصة:", ", ".join(miss)); return 2
-    tok = _http("POST", TOKEN_URL, form={"client_id": os.environ["GOOGLE_CLIENT_ID"], "client_secret": os.environ["GOOGLE_CLIENT_SECRET"],
-                                         "refresh_token": os.environ["GOOGLE_REFRESH_TOKEN"], "grant_type": "refresh_token"})["access_token"]
+    tok = _http("POST", TOKEN_URL, form={"client_id": cid, "client_secret": sec, "refresh_token": rt, "grant_type": "refresh_token"})["access_token"]
     base = API.format(blog=os.environ["BLOGGER_BLOG_ID"])
     existing = {p["title"]: p for p in _http("GET", base + "?fetchBodies=false&maxResults=100", token=tok).get("items", [])}
     for slug, title, html in pages:
