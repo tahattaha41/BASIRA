@@ -21,7 +21,7 @@ check('<b:skin>' in t and '</b:skin>' in t, 'b:skin present')
 check(t.count('<b:if') == t.count('</b:if>'), 'b:if balanced')
 check(t.count('<b:loop') == t.count('</b:loop>'), 'b:loop balanced')
 check('<data:post.body/>' in t and '<data:post.title/>' in t, 'post title/body rendered')
-check(re.search(r"<b:if cond='data:blog.url == data:blog.homepageUrl'>", t) is not None, 'home block outside widget')
+check(re.search(r"<b:if cond='data:view\.isHomepage'>", t) is not None, 'home block uses Blogger homepage flag (mobile-safe)')
 home = t.index('data:blog.homepageUrl\'>'); widget = t.index("<b:widget")
 check(home < widget and 'id=\'play-host\'' in t.split('<b:widget')[0], 'home (games) is static, not inside the Blog widget')
 for bad in ('ads'+'bygoogle', 'ca-'+'pub-', 'page'+'ad2', 'BA'+'YAN'):
