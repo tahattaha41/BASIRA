@@ -2,7 +2,7 @@ name: BASIRA CI
 
 on:
   push:
-    branches: [platform-dev, basira-brand-identity, basira-publish-readiness, basira-complete-platform]
+    branches: [main, platform-dev]
   pull_request:
   workflow_dispatch:
     inputs:
