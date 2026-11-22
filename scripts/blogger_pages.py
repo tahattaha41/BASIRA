@@ -4,6 +4,7 @@
 
 الأوضاع:
   plan   (الافتراضي) يطبع ما سيحدث، بلا أي اتصال.
+  --with-games ينشر صفحات الألعاب أيضاً (لا تفعل قبل رفع القالب الجديد، فهي تعتمد على جافاسكريبت القالب).
   apply  يتصل ببلوجر؛ يتطلب --confirm ومتغيرات بيئة: BLOGGER_BLOG_ID, BLOGGER_CLIENT_ID,
          BLOGGER_CLIENT_SECRET, BLOGGER_REFRESH_TOKEN (من أسرار GitHub، لا كلمة مرور جوجل أبداً).
          ينشئ الصفحات المفقودة فقط. أضف --update لتحديث محتوى صفحات موجودة بنفس العنوان. لا يحذف شيئاً.
@@ -17,15 +18,20 @@ TOKEN_URL = "https://oauth2.googleapis.com/token"
 TITLES = {"about": "من نحن", "editorial-policy": "سياسة التحرير", "contact": "اتصل بنا",
           "privacy-policy": "سياسة الخصوصية", "terms": "شروط الاستخدام"}
 
-def wanted():
+PLACEHOLDER = "يُضاف البريد"
+
+def wanted(with_games=False):
     site = json.loads((ROOT / "src/site.json").read_text(encoding="utf-8"))
     items = [(s, t) for s, t in TITLES.items()]
-    items += [(f"game-{g[0]}", g[1]) for g in site["games"]]
+    if with_games: items += [(f"game-{g[0]}", g[1]) for g in site["games"]]
     out = []
     for slug, title in items:
         f = ROOT / "dist/pages" / f"{slug}.html"
         if not f.is_file(): raise SystemExit(f"missing built page {f}; run scripts/build.py")
-        out.append((slug, title, f.read_text(encoding="utf-8")))
+        html = f.read_text(encoding="utf-8")
+        if PLACEHOLDER in html:
+            print(f"[skip] {slug}: يحتوي نصاً بديلاً (بريد التواصل ناقص)؛ لا يُنشر."); continue
+        out.append((slug, title, html))
     return site, out
 
 def http(method, url, token=None, body=None, form=None):
@@ -37,8 +43,8 @@ def http(method, url, token=None, body=None, form=None):
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read().decode() or "{}")
 
-def run(mode="plan", confirm=False, update=False, _http=http):
-    site, pages = wanted()
+def run(mode="plan", confirm=False, update=False, with_games=False, _http=http):
+    site, pages = wanted(with_games)
     if site.get("contact_email", "") == "" and not os.getenv("BASIRA_CONTACT_EMAIL"):
         print("تحذير: لا يوجد بريد تواصل؛ صفحة اتصل بنا ستحمل نص البريد البديل. لا تنشرها قبل إضافته.")
     if mode == "plan":
@@ -67,4 +73,4 @@ def run(mode="plan", confirm=False, update=False, _http=http):
 if __name__ == "__main__":
     a = sys.argv[1:]
     mode = "apply" if "apply" in a else "plan"
-    sys.exit(run(mode, "--confirm" in a, "--update" in a))
+    sys.exit(run(mode, "--confirm" in a, "--update" in a, "--with-games" in a))
