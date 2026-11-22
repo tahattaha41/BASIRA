@@ -2,9 +2,9 @@
 
 ## المرحلة 1 (تصميم الواجهة) — بانتظار مراجعة المالك
 - البناء: `python3 scripts/build.py` ← `dist/theme.xml` (القالب) + `dist/pages/*.html` (محتوى الصفحات).
-- الاختبارات: `python3 qa/test_theme.py` ثم `python3 qa/browser_test.py` (لقطات في `dist/preview/` وهي غير متتبَّعة في Git).
+- الاختبارات: `python3 qa/test_theme.py` (بنية القالب) و`qa/game_test.py` (تشغيل الألعاب فعلياً في Chromium على `preview/index.html`) و`qa/content_test.py` و`qa/publish_test.py`.
 - الهوية المعتمدة في فرع `basira-brand-identity`: BASIRA | بصيرة، والشعار Think. Discover. Play. / فكّر. اكتشف. العب.
-- معاينة `qa/blogger_sim.py` مبسّطة ولا تغني عن معاينة القالب في بلوجر الحقيقي.
+- لا يوجد محاكي بلوجر: بنية القالب تُفحص ثابتاً فقط، ولا يغني ذلك عن معاينته في بلوجر الحقيقي قبل النشر.
 
 ## ملفات المصدر مقابل صفحات بلوجر
 `src/pages/*.html` و`dist/pages/*.html` هي **نصوص مصدرية** للصفحات. لا تظهر على الموقع إلا إذا أنشأ المالك صفحة ثابتة في بلوجر بنفس الرابط (`/p/about.html` ...) ولصق المحتوى. روابط الصفحات في القالب مخفية حتى تُضاف إلى `published` في `src/site.json` ثم يُعاد البناء.
@@ -15,14 +15,14 @@
 - حقل `data:post.featuredImage` مفترض ولم يُجرَّب على بلوجر الحقيقي.
 
 ## تحديث 2026-11-21 (فرع basira-complete-platform)
-- الألعاب الخمس حقيقية: `src/js/games.js` + `src/games.css` + `src/data/bank.json`، وتُركَّب على الصفحة الرئيسية وفي صفحات `/p/game-*.html`. الحفظ في localStorage فقط (مفتاح `basira.v1`).
+- الألعاب الخمس حقيقية: `src/app.js` (المحرك) + `src/app.css` + `src/data/bank.json`. الصفحة الرئيسية والألعاب ثابتة خارج أداة Blog1، فتظهر حتى لو فشلت الأداة.
 - مسودات 8 مقالات في `content/articles/` (index.json فيه المصادر)، وتُبنى إلى `dist/articles/`. لم تُنشر.
 - الفحوص: `scripts/release_preflight.py` و`qa/*.py` وworkflow واحد `basira-ci.yml`. النشر: `scripts/blogger_pages.py` (صفحات فقط).
 - لم يُنفَّذ: الحسابات والمزامنة، الإعلانات، `contact_email`، نشر حي، أي اختبار على بلوجر الحقيقي.
 
 ## هوية BASIRA
 - الاسم والشعار محفوظان في `src/site.json`.
-- الرمز يُولّد كـ SVG مضمّن داخل قالب بلوجر عبر `scripts/ui.py`، لضمان عدم الاعتماد على استضافة صور خارجية.
+- الرمز يُضمَّن كـ SVG داخل القالب من `brand/basira-symbol.svg` عبر `scripts/build.py`.
 - أصول SVG المصدرية في `brand/`.
 - أضيفت قواعد الهوية إلى `src/brand.css` ويضمّنها سكربت البناء.
 - لم يتم تعديل إعدادات عنوان الموقع داخل لوحة Blogger؛ ذلك إجراء يدوي منفصل بعد مراجعة القالب.
