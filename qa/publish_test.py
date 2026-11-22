@@ -16,11 +16,11 @@ def fake(method, url, token=None, body=None, form=None):
 def quiet(**kw):
     with contextlib.redirect_stdout(io.StringIO()) as o: rc = bp.run(_http=fake, **kw)
     return rc, o.getvalue()
-for k in ('BLOGGER_BLOG_ID', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_REFRESH_TOKEN'): os.environ.pop(k, None)
+for k in ('BLOGGER_BLOG_ID', 'BLOGGER_CLIENT_ID', 'BLOGGER_CLIENT_SECRET', 'BLOGGER_REFRESH_TOKEN', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_REFRESH_TOKEN'): os.environ.pop(k, None)
 rc, _ = quiet(mode='plan'); check('plan: لا اتصال', rc == 0 and not calls)
 rc, _ = quiet(mode='apply'); check('apply بلا --confirm مرفوض', rc == 2 and not calls)
 rc, _ = quiet(mode='apply', confirm=True); check('apply بلا أسرار مرفوض', rc == 2 and not calls)
-os.environ.update(BLOGGER_BLOG_ID='1', GOOGLE_CLIENT_ID='a', GOOGLE_CLIENT_SECRET='b', GOOGLE_REFRESH_TOKEN='c')
+os.environ.update(BLOGGER_BLOG_ID='1', BLOGGER_CLIENT_ID='a', BLOGGER_CLIENT_SECRET='b', BLOGGER_REFRESH_TOKEN='c')
 rc, out = quiet(mode='apply', confirm=True)
 posts = [c for c in calls if c[0] == 'POST' and 'pages' in c[1]]
 check('apply: ينشئ المفقود فقط (9 من 10) ويتخطى الموجود', rc == 0 and len(posts) == 9 and '[skip] about' in out, (len(posts), out[:200]))

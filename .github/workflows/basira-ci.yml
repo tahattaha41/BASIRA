@@ -44,6 +44,18 @@ jobs:
         run: python qa/browser_test.py
       - name: Game tests (real play-through)
         run: python qa/game_test.py
+      - name: Reject leftovers of the old site
+        run: |
+          if grep -rInEi 'daqqa|smart[- ]choice|bayan|DQ-AD-GATE' src scripts dist qa docs brand content .github CLAUDE.md --exclude-dir=__pycache__ --exclude-dir=preview --exclude=basira-ci.yml; then
+            echo "Old-site reference found"; exit 1; fi
+      - name: Verify Blogger API connection (read-only; skipped without secrets)
+        if: github.event_name != 'pull_request'
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: python scripts/check_blogger_connection.py
       - name: Package for review
         run: |
           mkdir -p release && cp dist/theme.xml release/basira-theme.xml && cp -R dist/pages release/pages
