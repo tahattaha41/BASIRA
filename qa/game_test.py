@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """اختبار تشغيل فعلي للألعاب في Chromium على preview/index.html (نفس app.js وapp.css المضمّنين في القالب)."""
-import json, sys
+import json, re, sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +10,8 @@ fails = []
 def check(c, m):
     print(('ok   ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
+
+def ex(t): return re.compile('^' + re.escape(t) + '$')
 
 def right(q_text):
     for q in BANK['mcq']:
@@ -26,7 +28,7 @@ with sync_playwright() as p:
     for i in range(10):
         qt = host.locator('.g-q').inner_text()
         ans = right(qt)
-        host.locator('.g-opt', has_text=ans).first.click()
+        host.locator('.g-opt', has_text=ex(ans)).first.click()
         check(host.locator('.g-fb').is_visible() and 'صحيحة' in host.locator('.g-fb').inner_text() or i > 0, 'feedback shown') if i == 0 else None
         host.locator('.g-act .btn').click()
     check('10 / 10' in host.locator('.g-score').inner_text(), 'mcq perfect round scores 10/10')
@@ -38,7 +40,7 @@ with sync_playwright() as p:
     seen1 = set(st['seen']['mcq'])
     for i in range(10):
         qt = host.locator('.g-q').inner_text(); ans = right(qt)
-        host.locator('.g-opt', has_text=ans).first.click() if False else host.locator('.g-opt:not([data-ok="1"])').first.click()
+        host.locator('.g-opt:not([data-ok="1"])').first.click()
         host.locator('.g-act .btn').click()
     check('0 / 10' in host.locator('.g-score').inner_text(), 'all-wrong round scores 0/10')
     st2 = pg.evaluate("JSON.parse(localStorage.getItem('basira.v2'))")
@@ -50,7 +52,7 @@ with sync_playwright() as p:
     tfm = {q['s']: q['v'] for q in BANK['tf']}
     for i in range(10):
         s = host.locator('.g-q').inner_text()
-        host.locator('.g-opt', has_text='صح' if tfm[s] else 'خطأ').first.click()
+        host.locator('.g-opt', has_text=ex('صح' if tfm[s] else 'خطأ')).first.click()
         host.locator('.g-act .btn').click()
     check('10 / 10' in host.locator('.g-score').inner_text(), 'truefalse perfect round')
     # ترتيب
@@ -61,7 +63,7 @@ with sync_playwright() as p:
         q = host.locator('.g-q').inner_text()
         texts = host.locator('.g-opts .g-opt').all_inner_texts()
         items = om[q + '|' + ''.join(sorted(texts))]
-        for it in items: host.locator('.g-opts .g-opt:not([disabled])', has_text=it).first.click()
+        for it in items: host.locator('.g-opts .g-opt:not([disabled])', has_text=ex(it)).first.click()
         check('الترتيب الصحيح' in host.locator('.g-fb').inner_text() and 'صحيحة' in host.locator('.g-fb strong').inner_text() and 'غير' not in host.locator('.g-fb strong').inner_text(), f'order round {i+1} correct') if i == 0 else None
         host.locator('.g-act .btn').click()
     check('5 / 5' in host.locator('.g-score').inner_text(), 'order perfect round')
