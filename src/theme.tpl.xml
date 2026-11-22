@@ -57,7 +57,7 @@
     <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
   </aside>
 
-  <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+  <b:section class='main' id='main' maxwidgets='1' showaddelement='yes'>
     <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2' visible='true'>
       <b:widget-settings>
         <b:widget-setting name='showDateHeader'>false</b:widget-setting>
