@@ -2,14 +2,17 @@
 
 > ملف مولّد آلياً من GitHub Actions. لا تعدّله يدوياً.
 
-- وقت التوليد: 2026-11-22T18:27:51+00:00
+- وقت التوليد: 2026-11-22T18:29:35+00:00
 - الفرع: `basira-auto-project-report`
-- HEAD: `e1de0586a5ed4217fe50e5f5665a761e28cd45ca`
+- HEAD: `5680c20023da982d2acb0c36fec621f0e65a69be`
 
 ## آخر 12 تغييراً
 
 | Commit | التاريخ | الوصف |
 |---|---|---|
+| `5680c20` | 2026-11-22 | docs: record pull request status checklist |
+| `b93a442` | 2026-11-22 | docs: require project status updates in every pull request |
+| `23f0b84` | 2026-11-22 | docs: auto-update project activity report [skip ci] |
 | `e1de058` | 2026-11-22 | ci: automatically refresh BASIRA activity report |
 | `08c1abd` | 2026-11-22 | ci: add Git activity report generator |
 | `7e06a80` | 2026-11-22 | docs: add generated project activity log |
@@ -19,9 +22,6 @@
 | `001ddea` | 2026-11-22 | feat(publish): skip placeholder pages and game pages by default |
 | `ba6d777` | 2026-11-22 | docs: record merges, CI results and branches pending manual deletion |
 | `2395bae` | 2026-11-22 | Merge pull request #9 from tahattaha41/basira-cleanup |
-| `a3bd40d` | 2026-11-22 | Merge pull request #8 from tahattaha41/basira-ci-main |
-| `efea354` | 2026-11-22 | chore: BASIRA-only cleanup; legacy guard in CI; read-only Blogger check; align secret names |
-| `f49bea0` | 2026-11-22 | ci: run on main; make published list explicit |
 
 ## سياسة التحديث
 
