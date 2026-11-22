@@ -8,12 +8,12 @@
 ## ما أُزيل من `main` (عبر دمج #7)
 قالب الموقع القديم وملفات استيراده، وأدواته وصفحاته وسكربتات الاختبار الخاصة به، وسير عمل CI القديم، وعلامات «نموذج/قيد التنفيذ» من واجهة الألعاب.
 
+## الدمج (2026-11-22)
+دُمجت #7 ثم #8 ثم #9 في `main` بموافقة المالك. أُغلقت #3 و#5 و#6 دون دمج (#3 و#6 محتواهما داخل `main`؛ #5 وثائق مولّدة قديمة). فحص CI على `main` نجح، وشُغّلت محلياً: build وrelease_preflight وtest_theme وbrowser_test وgame_test وcontent_test وpublish_test، كلها نجحت.
+
 ## الفروع
-- معتمد: `main`.
-- مدموجة بالكامل في `main` وجاهزة للحذف: `basira-brand-identity`, `basira-publish-readiness`, `basira-complete-platform`.
-- `basira-main-brand-cleanup`: يحمل مشروع الموقع القديم بأدواته؛ نُقل منه فقط فحص اتصال بلوجر للقراءة (`scripts/check_blogger_connection.py`).
-- `platform-dev`, `basira-project-reference`: متقدمان صفراً عن `main`.
-- `basira-reference-platform` (PR #5): توثيق مرجعي وworkflow يدفع commits تلقائياً بصلاحية كتابة.
+- المعتمد الوحيد للعمل: `main`.
+- ما زال موجوداً لأن الحذف مرفوض (403) من بيئة الجلسة، وكل محتواه مدموج أو متروك عمداً، فيُحذف يدوياً من GitHub: `basira-brand-identity`, `basira-publish-readiness`, `basira-complete-platform`, `basira-main-brand-cleanup`, `basira-reference-platform`, `basira-ci-main`, `basira-cleanup`, وكذلك `basira-project-reference` و`platform-dev` (صفر تقدم عن `main`).
 
 ## الحالة الراهنة للمنصة
 الألعاب الخمس حقيقية؛ ثمانية مسودات مقالات غير منشورة؛ الحفظ محلي على الجهاز فقط؛ لا حسابات ولا إعلانات؛ رفع القالب إلى بلوجر يدوي.
