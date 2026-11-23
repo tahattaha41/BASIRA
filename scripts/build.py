@@ -35,8 +35,27 @@ def logo():
     return re.sub(r'<\?xml[^>]*\?>\s*', '', svg).strip()
 
 
+GAME_ART = {
+ 'mcq': "<svg viewBox='0 0 120 84' aria-hidden='true'><rect x='10' y='8' width='100' height='16' rx='8' class='a0'/><rect x='10' y='30' width='100' height='16' rx='8' class='a1 pulse'/><path d='M22 38.5l5 5 9-10' class='ck'/><rect x='10' y='52' width='100' height='16' rx='8' class='a0'/><rect x='10' y='74' width='60' height='6' rx='3' class='a2'/></svg>",
+ 'truefalse': "<svg viewBox='0 0 120 84' aria-hidden='true'><rect x='8' y='10' width='50' height='64' rx='14' class='a1'/><rect x='62' y='10' width='50' height='64' rx='14' class='a0'/><path d='M22 42l9 9 15-18' class='ck'/><path d='M78 32l20 20M98 32L78 52' class='cx'/></svg>",
+ 'order': "<svg viewBox='0 0 120 84' aria-hidden='true'><g class='stk'><rect x='14' y='8' width='92' height='20' rx='8' class='a0'/><rect x='14' y='32' width='92' height='20' rx='8' class='a1'/><rect x='14' y='56' width='92' height='20' rx='8' class='a0'/></g><circle cx='30' cy='18' r='7' class='a2'/><circle cx='30' cy='42' r='7' class='a2'/><circle cx='30' cy='66' r='7' class='a2'/><path d='M62 18h30M62 42h22M62 66h36' class='ln'/></svg>",
+ 'memory': "<svg viewBox='0 0 120 84' aria-hidden='true'><rect x='8' y='8' width='32' height='32' rx='9' class='a1 flip1'/><rect x='44' y='8' width='32' height='32' rx='9' class='a0'/><rect x='80' y='8' width='32' height='32' rx='9' class='a0'/><rect x='8' y='44' width='32' height='32' rx='9' class='a0'/><rect x='44' y='44' width='32' height='32' rx='9' class='a0'/><rect x='80' y='44' width='32' height='32' rx='9' class='a1 flip2'/><path d='M24 15l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z' class='st'/><path d='M96 51l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z' class='st'/></svg>",
+ 'word': "<svg viewBox='0 0 120 84' aria-hidden='true'><rect x='6' y='22' width='24' height='32' rx='8' class='a0'/><rect x='34' y='22' width='24' height='32' rx='8' class='a1 pulse'/><rect x='62' y='22' width='24' height='32' rx='8' class='a0'/><rect x='90' y='22' width='24' height='32' rx='8' class='a0'/><text x='46' y='46' text-anchor='middle' class='tx'>ب</text><path d='M10 66h16M66 66h16M94 66h16' class='ln'/><circle cx='98' cy='12' r='5' class='a2 pulse'/></svg>",
+}
+HERO_ART = ("<svg class='hero-art' viewBox='0 0 380 340' aria-hidden='true' focusable='false'>"
+ "<circle cx='190' cy='170' r='150' class='ring r1'/><circle cx='190' cy='170' r='112' class='ring r2'/>"
+ "<g class='orbit'><circle cx='190' cy='20' r='7' class='dot'/><circle cx='340' cy='170' r='5' class='dot d2'/><circle cx='60' cy='260' r='6' class='dot'/></g>"
+ "<path d='M70 170c34-52 82-78 120-78s86 26 120 78c-34 52-82 78-120 78S104 222 70 170z' class='eye'/>"
+ "<circle cx='190' cy='170' r='50' class='iris'/><circle cx='190' cy='170' r='22' class='pupil'/><circle cx='202' cy='158' r='8' class='glint'/>"
+ "<g class='tile t1'><rect x='28' y='54' width='58' height='58' rx='16'/><text x='57' y='96' text-anchor='middle'>؟</text></g>"
+ "<g class='tile t2'><rect x='294' y='38' width='58' height='58' rx='16'/><path d='M310 68l11 11 20-24' class='ck'/></g>"
+ "<g class='tile t3'><rect x='300' y='234' width='58' height='58' rx='16'/><text x='329' y='275' text-anchor='middle'>٣</text></g>"
+ "<g class='tile t4'><rect x='22' y='226' width='58' height='58' rx='16'/><path d='M51 240l5 12 13 1-10 9 3 13-11-7-11 7 3-13-10-9 13-1z' class='st'/></g>"
+ "</svg>")
+
+
 def home(site, ar):
-    pills = ''.join(f"<button aria-pressed='false' data-g='{g[0]}' data-i='g.{g[0]}.name' type='button'>{e(ar[f'g.{g[0]}.name'])}</button>" for g in site['games'])
+    pills = ''.join(f"<button aria-pressed='false' class='gcard' data-g='{g[0]}' type='button'><span class='gart'>{GAME_ART[g[0]]}</span><b data-i='g.{g[0]}.name'>{e(ar[f'g.{g[0]}.name'])}</b><small data-i='g.{g[0]}.desc'>{e(ar[f'g.{g[0]}.desc'])}</small><span class='gplay' data-i='card.play'>{e(ar['card.play'])}</span></button>" for g in site['games'])
     icon_ids = ['science', 'history', 'geography', 'technology', 'culture', 'logic', 'language', 'space']
     topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><svg class='topic-icon' aria-hidden='true' viewBox='0 0 48 48'><use href='#topic-{icon_ids[i]}'></use></svg><b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
     icons = read('brand/topic-icons.svg', ROOT)
@@ -45,12 +64,13 @@ def home(site, ar):
               "<a class='btn alt' data-i='verify.link' href='%s'>%s</a></div></div></section>"
               % (e(ar['verify.title']), e(ar['verify.text']), e(verify_url), e(ar['verify.link']))) if verify_url else ''
     return f"""{icons}
-<section class='hero'><div class='wrap'>
+<section class='hero'><div class='wrap hero-grid'><div class='hero-txt'>
 <p class='eyebrow' data-i='hero.eyebrow'>{e(ar['hero.eyebrow'])}</p>
 <h1 data-i='hero.title'>{e(ar['hero.title'])}</h1>
 <p class='lede' data-i='hero.lede'>{e(ar['hero.lede'])}</p>
 <div class='cta'><a class='btn' data-i='hero.cta' href='#play'>{e(ar['hero.cta'])}</a><a class='btn alt' data-i='hero.cta2' href='#topics'>{e(ar['hero.cta2'])}</a></div>
-</div></section>
+<div class='pstrip' id='pstrip' aria-live='polite'></div>
+</div><div class='hero-vis'>{HERO_ART}</div></div></section>
 <section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>{e(ar['noscript'])}</noscript></div></div></section>
 <section class='sec' id='play'><div class='wrap'><h2 data-i='games.title'>{e(ar['games.title'])}</h2>
 <p class='note' data-i='lang.note' hidden='hidden' id='lang-note'>{e(ar['lang.note'])}</p>
@@ -112,8 +132,7 @@ def build():
         write(os.path.join(DIST, 'articles', a['file']), body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
     pv = t
     # Keep the local Playwright preview self-contained; Blogger uses the remote main-branch assets.
-    pv = pv.replace('https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css', '../dist/basira.css')
-    pv = pv.replace('https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js', '../dist/basira.js')
+    pv = re.sub(r"https://(?:raw\.githubusercontent\.com|cdn\.jsdelivr\.net/gh)/tahattaha41/BASIRA(?:/|@)main/dist/basira\.(css|js)", r"../dist/basira.\1", pv)
     pv = re.sub(r"<\?xml[^>]*\?>\s*<!DOCTYPE html>", "<!doctype html>", pv)
     pv = re.sub(r"<b:section.*?</b:section>", "<div class='wrap content'><article class='post'><h2>sample</h2></article></div>", pv, flags=re.S)
     pv = re.sub(r"</?b:if[^>]*>", "", pv)

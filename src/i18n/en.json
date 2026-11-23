@@ -135,5 +135,13 @@
   "page.contact": "Contact",
   "page.privacy": "Privacy",
   "page.terms": "Terms",
-  "skip": "Skip to content"
+  "skip": "Skip to content",
+  "card.play": "Play now",
+  "pstrip.lv": "Level {n}",
+  "pstrip.xp": "{a} / {b} XP",
+  "pstrip.new": "Play a round to earn XP",
+  "streak.n": "Streak {n}",
+  "cheer.1": "Nice",
+  "cheer.2": "Great",
+  "cheer.3": "Legendary"
 }

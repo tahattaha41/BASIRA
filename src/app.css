@@ -212,3 +212,84 @@ a{color:var(--acc)}
 
 /* Bilingual Blogger static pages */
 .lang-en{display:none}html[lang='en'] .lang-en{display:block}html[lang='en'] .lang-ar{display:none}.admin-entry{white-space:nowrap;text-decoration:none;font-weight:600}.foot-end{flex-wrap:wrap}
+
+/* ===== v3: واجهة ألعاب حيّة (رسومات + حركة) ===== */
+.hero{background:linear-gradient(160deg,#101b2d 0%,#17283f 60%,#1b3140 100%);color:#f4f0e6;padding:clamp(40px,7vw,88px) 0 clamp(36px,6vw,72px);overflow:hidden}
+:root[data-theme=dark] .hero{background:linear-gradient(160deg,#0b1422 0%,#122033 60%,#15283a 100%)}
+.hero-grid{display:grid;gap:24px;align-items:center}
+@media(min-width:860px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+.hero .eyebrow{color:#d7bd82}
+.hero h1{color:#fff;letter-spacing:0}
+.hero .lede{color:#cfd5de}
+.hero .btn{background:#d7bd82;color:#14223a}
+.hero .btn.alt{background:transparent;color:#f4f0e6;border-color:rgba(244,240,230,.35)}
+.hero-vis{max-width:420px;width:100%;margin-inline:auto}
+.hero-art{width:100%;height:auto;display:block}
+.hero-art .ring{fill:none;stroke:rgba(215,189,130,.28);stroke-width:1.5;stroke-dasharray:3 7}
+.hero-art .r1{transform-origin:190px 170px;animation:spin 60s linear infinite}
+.hero-art .r2{transform-origin:190px 170px;animation:spin 40s linear infinite reverse}
+.hero-art .orbit{transform-origin:190px 170px;animation:spin 24s linear infinite}
+.hero-art .dot{fill:#d7bd82}.hero-art .d2{fill:#5fc7bb}
+.hero-art .eye{fill:#f4f0e6}
+.hero-art .iris{fill:#1b6b64}.hero-art .pupil{fill:#101b2d}.hero-art .glint{fill:#fff;opacity:.9}
+.hero-art .iris,.hero-art .pupil,.hero-art .glint{animation:look 6s ease-in-out infinite}
+.hero-art .tile rect{fill:#d7bd82}.hero-art .tile text{font:700 34px 'Noto Sans Arabic',sans-serif;fill:#14223a}
+.hero-art .ck{fill:none;stroke:#14223a;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.hero-art .st{fill:#14223a}
+.hero-art .t2 rect{fill:#5fc7bb}.hero-art .t3 rect{fill:#ecd9ae}.hero-art .t4 rect{fill:#e9a3ba}
+.hero-art .tile{animation:floaty 5s ease-in-out infinite}
+.hero-art .t2{animation-delay:-1.2s}.hero-art .t3{animation-delay:-2.4s}.hero-art .t4{animation-delay:-3.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+@keyframes look{0%,100%{transform:translateX(0)}35%{transform:translateX(-9px)}70%{transform:translateX(9px)}}
+.pstrip{margin-top:24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:rgba(255,255,255,.07);border:1px solid rgba(244,240,230,.18);border-radius:16px;padding:12px 16px;max-width:460px}
+.pstrip .lv{display:grid;place-items:center;min-width:44px;height:44px;border-radius:50%;background:#d7bd82;color:#14223a;font-weight:700;font-size:18px}
+.pstrip .xp{flex:1 1 140px;min-width:0}.pstrip .xp small{display:block;color:#cfd5de;font-size:13px;line-height:1.4}
+.pstrip .bar{height:8px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden;margin-top:6px}
+.pstrip .bar i{display:block;height:100%;background:#5fc7bb;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+
+/* بطاقات الألعاب */
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:14px;margin:0 0 20px}
+.picker .gcard{--g:var(--acc);display:flex;flex-direction:column;gap:6px;text-align:start;padding:14px;border:2px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);min-height:220px;position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.picker .gcard::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--g)}
+.picker .gcard[data-g=mcq]{--g:#0f7a70}.picker .gcard[data-g=truefalse]{--g:#c27a12}.picker .gcard[data-g=order]{--g:#6a58c8}.picker .gcard[data-g=memory]{--g:#c4416d}.picker .gcard[data-g=word]{--g:#2a81b8}
+.picker .gcard:hover{transform:translateY(-4px) rotate(-.6deg);border-color:var(--g)}
+.picker .gcard[aria-pressed=true]{border-color:var(--g);background:color-mix(in srgb,var(--g) 10%,var(--card));background-image:none;color:var(--ink)}
+.gart{display:block;background:color-mix(in srgb,var(--g) 12%,var(--bg));border-radius:14px;padding:8px}
+.gart svg{display:block;width:100%;height:auto}
+.gart .a0{fill:color-mix(in srgb,var(--g) 28%,transparent)}.gart .a1{fill:var(--g)}.gart .a2{fill:color-mix(in srgb,var(--g) 55%,#fff)}
+.gart .ck,.gart .cx{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.gart .ln{fill:none;stroke:color-mix(in srgb,var(--g) 55%,#fff);stroke-width:4;stroke-linecap:round}
+.gart .st{fill:#fff}.gart .tx{font:700 28px 'Noto Sans Arabic',sans-serif;fill:#fff}
+.gcard b{font-size:16px;line-height:1.5;margin-top:4px}.gcard small{color:var(--mute);font-size:13px;line-height:1.6}
+.gplay{margin-top:auto;align-self:flex-start;background:var(--g);color:#fff;border-radius:999px;padding:6px 16px;font-size:14px;font-weight:700}
+.gcard:hover .gart svg,.gcard[aria-pressed=true] .gart svg{animation:wiggle .7s ease}
+.gart .pulse{animation:pulse 1.8s ease-in-out infinite}.gart .flip1,.gart .flip2{animation:pulse 2.4s ease-in-out infinite}.gart .flip2{animation-delay:-1.2s}
+@keyframes wiggle{25%{transform:rotate(-3deg) scale(1.03)}75%{transform:rotate(3deg) scale(1.03)}}
+@keyframes pulse{50%{opacity:.6}}
+
+/* ظهور تدريجي */
+.js-rise [data-rise]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js-rise [data-rise].in{opacity:1;transform:none}
+
+/* تغذية راجعة للإجابات */
+.g-opt{transition:transform .15s ease,border-color .15s ease,background .15s ease}
+.g-opt:hover:not(:disabled){transform:translateX(-4px)}html[dir=ltr] .g-opt:hover:not(:disabled){transform:translateX(4px)}
+.g-opt.ok{animation:pop .45s ease}.g-opt.bad{animation:shake .4s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.04)}100%{transform:scale(1)}}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.g-fb{animation:rise .35s ease}@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+.g-time i{transition:width .2s linear,background .3s}.g-time.low i{background:var(--bad)!important}
+.g-prog i{transition:width .5s ease}
+.streak-b{display:inline-block;background:#c27a12;color:#fff;border-radius:999px;padding:2px 12px;font-size:14px;font-weight:700;margin-inline-end:8px;animation:pop .5s ease}
+.g-score{animation:pop .6s ease}
+.g-end.win .g-score{color:var(--ok)}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bsr-game{position:relative}
+.confetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--dx),420px) rotate(var(--rot));opacity:0}}
+.g-card{transition:transform .25s ease,background .2s}.g-card.up{transform:rotateY(0)}
+@media (prefers-reduced-motion:reduce){
+ .hero-art *,.gart *,.g-opt,.g-fb,.g-score,.streak-b,.confetti i{animation:none!important}
+ .js-rise [data-rise]{opacity:1;transform:none;transition:none}
+ .picker .gcard:hover{transform:none}.confetti{display:none}
+}
