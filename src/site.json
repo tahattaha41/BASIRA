@@ -146,5 +146,12 @@
   "tagline": "Think. Discover. Play.",
   "tagline_ar": "فكّر. اكتشف. العب.",
   "brand_description": "A modern Arabic knowledge and brain-games platform.",
-  "published": []
+  "published": [],
+  "published_urls": {
+    "about": "/p/blog-page_23.html",
+    "how-we-verify": "/p/blog-page_625.html",
+    "editorial-policy": "/p/blog-page_81.html",
+    "privacy-policy": "/p/blog-page_581.html",
+    "terms": "/p/blog-page_648.html"
+  }
 }
