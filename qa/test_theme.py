@@ -36,4 +36,7 @@ check('twitter:card' in t and "name='theme-color'" in t, 'Twitter card and theme
 check('"@type":"Article"' in t and 'data:blog.canonicalUrl' in t, 'Article JSON-LD uses Blogger page data')
 check("rel='manifest'" in t and 'application/manifest+json' in t, 'lightweight web manifest present')
 check('id="topic-science"' in t and 'topic-icon' in t, 'original topic SVG icons embedded')
+check("https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css" in t, 'theme loads CSS from the main-branch GitHub asset')
+check("https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js" in t, 'theme loads game engine from the main-branch GitHub asset')
+check((ROOT / 'dist/basira.css').is_file() and (ROOT / 'dist/basira.js').is_file(), 'remote CSS and JS assets are built')
 sys.exit(1 if fails else 0)
