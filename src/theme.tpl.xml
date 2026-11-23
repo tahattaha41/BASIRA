@@ -52,18 +52,31 @@
       <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
         <b:includable id='main' var='top'>
           <b:if cond='data:view.isHomepage'><h2 class='sec-h' data-i='latest.title'>{{ar:latest.title}}</h2></b:if>
-          <b:loop values='data:posts' var='post'>
-            <article class='post'>
-              <b:if cond='data:view.isSingleItem'>
-                <h1><data:post.title/></h1>
-                <data:post.body/>
-              <b:else/>
-                <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
-                <p class='meta'><data:post.date/></p>
-                <data:post.snippet/>
-              </b:if>
-            </article>
-          </b:loop>
+          <b:if cond='data:view.isHomepage'>
+            <div class='article-grid'>
+              <b:loop values='data:posts' var='post'>
+                <article class='post article-card'>
+                  <span class='article-kicker'>BASIRA · <data:post.date/></span>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                  <p><data:post.snippet/></p>
+                  <a class='article-read' expr:href='data:post.url'>اقرأ المقال ←</a>
+                </article>
+              </b:loop>
+            </div>
+          <b:else/>
+            <b:loop values='data:posts' var='post'>
+              <article class='post'>
+                <b:if cond='data:view.isSingleItem'>
+                  <h1><data:post.title/></h1>
+                  <data:post.body/>
+                <b:else/>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                  <p class='meta'><data:post.date/></p>
+                  <data:post.snippet/>
+                </b:if>
+              </article>
+            </b:loop>
+          </b:if>
           <div class='pager'>
             <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>«</a></b:if>
             <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>»</a></b:if>

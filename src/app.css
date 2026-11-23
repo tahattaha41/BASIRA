@@ -120,3 +120,13 @@ html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
 .pf-ach li.off{opacity:.45}.pf-ach li.on{border-color:var(--acc)}
 .pf-hist{margin:0 0 16px;padding-inline-start:20px;color:var(--mute);font-size:15px}
 @media (prefers-reduced-motion:reduce){.g-time i{transition:none}}
+
+/* homepage article cards */
+.article-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.article-card{display:flex;flex-direction:column;min-width:0}
+.article-card:first-child{grid-column:1/-1;border-inline-start:4px solid var(--acc)}
+.article-kicker{color:var(--mute);font-size:13px}
+.article-card h2{margin:8px 0;font-size:21px}
+.article-card p{color:var(--mute);margin:0 0 12px}
+.article-read{margin-top:auto;font-weight:600;text-decoration:none}
+@media(max-width:600px){.article-card:first-child{grid-column:auto}}

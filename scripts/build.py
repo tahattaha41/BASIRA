@@ -7,7 +7,7 @@ from xml.dom import minidom
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC, DIST, PREV = (os.path.join(ROOT, d) for d in ('src', 'dist', 'preview'))
 e = html.escape
-PAGE_TITLES = {'about': 'من نحن', 'how-we-verify': 'كيف نتحقق', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا',
+PAGE_TITLES = {'about': 'من نحن', 'how-we-verify': 'كيف نتحقق', 'how-we-verify-en': 'How we verify', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا',
                'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
 
 
@@ -90,14 +90,13 @@ def build():
     for g in site['games']:
         write(os.path.join(DIST, 'pages', f'game-{g[0]}.html'), game_page(site, g[0], ar))
     for slug in PAGE_TITLES:
-        write(os.path.join(DIST, 'pages', slug + '.html'), read(f'pages/{slug}.html').replace('{{EMAIL}}', mail))
+        source = f'pages/{slug}.html'
+        write(os.path.join(DIST, 'pages', slug + '.html'), read(source).replace('{{EMAIL}}', mail))
     idx = json.loads(read('content/articles/index.json', ROOT))
     for a in idx['articles']:
         body = read('content/articles/' + a['file'], ROOT)
         srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
-        write(os.path.join(DIST, 'articles', a['file']),
-              body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
-    # معاينة محلية للاختبار فقط: نفس ترميز القالب بعد تجريده من وسوم Blogger
+        write(os.path.join(DIST, 'articles', a['file']), body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
     pv = t
     pv = re.sub(r"<\?xml[^>]*\?>\s*<!DOCTYPE html>", "<!doctype html>", pv)
     pv = re.sub(r"<b:section.*?</b:section>", "<div class='wrap content'><article class='post'><h2>sample</h2></article></div>", pv, flags=re.S)
