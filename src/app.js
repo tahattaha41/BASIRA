@@ -78,7 +78,7 @@ function mount(root,slug){
   if(!m||root.getAttribute('data-ready')===slug)return;
   root.setAttribute('data-ready',slug);root.setAttribute('data-game',slug);root.textContent='';
   var box=el('div');root.appendChild(box);
-  var level='medium',timer=null,onDone=null,daily=null;
+  var level='medium',timer=null,onDone=null,daily=null,opponentScore=null;
   function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
   function intro(){
     stopTimer();box.textContent='';
@@ -107,8 +107,16 @@ function mount(root,slug){
     out.ach.forEach(function(id){var p=el('p','g-ach');p.textContent='★ '+T('ach.'+id);e.appendChild(p);});
     var bp=el('p','note');bp.textContent=T('g.best')+': '+out.best+'%';e.appendChild(bp);
     e.appendChild(tl(el('p','note'),'g.local'));
+    if(opponentScore!==null){var cmp=el('p','g-ach');cmp.textContent=T('challenge.opponent',{s:opponentScore})+' · '+(r.pts>opponentScore?T('challenge.won'):r.pts<opponentScore?T('challenge.lost'):T('challenge.tie'));e.appendChild(cmp);}
     var a=el('div','g-act');a.style.justifyContent='center';
     var again=btn('','btn',function(){if(onDone&&daily){onDone();}else start(level);});tl(again,daily?'daily.again':'g.again');a.appendChild(again);
+    if(daily){var share=btn('','btn alt',function(){
+      var u=new URL(location.href);u.search='';u.searchParams.set('challenge',daily);u.searchParams.set('score',String(r.pts));u.searchParams.set('pct',String(r.pct));
+      var msg=T('challenge.share.text',{url:u.toString(),score:r.pts});
+      if(navigator.share){navigator.share({title:T('challenge.title'),text:msg,url:u.toString()}).catch(function(){});}
+      else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u.toString()).then(function(){share.textContent=T('challenge.copied');}).catch(function(){prompt(T('challenge.copy.prompt'),u.toString());});}
+      else prompt(T('challenge.copy.prompt'),u.toString());
+    });tl(share,'challenge.share');a.appendChild(share);}
     var back=btn('','btn alt',function(){if(daily&&onDone){onDone('close');}else intro();});tl(back,'g.back');a.appendChild(back);
     e.appendChild(a);box.appendChild(e);
   }
@@ -260,8 +268,8 @@ function mount(root,slug){
     else if(slug==='memory')memory(lev);
   }
   /* تحدي اليوم: نفس الأسئلة لكل اللاعبين في اليوم بنفس البذرة */
-  root._daily=function(date,done){
-    daily=date;onDone=done;level='medium';
+  root._daily=function(date,done,opponent){
+    daily=date;onDone=done;opponentScore=Number.isFinite(opponent)?opponent:null;level='medium';
     var r=mulberry(hash('basira-'+date)),m5=shuffle(BANK.mcq,r).slice(0,3),t2=shuffle(BANK.tf,r).slice(0,2);
     var items=m5.map(mcq).concat(t2.map(tf));
     run(items,{level:'medium',levelName:'medium',sec:20});
@@ -274,14 +282,15 @@ function mount(root,slug){
 function dailyPanel(host){
   var gh=el('div','bsr-game');gh.id='daily-host';
   function render(){
-    host.textContent='';var d=today(),s=load(),done=s.daily&&s.daily[d];
+    host.textContent='';var params=new URLSearchParams(location.search),challengeDate=params.get('challenge'),isChallenge=/^\d{4}-\d{2}-\d{2}$/.test(challengeDate||''),d=isChallenge?challengeDate:today(),opponent=params.has('score')?Number(params.get('score')):null,s=load(),done=s.daily&&s.daily[d];
     var h=el('h2');tl(h,'daily.title');host.appendChild(h);
     host.appendChild(tl(el('p','g-sub'),'daily.sub'));
+    if(isChallenge&&Number.isFinite(opponent)){host.appendChild(tl(el('p','g-ach'),'challenge.invite',{s:opponent,date:d}));}
     if(done){host.appendChild(tl(el('p','g-ach'),'daily.done',{s:done.pts}));}
     var a=el('div','g-act'),b=btn('','btn',function(){
       host.textContent='';var g=el('div','bsr-game');g.setAttribute('data-auto','daily');host.appendChild(g);
       var back=function(mode){render();};
-      mount(g,'mcq');g._daily(d,function(mode){render();});
+      mount(g,'mcq');g._daily(d,function(mode){render();},opponent);
     });tl(b,done?'daily.again':'daily.play');a.appendChild(b);host.appendChild(a);
   }
   render();document.addEventListener('basira:lang',render);
