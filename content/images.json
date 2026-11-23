@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "policy": "Only original SVG illustrations are included in this phase. No third-party article photographs have been downloaded or published.",
+  "assets": [
+    {
+      "path": "brand/topic-icons.svg",
+      "type": "original-svg-sprite",
+      "license": "CC0-1.0",
+      "creator": "BASIRA project",
+      "used_for": "Eight knowledge-section icons",
+      "source": "Original project artwork"
+    }
+  ]
+}
