@@ -130,3 +130,10 @@ html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
 .article-card p{color:var(--mute);margin:0 0 12px}
 .article-read{margin-top:auto;font-weight:600;text-decoration:none}
 @media(max-width:600px){.article-card:first-child{grid-column:auto}}
+
+/* original inline topic illustrations */
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+.topic-icon{display:block;width:48px;height:48px;margin:0 0 10px;color:var(--acc)}
+.topics a{transition:border-color .15s ease,transform .15s ease}
+.topics a:hover{border-color:var(--acc);transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.topics a{transition:none}.topics a:hover{transform:none}}
