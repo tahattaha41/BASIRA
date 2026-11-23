@@ -1,0 +1,40 @@
+name: BASIRA auto-sync approved Blogger pages
+
+on:
+  workflow_run:
+    workflows: ["BASIRA CI"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: basira-blogger-pages-production
+  cancel-in-progress: false
+
+jobs:
+  sync-pages:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build current main pages
+        run: python scripts/build.py
+      - name: Publish/update static pages
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BASIRA_CONTACT_EMAIL: ${{ secrets.BASIRA_CONTACT_EMAIL }}
+        run: |
+          if [ -z "$BLOGGER_BLOG_ID" ] || [ -z "$BLOGGER_CLIENT_ID" ] || [ -z "$BLOGGER_CLIENT_SECRET" ] || [ -z "$BLOGGER_REFRESH_TOKEN" ]; then
+            echo "::warning::Blogger page sync skipped: required Blogger OAuth secrets are not configured."
+            exit 0
+          fi
+          python scripts/blogger_pages.py apply --confirm --update
