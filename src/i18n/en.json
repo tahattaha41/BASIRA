@@ -127,5 +127,13 @@
   "challenge.opponent": "Your friend's score: {s}",
   "challenge.won": "You beat your friend!",
   "challenge.lost": "Your friend scored higher",
-  "challenge.tie": "It's a tie"
+  "challenge.tie": "It's a tie",
+  "admin.link": "Site administration",
+  "page.about": "About",
+  "page.verify": "How we verify",
+  "page.editorial": "Editorial policy",
+  "page.contact": "Contact",
+  "page.privacy": "Privacy",
+  "page.terms": "Terms",
+  "skip": "Skip to content"
 }
