@@ -74,8 +74,8 @@ for slug, name, *_ in games:
     pg = ROOT / "dist/pages" / f"game-{slug}.html"
     if not pg.is_file(): err(f"Missing game page dist/pages/game-{slug}.html"); continue
     if f"data-game='{slug}'" not in pg.read_text(encoding="utf-8"): err(f"game-{slug}.html has no interactive mount point.")
-    if f"{slug}:[" not in theme: err(f"Game engine rules for '{slug}' not found in theme JS.")
-    if f"data-game='{slug}'" not in theme: err(f"Home page has no playable mount for '{slug}'.")
+    if f"slug==='{slug}'" not in theme: err(f"Game engine for '{slug}' not found in theme JS.")
+    if f"data-g='{slug}'" not in theme: err(f"Home page has no playable entry for '{slug}'.")
 for bad in ("نموذج تصميم", "قيد التنفيذ", "قريباً", "هذه صفحة نموذج", "inert='inert'"):
     blob = theme + "".join(p.read_text(encoding="utf-8") for p in (ROOT / "dist/pages").glob("*.html"))
     if re.search(r"(?<![\u0600-\u06FF])" + re.escape(bad), blob):

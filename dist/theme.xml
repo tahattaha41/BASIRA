@@ -5,467 +5,142 @@
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
-  <meta expr:content='data:blog.metaDescription' name='description'/>
-  <b:if cond='data:blog.pageType == &quot;error_page&quot; or data:blog.pageType == &quot;archive&quot; or data:blog.searchQuery'>
-    <meta content='noindex,follow' name='robots'/>
-  </b:if>
-  <meta content='#f7f5f0' name='theme-color'/>
-  <meta content='BASIRA' name='application-name'/>
-  <meta content='BASIRA | بصيرة' property='og:site_name'/>
-  <link href='https://fonts.googleapis.com' rel='preconnect'/>
-  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
   try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
   //]]></script>
   <b:skin><![CDATA[
-:root{--paper:#f7f5f0;--card:#fffefb;--ink:#1b2430;--soft:#475260;--faint:#66707c;--rule:#dcd7cb;--rule2:#b7b0a0;--mark:#ebe6d8;
---accent:#0f6b66;--accent-ink:#ffffff;--accent-bg:#e1efec;--play:#a8441c;--play-ink:#ffffff;--play-bg:#f6e6dc;--play-on-deep:#f0906a;--deep:#10302e;--deep-ink:#f3efe6;--deep-soft:#b9cdca;--deep-rule:#2f504d;--ok:#1f7a4d;--ok-bg:#e0f0e6;--bad:#a3262a;--bad-bg:#f6e0e0;--warn:#8a5a00;
---r:10px;--ui:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif}
-html[data-theme=dark]{--paper:#14181c;--card:#1b2025;--ink:#ece8de;--soft:#b8b4a8;--faint:#989ea6;--rule:#2c333a;--rule2:#47505a;--mark:#232a2e;
---accent:#6cc5bd;--accent-ink:#0d1517;--accent-bg:#1b2e2c;--play:#f0906a;--play-ink:#1a0e08;--play-bg:#33251e;--play-on-deep:#f0906a;--deep:#0c1a19;--deep-ink:#ece8de;--deep-soft:#a9bdba;--deep-rule:#27403d;--ok:#7fd3a2;--ok-bg:#1b2e24;--bad:#f09a9c;--bad-bg:#35201f;--warn:#e0b45a}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.8 var(--ui)}
-a{color:var(--accent);text-underline-offset:3px}
-h1,h2,h3,h4{margin:0;font-weight:700;line-height:1.45}
-.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.skip{position:absolute;top:-80px;inset-inline-start:8px;background:var(--ink);color:var(--paper);padding:10px 14px;z-index:60}.skip:focus{top:8px}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.ic{width:22px;height:22px}
-#nav-t{display:none}
-/* الأزرار */
-.btn,.btn-quiet,.icon-btn{font:600 16px var(--ui);cursor:pointer;transition:background .15s,border-color .15s,transform .1s,color .15s}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:var(--r);background:var(--accent);color:var(--accent-ink);text-decoration:none;border:1px solid var(--accent)}
-.btn:hover{filter:brightness(.92)}.btn:active{transform:translateY(1px)}
-.btn.play{background:var(--play);border-color:var(--play);color:var(--play-ink)}
-.btn.alt{background:none;color:var(--ink);border-color:var(--rule2)}
-.btn-quiet{min-height:44px;padding:0 16px;background:none;color:var(--ink);border:1px solid var(--rule2);border-radius:var(--r);font-size:14px}.btn-quiet:hover,.icon-btn:hover{border-color:var(--ink)}
-.icon-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;background:none;color:var(--ink);border:1px solid transparent;border-radius:var(--r);padding:0;list-style:none;text-decoration:none}
-.icon-btn::-webkit-details-marker{display:none}
-/* الرأس */
-.top{background:var(--paper);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:30}
-.bar{display:flex;align-items:center;gap:8px;min-height:64px;position:relative}
-.brand{display:inline-flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--ink);text-decoration:none;margin-inline-end:auto}
-.nav{display:none}
-.bar-end{display:flex;gap:2px}
-.sdrop{position:static}
-.sdrop .find{position:absolute;inset-inline:0;top:100%;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--rule);z-index:5}
-.sdrop .find input,.sdrop .find button{margin:0}
-.menu-btn{order:-1}
-.scrim{position:fixed;inset:0;background:rgba(10,14,18,.5);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s;z-index:40}
-.drawer{position:fixed;top:0;bottom:0;inset-inline-start:0;width:min(320px,86vw);background:var(--paper);border-inline-end:1px solid var(--rule);z-index:50;padding:12px 16px 20px;display:flex;flex-direction:column;gap:8px;visibility:hidden;transition:transform .22s,visibility .22s;transform:translateX(100%)}
-html[dir=rtl] .drawer{transform:translateX(100%)}html[dir=ltr] .drawer{transform:translateX(-100%)}
-.dr-top{display:flex;align-items:center;justify-content:space-between;min-height:48px}
-.drawer nav{display:flex;flex-direction:column;margin:8px 0 auto}
-.drawer nav a{display:flex;align-items:center;min-height:52px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
-.drawer nav a:hover{color:var(--accent)}
-#nav-t:checked~.scrim{opacity:1;visibility:visible}
-#nav-t:checked~.drawer{transform:none;visibility:visible}
-/* الأقسام */
-.sec{padding:44px 0 4px;scroll-margin-top:72px}
-.sec-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.sec-h h2{font-size:24px}
-.tag{font:600 12px var(--ui);color:var(--warn);border:1px solid currentColor;border-radius:6px;padding:1px 9px}
-.note{color:var(--soft);font-size:15px;margin:-4px 0 14px}
-.eyebrow{font:600 14px var(--ui);color:var(--play);margin:0 0 6px}
-.lvl{display:inline-flex;align-items:center;gap:6px;font:600 13px var(--ui);padding:2px 10px;border-radius:999px;background:var(--mark);color:var(--soft)}
-.lvl::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--ok)}.lvl-2::before{background:var(--warn)}.lvl-3::before{background:var(--bad)}
-/* الهيرو */
-.hero{padding:32px 0 28px;border-bottom:1px solid var(--rule)}
-.hero-in{display:grid;gap:28px;align-items:center}
-.hero h1{font-size:clamp(30px,8vw,52px);line-height:1.3}
-.hero .lede{font-size:18px;color:var(--soft);max-width:52ch;margin:12px 0 22px}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap}.cta-row .btn{flex:1 1 150px}
-/* الألعاب */
-.soon{margin-top:10px;font:600 14px var(--ui);color:var(--faint)}
-/* التحدي اليومي */
-/* المعرفة */
-.topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.topics a{display:block;height:100%;padding:14px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);text-decoration:none;color:var(--ink);transition:border-color .15s,background .15s}
-.topics a:hover{border-color:var(--accent);background:var(--accent-bg)}
-.topics b{display:block;font-size:16px;line-height:1.5}.topics span{display:block;color:var(--soft);font-size:14px;line-height:1.6;margin-top:4px}
-/* المقالات */
-.posts{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
-.posts:empty{border:0}.posts:empty::after{content:attr(data-empty);display:block;padding:28px;text-align:center;color:var(--soft);background:var(--card);border:1px dashed var(--rule2);border-radius:var(--r)}
-.posts li{padding:16px 0;border-bottom:1px solid var(--rule)}
-.posts p{margin:4px 0 0;color:var(--soft);font-size:15px;line-height:1.7}
-.meta{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:13px;color:var(--faint)}.meta span:first-child{color:var(--accent);font-weight:600}
-.more{margin:14px 0 0}
-/* التقدم */
-.prog{display:grid;gap:14px}
-.lvlcard{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:18px}
-.lv-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}.lv-top span{color:var(--soft);font-size:15px}.lvlcard p{margin:8px 0 0;color:var(--soft);font-size:15px}
-.g-prog{height:10px;border-radius:5px;background:var(--mark);overflow:hidden}.g-prog i{display:block;height:100%;background:var(--accent);border-radius:5px;transition:width .4s}.g-prog.big{height:14px;border-radius:7px}
-.badges{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.badge{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:12px;font-size:14px;font-weight:600;line-height:1.4}
-.bd{width:44px;height:44px;flex:none}.b-f{fill:var(--play)}.b-l{fill:none;stroke:var(--faint);stroke-width:3}.b-s{fill:none;stroke:var(--faint);stroke-width:3;stroke-linecap:round}
-.badge.locked{opacity:.55}.badge:not(.earned):not(.locked) .b-f{fill:var(--mark);stroke:var(--faint);stroke-width:2}
-.badge.earned{border-color:var(--play);animation:pop .5s ease-out}
-@keyframes pop{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:none}}
-.method{display:grid;border-top:2px solid var(--ink)}.method div{padding:16px 0;border-bottom:1px solid var(--rule)}.method h3{font-size:17px}.method p{margin:2px 0 0;color:var(--soft);font-size:15px}
-/* صفحات المحتوى */
-.page{padding:24px 0}
-.crumbs{font-size:13px;color:var(--faint);margin-bottom:10px}.crumbs a{color:var(--faint)}
-.page h1{font-size:clamp(26px,6vw,38px);margin-bottom:10px}
-.labels{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.labels a{font-size:13px;padding:2px 10px;border:1px solid var(--rule2);border-radius:6px;color:var(--soft);text-decoration:none}
-.byline{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--faint);margin-bottom:18px}
-.prose>p,.prose>ul,.prose>ol,.prose>h2,.prose>h3,.prose>blockquote,.prose>table{max-width:68ch}
-.prose h2{font-size:23px;margin:1.8em 0 .4em}.prose h3{font-size:19px;margin:1.4em 0 .3em}.prose p,.prose li{margin:.8em 0}.prose img{max-width:100%;height:auto}
-.prose table{border-collapse:collapse;width:100%;display:block;overflow-x:auto}.prose th,.prose td{border:1px solid var(--rule2);padding:8px 12px;text-align:start}
-.pager{display:flex;justify-content:space-between;gap:12px;margin-top:30px;font-weight:600}
-.lede{color:var(--soft)}
-.find{display:flex;max-width:640px;margin-bottom:18px}
-.find input{flex:1;min-width:0;min-height:52px;font:400 17px var(--ui);padding:0 16px;border:1px solid var(--ink);border-inline-end:0;background:var(--card);color:var(--ink);border-start-start-radius:var(--r);border-end-start-radius:var(--r)}
-.find button{position:relative;min-height:52px;padding:0 22px;font:600 16px var(--ui);border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;border-start-end-radius:var(--r);border-end-end-radius:var(--r)}
-.find button.busy{color:transparent}.find button.busy::after{content:'';position:absolute;inset:0;margin:auto;width:20px;height:20px;border:3px solid var(--accent-ink);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.sdrop .find{margin:0 auto;width:min(1120px,100% - 32px)}
-.err{padding:56px 0;text-align:center}.err .find{margin:20px auto}.err h1{font-size:30px}
-/* لوحات نماذج الألعاب */
-.board .lede{max-width:62ch}
-.screens{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));margin:20px 0}
-.screen{margin:0}.screen figcaption{font-size:14px;font-weight:600;color:var(--faint);margin-top:8px;text-align:center}
-.phone{max-width:340px;margin-inline:auto;border:1px solid var(--rule2);border-radius:26px;padding:18px 16px;background:var(--paper);min-height:480px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 0 var(--rule)}
-.g-head{display:grid;gap:8px}.g-row{display:flex;justify-content:space-between;font-size:14px;color:var(--soft);font-weight:600}
-.timer{font-variant-numeric:tabular-nums;color:var(--play)}
-.q{font-size:19px;line-height:1.6}
-.opts,.rows,.tf{display:grid;gap:8px}.tf{grid-template-columns:1fr 1fr}
-.opt{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border:1px solid var(--rule2);border-radius:var(--r);background:var(--card);font-size:16px;transition:background .15s,border-color .15s}
-.opt .ol{width:26px;height:26px;border-radius:50%;background:var(--mark);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
-.opt .mk{margin-inline-start:auto;font-size:16px}
-.opt.big{min-height:84px;justify-content:center;font-size:20px;font-weight:700}
-.opt.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}.opt.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
-.msg{border-radius:var(--r);padding:10px 14px;font-size:14px;line-height:1.7}.msg p{margin:2px 0 0;color:var(--ink)}
-.msg.ok{background:var(--ok-bg);border:1px solid var(--ok)}.msg.ok b{color:var(--ok)}.msg.err{background:var(--bad-bg);border:1px solid var(--bad)}.msg.err b{color:var(--bad)}
-.cta{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}.cta .btn{flex:1}
-.row{display:flex;align-items:center;gap:10px;min-height:52px;padding:6px 12px;border:1px solid var(--rule2);border-radius:var(--r);background:var(--card);font-size:15px;line-height:1.5}
-.row .grip{color:var(--faint);letter-spacing:0}.row .num{margin-inline-start:auto;width:26px;height:26px;border-radius:50%;background:var(--mark);display:grid;place-items:center;font-size:13px;font-weight:700}
-.row.ok{border-color:var(--ok);background:var(--ok-bg)}.row.bad{border-color:var(--bad);background:var(--bad-bg)}
-.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.mc{aspect-ratio:1;border-radius:12px;background:var(--accent);display:grid;place-items:center;font-size:26px;font-weight:700;color:var(--accent-ink)}
-.mc.up{background:var(--card);border:2px solid var(--play);color:var(--ink)}.mc.done{background:var(--ok-bg);border:2px solid var(--ok);color:var(--ok)}
-.hint{margin:0;color:var(--soft);font-size:15px}
-.tiles{display:flex;gap:8px;justify-content:center;direction:rtl}.tile{width:52px;height:60px;border-radius:12px;border:2px solid var(--rule2);display:grid;place-items:center;font-size:26px;font-weight:700;background:var(--card)}.tile.on{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
-.keys{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;direction:rtl}.key{min-height:40px;border-radius:8px;border:1px solid var(--rule2);display:grid;place-items:center;font-weight:600;background:var(--card)}.key.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}.key.bad{opacity:.4;text-decoration:line-through}
-.end{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;flex:1}
-.end h3{font-size:24px}.end p{margin:0;color:var(--soft)}.end .sub{font-size:14px}
-.ring{--p:80;width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--mark) 0);display:grid;place-items:center;margin-top:8px}
-.ring b{width:92px;height:92px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-size:24px}
-.lvlbar{width:100%;display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--soft);text-align:start}
-/* التذييل */
-.foot{margin-top:56px;border-top:2px solid var(--ink);padding-top:28px;font-size:15px}
-.foot-grid{display:grid;gap:24px}.foot-brand{font-size:20px;font-weight:700}.foot p{margin:6px 0 0;color:var(--soft);max-width:36ch}
-.foot h4{font-size:14px;color:var(--faint);margin-bottom:6px}.foot ul{list-style:none;margin:0;padding:0;columns:2;column-gap:16px}
-.foot li a{display:inline-block;padding:6px 0;color:var(--ink);text-decoration:none}.foot li a:hover{color:var(--accent);text-decoration:underline}
-.foot-end{border-top:1px solid var(--rule);margin-top:24px;padding:16px 0 24px;color:var(--faint);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media print{.top,.foot,.drawer,.find{display:none}}
-
-/* ====== هوية تحريرية جديدة ====== */
-.glyph{width:34px;height:34px;flex:none}
-.glyph .g-l{fill:none;stroke:currentColor;stroke-width:2.5;opacity:.6}.glyph .g-f{fill:var(--play)}.glyph .g-w{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.glyph .g-s{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;opacity:.6}
-.thumb-g{width:100%;height:100%}
-.hero{padding:28px 0 36px;border-bottom:2px solid var(--ink)}
-.hero-in{display:grid;gap:26px;align-items:start}
-.hero h1{font-size:clamp(36px,10vw,68px);line-height:1.2;letter-spacing:0;font-weight:700}
-.hl{background:linear-gradient(transparent 62%,var(--play-bg) 62%);color:inherit;padding:0 2px;box-decoration-break:clone}
-html[data-theme=dark] .hl{background:linear-gradient(transparent 62%,var(--play-bg) 62%)}
-.hero .lede{font-size:19px;max-width:30ch;margin:14px 0 20px}
-.cta-row{display:flex;gap:10px;flex-wrap:wrap}.cta-row .btn{flex:1 1 140px}
-/* السؤال الحي */
-.live{border:2px solid var(--ink);border-radius:16px;background:var(--card);padding:18px;display:grid;gap:14px}
-.live-h{display:flex;justify-content:space-between;font:600 13px var(--ui);color:var(--play)}.live-h span:last-child{color:var(--faint);font-variant-numeric:tabular-nums}
-.live-q{font-size:22px;line-height:1.55}
-.live-o{display:grid;gap:8px}
-.lo{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 14px;border:1px solid var(--rule2);border-radius:12px;background:var(--paper);color:var(--ink);font:500 17px var(--ui);cursor:pointer;text-align:start;transition:border-color .15s,background .15s,transform .1s}
-.lo:hover:not([disabled]){border-color:var(--accent);background:var(--accent-bg)}.lo:active:not([disabled]){transform:scale(.99)}
-.lo .ol{width:28px;height:28px;border-radius:50%;background:var(--mark);display:grid;place-items:center;font-size:14px;font-weight:700;flex:none}
-.lo[disabled]{cursor:default}.lo.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}.lo.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}.lo.dim{opacity:.55}
-.live-fb{border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.75}.live-fb b{display:block}.live-fb.ok{background:var(--ok-bg);border:1px solid var(--ok)}.live-fb.ok b{color:var(--ok)}.live-fb.bad{background:var(--bad-bg);border:1px solid var(--bad)}.live-fb.bad b{color:var(--bad)}.live-fb p{margin:2px 0 0}
-.live-f{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-height:20px}#lv-score{font:600 14px var(--ui);color:var(--soft)}
-.live-end{text-align:center;display:grid;gap:10px;justify-items:center;padding:8px 0}.live-end h2{font-size:24px}.live-end p{margin:0;color:var(--soft)}
-/* مسرح الألعاب */
-.stage{background:var(--deep);color:var(--deep-ink);margin-top:44px;padding:40px 0 44px}
-.stage .sec-h h2{color:var(--deep-ink)}.stage .tag{color:#f0b98f;border-color:#f0b98f}
-html[data-theme=dark] .stage .tag{color:var(--warn);border-color:var(--warn)}
-.stage-note{margin:-4px 0 20px;color:var(--deep-soft);font-size:15px}
-.stage-grid{display:grid;gap:20px}
-.tabs{display:grid;gap:0;border-top:1px solid var(--deep-rule)}
-.tab{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-bottom:1px solid var(--deep-rule);cursor:pointer;color:var(--deep-ink);border-radius:0;transition:background .15s,color .15s}
-.tab:hover{background:var(--deep-rule)}
-.tn{font:700 14px var(--ui);color:var(--deep-soft);font-variant-numeric:tabular-nums}.tt{font:600 17px var(--ui)}
-.tab .lvl{background:transparent;border:1px solid var(--deep-rule);color:inherit;font-size:12px}
-.panes .pane{display:none;gap:22px;align-items:center}
-.pane h3{font-size:clamp(26px,6vw,38px);line-height:1.3}.pane p{color:var(--deep-soft);font-size:18px;margin:8px 0 14px}
-.pane-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.pane .lvl{background:var(--deep-rule);color:var(--deep-ink)}
-.pane .soon{color:var(--deep-soft)}
-.pane .screen figcaption{color:var(--deep-soft)}
-.pane .phone{min-height:0;max-height:430px;overflow:hidden}
-/* فهرس المواضيع */
-.fahras{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
-.fahras a{display:grid;grid-template-columns:44px 1fr 24px;gap:10px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none;transition:padding .18s,background .15s}
-.fahras a:hover{background:var(--accent-bg);padding-inline-start:14px}
-.fn{font:700 15px var(--ui);color:var(--play);font-variant-numeric:tabular-nums}.ft{display:block;font:700 24px/1.4 var(--ui)}.fd{display:block;color:var(--soft);font-size:15px;line-height:1.6}.fg{color:var(--faint);transition:transform .18s}
-.fahras a:hover .fg{transform:translateX(-6px)}html[dir=ltr] .fahras a:hover .fg{transform:translateX(6px)}
-/* مقال مميز وقائمة */
-.feat{display:grid;gap:14px;padding-bottom:22px;border-bottom:2px solid var(--ink)}
-.feat-img{display:block;border-radius:14px;background:var(--accent-bg);overflow:hidden;aspect-ratio:16/10;color:var(--accent)}.feat-img img{width:100%;height:100%;object-fit:cover}.feat-img .glyph{width:100%;height:100%;padding:28%}
-.feat h3{font-size:clamp(26px,6vw,36px);line-height:1.4;margin:6px 0}.feat h3 a{color:var(--ink);text-decoration:none}.feat h3 a:hover{color:var(--accent)}.feat p{color:var(--soft);margin:0 0 10px}
-.tag-feat{color:var(--play)!important;font-weight:700}
-.read{font-weight:700}
-.feat-wrap:empty::after{content:attr(data-empty);display:block;padding:28px;text-align:center;color:var(--soft);background:var(--card);border:1px dashed var(--rule2);border-radius:var(--r)}
-.rows-list{list-style:none;margin:0;padding:0}
-.rl{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink);text-decoration:none}
-.rl:hover .rl-t{color:var(--accent)}
-.rl-n{font:700 28px/1.2 var(--ui);color:var(--rule2);font-variant-numeric:tabular-nums}.rl-b{display:grid;gap:2px}.rl-t{font:700 19px/1.55 var(--ui)}.rl-s{color:var(--soft);font-size:15px;line-height:1.7}
-/* المنهج */
-.method{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink);display:grid}
-.method li{display:grid;grid-template-columns:44px 1fr;column-gap:10px;padding:16px 0;border-bottom:1px solid var(--rule)}
-.mn{grid-row:span 2;font:700 34px/1 var(--ui);color:var(--play)}.method h3{font-size:18px}.method p{margin:2px 0 0;color:var(--soft);font-size:15px}
-.method div{border:0}
-@media(min-width:900px){
- .menu-btn,.drawer,.scrim{display:none}.nav{display:flex;gap:2px;margin-inline-end:auto}
- .nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;border-bottom:2px solid transparent}.nav a:hover{border-bottom-color:var(--play)}
- .brand{margin-inline-end:24px}
- .hero{padding:64px 0 64px}.hero-in{grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
- .live{padding:26px}.live-q{font-size:25px}
- .stage{padding:64px 0 72px}.stage-grid{grid-template-columns:340px 1fr;gap:56px;align-items:start}
- .panes .pane{grid-template-columns:1fr 340px}
- .pane .phone{max-height:none}
- .fahras{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
- .feat{grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}.feat-img{aspect-ratio:4/3}
- .rows-list{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
- .prog{grid-template-columns:1fr 1.4fr;align-items:start}.badges{grid-template-columns:repeat(4,1fr)}
- .method{grid-template-columns:repeat(3,1fr);gap:0 36px}.method li{border-bottom:0;padding:20px 0}
- .foot-grid{grid-template-columns:1.4fr 1.4fr 1fr}.foot ul{columns:1}.foot-grid>div:nth-child(2) ul{columns:2}
-}
-@media(min-width:620px) and (max-width:899px){.badges{grid-template-columns:repeat(4,1fr)}}
-.stage .btn.play{background:var(--play-on-deep);border-color:var(--play-on-deep);color:#1a0e08}
-.stage .tab .tn{color:var(--deep-soft)}
-[hidden]{display:none!important}
-.pane .phone{color:var(--ink)}.pane .phone .q,.pane .phone h3{color:var(--ink)}.pane .phone .end p{color:var(--soft)}
-.feat-img{display:grid;place-items:center}.feat-img .glyph{width:88px;height:88px;padding:0;background:none}
-.pane .phone .q{font-size:19px;line-height:1.6}.pane .phone .end h3{font-size:24px}
-/* BASIRA identity layer — appended after the base theme. */
-:root{--brand-ink:#152d43;--brand-accent:#0f766e;--brand-spark:#e6a23c;}
-html[data-theme=dark]{--brand-ink:#e9f1f4;--brand-accent:#72c9bd;--brand-spark:#f2bd68;}
-.brand-lockup{display:inline-flex;align-items:center;gap:9px;direction:ltr;white-space:nowrap;}
-.brand-symbol{width:34px;height:34px;display:block;flex:none;overflow:visible;}
-.brand-symbol .bs-line{fill:none;stroke:var(--brand-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
-.brand-symbol .bs-core{fill:var(--brand-spark);stroke:var(--brand-ink);stroke-width:1.2;stroke-linejoin:round;}
-.brand-symbol .bs-ray{fill:none;stroke:var(--brand-ink);stroke-width:2;stroke-linecap:round;}
-.brand-names{display:flex;flex-direction:column;line-height:1.05;gap:3px;text-align:start;}
-.brand-names b{font:800 17px/1.05 'Segoe UI',Arial,sans-serif;letter-spacing:1.4px;color:var(--brand-ink);}
-.brand-names small{font:700 12px/1.2 'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;color:var(--brand-accent);}
-.foot-brand .brand-symbol{width:38px;height:38px;}
-.foot-brand .brand-names b{font-size:19px;}
-.hero .eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-.eyebrow-ar{font-family:'Noto Sans Arabic','Segoe UI',Tahoma,sans-serif;}
-/* واجهة الألعاب الحقيقية */
-.bsr-game{min-height:120px}
-.bg{display:block}
-.bsr-game{background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:16px;padding:18px;max-width:640px}
-.bsr-game button{font-family:var(--ui)}
-.bg-rules{margin:0 0 14px;font-size:16px;color:var(--soft);line-height:1.8}
-.bg-lvs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.bg-lv{min-height:48px;border:1px solid var(--rule2);background:var(--paper);color:var(--ink);border-radius:var(--r);font-size:16px;font-weight:600;cursor:pointer}
-.bg-lv[aria-checked=true]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.bg-lvd,.bg-best{margin:0 0 6px;font-size:15px;color:var(--soft)}
-.bg-go{margin-top:12px;width:100%}
-.bg-head{margin-bottom:14px}
-.bg-bar{height:6px;background:var(--mark);border-radius:3px;overflow:hidden}
-.bg-bar i{display:block;height:100%;background:var(--accent)}
-.bg-row{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:14px;color:var(--soft);font-weight:600}
-.bg-q{font-size:20px;line-height:1.7;margin:0 0 14px}
-.bg-q2{margin:0 0 10px;font-size:14px;color:var(--soft)}
-.bg-opts{display:grid;gap:10px}
-.bg-opt{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;padding:10px 14px;text-align:start;background:var(--paper);color:var(--ink);border:1px solid var(--rule2);border-radius:var(--r);font-size:17px;cursor:pointer}
-.bg-opt:hover:not(:disabled){border-color:var(--ink)}
-.bg-opt:disabled{cursor:default}
-.bg-ol{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--mark);font-weight:700;font-size:14px;flex:none}
-.bg-opt.ok{border:2px solid var(--ok);background:var(--accent-bg)}
-.bg-opt.bad{border:2px solid var(--play);background:var(--play-bg)}
-.bg-opt.dim{opacity:.6}
-.bg-mk{margin-inline-start:auto;font-size:18px}
-.bg-tf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bg-big{justify-content:center;font-size:20px;font-weight:700;min-height:64px}
-.bg-fb{margin-top:14px;padding:12px 14px;border-radius:var(--r);border:1px solid var(--rule2)}
-.bg-fb.ok{border-color:var(--ok);background:var(--accent-bg)}
-.bg-fb.bad{border-color:var(--play);background:var(--play-bg)}
-.bg-fb p{margin:4px 0 12px;font-size:16px;line-height:1.7}
-.bg-fb[hidden],.bsr-game [hidden]{display:none!important}
-.bg-rows{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
-.bg-row2{display:flex;align-items:center;gap:8px;min-height:52px;padding:6px 12px;background:var(--paper);border:1px solid var(--rule2);border-radius:var(--r)}
-.bg-row2.ok{border:2px solid var(--ok)}.bg-row2.bad{border:2px solid var(--play)}
-.bg-rt{flex:1;font-size:16px;line-height:1.6}
-.bg-mv{width:44px;height:44px;border:1px solid var(--rule2);background:var(--card);color:var(--ink);border-radius:var(--r);cursor:pointer;font-size:14px}
-.bg-mv:disabled{opacity:.35;cursor:default}
-.bg-hint{margin:0 0 12px;font-size:17px;min-height:1.6em}
-.bg-tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 12px;direction:rtl}
-.bg-tile{display:grid;place-items:center;width:46px;height:56px;border:2px solid var(--rule2);border-radius:10px;font-size:26px;font-weight:700;background:var(--paper)}
-.bg-tile.on{border-color:var(--accent);background:var(--accent-bg)}
-.bg-left{margin:0 0 10px;text-align:center;font-size:14px;color:var(--soft)}
-.bg-keys{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;direction:rtl}
-.bg-key{min-height:44px;border:1px solid var(--rule2);background:var(--paper);color:var(--ink);border-radius:8px;font-size:18px;font-weight:600;cursor:pointer;padding:0}
-.bg-key.ok{background:var(--accent-bg);border-color:var(--ok)}.bg-key.bad{background:var(--play-bg);border-color:var(--play);text-decoration:line-through}
-.bg-key:disabled{cursor:default}
-.bg-hintbtn{margin-bottom:12px;min-height:44px}
-.bg-grid{display:grid;gap:8px}.bg-grid.g2{grid-template-columns:repeat(2,1fr)}.bg-grid.g3{grid-template-columns:repeat(3,1fr)}
-.bg-card{min-height:72px;padding:6px;border:2px solid var(--rule2);border-radius:12px;background:var(--deep);color:var(--deep-ink);font-size:15px;font-weight:600;cursor:pointer;line-height:1.4}
-.bg-card.up{background:var(--paper);color:var(--ink);border-color:var(--accent)}
-.bg-card.done{background:var(--accent-bg);color:var(--ink);border-color:var(--ok);opacity:1}
-.bg-card:disabled{cursor:default}
-.bg-end{text-align:center}
-.bg-big2{font-size:40px;font-weight:700;line-height:1.3}
-.bg-end.win .bg-big2{color:var(--ok)}.bg-end.lose .bg-big2{color:var(--play)}
-.bg-end h3{margin:4px 0 8px;font-size:22px}.bg-end p{margin:4px 0}
-.bg-meta{font-size:14px;color:var(--soft)}.bg-record{font-weight:700;color:var(--ok)}
-.bg-rev{text-align:start;margin:14px 0;font-size:15px}.bg-rev summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}
-.bg-rev ul{margin:0;padding-inline-start:20px}.bg-rev li{margin-bottom:8px}
-.bg-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.bg-stats{width:100%;border-collapse:collapse;font-size:15px;margin-bottom:12px}
-.bg-stats caption{text-align:start;font-weight:700;margin-bottom:6px}
-.bg-stats th,.bg-stats td{padding:8px 6px;border-bottom:1px solid var(--rule);text-align:start}
-.stage .bsr-game{max-width:none}
-.game-page .bsr-game{margin:0 auto 24px}
-.game-page .game-about{max-width:640px;margin:0 auto}
-@media(max-width:380px){.bg-key{font-size:16px}.bg-tile{width:40px;height:50px}}
-#gm-mcq:checked~.tabs [for=gm-mcq]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-mcq:checked~.tabs [for=gm-mcq] .tn{color:var(--play)}#gm-mcq:checked~.panes .p-mcq{display:grid}#gm-mcq:focus-visible~.tabs [for=gm-mcq]{outline:3px solid var(--play-on-deep);outline-offset:2px}
-#gm-truefalse:checked~.tabs [for=gm-truefalse]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-truefalse:checked~.tabs [for=gm-truefalse] .tn{color:var(--play)}#gm-truefalse:checked~.panes .p-truefalse{display:grid}#gm-truefalse:focus-visible~.tabs [for=gm-truefalse]{outline:3px solid var(--play-on-deep);outline-offset:2px}
-#gm-order:checked~.tabs [for=gm-order]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-order:checked~.tabs [for=gm-order] .tn{color:var(--play)}#gm-order:checked~.panes .p-order{display:grid}#gm-order:focus-visible~.tabs [for=gm-order]{outline:3px solid var(--play-on-deep);outline-offset:2px}
-#gm-memory:checked~.tabs [for=gm-memory]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-memory:checked~.tabs [for=gm-memory] .tn{color:var(--play)}#gm-memory:checked~.panes .p-memory{display:grid}#gm-memory:focus-visible~.tabs [for=gm-memory]{outline:3px solid var(--play-on-deep);outline-offset:2px}
-#gm-word:checked~.tabs [for=gm-word]{background:var(--paper);color:var(--ink);border-color:var(--paper)}#gm-word:checked~.tabs [for=gm-word] .tn{color:var(--play)}#gm-word:checked~.panes .p-word{display:grid}#gm-word:focus-visible~.tabs [for=gm-word]{outline:3px solid var(--play-on-deep);outline-offset:2px}
+:root{--bg:#f7f5f0;--card:#fff;--ink:#1c1b19;--mute:#6b675f;--line:#e4e0d6;--acc:#0f5f58;--acc-ink:#fff;--ok:#1f7a45;--bad:#b3261e;--r:14px}
+:root[data-theme=dark]{--bg:#151513;--card:#1f1f1c;--ink:#f1eee6;--mute:#a7a296;--line:#33322d;--acc:#5fc7bb;--acc-ink:#0d1b19;--ok:#6fd08f;--bad:#ff8a80}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.8 'Noto Sans Arabic',system-ui,sans-serif}
+a{color:var(--acc)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;inset-inline-start:-999px}.skip:focus{inset-inline-start:8px;top:8px;background:var(--card);padding:8px 12px;z-index:9}
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+.bar{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;font-size:20px}
+.brand svg{width:32px;height:32px}
+.nav{display:flex;gap:20px;margin-inline-start:auto;flex-wrap:wrap}
+.nav a{color:var(--ink);text-decoration:none;font-size:15px}
+.nav a:hover{color:var(--acc)}
+button,.btn{font:inherit;cursor:pointer}
+.btn{display:inline-block;background:var(--acc);color:var(--acc-ink);border:0;border-radius:10px;padding:10px 20px;text-decoration:none;font-weight:600}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-quiet{background:none;border:1px solid var(--line);border-radius:10px;color:var(--mute);padding:6px 14px;font-size:14px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.hero{padding:56px 0 24px}
+.eyebrow{color:var(--mute);font-size:14px;margin:0 0 8px}
+.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.3;margin:0 0 16px;font-weight:700}
+.lede{max-width:620px;color:var(--mute);margin:0 0 24px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.sec{padding:32px 0}
+.sec h2{font-size:26px;margin:0 0 16px}
+.picker{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.picker button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 18px;color:var(--ink)}
+.picker button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;list-style:none;margin:0;padding:0}
+.topics a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;text-decoration:none;color:var(--ink)}
+.topics b{display:block}.topics span{color:var(--mute);font-size:14px}
+.content{padding:24px 0 48px}
+.content .post{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin:0 0 16px}
+.content .post h2,.content .post h1{margin:0 0 8px;font-size:24px}
+.content .post h2 a{color:var(--ink);text-decoration:none}
+.meta{color:var(--mute);font-size:14px;margin:0 0 8px}
+.pager{display:flex;justify-content:space-between;gap:12px}
+.foot{border-top:1px solid var(--line);padding:32px 0;color:var(--mute);font-size:15px}
+.foot ul{list-style:none;margin:0;padding:0}.foot a{color:var(--mute)}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
+.foot h4{margin:0 0 8px;color:var(--ink)}
+.foot-end{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.note{color:var(--mute);font-size:14px}
+/* games */
+.bsr-game{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-height:260px}
+.bsr-game h3{margin:0 0 4px;font-size:22px}
+.g-sub{color:var(--mute);margin:0 0 16px}
+.g-bar{display:flex;justify-content:space-between;color:var(--mute);font-size:14px;margin:0 0 12px}
+.g-prog{height:6px;background:var(--line);border-radius:3px;margin:0 0 16px;overflow:hidden}.g-prog i{display:block;height:100%;background:var(--acc)}
+.g-q{font-size:20px;font-weight:600;margin:0 0 16px}
+.g-opts{display:grid;gap:10px}
+.g-opt{text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px;color:var(--ink)}
+.g-opt:hover:not(:disabled){border-color:var(--acc)}
+.g-opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
+.g-opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.g-fb{margin:16px 0 0;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
+.g-fb strong.ok{color:var(--ok)}.g-fb strong.bad{color:var(--bad)}
+.g-act{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.g-end{text-align:center;padding:16px 0}
+.g-score{font-size:44px;font-weight:700;margin:0}
+.g-ord{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.g-ord li{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;min-height:46px}
+.g-ord li.fill{border-style:solid}
+.g-word{font-size:34px;letter-spacing:.2em;text-align:center;margin:8px 0 16px;direction:rtl}
+.g-in{font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:min(100%,240px)}
+.g-mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.g-card{min-height:72px;border:1px solid var(--line);border-radius:10px;background:var(--acc);color:var(--acc-ink);font-size:16px;padding:6px}
+.g-card.up{background:var(--bg);color:var(--ink)}
+.g-card.done{background:color-mix(in srgb,var(--ok) 18%,var(--card));color:var(--ink);border-color:var(--ok)}
+@media (max-width:560px){.g-mem{grid-template-columns:repeat(3,1fr)}.nav{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 ]]></b:skin>
 </head>
 <body>
-  <a class='skip' href='#main-content'>تجاوز إلى المحتوى</a>
-  <input aria-hidden='true' id='nav-t' tabindex='-1' type='checkbox'/>
+  <a class='skip' href='#content'>تجاوز إلى المحتوى</a>
   <header class='top'>
     <div class='wrap bar'>
-      <label aria-label='فتح القائمة' class='icon-btn menu-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M4 7h16M4 12h16M4 17h16'/></svg></label>
-      <a class='brand' expr:href='data:blog.homepageUrl'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></a>
+      <a class='brand' expr:href='data:blog.homepageUrl'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title"><title id="title">BASIRA symbol</title><path d="M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z" fill="none" stroke="#0f766e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z" fill="none" stroke="#0f766e" stroke-width="2.4"/><path d="M24 19l5 5-5 5-5-5z" fill="#e6a23c" stroke="#152d43" stroke-width="1.2"/><path d="M24 4v5M24 39v5M4 24h5M39 24h5" fill="none" stroke="#152d43" stroke-width="2" stroke-linecap="round"/></svg><span>BASIRA | بصيرة</span></a>
       <nav aria-label='القائمة الرئيسية' class='nav'>
-        <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
+        <a expr:href='data:blog.homepageUrl + &quot;#play&quot;'>الألعاب</a>
         <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
-        <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
         <a href='/search?max-results=24'>المقالات</a>
       </nav>
-      <div class='bar-end'>
-        <details class='sdrop'><summary aria-label='بحث' class='icon-btn'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><circle cx='11' cy='11' r='6.5'/><path d='M16 16l4.5 4.5'/></svg></summary>
-          <form action='/search' class='find' method='get' role='search'><label class='sr' for='q'>ابحث في الموقع</label><input id='q' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
-        </details>
-        <a aria-label='الحساب والتقدم' class='icon-btn' expr:href='data:blog.homepageUrl + &quot;#progress&quot;'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><circle cx='12' cy='8.5' r='3.8'/><path d='M4.5 20c.8-4 3.6-6 7.5-6s6.7 2 7.5 6'/></svg></a>
-      </div>
     </div>
   </header>
-  <label class='scrim' for='nav-t'></label>
-  <aside aria-label='القائمة الجانبية' class='drawer'>
-    <div class='dr-top'><span class='brand'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></span><label aria-label='إغلاق القائمة' class='icon-btn' for='nav-t' role='button' tabindex='0'><svg class='ic' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' focusable='false'><path d='M6 6l12 12M18 6L6 18'/></svg></label></div>
-    <nav aria-label='القائمة الجانبية'>
-      <a expr:href='data:blog.homepageUrl + &quot;#games&quot;'>الألعاب</a>
-      <a expr:href='data:blog.homepageUrl + &quot;#live&quot;'>سؤال اليوم</a>
-      <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>أقسام المعرفة</a>
-      <a href='/search?max-results=24'>المقالات</a>
-      <a expr:href='data:blog.homepageUrl + &quot;#progress&quot;'>التقدم والحساب</a>
-      
-    </nav>
-    <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
-  </aside>
 
-  <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
-    <b:widget id='Blog1' locked='true' title='المحتوى' type='Blog' version='2'>
-      <b:widget-settings>
-        <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-        <b:widget-setting name='showShareButtons'>false</b:widget-setting>
-        <b:widget-setting name='showCommentLink'>false</b:widget-setting>
-      </b:widget-settings>
-      <b:includable id='main' var='top'>
-<main id='main-content'>
-<b:if cond='data:blog.url == data:blog.homepageUrl'>
-<section class='hero' itemscope='itemscope' itemtype='https://schema.org/WebSite'><meta content='BASIRA | بصيرة' itemprop='name'/><link expr:href='data:blog.homepageUrl' itemprop='url'/><div class='wrap hero-in'>
-<div class='hero-txt'>
-<p class='eyebrow'>Think. Discover. Play. <span class='eyebrow-ar'>فكّر. اكتشف. العب.</span></p>
-<h1>اعرف أكثر، ثم <mark class='hl'>تحدَّ نفسك</mark></h1>
-<p class='lede'>منصة عربية تجمع المعرفة الموثّقة والألعاب الذهنية والتحديات الممتعة. اكتشف فكرة جديدة واختبر قدراتك.</p>
-<div class='cta-row'><a class='btn' href='#topics'>استكشف المعرفة</a><a class='btn alt' href='#games'>الألعاب</a></div>
-</div>
-<div class='live' id='live' aria-live='polite'>
-<div class='live-h'><span>سؤال اليوم</span><span id='lv-n'>1 من 6</span></div>
-<h2 class='live-q' id='lv-q'>ما العدد التالي: 2، 6، 12، 20، ؟</h2><div class='live-o' id='lv-o'><button class='lo' type='button'><span class='ol'>أ</span><span>28</span></button><button class='lo' type='button'><span class='ol'>ب</span><span>30</span></button><button class='lo' type='button'><span class='ol'>ج</span><span>32</span></button><button class='lo' type='button'><span class='ol'>د</span><span>24</span></button></div>
-<div class='live-fb' id='lv-fb' hidden='hidden'></div>
-<div class='live-f'><button class='btn' id='lv-next' type='button' hidden='hidden'>سؤال آخر</button><span id='lv-score'></span></div>
-<noscript><p class='note'>يحتاج هذا السؤال إلى تفعيل JavaScript.</p></noscript>
-</div>
+  <b:if cond='data:blog.url == data:blog.homepageUrl'>
+<section class='hero'><div class='wrap'>
+<p class='eyebrow'>Think. Discover. Play. · فكّر. اكتشف. العب.</p>
+<h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
+<p class='lede'>معلومات موثّقة بالمصادر وألعاب أسئلة بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.</p>
+<div class='cta'><a class='btn' href='#play'>العب الآن</a><a class='btn alt' href='#topics'>تصفّح المعرفة</a></div>
 </div></section>
-<section class='stage' id='games'><div class='wrap'>
-<div class='sec-h'><h2>العب</h2></div>
-<p class='stage-note'>اختر لعبة وابدأ فوراً، بلا تسجيل. أسئلتها مراجَعة ومخزّنة، وتُحفظ نتائجك على جهازك.</p>
-<div class='stage-grid'><input class='sr' type='radio' name='gm' id='gm-mcq' checked='checked'/><input class='sr' type='radio' name='gm' id='gm-truefalse'/><input class='sr' type='radio' name='gm' id='gm-order'/><input class='sr' type='radio' name='gm' id='gm-memory'/><input class='sr' type='radio' name='gm' id='gm-word'/><div class='tabs'><label class='tab' for='gm-mcq'><span class='tn'>01</span><span class='tt'>اختبارات متعددة الخيارات</span><span class='lvl lvl-2'>متوسط</span></label><label class='tab' for='gm-truefalse'><span class='tn'>02</span><span class='tt'>صح أم خطأ</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-order'><span class='tn'>03</span><span class='tt'>ترتيب الأحداث</span><span class='lvl lvl-3'>صعب</span></label><label class='tab' for='gm-memory'><span class='tn'>04</span><span class='tt'>لعبة الذاكرة</span><span class='lvl lvl-1'>سهل</span></label><label class='tab' for='gm-word'><span class='tn'>05</span><span class='tt'>خمّن الكلمة</span><span class='lvl lvl-2'>متوسط</span></label></div><div class='panes'><div class='pane p-mcq'><div class='pane-txt'><h3>اختبارات متعددة الخيارات</h3><p>أربع إجابات وتفسير بعد كل سؤال</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='mcq'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-truefalse'><div class='pane-txt'><h3>صح أم خطأ</h3><p>جمل سريعة تختبر دقة معلوماتك</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='truefalse'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-order'><div class='pane-txt'><h3>ترتيب الأحداث</h3><p>رتّب وقائع بالتسلسل الصحيح</p><div class='pane-meta'><span class='lvl lvl-3'>صعب</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='order'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-memory'><div class='pane-txt'><h3>لعبة الذاكرة</h3><p>اكتشف الأزواج بأقل عدد من المحاولات</p><div class='pane-meta'><span class='lvl lvl-1'>سهل</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='memory'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div><div class='pane p-word'><div class='pane-txt'><h3>خمّن الكلمة</h3><p>كلمة مخفية وتلميح يساعدك</p><div class='pane-meta'><span class='lvl lvl-2'>متوسط</span></div></div><div class='pane-vis'><div class='bsr-game' data-game='word'><noscript><p>تحتاج هذه اللعبة إلى تفعيل JavaScript.</p></noscript></div></div></div></div></div>
+<section class='sec' id='play'><div class='wrap'><h2>الألعاب</h2>
+<div class='picker' id='picker'><button aria-pressed='false' data-g='mcq' type='button'>اختبارات متعددة الخيارات</button><button aria-pressed='false' data-g='truefalse' type='button'>صح أم خطأ</button><button aria-pressed='false' data-g='order' type='button'>ترتيب الأحداث</button><button aria-pressed='false' data-g='memory' type='button'>لعبة الذاكرة</button><button aria-pressed='false' data-g='word' type='button'>خمّن الكلمة</button></div>
+<div class='bsr-game' id='play-host'><noscript>تحتاج الألعاب إلى تفعيل JavaScript.</noscript></div>
 </div></section>
-<div class='wrap'>
-<section class='sec' id='topics'><div class='sec-h'><h2>تصفّح بالموضوع</h2></div>
-<ol class='fahras'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><span class='fn'>01</span><span class='fb'><span class='ft'>العلوم</span><span class='fd'>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><span class='fn'>02</span><span class='fb'><span class='ft'>التاريخ والحضارات</span><span class='fd'>أحداث وشعوب وتواريخ موثقة بالمصادر</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><span class='fn'>03</span><span class='fb'><span class='ft'>الجغرافيا والدول</span><span class='fd'>بلدان ومدن وخرائط وحقائق مرجعية</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><span class='fn'>04</span><span class='fb'><span class='ft'>التكنولوجيا</span><span class='fd'>شرح مبسط لما نستخدمه كل يوم</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><span class='fn'>05</span><span class='fb'><span class='ft'>الثقافة العامة</span><span class='fd'>معلومات متنوعة تستحق أن تُعرف</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><span class='fn'>06</span><span class='fb'><span class='ft'>الرياضيات والمنطق</span><span class='fd'>أفكار وألغاز بخطوات حل واضحة</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><span class='fn'>07</span><span class='fb'><span class='ft'>اللغة والأدب</span><span class='fd'>قواعد ومفردات ونصوص وأعلام</span></span><span class='fg' aria-hidden='true'>←</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><span class='fn'>08</span><span class='fb'><span class='ft'>الفضاء والفلك</span><span class='fd'>الكواكب والنجوم وأحدث الاكتشافات</span></span><span class='fg' aria-hidden='true'>←</span></a></li></ol></section>
-<section class='sec' id='latest'><div class='sec-h'><h2>من المقالات</h2></div>
-<div class='feat-wrap' data-empty='لا توجد مقالات منشورة بعد.'>
-<b:loop index='i' values='data:posts' var='post'><b:if cond='data:i == 0'><article class='feat'>
-<a class='feat-img' expr:href='data:post.url' tabindex='-1' aria-hidden='true'><b:if cond='data:post.featuredImage'><img expr:src='data:post.featuredImage' alt='' loading='lazy'/><b:else/><svg class='glyph' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M8 10h14a4 4 0 014 4v24a3 3 0 00-3-3H8z M40 10H26v25h12a2 2 0 002-2z' class='g-l'/></svg></b:if></a>
-<div class='feat-body'><div class='meta'><span class='tag-feat'>مقال مميز</span><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<h3><a expr:href='data:post.url'><data:post.title/></a></h3><p><data:post.snippet/></p><a class='read' expr:href='data:post.url'>اقرأ المقال</a></div></article></b:if></b:loop>
-</div>
-<ol class='rows-list' data-empty=''><b:loop index='i' values='data:posts' var='post'><b:if cond='data:i &gt; 0'><li><a class='rl' expr:href='data:post.url'><span class='rl-n'><data:i/></span><span class='rl-b'><span class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></span><span class='rl-t'><data:post.title/></span><span class='rl-s'><data:post.snippet/></span></span></a></li></b:if></b:loop></ol>
-<p class='more'><a href='/search?max-results=24'>كل المقالات</a></p></section>
-<section class='sec' id='progress'><div class='sec-h'><h2>تقدّمك وإنجازاتك</h2></div>
-<div class='lvlcard'><div id='bsr-progress'><p>يحتاج عرض تقدّمك إلى JavaScript.</p></div></div></section>
-<section class='sec'><div class='sec-h'><h2>كيف نتحقق من المعلومات</h2></div>
-<ol class='method'><li><span class='mn'>1</span><h3>مصدر لكل معلومة</h3><p>كل رقم أو تاريخ في المقال مرتبط بمصدر يمكنك فتحه ومراجعته.</p></li><li><span class='mn'>2</span><h3>تاريخ تحديث ظاهر</h3><p>المعلومات التي تتغير تحمل تاريخ آخر مراجعة لها.</p></li><li><span class='mn'>3</span><h3>مراجعة بشرية</h3><p>لا يُنشر مقال ولا سؤال دون أن يراجعه إنسان.</p></li></ol></section>
-</div>
+<section class='sec' id='topics'><div class='wrap'><h2>أقسام المعرفة</h2><ul class='topics'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><b>العلوم</b><span>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><b>التاريخ والحضارات</b><span>أحداث وشعوب وتواريخ موثقة بالمصادر</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><b>الجغرافيا والدول</b><span>بلدان ومدن وخرائط وحقائق مرجعية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><b>التكنولوجيا</b><span>شرح مبسط لما نستخدمه كل يوم</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><b>الثقافة العامة</b><span>معلومات متنوعة تستحق أن تُعرف</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><b>الرياضيات والمنطق</b><span>أفكار وألغاز بخطوات حل واضحة</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><b>اللغة والأدب</b><span>قواعد ومفردات ونصوص وأعلام</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><b>الفضاء والفلك</b><span>الكواكب والنجوم وأحدث الاكتشافات</span></a></li></ul></div></section>
+  </b:if>
 
-<b:elseif cond='data:blog.pageType == &quot;error_page&quot;'/>
-<div class='wrap err'><h1>الصفحة غير موجودة</h1><p>ربما تغيّر الرابط. ابحث عن الموضوع أو ارجع إلى الرئيسية.</p>
-<form action='/search' class='find' method='get' role='search'><label class='sr' for='q2'>ابحث في الموقع</label><input id='q2' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
-<p><a class='btn' expr:href='data:blog.homepageUrl'>الرئيسية</a></p></div>
-
-<b:elseif cond='data:blog.pageType == &quot;item&quot;'/>
-<div class='wrap page'><b:loop values='data:posts' var='post'><article itemscope='itemscope' itemtype='https://schema.org/Article'><link expr:href='data:post.url' itemprop='mainEntityOfPage'/><meta content='BASIRA | بصيرة' itemprop='publisher'/>
-<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <a href='/search?max-results=24'>المقالات</a></nav>
-<div class='labels'><b:loop values='data:post.labels' var='label'><a expr:href='data:label.url' rel='tag'><data:label.name/></a></b:loop></div>
-<h1 class='entry-title' itemprop='headline'><data:post.title/></h1>
-<div class='byline'><span itemprop='author'><data:post.author.name/></span><time itemprop='datePublished' expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<div class='prose entry-content'><data:post.body/></div>
-<nav aria-label='التنقل بين المقالات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>المقال الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>المقال الأقدم</a></b:if></nav>
-</article></b:loop></div>
-
-<b:elseif cond='data:blog.pageType == &quot;static_page&quot;'/>
-<div class='wrap page'><b:loop values='data:posts' var='post'><article>
-<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › <data:post.title/></nav>
-<h1><data:post.title/></h1>
-<div class='prose entry-content'><data:post.body/></div>
-</article></b:loop></div>
-
-<b:else/>
-<div class='wrap page'>
-<nav aria-label='مسار التصفح' class='crumbs'><a expr:href='data:blog.homepageUrl'>الرئيسية</a> › المقالات</nav>
-<b:if cond='data:blog.searchLabel'><h1><data:blog.searchLabel/></h1>
-<b:elseif cond='data:blog.searchQuery'/><h1>نتائج البحث: <data:blog.searchQuery/></h1>
-<b:else/><h1>كل المقالات</h1></b:if>
-<form action='/search' class='find' method='get' role='search'><label class='sr' for='q3'>ابحث في الموقع</label><input expr:value='data:blog.searchQuery' id='q3' name='q' placeholder='ابحث عن موضوع' type='search'/><button type='submit'>بحث</button></form>
-<ul class='posts' data-empty='لا توجد مقالات مطابقة. جرّب كلمة أخرى أو تصفّح الأقسام من الرئيسية.'><b:loop values='data:posts' var='post'><li>
-<div class='meta'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop><time expr:datetime='data:post.timestampISO8601'><data:post.timestamp/></time></div>
-<a expr:href='data:post.url'><data:post.title/></a><p><data:post.snippet/></p></li></b:loop></ul>
-<nav aria-label='التنقل بين الصفحات' class='pager'><b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>الأحدث</a></b:if><b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if></nav>
-</div>
-
-</b:if>
-</main>
-      </b:includable>
-    </b:widget>
-  </b:section>
+  <div class='wrap content' id='content'>
+    <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
+        <b:includable id='main' var='top'>
+          <b:loop values='data:posts' var='post'>
+            <article class='post'>
+              <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
+                <h1><data:post.title/></h1>
+                <data:post.body/>
+              <b:else/>
+                <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                <data:post.snippet/>
+              </b:if>
+            </article>
+          </b:loop>
+          <div class='pager'>
+            <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>الأحدث</a></b:if>
+            <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </div>
 
   <footer class='foot'>
     <div class='wrap'>
       <div class='foot-grid'>
-        <div><div class='foot-brand'><span class='brand-lockup'><svg class='brand-symbol' viewBox='0 0 48 48' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><path d='M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z' class='bs-line'/><path d='M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z' class='bs-line'/><path d='M24 19l5 5-5 5-5-5z' class='bs-core'/><path d='M24 4v5M24 39v5M4 24h5M39 24h5' class='bs-ray'/></svg><span class='brand-names'><b>BASIRA</b><small>بصيرة</small></span></span></div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
+        <div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
         <div><h4>أقسام المعرفة</h4><ul><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'>العلوم</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'>التاريخ والحضارات</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'>الجغرافيا والدول</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'>التكنولوجيا</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'>الثقافة العامة</a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'>الرياضيات والمنطق</a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'>اللغة والأدب</a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'>الفضاء والفلك</a></li></ul></div>
         <div><h4>عن الموقع</h4><ul><li>الصفحات التعريفية قيد الإعداد</li></ul></div>
       </div>
@@ -474,386 +149,186 @@ html[data-theme=dark]{--brand-ink:#e9f1f4;--brand-accent:#72c9bd;--brand-spark:#
   </footer>
   <script>//<![CDATA[
 (function(){
-  var d=document.documentElement,bs=document.querySelectorAll('.js-theme'),nav=document.getElementById('nav-t');
-  function label(){var t=d.getAttribute('data-theme')==='dark'?'الوضع الفاتح':'الوضع الداكن';for(var i=0;i<bs.length;i++)bs[i].textContent=t;}
-  label();
-  for(var i=0;i<bs.length;i++)bs[i].addEventListener('click',function(){
-    var dark=d.getAttribute('data-theme')!=='dark';
-    if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
-    try{localStorage.setItem('site-theme',dark?'dark':'light');}catch(e){}
-    label();
-  });
-  function closeNav(){if(nav)nav.checked=false;}
-  var dl=document.querySelectorAll('.drawer a');for(i=0;i<dl.length;i++)dl[i].addEventListener('click',closeNav);
-  var lb=document.querySelectorAll('label[role=button]');
-  for(i=0;i<lb.length;i++)lb[i].addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();this.click();}});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeNav();var s=document.querySelector('.sdrop');if(s)s.removeAttribute('open');}});
-  var fs=document.querySelectorAll('form.find');
-  for(i=0;i<fs.length;i++)fs[i].addEventListener('submit',function(e){
-    var q=this.querySelector('input[name=q]');
-    if(q&&!q.value.trim()){e.preventDefault();q.focus();return;}
-    var b=this.querySelector('button');if(b){b.classList.add('busy');b.setAttribute('aria-busy','true');}
-  });
+'use strict';
+var BANK={"topics":["العلوم","التاريخ والحضارات","الجغرافيا والدول","التكنولوجيا","الثقافة العامة","الرياضيات والمنطق","اللغة والأدب","الفضاء والفلك"],"mcq":[{"id":"m1","t":"العلوم","l":1,"q":"أي غاز تمتصه النباتات أثناء البناء الضوئي؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],"a":2,"x":"تمتص النباتات ثاني أكسيد الكربون وتستخدمه مع الماء وضوء الشمس لصنع الغذاء، وتطلق الأكسجين."},{"id":"m2","t":"العلوم","l":2,"q":"ما الرمز الكيميائي للذهب؟","o":["Ag","Au","Fe","Go"],"a":1,"x":"الرمز Au مأخوذ من الاسم اللاتيني aurum. أما Ag فللفضة وFe للحديد."},{"id":"m3","t":"العلوم","l":2,"q":"كم عدد العظام في جسم الإنسان البالغ تقريباً؟","o":["150","206","300","412"],"a":1,"x":"للبالغ 206 عظمة، بينما يولد الطفل بعدد أكبر تلتحم بعض عظامه مع النمو."},{"id":"m4","t":"العلوم","l":1,"q":"ما أسرع حيوان بري في العالم؟","o":["الأسد","الحصان","الفهد","الغزال"],"a":2,"x":"الفهد (الشيتا) أسرع الحيوانات البرية، ويستطيع الركض بسرعات تفوق 100 كم/س لمسافات قصيرة."},{"id":"m5","t":"العلوم","l":2,"q":"ما الغاز الأكثر وفرة في الغلاف الجوي للأرض؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الأرجون"],"a":1,"x":"يشكل النيتروجين نحو 78% من حجم الهواء، والأكسجين نحو 21%."},{"id":"m6","t":"العلوم","l":2,"q":"ما وحدة قياس القوة في النظام الدولي للوحدات؟","o":["الجول","الواط","النيوتن","الباسكال"],"a":2,"x":"النيوتن وحدة القوة، والجول للطاقة، والواط للقدرة، والباسكال للضغط."},{"id":"m7","t":"العلوم","l":1,"q":"ما أصلب مادة طبيعية معروفة؟","o":["الحديد","الألماس","الذهب","الكوارتز"],"a":1,"x":"الألماس أصلب المواد الطبيعية على مقياس موس للصلادة."},{"id":"m8","t":"التاريخ والحضارات","l":2,"q":"في أي عام سقطت القسطنطينية بيد العثمانيين؟","o":["1204","1453","1517","1683"],"a":1,"x":"فتح السلطان محمد الفاتح القسطنطينية عام 1453م."},{"id":"m9","t":"التاريخ والحضارات","l":2,"q":"من الفرعون الذي يُنسب إليه بناء الهرم الأكبر في الجيزة؟","o":["خوفو","خفرع","رمسيس الثاني","توت عنخ آمون"],"a":0,"x":"يُنسب الهرم الأكبر إلى الملك خوفو من الأسرة الرابعة."},{"id":"m10","t":"التاريخ والحضارات","l":2,"q":"في أي عام بدأت الحرب العالمية الأولى؟","o":["1905","1914","1918","1939"],"a":1,"x":"بدأت الحرب العالمية الأولى عام 1914 وانتهت عام 1918."},{"id":"m11","t":"التاريخ والحضارات","l":1,"q":"في أي عام انتهت الحرب العالمية الثانية؟","o":["1939","1941","1945","1950"],"a":2,"x":"انتهت الحرب العالمية الثانية عام 1945."},{"id":"m12","t":"التاريخ والحضارات","l":3,"q":"من الذي نجح في فكّ رموز حجر رشيد؟","o":["هوارد كارتر","جان فرانسوا شامبليون","نابليون بونابرت","ماريت"],"a":1,"x":"فكّ شامبليون رموز الكتابة الهيروغليفية عام 1822 بالاستعانة بحجر رشيد."},{"id":"m13","t":"التاريخ والحضارات","l":2,"q":"أي حضارة بنت مدينة البتراء؟","o":["الرومان","الفرس","الأنباط","الفينيقيون"],"a":2,"x":"بنى الأنباط البتراء في جنوب الأردن ونحتوا واجهاتها في الصخر."},{"id":"m14","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة أستراليا؟","o":["سيدني","ملبورن","كانبرا","بيرث"],"a":2,"x":"عاصمة أستراليا كانبرا، وليست سيدني التي هي أكبر مدنها."},{"id":"m15","t":"الجغرافيا والدول","l":1,"q":"ما أكبر محيطات العالم مساحة؟","o":["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],"a":2,"x":"المحيط الهادئ أكبر المحيطات، ويغطي نحو ثلث سطح الأرض."},{"id":"m16","t":"الجغرافيا والدول","l":1,"q":"ما أطول نهر في قارة أفريقيا؟","o":["الكونغو","النيجر","النيل","الزمبيزي"],"a":2,"x":"نهر النيل أطول أنهار أفريقيا."},{"id":"m17","t":"الجغرافيا والدول","l":1,"q":"ما أعلى قمة جبلية فوق مستوى سطح البحر؟","o":["كي تو","إفرست","كليمنجارو","مون بلان"],"a":1,"x":"قمة إفرست في جبال الهيمالايا أعلى قمة فوق مستوى سطح البحر."},{"id":"m18","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة كندا؟","o":["تورونتو","فانكوفر","أوتاوا","مونتريال"],"a":2,"x":"عاصمة كندا أوتاوا."},{"id":"m19","t":"الجغرافيا والدول","l":2,"q":"ما أصغر دولة في العالم مساحة؟","o":["موناكو","الفاتيكان","سان مارينو","ليختنشتاين"],"a":1,"x":"الفاتيكان أصغر دولة مساحة، ومساحتها نحو 0.44 كم²."},{"id":"m20","t":"التكنولوجيا","l":1,"q":"ماذا يعني الاختصار CPU؟","o":["وحدة المعالجة المركزية","ذاكرة الوصول العشوائي","وحدة التخزين","بطاقة الشاشة"],"a":0,"x":"CPU اختصار Central Processing Unit أي وحدة المعالجة المركزية، وهي عقل الحاسوب."},{"id":"m21","t":"التكنولوجيا","l":1,"q":"من الذي أسس شركة مايكروسوفت مع بول ألين؟","o":["ستيف جوبز","بيل غيتس","مارك زوكربيرغ","لاري بيج"],"a":1,"x":"أسس بيل غيتس وبول ألين مايكروسوفت عام 1975."},{"id":"m22","t":"التكنولوجيا","l":1,"q":"ما النظام العددي الذي تعتمد عليه الحواسيب داخلياً؟","o":["العشري","الثنائي","الروماني","الثماني فقط"],"a":1,"x":"تعمل الحواسيب بالنظام الثنائي المكوَّن من 0 و1."},{"id":"m23","t":"التكنولوجيا","l":2,"q":"ماذا يرمز الاختصار HTTP؟","o":["بروتوكول نقل النص التشعبي","لغة ترميز الصفحات","عنوان الموقع","نظام أسماء النطاقات"],"a":0,"x":"HTTP هو بروتوكول نقل النص التشعبي، وبه يتبادل المتصفح والخادم صفحات الويب."},{"id":"m24","t":"الثقافة العامة","l":1,"q":"كم عدد ألوان قوس قزح التقليدية؟","o":["5","6","7","8"],"a":2,"x":"يُقسَّم قوس قزح تقليدياً إلى سبعة ألوان."},{"id":"m25","t":"الثقافة العامة","l":1,"q":"ما أكبر حيوان ثديي في العالم؟","o":["الفيل الأفريقي","الحوت الأزرق","القرش الحوتي","الزرافة"],"a":1,"x":"الحوت الأزرق أكبر الثدييات، بل أكبر حيوان عاش على الأرض."},{"id":"m26","t":"الثقافة العامة","l":1,"q":"كم عدد لاعبي فريق كرة القدم داخل الملعب؟","o":["9","10","11","12"],"a":2,"x":"يلعب كل فريق بأحد عشر لاعباً داخل الملعب."},{"id":"m27","t":"الثقافة العامة","l":1,"q":"في أي دولة يقع برج بيزا المائل؟","o":["فرنسا","إيطاليا","إسبانيا","اليونان"],"a":1,"x":"يقع برج بيزا المائل في مدينة بيزا بإيطاليا."},{"id":"m28","t":"الرياضيات والمنطق","l":1,"q":"ما ناتج 12 × 12؟","o":["124","132","144","156"],"a":2,"x":"12 × 12 = 144."},{"id":"m29","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 2، 6، 12، 20، ؟","o":["28","30","32","24"],"a":1,"x":"الفروق بين الأعداد 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30."},{"id":"m30","t":"الرياضيات والمنطق","l":1,"q":"ما قيمة النسبة التقريبية π (باي)؟","o":["2.14","3.14","4.13","3.41"],"a":1,"x":"قيمة π تقريباً 3.14159."},{"id":"m31","t":"الرياضيات والمنطق","l":1,"q":"ما مجموع زوايا المثلث؟","o":["90 درجة","180 درجة","270 درجة","360 درجة"],"a":1,"x":"مجموع زوايا أي مثلث مستوٍ 180 درجة."},{"id":"m32","t":"الرياضيات والمنطق","l":2,"q":"ما الجذر التربيعي للعدد 169؟","o":["11","12","13","14"],"a":2,"x":"13 × 13 = 169."},{"id":"m33","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 1، 1، 2، 3، 5، 8، ؟","o":["11","12","13","15"],"a":2,"x":"كل عدد هو مجموع العددين السابقين له (متتالية فيبوناتشي): 5 + 8 = 13."},{"id":"m34","t":"اللغة والأدب","l":1,"q":"ما جمع كلمة «كتاب»؟","o":["كتّاب","كتب","أكتاب","كاتبون"],"a":1,"x":"جمع «كتاب» هو «كتب»."},{"id":"m35","t":"اللغة والأدب","l":1,"q":"ما ضد كلمة «كريم»؟","o":["بخيل","شجاع","ذكي","قوي"],"a":0,"x":"ضد الكريم هو البخيل."},{"id":"m36","t":"اللغة والأدب","l":1,"q":"كم عدد حروف الأبجدية العربية؟","o":["26","28","29","30"],"a":1,"x":"تتكون الأبجدية العربية من 28 حرفاً."},{"id":"m37","t":"اللغة والأدب","l":2,"q":"من مؤلف سيرة «الأيام» الذاتية؟","o":["طه حسين","العقاد","توفيق الحكيم","المازني"],"a":0,"x":"«الأيام» سيرة ذاتية للأديب طه حسين."},{"id":"m38","t":"اللغة والأدب","l":2,"q":"من كاتب «الثلاثية» (بين القصرين، قصر الشوق، السكرية)؟","o":["نجيب محفوظ","يوسف إدريس","إحسان عبد القدوس","جمال الغيطاني"],"a":0,"x":"«الثلاثية» رواية لنجيب محفوظ، وقد نال جائزة نوبل في الأدب عام 1988."},{"id":"m39","t":"الفضاء والفلك","l":1,"q":"كم عدد كواكب المجموعة الشمسية؟","o":["7","8","9","10"],"a":1,"x":"ثمانية كواكب بعد أن صُنِّف بلوتو كوكباً قزماً عام 2006."},{"id":"m40","t":"الفضاء والفلك","l":1,"q":"ما أكبر كواكب المجموعة الشمسية؟","o":["زحل","المشتري","نبتون","الأرض"],"a":1,"x":"المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة."},{"id":"m41","t":"الفضاء والفلك","l":1,"q":"أي كوكب يُعرف بالكوكب الأحمر؟","o":["المريخ","الزهرة","عطارد","أورانوس"],"a":0,"x":"المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته."},{"id":"m42","t":"الفضاء والفلك","l":1,"q":"ما اسم المجرة التي تقع فيها المجموعة الشمسية؟","o":["أندروميدا","درب التبانة","المثلث","الدوامة"],"a":1,"x":"مجرتنا هي درب التبانة."},{"id":"m43","t":"الفضاء والفلك","l":1,"q":"أي كوكب يشتهر بحلقاته الواضحة؟","o":["زحل","المريخ","عطارد","الزهرة"],"a":0,"x":"يشتهر زحل بحلقاته، وللمشتري وأورانوس ونبتون حلقات خافتة أيضاً."},{"id":"m44","t":"الفضاء والفلك","l":2,"q":"ما أقرب كواكب المجموعة الشمسية إلى الشمس؟","o":["الزهرة","الأرض","عطارد","المريخ"],"a":2,"x":"عطارد أقرب الكواكب إلى الشمس."},{"id":"m45","t":"الفضاء والفلك","l":2,"q":"من أول إنسان وطئت قدماه سطح القمر؟","o":["بز ألدرين","نيل أرمسترونغ","يوري غاغارين","مايكل كولينز"],"a":1,"x":"وطئ نيل أرمسترونغ سطح القمر في 20 يوليو 1969 ضمن مهمة أبولو 11."}],"tf":[{"id":"t1","t":"العلوم","l":1,"s":"يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.","v":true,"x":"يتغير ذلك مع الارتفاع، إذ ينخفض الضغط فتنخفض درجة الغليان."},{"id":"t2","t":"الفضاء والفلك","l":1,"s":"الشمس كوكب.","v":false,"x":"الشمس نجم، والكواكب تدور حول النجوم."},{"id":"t3","t":"العلوم","l":1,"s":"للقلب البشري أربع حجرات.","v":true,"x":"أذينان وبطينان."},{"id":"t4","t":"العلوم","l":1,"s":"الخفاش من الطيور.","v":false,"x":"الخفاش من الثدييات، وهو الثديي الوحيد القادر على الطيران الحقيقي."},{"id":"t5","t":"العلوم","l":2,"s":"كثافة الذهب أكبر من كثافة الحديد.","v":true,"x":"كثافة الذهب نحو 19.3 غ/سم³ وكثافة الحديد نحو 7.9 غ/سم³."},{"id":"t6","t":"العلوم","l":1,"s":"العنكبوت حشرة.","v":false,"x":"العنكبوت من العنكبيات وله ثماني أرجل، أما الحشرات فلها ست أرجل."},{"id":"t7","t":"الفضاء والفلك","l":1,"s":"القمر يدور حول الأرض.","v":true,"x":"القمر تابع طبيعي للأرض."},{"id":"t8","t":"الجغرافيا والدول","l":2,"s":"تقع مصر في قارة آسيا بالكامل.","v":false,"x":"معظم مصر في أفريقيا، وتقع شبه جزيرة سيناء في آسيا."},{"id":"t9","t":"الجغرافيا والدول","l":1,"s":"أستراليا قارة ودولة في آن واحد.","v":true,"x":"أستراليا دولة تشغل قارة كاملة."},{"id":"t10","t":"الجغرافيا والدول","l":2,"s":"تطل الصين على المحيط الأطلسي.","v":false,"x":"تطل الصين على المحيط الهادئ، ولا ساحل لها على الأطلسي."},{"id":"t11","t":"الرياضيات والمنطق","l":2,"s":"العدد 1 عدد أولي.","v":false,"x":"العدد الأولي له قاسمان بالضبط، والعدد 1 له قاسم واحد فقط."},{"id":"t12","t":"الرياضيات والمنطق","l":2,"s":"العدد 2 هو العدد الأولي الزوجي الوحيد.","v":true,"x":"كل عدد زوجي أكبر من 2 يقبل القسمة على 2، فليس أولياً."},{"id":"t13","t":"الرياضيات والمنطق","l":1,"s":"مجموع زوايا أي مثلث مستوٍ 180 درجة.","v":true,"x":"هذه خاصية المثلث في الهندسة المستوية."},{"id":"t14","t":"الرياضيات والمنطق","l":2,"s":"الصفر عدد زوجي.","v":true,"x":"الصفر يقبل القسمة على 2 بلا باقٍ فهو عدد زوجي."},{"id":"t15","t":"التاريخ والحضارات","l":2,"s":"بدأت الثورة الفرنسية عام 1789.","v":true,"x":"بدأت الثورة الفرنسية بسقوط سجن الباستيل في يوليو 1789."},{"id":"t16","t":"التاريخ والحضارات","l":1,"s":"بُنيت أهرامات الجيزة في عهد الدولة العثمانية.","v":false,"x":"بُنيت قبل ذلك بنحو أربعة آلاف سنة في عصر الدولة القديمة."},{"id":"t17","t":"التاريخ والحضارات","l":2,"s":"اخترع غوتنبرغ الطباعة بالحروف المعدنية المتحركة في أوروبا.","v":true,"x":"اخترعها يوهان غوتنبرغ في منتصف القرن الخامس عشر."},{"id":"t18","t":"التكنولوجيا","l":1,"s":"يعتمد الحاسوب داخلياً على النظام الثنائي.","v":true,"x":"كل المعلومات تُمثَّل بسلاسل من 0 و1."},{"id":"t19","t":"التكنولوجيا","l":2,"s":"تحتفظ ذاكرة RAM بمحتواها بعد إطفاء الجهاز.","v":false,"x":"ذاكرة RAM مؤقتة وتفقد محتواها عند انقطاع الكهرباء."},{"id":"t20","t":"اللغة والأدب","l":2,"s":"التاء المربوطة (ة) تأتي في أول الكلمة.","v":false,"x":"التاء المربوطة لا تأتي إلا في آخر الكلمة."},{"id":"t21","t":"الفضاء والفلك","l":1,"s":"المشتري أكبر من الأرض.","v":true,"x":"قطر المشتري نحو 11 ضعف قطر الأرض."},{"id":"t22","t":"العلوم","l":1,"s":"الضوء أسرع من الصوت.","v":true,"x":"يقطع الضوء نحو 300 ألف كم كل ثانية، والصوت في الهواء نحو 343 م/ث."},{"id":"t23","t":"الفضاء والفلك","l":1,"s":"تدور الأرض حول الشمس دورة كاملة كل 24 ساعة.","v":false,"x":"الدورة حول الشمس تستغرق نحو 365 يوماً، أما 24 ساعة فمدة دورانها حول نفسها."},{"id":"t24","t":"العلوم","l":3,"s":"تسقط الريشة والحجر بالتسارع نفسه في الفراغ.","v":true,"x":"في الفراغ لا توجد مقاومة هواء، فيتساوى تسارع السقوط لكل الأجسام."},{"id":"t25","t":"العلوم","l":1,"s":"الحوت سمكة.","v":false,"x":"الحوت من الثدييات يتنفس الهواء ويرضع صغاره."},{"id":"t26","t":"اللغة والأدب","l":2,"s":"نال نجيب محفوظ جائزة نوبل في الأدب.","v":true,"x":"نالها عام 1988."},{"id":"t27","t":"الجغرافيا والدول","l":2,"s":"عاصمة تركيا هي إسطنبول.","v":false,"x":"عاصمة تركيا أنقرة، وإسطنبول أكبر مدنها."},{"id":"t28","t":"الجغرافيا والدول","l":3,"s":"يُعد البحر الميت أخفض منطقة على سطح اليابسة.","v":true,"x":"يقع شاطئه على نحو 430 متراً تحت مستوى سطح البحر."},{"id":"t29","t":"العلوم","l":2,"s":"تحمي طبقة الأوزون الأرض من معظم الأشعة فوق البنفسجية الضارة.","v":true,"x":"تمتص طبقة الأوزون الجزء الأكبر من هذه الأشعة."},{"id":"t30","t":"العلوم","l":3,"s":"الألماس والجرافيت مكوَّنان من عنصر الكربون.","v":true,"x":"يختلفان في ترتيب ذرات الكربون فقط."},{"id":"t31","t":"العلوم","l":2,"s":"يتكوَّن جزيء الماء من ذرتي أكسجين وذرة هيدروجين.","v":false,"x":"العكس صحيح: ذرتا هيدروجين وذرة أكسجين (H₂O)."},{"id":"t32","t":"العلوم","l":1,"s":"ينتقل الصوت عبر الفراغ.","v":false,"x":"يحتاج الصوت إلى وسط مادي كالهواء أو الماء."},{"id":"t33","t":"الرياضيات والمنطق","l":1,"s":"تحتوي السنة الكبيسة على 366 يوماً.","v":true,"x":"يضاف يوم 29 فبراير في السنة الكبيسة."},{"id":"t34","t":"الفضاء والفلك","l":2,"s":"قطر المشتري أكبر من قطر الأرض بأكثر من عشرة أضعاف.","v":true,"x":"نحو 11.2 ضعفاً."},{"id":"t35","t":"الرياضيات والمنطق","l":1,"s":"عدد أضلاع المسدس سبعة.","v":false,"x":"للمسدس ستة أضلاع."},{"id":"t36","t":"اللغة والأدب","l":3,"s":"الخليل بن أحمد الفراهيدي هو واضع علم العروض.","v":true,"x":"وضع الخليل علم العروض لضبط أوزان الشعر العربي."},{"id":"t37","t":"العلوم","l":2,"s":"كان ابن الهيثم من علماء البصريات المسلمين.","v":true,"x":"ألّف «كتاب المناظر» وأسهم في تأسيس علم البصريات."},{"id":"t38","t":"التاريخ والحضارات","l":3,"s":"فُتحت مصر على يد عمرو بن العاص في القرن السابع الميلادي.","v":true,"x":"جرى الفتح نحو عام 640م."},{"id":"t39","t":"التكنولوجيا","l":2,"s":"يمكن لمتصفح الويب فتح الصفحات دون استخدام بروتوكول HTTP أو HTTPS.","v":false,"x":"تُحمَّل صفحات الويب عبر HTTP أو HTTPS، مع وجود بروتوكولات أخرى لخدمات مختلفة."}],"order":[{"id":"o1","t":"التاريخ والحضارات","l":2,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["اختراع الطباعة بالحروف المتحركة في أوروبا","الثورة الفرنسية","أول هبوط بشري على القمر","سقوط جدار برلين"],"x":"منتصف القرن 15، ثم 1789، ثم 1969، ثم 1989."},{"id":"o2","t":"الفضاء والفلك","l":1,"q":"رتّب الكواكب من الأقرب إلى الشمس إلى الأبعد","items":["عطارد","الزهرة","الأرض","المريخ"],"x":"عطارد ثم الزهرة ثم الأرض ثم المريخ."},{"id":"o3","t":"الرياضيات والمنطق","l":1,"q":"رتّب الوحدات من الأصغر إلى الأكبر","items":["مليمتر","سنتيمتر","متر","كيلومتر"],"x":"1 سم = 10 مم، و1 م = 100 سم، و1 كم = 1000 م."},{"id":"o4","t":"العلوم","l":1,"q":"رتّب مراحل دورة حياة الفراشة","items":["بيضة","يرقة","شرنقة","فراشة بالغة"],"x":"تمر الفراشة بتحوّل كامل: بيضة فيرقة فشرنقة فبالغة."},{"id":"o5","t":"التاريخ والحضارات","l":3,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["بناء الهرم الأكبر (نحو 2560 ق.م)","تأسيس الإسكندرية (332 ق.م)","فتح مصر على يد عمرو بن العاص (نحو 640م)","بناء الجامع الأزهر (نحو 970م)"],"x":"الأحداث موزعة على نحو أربعة آلاف سنة من التاريخ المصري."},{"id":"o6","t":"الرياضيات والمنطق","l":1,"q":"رتّب الأعداد من الأصغر إلى الأكبر","items":["0.5","3/4","1","1.25"],"x":"0.5 ثم 0.75 ثم 1 ثم 1.25."},{"id":"o7","t":"التكنولوجيا","l":2,"q":"رتّب من الأقدم إلى الأحدث","items":["حاسوب IBM الشخصي (1981)","إطلاق شبكة الويب للجمهور (1991)","إطلاق هاتف آيفون الأول (2007)","إطلاق ChatGPT (2022)"],"x":"1981 ثم 1991 ثم 2007 ثم 2022."},{"id":"o8","t":"العلوم","l":1,"q":"رتّب حالات الماء أثناء التسخين","items":["جليد","ماء سائل","بخار ماء"],"x":"يذوب الجليد فيصير ماءً، ثم يتبخر الماء بالتسخين."},{"id":"o9","t":"الرياضيات والمنطق","l":2,"q":"رتّب الأرقام الرومانية من الأصغر إلى الأكبر","items":["V","X","L","C"],"x":"V = 5 ثم X = 10 ثم L = 50 ثم C = 100."},{"id":"o10","t":"اللغة والأدب","l":1,"q":"رتّب الأشهر الهجرية كما تأتي في السنة","items":["محرم","صفر","ربيع الأول","ربيع الآخر"],"x":"هذه أول أربعة أشهر في التقويم الهجري."}],"word":[{"id":"w1","t":"الفضاء والفلك","w":"مجرة","h":"تجمع هائل من النجوم والغاز والغبار"},{"id":"w2","t":"الفضاء والفلك","w":"كوكب","h":"جرم يدور حول نجم"},{"id":"w3","t":"الفضاء والفلك","w":"تلسكوب","h":"جهاز يُقرِّب الأجرام البعيدة"},{"id":"w4","t":"الجغرافيا والدول","w":"بركان","h":"جبل يقذف حمماً ورماداً"},{"id":"w5","t":"الجغرافيا والدول","w":"محيط","h":"أوسع مسطح مائي على الأرض"},{"id":"w6","t":"الجغرافيا والدول","w":"جزيرة","h":"يابسة تحيط بها المياه"},{"id":"w7","t":"الجغرافيا والدول","w":"خريطة","h":"رسم يمثل سطح الأرض"},{"id":"w8","t":"الجغرافيا والدول","w":"عاصمة","h":"المدينة التي تقع فيها الحكومة"},{"id":"w9","t":"العلوم","w":"ذرة","h":"أصغر وحدة بناء للعنصر"},{"id":"w10","t":"العلوم","w":"خلية","h":"وحدة بناء الكائن الحي"},{"id":"w11","t":"العلوم","w":"طاقة","h":"القدرة على إنجاز شغل"},{"id":"w12","t":"العلوم","w":"مجهر","h":"جهاز يُكبِّر الأشياء الدقيقة"},{"id":"w13","t":"العلوم","w":"جاذبية","h":"قوة تشدّ الأجسام نحو الأرض"},{"id":"w14","t":"التكنولوجيا","w":"حاسوب","h":"جهاز يعالج البيانات"},{"id":"w15","t":"التكنولوجيا","w":"برمجة","h":"كتابة تعليمات للحاسوب"},{"id":"w16","t":"التكنولوجيا","w":"شبكة","h":"أجهزة متصلة ببعضها"},{"id":"w17","t":"التكنولوجيا","w":"معالج","h":"عقل الحاسوب"},{"id":"w18","t":"الرياضيات والمنطق","w":"مثلث","h":"شكل له ثلاثة أضلاع"},{"id":"w19","t":"الرياضيات والمنطق","w":"دائرة","h":"شكل كل نقاطه على بعد واحد من مركزه"},{"id":"w20","t":"الرياضيات والمنطق","w":"معادلة","h":"تساوٍ بين تعبيرين يحوي مجهولاً"},{"id":"w21","t":"اللغة والأدب","w":"قصيدة","h":"نص شعري"},{"id":"w22","t":"اللغة والأدب","w":"ديوان","h":"مجموعة قصائد"},{"id":"w23","t":"اللغة والأدب","w":"مكتبة","h":"مكان الكتب"},{"id":"w24","t":"اللغة والأدب","w":"رواية","h":"عمل أدبي سردي طويل"},{"id":"w25","t":"التاريخ والحضارات","w":"حضارة","h":"مجتمع متقدم عمرانياً وثقافياً"},{"id":"w26","t":"التاريخ والحضارات","w":"تاريخ","h":"علم دراسة الماضي"},{"id":"w27","t":"التاريخ والحضارات","w":"فرعون","h":"لقب ملك مصر القديمة"},{"id":"w28","t":"التاريخ والحضارات","w":"قلعة","h":"حصن محصَّن"}],"mem":[{"id":"p1","title":"عواصم","kind":"الدولة والعاصمة","pairs":[["مصر","القاهرة"],["فرنسا","باريس"],["اليابان","طوكيو"],["إيطاليا","روما"],["ألمانيا","برلين"],["إسبانيا","مدريد"]]},{"id":"p2","title":"عواصم عربية","kind":"الدولة والعاصمة","pairs":[["السعودية","الرياض"],["المغرب","الرباط"],["الأردن","عمّان"],["العراق","بغداد"],["لبنان","بيروت"],["السودان","الخرطوم"]]},{"id":"p3","title":"عناصر","kind":"العنصر ورمزه","pairs":[["الذهب","Au"],["الحديد","Fe"],["الأكسجين","O"],["الهيدروجين","H"],["الصوديوم","Na"],["الكربون","C"]]},{"id":"p4","title":"علماء","kind":"العالم وإسهامه","pairs":[["الخوارزمي","الجبر"],["ابن سينا","القانون في الطب"],["ابن الهيثم","المناظر"],["ابن النفيس","الدورة الدموية الصغرى"],["نيوتن","الجاذبية"],["أينشتاين","النسبية"]]}]};
+var META=[["mcq","اختبارات متعددة الخيارات","أربع إجابات وتفسير بعد كل سؤال","متوسط"],["truefalse","صح أم خطأ","جمل سريعة تختبر دقة معلوماتك","سهل"],["order","ترتيب الأحداث","رتّب وقائع بالتسلسل الصحيح","صعب"],["memory","لعبة الذاكرة","اكتشف الأزواج بأقل عدد من المحاولات","سهل"],["word","خمّن الكلمة","كلمة مخفية وتلميح يساعدك","متوسط"]];
+var KEY='basira.v2',PASS=0.7;
+var ROUND={mcq:10,truefalse:10,order:5,word:5};
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}}
+function save(s){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+function el(tag,cls,text){var n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;}
+function btn(text,cls,fn){var b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function pick(slug,pool,n){
+  var s=load(),seen=(s.seen&&s.seen[slug])||[];
+  var fresh=pool.filter(function(x){return seen.indexOf(x.id)<0;});
+  if(fresh.length<n){fresh=pool;seen=[];}
+  var chosen=shuffle(fresh).slice(0,n);
+  s.seen=s.seen||{};s.seen[slug]=seen.concat(chosen.map(function(x){return x.id;}));save(s);
+  return chosen;
+}
+function norm(t){return String(t).replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,'').trim();}
+function meta(slug){for(var i=0;i<META.length;i++)if(META[i][0]===slug)return META[i];return null;}
 
-  /* سؤال اليوم: أسئلة مراجَعة مخزنة في القالب. بلا خادم وبلا نقاط، والنتيجة لهذه الجلسة فقط. */
-  var Q=[{"q": "ما العدد التالي: 2، 6، 12، 20، ؟", "o": ["28", "30", "32", "24"], "a": 1, "x": "الفروق بين الأعداد المتتالية هي 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30. وكل حدّ هو n × (n+1).", "l": "متوسط"}, {"q": "ما أكبر كواكب المجموعة الشمسية؟", "o": ["زحل", "المشتري", "نبتون", "الأرض"], "a": 1, "x": "المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة.", "l": "سهل"}, {"q": "أي هذه الأنهار يصب في البحر المتوسط؟", "o": ["الأمازون", "الدانوب", "النيل", "المسيسيبي"], "a": 2, "x": "يصب النيل في البحر المتوسط شمال مصر. أما الأمازون فيصب في المحيط الأطلسي، والدانوب في البحر الأسود، والمسيسيبي في خليج المكسيك.", "l": "سهل"}, {"q": "ما أصغر عدد أولي؟", "o": ["0", "1", "2", "3"], "a": 2, "x": "العدد الأولي له قاسمان بالضبط هما 1 ونفسه. العدد 1 له قاسم واحد فقط فليس أولياً، والعدد 2 هو أصغر عدد يحقق الشرط.", "l": "متوسط"}, {"q": "كم يوماً في السنة الكبيسة؟", "o": ["365", "364", "367", "366"], "a": 3, "x": "السنة الكبيسة في التقويم الميلادي 366 يوماً، لأن شهر فبراير فيها 29 يوماً.", "l": "سهل"}, {"q": "أي كوكب يُعرف بالكوكب الأحمر؟", "o": ["المريخ", "الزهرة", "عطارد", "أورانوس"], "a": 0, "x": "المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته.", "l": "سهل"}],live=document.getElementById('live');
-  if(live&&Q.length){
-    var $=function(id){return document.getElementById(id);},qe=$('lv-q'),oe=$('lv-o'),fb=$('lv-fb'),nx=$('lv-next'),sc=$('lv-score'),nn=$('lv-n');
-    var day=Math.floor(new Date().getTime()/86400000),idx=day%Q.length,done=0,right=0,locked=false;
-    var AR='أبجد';
-    function show(){
-      var q=Q[idx];locked=false;qe.textContent=q.q;oe.innerHTML='';fb.hidden=true;fb.className='live-fb';nx.hidden=true;
-      nn.textContent=(done+1)+' من '+Q.length;sc.textContent=done?('الصحيحة: '+right+' من '+done):'';
-      q.o.forEach(function(t,i){
-        var b=document.createElement('button');b.type='button';b.className='lo';
-        var l=document.createElement('span');l.className='ol';l.textContent=AR.charAt(i);
-        var s2=document.createElement('span');s2.textContent=t;b.appendChild(l);b.appendChild(s2);
-        b.addEventListener('click',function(){pick(i,b);});oe.appendChild(b);
+function mount(root,slug){
+  var m=meta(slug);if(!m||root.getAttribute('data-ready')===slug)return;
+  root.setAttribute('data-ready',slug);root.textContent='';
+  var best=((load().stats||{})[slug]||{}).best;
+  var box=el('div');root.appendChild(box);
+  function intro(){
+    box.textContent='';
+    box.appendChild(el('h3','',m[1]));
+    box.appendChild(el('p','g-sub',m[2]+' · المستوى: '+m[3]));
+    if(best!=null)box.appendChild(el('p','note','أفضل نتيجة لك على هذا الجهاز: '+best+'%'));
+    var a=el('div','g-act');a.appendChild(btn('ابدأ','btn',start));box.appendChild(a);
+  }
+  function finish(score,total){
+    var pct=Math.round(score/total*100),s=load();
+    s.stats=s.stats||{};var st=s.stats[slug]||{plays:0,best:0};
+    st.plays++;st.best=Math.max(st.best,pct);s.stats[slug]=st;save(s);best=st.best;
+    box.textContent='';
+    var e=el('div','g-end');
+    e.appendChild(el('p','g-score',score+' / '+total));
+    e.appendChild(el('p','',pct>=PASS*100?'أحسنت! اجتزت الجولة ('+pct+'%)':'نتيجتك '+pct+'%. حاول مرة أخرى'));
+    e.appendChild(el('p','note','أفضل نتيجة: '+st.best+'%. تُحفظ نتائجك على جهازك فقط.'));
+    var a=el('div','g-act');a.style.justifyContent='center';
+    a.appendChild(btn('جولة جديدة','btn',start));e.appendChild(a);box.appendChild(e);
+  }
+  // مشغّل أسئلة متتابعة: كل عنصر دالة draw(body, answer(ok, explanation))
+  function run(items){
+    var i=0,score=0;
+    function next(){
+      if(i>=items.length)return finish(score,items.length);
+      box.textContent='';
+      var bar=el('div','g-bar');bar.appendChild(el('span','','السؤال '+(i+1)+' من '+items.length));bar.appendChild(el('span','','النقاط: '+score));
+      var pr=el('div','g-prog'),pi=el('i');pi.style.width=(i/items.length*100)+'%';pr.appendChild(pi);
+      var body=el('div'),fb=el('div','g-fb');fb.hidden=true;fb.setAttribute('aria-live','polite');
+      var act=el('div','g-act');
+      box.appendChild(bar);box.appendChild(pr);box.appendChild(body);box.appendChild(fb);box.appendChild(act);
+      var done=false;
+      items[i](body,function(ok,why){
+        if(done)return;done=true;if(ok)score++;
+        fb.hidden=false;fb.textContent='';
+        fb.appendChild(el('strong',ok?'ok':'bad',ok?'إجابة صحيحة. ':'إجابة غير صحيحة. '));
+        if(why)fb.appendChild(document.createTextNode(why));
+        act.appendChild(btn(i+1<items.length?'التالي':'النتيجة','btn',function(){i++;next();}));
+        act.firstChild.focus();
       });
     }
-    function pick(i,btn){
-      if(locked)return;locked=true;var q=Q[idx],ok=i===q.a,bs=oe.children;done++;if(ok)right++;
-      for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(k===q.a)bs[k].classList.add('ok');else if(k===i)bs[k].classList.add('bad');else bs[k].classList.add('dim');}
-      fb.hidden=false;fb.className='live-fb '+(ok?'ok':'bad');
-      fb.innerHTML='';var t=document.createElement('b');t.textContent=ok?'إجابة صحيحة':'إجابة خاطئة';var p=document.createElement('p');p.textContent=q.x;fb.appendChild(t);fb.appendChild(p);
-      sc.textContent='الصحيحة: '+right+' من '+done;
-      nx.hidden=false;nx.textContent=done>=Q.length?'النتيجة':'سؤال آخر';nx.focus();
-    }
-    nx.addEventListener('click',function(){
-      if(done>=Q.length){
-        live.innerHTML='';var w=document.createElement('div');w.className='live-end';
-        var h=document.createElement('h2');h.textContent='أكملت الجولة: '+right+' من '+Q.length;
-        var p=document.createElement('p');p.textContent='النتيجة لهذه الجلسة فقط ولا تُحفظ.';
-        var r=document.createElement('button');r.className='btn';r.type='button';r.textContent='أعد الجولة';
-        r.addEventListener('click',function(){location.reload();});
-        w.appendChild(h);w.appendChild(p);w.appendChild(r);live.appendChild(w);r.focus();return;
-      }
-      idx=(idx+1)%Q.length;show();
-    });
-    show();
+    next();
   }
-})();
-
-/* محرك ألعاب BASIRA: أسئلة مراجَعة مخزنة داخل القالب، بلا خادم ولا ذكاء اصطناعي أثناء اللعب.
-   الحفظ محلي (localStorage) على هذا الجهاز فقط. */
-(function(){
-  var B={"topics":["العلوم","التاريخ والحضارات","الجغرافيا والدول","التكنولوجيا","الثقافة العامة","الرياضيات والمنطق","اللغة والأدب","الفضاء والفلك"],"mcq":[{"id":"m1","t":"العلوم","l":1,"q":"أي غاز تمتصه النباتات أثناء البناء الضوئي؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],"a":2,"x":"تمتص النباتات ثاني أكسيد الكربون وتستخدمه مع الماء وضوء الشمس لصنع الغذاء، وتطلق الأكسجين."},{"id":"m2","t":"العلوم","l":2,"q":"ما الرمز الكيميائي للذهب؟","o":["Ag","Au","Fe","Go"],"a":1,"x":"الرمز Au مأخوذ من الاسم اللاتيني aurum. أما Ag فللفضة وFe للحديد."},{"id":"m3","t":"العلوم","l":2,"q":"كم عدد العظام في جسم الإنسان البالغ تقريباً؟","o":["150","206","300","412"],"a":1,"x":"للبالغ 206 عظمة، بينما يولد الطفل بعدد أكبر تلتحم بعض عظامه مع النمو."},{"id":"m4","t":"العلوم","l":1,"q":"ما أسرع حيوان بري في العالم؟","o":["الأسد","الحصان","الفهد","الغزال"],"a":2,"x":"الفهد (الشيتا) أسرع الحيوانات البرية، ويستطيع الركض بسرعات تفوق 100 كم/س لمسافات قصيرة."},{"id":"m5","t":"العلوم","l":2,"q":"ما الغاز الأكثر وفرة في الغلاف الجوي للأرض؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الأرجون"],"a":1,"x":"يشكل النيتروجين نحو 78% من حجم الهواء، والأكسجين نحو 21%."},{"id":"m6","t":"العلوم","l":2,"q":"ما وحدة قياس القوة في النظام الدولي للوحدات؟","o":["الجول","الواط","النيوتن","الباسكال"],"a":2,"x":"النيوتن وحدة القوة، والجول للطاقة، والواط للقدرة، والباسكال للضغط."},{"id":"m7","t":"العلوم","l":1,"q":"ما أصلب مادة طبيعية معروفة؟","o":["الحديد","الألماس","الذهب","الكوارتز"],"a":1,"x":"الألماس أصلب المواد الطبيعية على مقياس موس للصلادة."},{"id":"m8","t":"التاريخ والحضارات","l":2,"q":"في أي عام سقطت القسطنطينية بيد العثمانيين؟","o":["1204","1453","1517","1683"],"a":1,"x":"فتح السلطان محمد الفاتح القسطنطينية عام 1453م."},{"id":"m9","t":"التاريخ والحضارات","l":2,"q":"من الفرعون الذي يُنسب إليه بناء الهرم الأكبر في الجيزة؟","o":["خوفو","خفرع","رمسيس الثاني","توت عنخ آمون"],"a":0,"x":"يُنسب الهرم الأكبر إلى الملك خوفو من الأسرة الرابعة."},{"id":"m10","t":"التاريخ والحضارات","l":2,"q":"في أي عام بدأت الحرب العالمية الأولى؟","o":["1905","1914","1918","1939"],"a":1,"x":"بدأت الحرب العالمية الأولى عام 1914 وانتهت عام 1918."},{"id":"m11","t":"التاريخ والحضارات","l":1,"q":"في أي عام انتهت الحرب العالمية الثانية؟","o":["1939","1941","1945","1950"],"a":2,"x":"انتهت الحرب العالمية الثانية عام 1945."},{"id":"m12","t":"التاريخ والحضارات","l":3,"q":"من الذي نجح في فكّ رموز حجر رشيد؟","o":["هوارد كارتر","جان فرانسوا شامبليون","نابليون بونابرت","ماريت"],"a":1,"x":"فكّ شامبليون رموز الكتابة الهيروغليفية عام 1822 بالاستعانة بحجر رشيد."},{"id":"m13","t":"التاريخ والحضارات","l":2,"q":"أي حضارة بنت مدينة البتراء؟","o":["الرومان","الفرس","الأنباط","الفينيقيون"],"a":2,"x":"بنى الأنباط البتراء في جنوب الأردن ونحتوا واجهاتها في الصخر."},{"id":"m14","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة أستراليا؟","o":["سيدني","ملبورن","كانبرا","بيرث"],"a":2,"x":"عاصمة أستراليا كانبرا، وليست سيدني التي هي أكبر مدنها."},{"id":"m15","t":"الجغرافيا والدول","l":1,"q":"ما أكبر محيطات العالم مساحة؟","o":["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],"a":2,"x":"المحيط الهادئ أكبر المحيطات، ويغطي نحو ثلث سطح الأرض."},{"id":"m16","t":"الجغرافيا والدول","l":1,"q":"ما أطول نهر في قارة أفريقيا؟","o":["الكونغو","النيجر","النيل","الزمبيزي"],"a":2,"x":"نهر النيل أطول أنهار أفريقيا."},{"id":"m17","t":"الجغرافيا والدول","l":1,"q":"ما أعلى قمة جبلية فوق مستوى سطح البحر؟","o":["كي تو","إفرست","كليمنجارو","مون بلان"],"a":1,"x":"قمة إفرست في جبال الهيمالايا أعلى قمة فوق مستوى سطح البحر."},{"id":"m18","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة كندا؟","o":["تورونتو","فانكوفر","أوتاوا","مونتريال"],"a":2,"x":"عاصمة كندا أوتاوا."},{"id":"m19","t":"الجغرافيا والدول","l":2,"q":"ما أصغر دولة في العالم مساحة؟","o":["موناكو","الفاتيكان","سان مارينو","ليختنشتاين"],"a":1,"x":"الفاتيكان أصغر دولة مساحة، ومساحتها نحو 0.44 كم²."},{"id":"m20","t":"التكنولوجيا","l":1,"q":"ماذا يعني الاختصار CPU؟","o":["وحدة المعالجة المركزية","ذاكرة الوصول العشوائي","وحدة التخزين","بطاقة الشاشة"],"a":0,"x":"CPU اختصار Central Processing Unit أي وحدة المعالجة المركزية، وهي عقل الحاسوب."},{"id":"m21","t":"التكنولوجيا","l":1,"q":"من الذي أسس شركة مايكروسوفت مع بول ألين؟","o":["ستيف جوبز","بيل غيتس","مارك زوكربيرغ","لاري بيج"],"a":1,"x":"أسس بيل غيتس وبول ألين مايكروسوفت عام 1975."},{"id":"m22","t":"التكنولوجيا","l":1,"q":"ما النظام العددي الذي تعتمد عليه الحواسيب داخلياً؟","o":["العشري","الثنائي","الروماني","الثماني فقط"],"a":1,"x":"تعمل الحواسيب بالنظام الثنائي المكوَّن من 0 و1."},{"id":"m23","t":"التكنولوجيا","l":2,"q":"ماذا يرمز الاختصار HTTP؟","o":["بروتوكول نقل النص التشعبي","لغة ترميز الصفحات","عنوان الموقع","نظام أسماء النطاقات"],"a":0,"x":"HTTP هو بروتوكول نقل النص التشعبي، وبه يتبادل المتصفح والخادم صفحات الويب."},{"id":"m24","t":"الثقافة العامة","l":1,"q":"كم عدد ألوان قوس قزح التقليدية؟","o":["5","6","7","8"],"a":2,"x":"يُقسَّم قوس قزح تقليدياً إلى سبعة ألوان."},{"id":"m25","t":"الثقافة العامة","l":1,"q":"ما أكبر حيوان ثديي في العالم؟","o":["الفيل الأفريقي","الحوت الأزرق","القرش الحوتي","الزرافة"],"a":1,"x":"الحوت الأزرق أكبر الثدييات، بل أكبر حيوان عاش على الأرض."},{"id":"m26","t":"الثقافة العامة","l":1,"q":"كم عدد لاعبي فريق كرة القدم داخل الملعب؟","o":["9","10","11","12"],"a":2,"x":"يلعب كل فريق بأحد عشر لاعباً داخل الملعب."},{"id":"m27","t":"الثقافة العامة","l":1,"q":"في أي دولة يقع برج بيزا المائل؟","o":["فرنسا","إيطاليا","إسبانيا","اليونان"],"a":1,"x":"يقع برج بيزا المائل في مدينة بيزا بإيطاليا."},{"id":"m28","t":"الرياضيات والمنطق","l":1,"q":"ما ناتج 12 × 12؟","o":["124","132","144","156"],"a":2,"x":"12 × 12 = 144."},{"id":"m29","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 2، 6، 12، 20، ؟","o":["28","30","32","24"],"a":1,"x":"الفروق بين الأعداد 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30."},{"id":"m30","t":"الرياضيات والمنطق","l":1,"q":"ما قيمة النسبة التقريبية π (باي)؟","o":["2.14","3.14","4.13","3.41"],"a":1,"x":"قيمة π تقريباً 3.14159."},{"id":"m31","t":"الرياضيات والمنطق","l":1,"q":"ما مجموع زوايا المثلث؟","o":["90 درجة","180 درجة","270 درجة","360 درجة"],"a":1,"x":"مجموع زوايا أي مثلث مستوٍ 180 درجة."},{"id":"m32","t":"الرياضيات والمنطق","l":2,"q":"ما الجذر التربيعي للعدد 169؟","o":["11","12","13","14"],"a":2,"x":"13 × 13 = 169."},{"id":"m33","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 1، 1، 2، 3، 5، 8، ؟","o":["11","12","13","15"],"a":2,"x":"كل عدد هو مجموع العددين السابقين له (متتالية فيبوناتشي): 5 + 8 = 13."},{"id":"m34","t":"اللغة والأدب","l":1,"q":"ما جمع كلمة «كتاب»؟","o":["كتّاب","كتب","أكتاب","كاتبون"],"a":1,"x":"جمع «كتاب» هو «كتب»."},{"id":"m35","t":"اللغة والأدب","l":1,"q":"ما ضد كلمة «كريم»؟","o":["بخيل","شجاع","ذكي","قوي"],"a":0,"x":"ضد الكريم هو البخيل."},{"id":"m36","t":"اللغة والأدب","l":1,"q":"كم عدد حروف الأبجدية العربية؟","o":["26","28","29","30"],"a":1,"x":"تتكون الأبجدية العربية من 28 حرفاً."},{"id":"m37","t":"اللغة والأدب","l":2,"q":"من مؤلف سيرة «الأيام» الذاتية؟","o":["طه حسين","العقاد","توفيق الحكيم","المازني"],"a":0,"x":"«الأيام» سيرة ذاتية للأديب طه حسين."},{"id":"m38","t":"اللغة والأدب","l":2,"q":"من كاتب «الثلاثية» (بين القصرين، قصر الشوق، السكرية)؟","o":["نجيب محفوظ","يوسف إدريس","إحسان عبد القدوس","جمال الغيطاني"],"a":0,"x":"«الثلاثية» رواية لنجيب محفوظ، وقد نال جائزة نوبل في الأدب عام 1988."},{"id":"m39","t":"الفضاء والفلك","l":1,"q":"كم عدد كواكب المجموعة الشمسية؟","o":["7","8","9","10"],"a":1,"x":"ثمانية كواكب بعد أن صُنِّف بلوتو كوكباً قزماً عام 2006."},{"id":"m40","t":"الفضاء والفلك","l":1,"q":"ما أكبر كواكب المجموعة الشمسية؟","o":["زحل","المشتري","نبتون","الأرض"],"a":1,"x":"المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة."},{"id":"m41","t":"الفضاء والفلك","l":1,"q":"أي كوكب يُعرف بالكوكب الأحمر؟","o":["المريخ","الزهرة","عطارد","أورانوس"],"a":0,"x":"المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته."},{"id":"m42","t":"الفضاء والفلك","l":1,"q":"ما اسم المجرة التي تقع فيها المجموعة الشمسية؟","o":["أندروميدا","درب التبانة","المثلث","الدوامة"],"a":1,"x":"مجرتنا هي درب التبانة."},{"id":"m43","t":"الفضاء والفلك","l":1,"q":"أي كوكب يشتهر بحلقاته الواضحة؟","o":["زحل","المريخ","عطارد","الزهرة"],"a":0,"x":"يشتهر زحل بحلقاته، وللمشتري وأورانوس ونبتون حلقات خافتة أيضاً."},{"id":"m44","t":"الفضاء والفلك","l":2,"q":"ما أقرب كواكب المجموعة الشمسية إلى الشمس؟","o":["الزهرة","الأرض","عطارد","المريخ"],"a":2,"x":"عطارد أقرب الكواكب إلى الشمس."},{"id":"m45","t":"الفضاء والفلك","l":2,"q":"من أول إنسان وطئت قدماه سطح القمر؟","o":["بز ألدرين","نيل أرمسترونغ","يوري غاغارين","مايكل كولينز"],"a":1,"x":"وطئ نيل أرمسترونغ سطح القمر في 20 يوليو 1969 ضمن مهمة أبولو 11."}],"tf":[{"id":"t1","t":"العلوم","l":1,"s":"يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.","v":true,"x":"يتغير ذلك مع الارتفاع، إذ ينخفض الضغط فتنخفض درجة الغليان."},{"id":"t2","t":"الفضاء والفلك","l":1,"s":"الشمس كوكب.","v":false,"x":"الشمس نجم، والكواكب تدور حول النجوم."},{"id":"t3","t":"العلوم","l":1,"s":"للقلب البشري أربع حجرات.","v":true,"x":"أذينان وبطينان."},{"id":"t4","t":"العلوم","l":1,"s":"الخفاش من الطيور.","v":false,"x":"الخفاش من الثدييات، وهو الثديي الوحيد القادر على الطيران الحقيقي."},{"id":"t5","t":"العلوم","l":2,"s":"كثافة الذهب أكبر من كثافة الحديد.","v":true,"x":"كثافة الذهب نحو 19.3 غ/سم³ وكثافة الحديد نحو 7.9 غ/سم³."},{"id":"t6","t":"العلوم","l":1,"s":"العنكبوت حشرة.","v":false,"x":"العنكبوت من العنكبيات وله ثماني أرجل، أما الحشرات فلها ست أرجل."},{"id":"t7","t":"الفضاء والفلك","l":1,"s":"القمر يدور حول الأرض.","v":true,"x":"القمر تابع طبيعي للأرض."},{"id":"t8","t":"الجغرافيا والدول","l":2,"s":"تقع مصر في قارة آسيا بالكامل.","v":false,"x":"معظم مصر في أفريقيا، وتقع شبه جزيرة سيناء في آسيا."},{"id":"t9","t":"الجغرافيا والدول","l":1,"s":"أستراليا قارة ودولة في آن واحد.","v":true,"x":"أستراليا دولة تشغل قارة كاملة."},{"id":"t10","t":"الجغرافيا والدول","l":2,"s":"تطل الصين على المحيط الأطلسي.","v":false,"x":"تطل الصين على المحيط الهادئ، ولا ساحل لها على الأطلسي."},{"id":"t11","t":"الرياضيات والمنطق","l":2,"s":"العدد 1 عدد أولي.","v":false,"x":"العدد الأولي له قاسمان بالضبط، والعدد 1 له قاسم واحد فقط."},{"id":"t12","t":"الرياضيات والمنطق","l":2,"s":"العدد 2 هو العدد الأولي الزوجي الوحيد.","v":true,"x":"كل عدد زوجي أكبر من 2 يقبل القسمة على 2، فليس أولياً."},{"id":"t13","t":"الرياضيات والمنطق","l":1,"s":"مجموع زوايا أي مثلث مستوٍ 180 درجة.","v":true,"x":"هذه خاصية المثلث في الهندسة المستوية."},{"id":"t14","t":"الرياضيات والمنطق","l":2,"s":"الصفر عدد زوجي.","v":true,"x":"الصفر يقبل القسمة على 2 بلا باقٍ فهو عدد زوجي."},{"id":"t15","t":"التاريخ والحضارات","l":2,"s":"بدأت الثورة الفرنسية عام 1789.","v":true,"x":"بدأت الثورة الفرنسية بسقوط سجن الباستيل في يوليو 1789."},{"id":"t16","t":"التاريخ والحضارات","l":1,"s":"بُنيت أهرامات الجيزة في عهد الدولة العثمانية.","v":false,"x":"بُنيت قبل ذلك بنحو أربعة آلاف سنة في عصر الدولة القديمة."},{"id":"t17","t":"التاريخ والحضارات","l":2,"s":"اخترع غوتنبرغ الطباعة بالحروف المعدنية المتحركة في أوروبا.","v":true,"x":"اخترعها يوهان غوتنبرغ في منتصف القرن الخامس عشر."},{"id":"t18","t":"التكنولوجيا","l":1,"s":"يعتمد الحاسوب داخلياً على النظام الثنائي.","v":true,"x":"كل المعلومات تُمثَّل بسلاسل من 0 و1."},{"id":"t19","t":"التكنولوجيا","l":2,"s":"تحتفظ ذاكرة RAM بمحتواها بعد إطفاء الجهاز.","v":false,"x":"ذاكرة RAM مؤقتة وتفقد محتواها عند انقطاع الكهرباء."},{"id":"t20","t":"اللغة والأدب","l":2,"s":"التاء المربوطة (ة) تأتي في أول الكلمة.","v":false,"x":"التاء المربوطة لا تأتي إلا في آخر الكلمة."},{"id":"t21","t":"الفضاء والفلك","l":1,"s":"المشتري أكبر من الأرض.","v":true,"x":"قطر المشتري نحو 11 ضعف قطر الأرض."},{"id":"t22","t":"العلوم","l":1,"s":"الضوء أسرع من الصوت.","v":true,"x":"يقطع الضوء نحو 300 ألف كم كل ثانية، والصوت في الهواء نحو 343 م/ث."},{"id":"t23","t":"الفضاء والفلك","l":1,"s":"تدور الأرض حول الشمس دورة كاملة كل 24 ساعة.","v":false,"x":"الدورة حول الشمس تستغرق نحو 365 يوماً، أما 24 ساعة فمدة دورانها حول نفسها."},{"id":"t24","t":"العلوم","l":3,"s":"تسقط الريشة والحجر بالتسارع نفسه في الفراغ.","v":true,"x":"في الفراغ لا توجد مقاومة هواء، فيتساوى تسارع السقوط لكل الأجسام."},{"id":"t25","t":"العلوم","l":1,"s":"الحوت سمكة.","v":false,"x":"الحوت من الثدييات يتنفس الهواء ويرضع صغاره."},{"id":"t26","t":"اللغة والأدب","l":2,"s":"نال نجيب محفوظ جائزة نوبل في الأدب.","v":true,"x":"نالها عام 1988."},{"id":"t27","t":"الجغرافيا والدول","l":2,"s":"عاصمة تركيا هي إسطنبول.","v":false,"x":"عاصمة تركيا أنقرة، وإسطنبول أكبر مدنها."},{"id":"t28","t":"الجغرافيا والدول","l":3,"s":"يُعد البحر الميت أخفض منطقة على سطح اليابسة.","v":true,"x":"يقع شاطئه على نحو 430 متراً تحت مستوى سطح البحر."},{"id":"t29","t":"العلوم","l":2,"s":"تحمي طبقة الأوزون الأرض من معظم الأشعة فوق البنفسجية الضارة.","v":true,"x":"تمتص طبقة الأوزون الجزء الأكبر من هذه الأشعة."},{"id":"t30","t":"العلوم","l":3,"s":"الألماس والجرافيت مكوَّنان من عنصر الكربون.","v":true,"x":"يختلفان في ترتيب ذرات الكربون فقط."},{"id":"t31","t":"العلوم","l":2,"s":"يتكوَّن جزيء الماء من ذرتي أكسجين وذرة هيدروجين.","v":false,"x":"العكس صحيح: ذرتا هيدروجين وذرة أكسجين (H₂O)."},{"id":"t32","t":"العلوم","l":1,"s":"ينتقل الصوت عبر الفراغ.","v":false,"x":"يحتاج الصوت إلى وسط مادي كالهواء أو الماء."},{"id":"t33","t":"الرياضيات والمنطق","l":1,"s":"تحتوي السنة الكبيسة على 366 يوماً.","v":true,"x":"يضاف يوم 29 فبراير في السنة الكبيسة."},{"id":"t34","t":"الفضاء والفلك","l":2,"s":"قطر المشتري أكبر من قطر الأرض بأكثر من عشرة أضعاف.","v":true,"x":"نحو 11.2 ضعفاً."},{"id":"t35","t":"الرياضيات والمنطق","l":1,"s":"عدد أضلاع المسدس سبعة.","v":false,"x":"للمسدس ستة أضلاع."},{"id":"t36","t":"اللغة والأدب","l":3,"s":"الخليل بن أحمد الفراهيدي هو واضع علم العروض.","v":true,"x":"وضع الخليل علم العروض لضبط أوزان الشعر العربي."},{"id":"t37","t":"العلوم","l":2,"s":"كان ابن الهيثم من علماء البصريات المسلمين.","v":true,"x":"ألّف «كتاب المناظر» وأسهم في تأسيس علم البصريات."},{"id":"t38","t":"التاريخ والحضارات","l":3,"s":"فُتحت مصر على يد عمرو بن العاص في القرن السابع الميلادي.","v":true,"x":"جرى الفتح نحو عام 640م."},{"id":"t39","t":"التكنولوجيا","l":2,"s":"يمكن لمتصفح الويب فتح الصفحات دون استخدام بروتوكول HTTP أو HTTPS.","v":false,"x":"تُحمَّل صفحات الويب عبر HTTP أو HTTPS، مع وجود بروتوكولات أخرى لخدمات مختلفة."}],"order":[{"id":"o1","t":"التاريخ والحضارات","l":2,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["اختراع الطباعة بالحروف المتحركة في أوروبا","الثورة الفرنسية","أول هبوط بشري على القمر","سقوط جدار برلين"],"x":"منتصف القرن 15، ثم 1789، ثم 1969، ثم 1989."},{"id":"o2","t":"الفضاء والفلك","l":1,"q":"رتّب الكواكب من الأقرب إلى الشمس إلى الأبعد","items":["عطارد","الزهرة","الأرض","المريخ"],"x":"عطارد ثم الزهرة ثم الأرض ثم المريخ."},{"id":"o3","t":"الرياضيات والمنطق","l":1,"q":"رتّب الوحدات من الأصغر إلى الأكبر","items":["مليمتر","سنتيمتر","متر","كيلومتر"],"x":"1 سم = 10 مم، و1 م = 100 سم، و1 كم = 1000 م."},{"id":"o4","t":"العلوم","l":1,"q":"رتّب مراحل دورة حياة الفراشة","items":["بيضة","يرقة","شرنقة","فراشة بالغة"],"x":"تمر الفراشة بتحوّل كامل: بيضة فيرقة فشرنقة فبالغة."},{"id":"o5","t":"التاريخ والحضارات","l":3,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["بناء الهرم الأكبر (نحو 2560 ق.م)","تأسيس الإسكندرية (332 ق.م)","فتح مصر على يد عمرو بن العاص (نحو 640م)","بناء الجامع الأزهر (نحو 970م)"],"x":"الأحداث موزعة على نحو أربعة آلاف سنة من التاريخ المصري."},{"id":"o6","t":"الرياضيات والمنطق","l":1,"q":"رتّب الأعداد من الأصغر إلى الأكبر","items":["0.5","3/4","1","1.25"],"x":"0.5 ثم 0.75 ثم 1 ثم 1.25."},{"id":"o7","t":"التكنولوجيا","l":2,"q":"رتّب من الأقدم إلى الأحدث","items":["حاسوب IBM الشخصي (1981)","إطلاق شبكة الويب للجمهور (1991)","إطلاق هاتف آيفون الأول (2007)","إطلاق ChatGPT (2022)"],"x":"1981 ثم 1991 ثم 2007 ثم 2022."},{"id":"o8","t":"العلوم","l":1,"q":"رتّب حالات الماء أثناء التسخين","items":["جليد","ماء سائل","بخار ماء"],"x":"يذوب الجليد فيصير ماءً، ثم يتبخر الماء بالتسخين."},{"id":"o9","t":"الرياضيات والمنطق","l":2,"q":"رتّب الأرقام الرومانية من الأصغر إلى الأكبر","items":["V","X","L","C"],"x":"V = 5 ثم X = 10 ثم L = 50 ثم C = 100."},{"id":"o10","t":"اللغة والأدب","l":1,"q":"رتّب الأشهر الهجرية كما تأتي في السنة","items":["محرم","صفر","ربيع الأول","ربيع الآخر"],"x":"هذه أول أربعة أشهر في التقويم الهجري."}],"word":[{"id":"w1","t":"الفضاء والفلك","w":"مجرة","h":"تجمع هائل من النجوم والغاز والغبار"},{"id":"w2","t":"الفضاء والفلك","w":"كوكب","h":"جرم يدور حول نجم"},{"id":"w3","t":"الفضاء والفلك","w":"تلسكوب","h":"جهاز يُقرِّب الأجرام البعيدة"},{"id":"w4","t":"الجغرافيا والدول","w":"بركان","h":"جبل يقذف حمماً ورماداً"},{"id":"w5","t":"الجغرافيا والدول","w":"محيط","h":"أوسع مسطح مائي على الأرض"},{"id":"w6","t":"الجغرافيا والدول","w":"جزيرة","h":"يابسة تحيط بها المياه"},{"id":"w7","t":"الجغرافيا والدول","w":"خريطة","h":"رسم يمثل سطح الأرض"},{"id":"w8","t":"الجغرافيا والدول","w":"عاصمة","h":"المدينة التي تقع فيها الحكومة"},{"id":"w9","t":"العلوم","w":"ذرة","h":"أصغر وحدة بناء للعنصر"},{"id":"w10","t":"العلوم","w":"خلية","h":"وحدة بناء الكائن الحي"},{"id":"w11","t":"العلوم","w":"طاقة","h":"القدرة على إنجاز شغل"},{"id":"w12","t":"العلوم","w":"مجهر","h":"جهاز يُكبِّر الأشياء الدقيقة"},{"id":"w13","t":"العلوم","w":"جاذبية","h":"قوة تشدّ الأجسام نحو الأرض"},{"id":"w14","t":"التكنولوجيا","w":"حاسوب","h":"جهاز يعالج البيانات"},{"id":"w15","t":"التكنولوجيا","w":"برمجة","h":"كتابة تعليمات للحاسوب"},{"id":"w16","t":"التكنولوجيا","w":"شبكة","h":"أجهزة متصلة ببعضها"},{"id":"w17","t":"التكنولوجيا","w":"معالج","h":"عقل الحاسوب"},{"id":"w18","t":"الرياضيات والمنطق","w":"مثلث","h":"شكل له ثلاثة أضلاع"},{"id":"w19","t":"الرياضيات والمنطق","w":"دائرة","h":"شكل كل نقاطه على بعد واحد من مركزه"},{"id":"w20","t":"الرياضيات والمنطق","w":"معادلة","h":"تساوٍ بين تعبيرين يحوي مجهولاً"},{"id":"w21","t":"اللغة والأدب","w":"قصيدة","h":"نص شعري"},{"id":"w22","t":"اللغة والأدب","w":"ديوان","h":"مجموعة قصائد"},{"id":"w23","t":"اللغة والأدب","w":"مكتبة","h":"مكان الكتب"},{"id":"w24","t":"اللغة والأدب","w":"رواية","h":"عمل أدبي سردي طويل"},{"id":"w25","t":"التاريخ والحضارات","w":"حضارة","h":"مجتمع متقدم عمرانياً وثقافياً"},{"id":"w26","t":"التاريخ والحضارات","w":"تاريخ","h":"علم دراسة الماضي"},{"id":"w27","t":"التاريخ والحضارات","w":"فرعون","h":"لقب ملك مصر القديمة"},{"id":"w28","t":"التاريخ والحضارات","w":"قلعة","h":"حصن محصَّن"}],"mem":[{"id":"p1","title":"عواصم","kind":"الدولة والعاصمة","pairs":[["مصر","القاهرة"],["فرنسا","باريس"],["اليابان","طوكيو"],["إيطاليا","روما"],["ألمانيا","برلين"],["إسبانيا","مدريد"]]},{"id":"p2","title":"عواصم عربية","kind":"الدولة والعاصمة","pairs":[["السعودية","الرياض"],["المغرب","الرباط"],["الأردن","عمّان"],["العراق","بغداد"],["لبنان","بيروت"],["السودان","الخرطوم"]]},{"id":"p3","title":"عناصر","kind":"العنصر ورمزه","pairs":[["الذهب","Au"],["الحديد","Fe"],["الأكسجين","O"],["الهيدروجين","H"],["الصوديوم","Na"],["الكربون","C"]]},{"id":"p4","title":"علماء","kind":"العالم وإسهامه","pairs":[["الخوارزمي","الجبر"],["ابن سينا","القانون في الطب"],["ابن الهيثم","المناظر"],["ابن النفيس","الدورة الدموية الصغرى"],["نيوتن","الجاذبية"],["أينشتاين","النسبية"]]}]},META=[["mcq","اختبارات متعددة الخيارات"],["truefalse","صح أم خطأ"],["order","ترتيب الأحداث"],["memory","لعبة الذاكرة"],["word","خمّن الكلمة"]],KEY='basira.v1',PTS=[0,10,15,20],LVN=['','سهل','متوسط','صعب'],PASS=0.7;
-  var KB='ابتثجحخدذرزسشصضطظعغفقكلمنهويةء',NORM={'أ':'ا','إ':'ا','آ':'ا','ؤ':'و','ئ':'ي','ى':'ي'};
-  var RULES={
-    mcq:['اختر الإجابة الصحيحة من أربع. يظهر التفسير بعد كل سؤال.',['أسئلة مباشرة، بلا مؤقت.','أسئلة أصعب قليلاً، بلا مؤقت.','أصعب الأسئلة، و20 ثانية لكل سؤال.']],
-    truefalse:['احكم على كل جملة بأنها صح أو خطأ. يظهر التفسير بعد كل جملة.',['جمل مباشرة، بلا مؤقت.','جمل أدق، بلا مؤقت.','أدق الجمل، و20 ثانية لكل جملة.']],
-    order:['رتّب العناصر بالتسلسل الصحيح باستعمال أزرار الأسهم ثم اضغط «تحقق». المحاولة الواحدة لكل سؤال.',['تسلسلات واضحة.','تسلسلات متوسطة.','أصعب التسلسلات المتاحة.']],
-    memory:['اقلب بطاقتين في كل محاولة وطابق كل عنصر مع ما يقابله. كل محاولة هي قلب بطاقتين.',['4 أزواج.','6 أزواج.','6 أزواج بحدّ أقصى 14 محاولة، وإلا تخسر.']],
-    word:['خمّن الكلمة المخفية بالضغط على الحروف. كل حرف خاطئ يستهلك محاولة. خمس كلمات في كل جولة.',['8 محاولات خاطئة مسموحة والتلميح ظاهر.','6 محاولات والتلميح ظاهر.','4 محاولات والتلميح يكلّف محاولة.']]
-  };
-  var ROUND={mcq:10,truefalse:10,order:5,word:5};
-
-  /* ---- أدوات ---- */
-  function E(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n;}
-  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  function load(){try{var s=JSON.parse(localStorage.getItem(KEY));if(s&&typeof s==='object'){s.g=s.g||{};s.seen=s.seen||{};s.lv=s.lv||{};return s;}}catch(e){}return {g:{},seen:{},lv:{}};}
-  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s));return true;}catch(e){return false;}}
-  function nrm(c){return NORM[c]||c;}
-  function stop(root){(root.__iv||[]).forEach(clearInterval);(root.__to||[]).forEach(clearTimeout);root.__iv=[];root.__to=[];}
-  function later(root,fn,ms){var t=setTimeout(fn,ms);(root.__to=root.__to||[]).push(t);return t;}
-  function every(root,fn,ms){var t=setInterval(fn,ms);(root.__iv=root.__iv||[]).push(t);return t;}
-  function fmt(n){return Math.floor(n/60)+':'+('0'+(n%60)).slice(-2);}
-  function choose(key,arr,n,lv){
-    var seen=load().seen[key]||[],tiers=lv===1?[[1],[2],[3]]:lv===2?[[2],[1],[3]]:[[3,2],[1]],out=[];
-    tiers.forEach(function(t){
-      if(out.length>=n)return;
-      var c=arr.filter(function(q){return t.indexOf(q.l)>-1;});
-      out=out.concat(shuffle(c.filter(function(q){return seen.indexOf(q.id)<0;})),shuffle(c.filter(function(q){return seen.indexOf(q.id)>-1;})));
-    });
-    out=out.slice(0,n);
-    var s=load(),sn=(s.seen[key]||[]).concat(out.map(function(q){return q.id;}));s.seen[key]=sn.slice(-60);save(s);
-    return out;
-  }
-
-  /* ---- الشاشة الأولى ---- */
-  function intro(root,key){
-    stop(root);root.textContent='';root.__lv=load().lv[key]||1;
-    var r=RULES[key],box=E('div','bg-intro');
-    box.appendChild(E('p','bg-rules',r[0]));
-    var grp=E('div','bg-lvs');grp.setAttribute('role','radiogroup');grp.setAttribute('aria-label','المستوى');
-    var best=E('p','bg-best'),desc=E('p','bg-lvd');
-    function paint(){
-      var s=load(),b=(s.g[key]&&s.g[key].best&&s.g[key].best[root.__lv])||0;
-      desc.textContent=r[1][root.__lv-1];
-      best.textContent=b?('أفضل نتيجة لك في هذا المستوى: '+b+' نقطة (محفوظة على هذا الجهاز)'):'لا توجد نتيجة محفوظة لهذا المستوى بعد.';
-      for(var i=0;i<grp.children.length;i++){var on=(i+1)===root.__lv;grp.children[i].setAttribute('aria-checked',on?'true':'false');grp.children[i].tabIndex=on?0:-1;}
-    }
-    [1,2,3].forEach(function(l){
-      var b=E('button','bg-lv',LVN[l]);b.type='button';b.setAttribute('role','radio');
-      b.addEventListener('click',function(){root.__lv=l;paint();});
-      b.addEventListener('keydown',function(e){
-        var d=e.key==='ArrowLeft'?1:e.key==='ArrowRight'?-1:0;if(!d)return;e.preventDefault();
-        root.__lv=Math.min(3,Math.max(1,root.__lv+d));paint();grp.children[root.__lv-1].focus();
+  function mcq(q){return function(body,answer){
+    body.appendChild(el('p','g-q',q.q));
+    var opts=q.o.map(function(t,k){return {t:t,ok:k===q.a};}),list=el('div','g-opts');
+    shuffle(opts).forEach(function(o){
+      var b=btn(o.t,'g-opt',function(){
+        [].forEach.call(list.children,function(c,idx){c.disabled=true;});
+        b.classList.add(o.ok?'ok':'bad');
+        [].forEach.call(list.children,function(c){if(c.getAttribute('data-ok')==='1')c.classList.add('ok');});
+        answer(o.ok,q.x);
       });
-      grp.appendChild(b);
-    });
-    var go=E('button','btn play bg-go','ابدأ اللعب');go.type='button';
-    go.addEventListener('click',function(){var s=load();s.lv[key]=root.__lv;save(s);start(root,key);});
-    box.appendChild(grp);box.appendChild(desc);box.appendChild(best);box.appendChild(go);root.appendChild(box);paint();
-  }
-
-  /* ---- بدء جولة ---- */
-  function start(root,key){
-    stop(root);var lv=root.__lv;
-    var st={key:key,lv:lv,i:0,score:0,right:0,answered:0,log:[],locked:false,done:false};
-    if(key==='memory'){memory(root,st);return;}
-    var pool={mcq:B.mcq,truefalse:B.tf,order:B.order,word:B.word}[key];
-    if(key==='word')pool=B.word.map(function(w){return {id:w.id,l:w.w.length<=4?1:w.w.length===5?2:3,w:w.w,h:w.h,t:w.t};});
-    st.qs=choose(key,pool,ROUND[key],lv);st.n=st.qs.length;
-    question(root,st);
-  }
-  function head(root,st,label){
-    var h=E('div','bg-head'),bar=E('div','bg-bar'),i=E('i');i.style.width=Math.round(st.i*100/(st.n||1))+'%';bar.appendChild(i);
-    var row=E('div','bg-row');row.appendChild(E('span',null,label));row.appendChild(E('span','bg-sc','النقاط: '+st.score));
-    var tm=E('span','bg-timer');row.appendChild(tm);h.appendChild(bar);h.appendChild(row);return {el:h,timer:tm};
-  }
-  function question(root,st){
-    stop(root);root.textContent='';st.locked=false;
-    var q=st.qs[st.i],h=head(root,st,'السؤال '+(st.i+1)+' من '+st.n);root.appendChild(h.el);
-    var body=E('div','bg-body'),fb=E('div','bg-fb');fb.setAttribute('aria-live','polite');fb.hidden=true;
-    root.appendChild(body);root.appendChild(fb);
-    function settle(ok,detail,extra){
-      if(st.locked)return;st.locked=true;stop(root);h.timer.textContent='';
-      st.answered++;if(ok){st.right++;st.score+=PTS[st.lv]+(extra||0);}
-      h.el.querySelector('.bg-sc').textContent='النقاط: '+st.score;
-      fb.hidden=false;fb.className='bg-fb '+(ok?'ok':'bad');fb.textContent='';
-      fb.appendChild(E('b',null,detail.title));if(detail.text)fb.appendChild(E('p',null,detail.text));
-      st.log.push({q:detail.q,ok:ok,a:detail.a});
-      var last=st.i+1>=st.n,nx=E('button','btn bg-next',last?'عرض النتيجة':'التالي');nx.type='button';
-      nx.addEventListener('click',function(){if(last)finish(root,st);else{st.i++;question(root,st);}});
-      fb.appendChild(nx);nx.focus();
-    }
-    if(st.key==='mcq')buildMcq(body,q,settle,st);
-    else if(st.key==='truefalse')buildTf(body,q,settle,st);
-    else if(st.key==='order')buildOrder(body,q,settle,st);
-    else buildWord(body,q,settle,st);
-    if(st.lv===3&&(st.key==='mcq'||st.key==='truefalse')){
-      var left=20;h.timer.textContent='⏱ '+fmt(left);
-      every(root,function(){left--;h.timer.textContent='⏱ '+fmt(Math.max(left,0));if(left<=0)expire();},1000);
-      var expire=function(){
-        var btns=body.querySelectorAll('button');for(var i=0;i<btns.length;i++)btns[i].disabled=true;
-        settle(false,{title:'انتهى الوقت',text:'الإجابة الصحيحة: '+(st.key==='mcq'?q.o[q.a]:(q.v?'صح':'خطأ'))+'. '+q.x,q:q.q||q.s,a:'انتهى الوقت'});
-      };
-    }
-  }
-
-  /* ---- اختيار من متعدد ---- */
-  function buildMcq(body,q,settle,st){
-    body.appendChild(E('h3','bg-q',q.q));
-    var opts=shuffle(q.o.map(function(t,i){return {t:t,c:i===q.a};})),list=E('div','bg-opts'),bs=[];
-    opts.forEach(function(o,i){
-      var b=E('button','bg-opt');b.type='button';b.appendChild(E('span','bg-ol','أبجد'.charAt(i)));b.appendChild(E('span',null,o.t));bs.push(b);
-      b.addEventListener('click',function(){
-        if(st.locked)return;
-        bs.forEach(function(x,k){x.disabled=true;if(opts[k].c){x.classList.add('ok');x.appendChild(E('b','bg-mk','✓'));}else if(x===b){x.classList.add('bad');x.appendChild(E('b','bg-mk','✕'));}else x.classList.add('dim');});
-        settle(o.c,{title:o.c?'إجابة صحيحة':'إجابة خاطئة',text:q.x,q:q.q,a:o.t});
-      });
-      list.appendChild(b);
+      b.setAttribute('data-ok',o.ok?'1':'0');list.appendChild(b);
     });
     body.appendChild(list);
-  }
-  /* ---- صح أم خطأ ---- */
-  function buildTf(body,q,settle,st){
-    body.appendChild(E('h3','bg-q',q.s));
-    var row=E('div','bg-tf');
-    [[true,'صح'],[false,'خطأ']].forEach(function(p){
-      var b=E('button','bg-opt bg-big',p[1]);b.type='button';
-      b.addEventListener('click',function(){
-        if(st.locked)return;var ok=p[0]===q.v,all=row.children;
-        for(var i=0;i<all.length;i++)all[i].disabled=true;
-        b.classList.add(ok?'ok':'bad');b.appendChild(E('b','bg-mk',ok?'✓':'✕'));
-        settle(ok,{title:ok?'إجابة صحيحة':'إجابة خاطئة',text:'الجملة '+(q.v?'صحيحة':'خاطئة')+'. '+q.x,q:q.s,a:p[1]});
-      });
-      row.appendChild(b);
+  };}
+  function tf(q){return function(body,answer){
+    body.appendChild(el('p','g-q',q.s));
+    var list=el('div','g-opts');
+    [['صح',true],['خطأ',false]].forEach(function(p){
+      var b=btn(p[0],'g-opt',function(){
+        [].forEach.call(list.children,function(c){c.disabled=true;});
+        var ok=p[1]===q.v;b.classList.add(ok?'ok':'bad');answer(ok,q.x);
+      });list.appendChild(b);
     });
-    body.appendChild(row);
-  }
-  /* ---- ترتيب ---- */
-  function buildOrder(body,q,settle,st){
-    body.appendChild(E('h3','bg-q',q.q));
-    var cur=q.items.map(function(t,i){return {t:t,k:i};}),tries=0;
-    do{cur=shuffle(cur);tries++;}while(tries<20&&cur.every(function(c,i){return c.k===i;}));
-    var list=E('ol','bg-rows'),checked=false;
-    function paint(res){
-      list.textContent='';
-      cur.forEach(function(c,i){
-        var li=E('li','bg-row2'+(res?(c.k===i?' ok':' bad'):''));li.appendChild(E('span','bg-rt',c.t));
-        if(!res){
-          var up=E('button','bg-mv','▲'),dn=E('button','bg-mv','▼');up.type=dn.type='button';
-          up.setAttribute('aria-label','حرّك «'+c.t+'» للأعلى');dn.setAttribute('aria-label','حرّك «'+c.t+'» للأسفل');
-          up.disabled=i===0;dn.disabled=i===cur.length-1;
-          up.addEventListener('click',function(){var t=cur[i-1];cur[i-1]=cur[i];cur[i]=t;paint();var b=list.children[i-1].children[1];if(b)b.focus();});
-          dn.addEventListener('click',function(){var t=cur[i+1];cur[i+1]=cur[i];cur[i]=t;paint();var b=list.children[i+1].children[2];if(b)b.focus();});
-          li.appendChild(up);li.appendChild(dn);
-        }else li.appendChild(E('b','bg-mk',c.k===i?'✓':'✕'));
-        list.appendChild(li);
-      });
-    }
-    paint(false);body.appendChild(list);
-    var chk=E('button','btn bg-check','تحقق');chk.type='button';
-    chk.addEventListener('click',function(){
-      if(checked||st.locked)return;checked=true;paint(true);chk.hidden=true;
-      var ok=cur.every(function(c,i){return c.k===i;}),mine=cur.map(function(c){return c.t;}).join(' ← ');
-      settle(ok,{title:ok?'ترتيب صحيح':'الترتيب غير صحيح',text:(ok?'':'الترتيب الصحيح: '+q.items.join(' ← ')+'. ')+q.x,q:q.q,a:mine});
-    });
-    body.appendChild(chk);
-  }
-  /* ---- خمّن الكلمة ---- */
-  function buildWord(body,q,settle,st){
-    var max=[0,8,6,4][st.lv],wrong=0,got={},hintShown=st.lv<3,over=false;
-    var letters=q.w.split(''),info=E('p','bg-hint'),tiles=E('div','bg-tiles'),left=E('p','bg-left'),keys=E('div','bg-keys');
-    tiles.setAttribute('dir','rtl');
-    body.appendChild(E('p','bg-q2','الكلمة من قسم «'+q.t+'»'));body.appendChild(info);body.appendChild(tiles);body.appendChild(left);body.appendChild(keys);
-    var hintBtn=null;
-    function paint(reveal){
-      info.textContent=hintShown?('تلميح: '+q.h):'';
-      tiles.textContent='';
-      letters.forEach(function(c){var on=reveal||got[nrm(c)],t=E('span','bg-tile'+(on?' on':''),on?c:'');tiles.appendChild(t);});
-      tiles.setAttribute('aria-label','الكلمة: '+letters.map(function(c){return got[nrm(c)]?c:'_';}).join(' '));
-      left.textContent='المحاولات الخاطئة المتبقية: '+(max-wrong);
-    }
-    function check(){
-      if(over)return;
-      var won=letters.every(function(c){return got[nrm(c)];});
-      if(won){over=true;lock();paint(false);settle(true,{title:'أحسنت: «'+q.w+'»',text:'الكلمة من قسم '+q.t+'.',q:q.h,a:q.w},2*(max-wrong));}
-      else if(wrong>=max){over=true;lock();paint(true);settle(false,{title:'نفدت المحاولات',text:'الكلمة هي «'+q.w+'».',q:q.h,a:q.w});}
-    }
-    function lock(){var b=keys.querySelectorAll('button');for(var i=0;i<b.length;i++)b[i].disabled=true;if(hintBtn)hintBtn.disabled=true;}
-    KB.split('').forEach(function(c){
-      var b=E('button','bg-key',c);b.type='button';
-      b.addEventListener('click',function(){
-        if(over||b.disabled)return;b.disabled=true;
-        if(letters.some(function(x){return nrm(x)===c;})){got[c]=true;b.classList.add('ok');}else{wrong++;b.classList.add('bad');}
-        paint(false);check();
-      });
-      keys.appendChild(b);
-    });
-    if(!hintShown){
-      hintBtn=E('button','btn alt bg-hintbtn','أظهر التلميح (يكلّف محاولة)');hintBtn.type='button';
-      hintBtn.addEventListener('click',function(){if(over||hintShown)return;hintShown=true;wrong++;hintBtn.hidden=true;paint(false);check();});
-      body.insertBefore(hintBtn,tiles);
-    }
-    paint(false);
-  }
-
-  /* ---- لعبة الذاكرة ---- */
-  function memory(root,st){
-    stop(root);root.textContent='';
-    var lv=st.lv,np=lv===1?4:6,limit=lv===3?14:0,set=B.mem[Math.floor(Math.random()*B.mem.length)];
-    var pairs=shuffle(set.pairs).slice(0,np),cards=[];
-    pairs.forEach(function(p,i){cards.push({p:i,t:p[0]});cards.push({p:i,t:p[1]});});
-    cards=shuffle(cards);
-    var moves=0,matched=0,open=[],lock=false,fin=false;
-    var h=E('div','bg-head'),row=E('div','bg-row'),mv=E('span',null),info=E('span','bg-sc');row.appendChild(mv);row.appendChild(info);h.appendChild(row);
-    root.appendChild(h);root.appendChild(E('p','bg-q2','«'+set.title+'»: طابق '+set.kind));
-    var grid=E('div','bg-grid g'+(np===4?'2':'3')),fb=E('div','bg-fb');fb.setAttribute('aria-live','polite');fb.hidden=true;
-    var btns=[];
-    function stat(){mv.textContent='المحاولات: '+moves+(limit?' من '+limit:'');info.textContent='الأزواج: '+matched+' من '+np;}
-    function paint(i){var c=cards[i],b=btns[i];b.className='bg-card'+(c.done?' done':c.up?' up':'');b.firstChild.textContent=(c.up||c.done)?c.t:'';b.setAttribute('aria-label',(c.up||c.done)?c.t+(c.done?' (متطابقة)':''):'بطاقة مغلقة '+(i+1));b.disabled=!!c.done;}
-    cards.forEach(function(c,i){
-      var b=E('button','bg-card');b.type='button';b.appendChild(E('span'));btns.push(b);
-      b.addEventListener('click',function(){
-        if(fin||lock||c.up||c.done)return;
-        c.up=true;open.push(i);paint(i);
-        if(open.length<2)return;
-        moves++;var a=cards[open[0]],bb=cards[open[1]],oi=open.slice();open=[];
-        if(a.p===bb.p){
-          a.done=bb.done=true;a.up=bb.up=false;matched++;paint(oi[0]);paint(oi[1]);stat();
-          if(matched===np)end(true);
-        }else{
-          lock=true;stat();
-          later(root,function(){a.up=bb.up=false;paint(oi[0]);paint(oi[1]);lock=false;if(limit&&moves>=limit)end(false);},900);
+    body.appendChild(list);
+  };}
+  function order(q){return function(body,answer){
+    body.appendChild(el('p','g-q',q.q));
+    var correct=q.items,mix=shuffle(correct),tries=0;
+    while(mix.join('|')===correct.join('|')&&tries++<10)mix=shuffle(correct);
+    var slots=el('ol','g-ord'),pool=el('div','g-opts'),chosen=[];
+    correct.forEach(function(){slots.appendChild(el('li'));});
+    mix.forEach(function(t){
+      var b=btn(t,'g-opt',function(){
+        b.disabled=true;chosen.push(t);
+        var li=slots.children[chosen.length-1];li.textContent=(chosen.length)+'. '+t;li.className='fill';
+        if(chosen.length===correct.length){
+          var ok=chosen.join('|')===correct.join('|');
+          [].forEach.call(slots.children,function(c,k){c.classList.add(chosen[k]===correct[k]?'ok':'bad');c.style.borderColor=chosen[k]===correct[k]?'var(--ok)':'var(--bad)';});
+          answer(ok,'الترتيب الصحيح: '+correct.join(' ← ')+'. '+q.x);
         }
-      });
-      grid.appendChild(b);paint(i);
+      });pool.appendChild(b);
     });
-    function end(win){
-      if(fin)return;fin=true;
-      var pts=win?Math.max(0,np*PTS[lv]-(moves-np)*2):0;st.score=pts;st.n=1;st.answered=0;
-      finish(root,st,{win:win,headline:win?'أكملت اللعبة':'انتهت المحاولات',
-        lines:[win?('أطابقت كل الأزواج في '+moves+' محاولة.'):('لم تكتمل الأزواج: طابقت '+matched+' من '+np+' ضمن '+limit+' محاولة.'),'الحد الأدنى الممكن للمحاولات: '+np+'.'],points:pts,max:np*PTS[lv]});
-    }
-    root.appendChild(grid);root.appendChild(fb);stat();
-  }
-
-  /* ---- النهاية والحفظ ---- */
-  function finish(root,st,custom){
-    if(st.done)return;st.done=true;stop(root);root.textContent='';
-    var key=st.key,max=custom?custom.max:st.n*PTS[st.lv],win,head,lines=[];
-    if(custom){win=custom.win;head=custom.headline;lines=custom.lines;}
-    else{
-      var pct=st.n?st.right/st.n:0;win=pct>=PASS;
-      head=win?'نجحت في الجولة':'لم تبلغ حدّ النجاح';
-      lines=['الإجابات الصحيحة: '+st.right+' من '+st.n+' ('+Math.round(pct*100)+'%).',win?'حدّ النجاح 70% وقد بلغته.':'حدّ النجاح 70%. جرّب مجدداً بأسئلة جديدة.'];
-    }
-    var s=load(),g=s.g[key]=s.g[key]||{plays:0,right:0,answered:0,best:{}},prev=g.best[st.lv]||0;
-    g.plays++;g.right+=st.right||0;g.answered+=st.answered||0;
-    var record=st.score>prev;if(record)g.best[st.lv]=st.score;
-    var saved=save(s);
-    var end=E('div','bg-end '+(win?'win':'lose'));
-    end.appendChild(E('div','bg-big2',st.score+' نقطة'));
-    end.appendChild(E('h3',null,head));
-    lines.forEach(function(l){end.appendChild(E('p',null,l));});
-    end.appendChild(E('p','bg-meta','المستوى: '+LVN[st.lv]+(max?' · الحد الأقصى: '+max+' نقطة':'')));
-    if(record&&st.score>0)end.appendChild(E('p','bg-record','رقم قياسي جديد لك في هذا المستوى'));
-    else if(prev)end.appendChild(E('p','bg-meta','أفضل نتيجة سابقة: '+prev+' نقطة'));
-    end.appendChild(E('p','bg-meta',saved?'تُحفظ نتائجك على هذا الجهاز فقط ولا تنتقل بين الأجهزة.':'تعذّر الحفظ في هذا المتصفح (قد يمنعه وضع التصفح الخاص).'));
-    if(st.log&&st.log.length){
-      var d=E('details','bg-rev'),sm=E('summary',null,'راجع إجاباتك');d.appendChild(sm);
-      var ul=E('ul');st.log.forEach(function(r){var li=E('li',r.ok?'ok':'bad');li.appendChild(E('b',null,(r.ok?'✓ ':'✕ ')+r.q));li.appendChild(E('span',null,' — إجابتك: '+r.a));ul.appendChild(li);});
-      d.appendChild(ul);end.appendChild(d);
-    }
-    var row=E('div','bg-actions'),again=E('button','btn play','العب مجدداً'),chg=E('button','btn alt','غيّر المستوى');again.type=chg.type='button';
-    again.addEventListener('click',function(){start(root,key);});chg.addEventListener('click',function(){intro(root,key);});
-    row.appendChild(again);row.appendChild(chg);end.appendChild(row);root.appendChild(end);
-    again.focus();fillProgress();
-  }
-
-  /* ---- لوحة التقدم على الصفحة الرئيسية ---- */
-  function fillProgress(){
-    var box=document.getElementById('bsr-progress');if(!box)return;
-    var s=load(),keys=Object.keys(s.g),tot=0;box.textContent='';
-    keys.forEach(function(k){tot+=s.g[k].plays||0;});
-    if(!tot){box.appendChild(E('p',null,'لم تلعب أي جولة بعد على هذا الجهاز. ابدأ بأي لعبة وسيظهر تقدّمك هنا.'));}
-    else{
-      var tb=E('table','bg-stats'),cap=E('caption',null,'نتائجك على هذا الجهاز'),thead=E('tr');
-      tb.appendChild(cap);['اللعبة','الجولات','أفضل نتيجة','الدقة'].forEach(function(t){var th=E('th',null,t);th.scope='col';thead.appendChild(th);});tb.appendChild(thead);
-      META.forEach(function(m){
-        var g=s.g[m[0]];if(!g)return;var best=0;for(var l in g.best)best=Math.max(best,g.best[l]);
-        var tr=E('tr');tr.appendChild(E('th',null,m[1]));tr.children[0].scope='row';tr.appendChild(E('td',null,String(g.plays)));tr.appendChild(E('td',null,best+' نقطة'));
-        tr.appendChild(E('td',null,g.answered?Math.round(g.right*100/g.answered)+'%':'—'));tb.appendChild(tr);
+    body.appendChild(slots);body.appendChild(el('p','note','اضغط على الأحداث بالترتيب من الأقدم إلى الأحدث'));body.appendChild(pool);
+  };}
+  function word(q){return function(body,answer){
+    var w=q.w,left=3;
+    body.appendChild(el('p','g-q','خمّن الكلمة. التلميح: '+q.h));
+    var shown=el('div','g-word');function mask(n){var chars=w.split('');return chars.map(function(c,k){return k<n?c:'_';}).join(' ');}
+    var rev=0;shown.textContent=mask(0);
+    var inp=el('input','g-in');inp.type='text';inp.setAttribute('aria-label','إجابتك');inp.autocomplete='off';
+    var info=el('p','note','المحاولات المتبقية: '+left);
+    var go=btn('تحقق','btn',function(){
+      var ok=norm(inp.value)===norm(w);
+      if(ok){inp.disabled=true;go.disabled=true;shown.textContent=w.split('').join(' ');return answer(true,'الكلمة: '+w+'.');}
+      left--;rev++;shown.textContent=mask(rev);info.textContent='المحاولات المتبقية: '+left;inp.value='';
+      if(left<=0){inp.disabled=true;go.disabled=true;shown.textContent=w.split('').join(' ');answer(false,'الكلمة: '+w+'.');}else inp.focus();
+    });
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go.click();}});
+    body.appendChild(shown);body.appendChild(inp);body.appendChild(document.createTextNode(' '));body.appendChild(go);body.appendChild(info);
+  };}
+  function memory(){
+    var set=pick('memory',BANK.mem,1)[0],cards=[];
+    set.pairs.forEach(function(p,k){cards.push({k:k,t:p[0]});cards.push({k:k,t:p[1]});});
+    cards=shuffle(cards);
+    box.textContent='';
+    box.appendChild(el('h3','',m[1]+': '+set.title));
+    box.appendChild(el('p','g-sub','طابق '+set.kind));
+    var bar=el('p','note','المحاولات: 0'),grid=el('div','g-mem'),open=[],moves=0,found=0,lock=false;
+    cards.forEach(function(c){
+      var b=btn('؟','g-card',function(){
+        if(lock||b.disabled||open.indexOf(b)>=0)return;
+        b.textContent=c.t;b.classList.add('up');open.push(b);
+        if(open.length<2)return;
+        moves++;bar.textContent='المحاولات: '+moves;
+        var x=open[0],y=open[1];
+        if(x._c.k===y._c.k){x.disabled=y.disabled=true;x.classList.add('done');y.classList.add('done');open=[];found++;
+          if(found===set.pairs.length){var sc=Math.max(0,Math.min(100,Math.round(set.pairs.length/moves*100)));setTimeout(function(){finish(sc,100);},300);}
+        }else{lock=true;setTimeout(function(){[x,y].forEach(function(z){z.textContent='؟';z.classList.remove('up');});open=[];lock=false;},700);}
       });
-      box.appendChild(tb);
-      var clr=E('button','btn-quiet','مسح بيانات هذا الجهاز');clr.type='button';
-      clr.addEventListener('click',function(){if(confirm('سيُحذف تقدّمك المحفوظ على هذا الجهاز. هل تريد المتابعة؟')){try{localStorage.removeItem(KEY);}catch(e){}fillProgress();}});
-      box.appendChild(clr);
-    }
-    box.appendChild(E('p','note','التقدم محفوظ في متصفحك فقط، ولا يوجد حساب ولا مزامنة بين الأجهزة بعد. مسح بيانات المتصفح يحذفه.'));
+      b._c=c;grid.appendChild(b);
+    });
+    box.appendChild(bar);box.appendChild(grid);
   }
+  function start(){
+    if(slug==='mcq')run(pick(slug,BANK.mcq,ROUND.mcq).map(mcq));
+    else if(slug==='truefalse')run(pick(slug,BANK.tf,ROUND.truefalse).map(tf));
+    else if(slug==='order')run(pick(slug,BANK.order,ROUND.order).map(order));
+    else if(slug==='word')run(pick(slug,BANK.word,ROUND.word).map(word));
+    else if(slug==='memory')memory();
+  }
+  intro();
+}
 
-  function mount(root){
-    if(root.__bsr)return;var key=root.getAttribute('data-game');if(!RULES[key])return;
-    root.__bsr=1;root.__reset=function(){intro(root,key);};intro(root,key);
+function init(){
+  var d=document.documentElement,tb=document.querySelectorAll('.js-theme');
+  function label(){var t=d.getAttribute('data-theme')==='dark'?'الوضع الفاتح':'الوضع الداكن';[].forEach.call(tb,function(b){b.textContent=t;});}
+  label();
+  [].forEach.call(tb,function(b){b.addEventListener('click',function(){
+    var dark=d.getAttribute('data-theme')!=='dark';
+    if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
+    try{localStorage.setItem('site-theme',dark?'dark':'light');}catch(e){}label();});});
+  [].forEach.call(document.querySelectorAll('.bsr-game[data-game]'),function(r){mount(r,r.getAttribute('data-game'));});
+  var pk=document.getElementById('picker'),host=document.getElementById('play-host');
+  if(pk&&host){
+    var bs=pk.querySelectorAll('button');
+    [].forEach.call(bs,function(b){b.addEventListener('click',function(){
+      [].forEach.call(bs,function(x){x.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');host.removeAttribute('data-ready');host.setAttribute('data-game',b.getAttribute('data-g'));mount(host,b.getAttribute('data-g'));});});
+    bs[0].click();
   }
-  function init(){
-    var gs=document.querySelectorAll('.bsr-game');
-    for(var i=0;i<gs.length;i++){if(!gs[i].closest('.pane'))mount(gs[i]);}
-    var rs=document.querySelectorAll('input[name=gm]');
-    function sync(){
-      for(var i=0;i<rs.length;i++){
-        var m=document.querySelector('.pane.p-'+rs[i].id.slice(3)+' .bsr-game');if(!m)continue;
-        if(rs[i].checked)mount(m);else if(m.__bsr)m.__reset();
-      }
-    }
-    for(var j=0;j<rs.length;j++)rs[j].addEventListener('change',sync);
-    sync();fillProgress();
-  }
-  init();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 
   //]]></script>

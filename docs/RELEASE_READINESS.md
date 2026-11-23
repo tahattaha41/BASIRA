@@ -14,7 +14,7 @@
 في الوضع الصارم يفشل أيضاً: بريد التواصل غير صالح، أو صفحات أساسية غير مؤكدة في `published`.
 
 ## الاختبارات المرافقة (تعمل في `.github/workflows/basira-ci.yml`)
-`qa/test_theme.py` (بنية وتباين) · `qa/browser_test.py` (Chromium: تخطيط وتفاعل) · `qa/game_test.py` (لعب فعلي للألعاب الخمس) · `qa/content_test.py` (المحتوى والحسابات) · `qa/publish_test.py` (مسار النشر بدون شبكة).
+`qa/test_theme.py` (بنية وتباين) · `qa/game_test.py` (لعب فعلي للألعاب الخمس) · `qa/content_test.py` (المحتوى والحسابات) · `qa/publish_test.py` (مسار النشر بدون شبكة).
 
 ## مدخلات مطلوبة من المالك قبل النشر الصارم
 1. سر GitHub `BASIRA_CONTACT_EMAIL` (أو حقل `contact_email`) ببريد حقيقي.

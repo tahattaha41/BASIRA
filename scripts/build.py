@@ -1,76 +1,93 @@
 #!/usr/bin/env python3
-"""يبني dist/theme.xml (قالب بلوجر) من src/. الأسرار غير مسموحة هنا."""
-import html, json, os, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import ui
+"""يبني dist/ من src/ و content/. لا أسرار هنا. المخرجات: theme.xml وpages وarticles، ومعاينة محلية في preview/."""
+import html, json, os, re
 from urllib.parse import quote
 from xml.dom import minidom
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC, DIST = os.path.join(ROOT, 'src'), os.path.join(ROOT, 'dist')
+SRC, DIST, PREV = (os.path.join(ROOT, d) for d in ('src', 'dist', 'preview'))
+e = html.escape
+PAGE_TITLES = {'about': 'من نحن', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا',
+               'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
 
 
-def read(p):
-    with open(os.path.join(SRC, p), encoding='utf-8') as f:
+def read(p, base=SRC):
+    with open(os.path.join(base, p), encoding='utf-8') as f:
         return f.read()
 
 
-def build():
-    os.makedirs(DIST, exist_ok=True)
-    site = json.loads(read('site.json'))
-    e = html.escape
+def write(path, txt):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(txt)
+
+
+def logo():
+    svg = read('brand/basira-symbol.svg', ROOT)
+    return re.sub(r'<\?xml[^>]*\?>\s*', '', svg).strip()
+
+
+def home(site):
+    pills = ''.join(f"<button aria-pressed='false' data-g='{g[0]}' type='button'>{e(g[1])}</button>" for g in site['games'])
     topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><b>{e(n)}</b><span>{e(d)}</span></a></li>" for n, d in site['topics'])
-    games = ui.game_cards(site)
-    foot = ''.join(f"<li><a href='/search/label/{quote(n)}'>{e(n)}</a></li>" for n, d in site['topics'])
+    return f"""<section class='hero'><div class='wrap'>
+<p class='eyebrow'>Think. Discover. Play. · فكّر. اكتشف. العب.</p>
+<h1>اعرف أكثر، ثم تحدَّ نفسك</h1>
+<p class='lede'>معلومات موثّقة بالمصادر وألعاب أسئلة بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.</p>
+<div class='cta'><a class='btn' href='#play'>{e(site['play_label'])}</a><a class='btn alt' href='#topics'>تصفّح المعرفة</a></div>
+</div></section>
+<section class='sec' id='play'><div class='wrap'><h2>الألعاب</h2>
+<div class='picker' id='picker'>{pills}</div>
+<div class='bsr-game' id='play-host'><noscript>تحتاج الألعاب إلى تفعيل JavaScript.</noscript></div>
+</div></section>
+<section class='sec' id='topics'><div class='wrap'><h2>أقسام المعرفة</h2><ul class='topics'>{topics}</ul></div></section>"""
+
+
+def game_page(site, slug):
+    g = next(x for x in site['games'] if x[0] == slug)
+    return (f"<p>{e(g[2])}. تعمل اللعبة على جهازك بلا تسجيل، وأسئلتها مراجَعة ومخزّنة مسبقاً.</p>\n"
+            f"<div class='bsr-game' data-game='{slug}'><noscript>تحتاج اللعبة إلى تفعيل JavaScript.</noscript></div>\n")
+
+
+def build():
+    site = json.loads(read('site.json'))
     pub = site.get('published', [])
-    def plink(path, text):
-        return f"<a href='{path}'>{e(text)}</a>" if path in pub else ''
-    about = [('/p/about.html', 'من نحن'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'), ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
-    foot_about = ''.join(f"<li>{plink(p_, t)}</li>" for p_, t in about if p_ in pub) or "<li>الصفحات التعريفية قيد الإعداد</li>"
-    dr_about = plink('/p/about.html', 'من نحن')
-    daily_btn = (f"<a class='btn play' href='/p/game-mcq.html'>{e(site['play_label'])}</a>" if '/p/game-mcq.html' in pub else f"<a class='btn play' href='/#games'>{e(site['play_label'])}</a>")
-    css = read('style.css') + read('brand.css') + read('games.css') + ui.stage_css(site)
+    css, lg = read('app.css'), logo()
     bank = json.dumps(json.loads(read('data/bank.json')), ensure_ascii=False, separators=(',', ':'))
-    meta = json.dumps([[g[0], g[1]] for g in site['games']], ensure_ascii=False, separators=(',', ':'))
-    games_js = read('js/games.js').replace('{{BANK_JSON}}', bank).replace('{{GAMES_META}}', meta)
-    js = read('js/site.js').replace('{{QUIZ_JSON}}', json.dumps(site['quiz'], ensure_ascii=False)) + '\n' + games_js
-    for name, txt in (('css', css), ('js', js)):
-        assert ']]>' not in txt, name + ' contains CDATA terminator'
+    meta = json.dumps([g[:4] for g in site['games']], ensure_ascii=False, separators=(',', ':'))
+    js = read('app.js').replace('{{BANK_JSON}}', bank).replace('{{GAMES_META}}', meta)
+    for n, t in (('css', css), ('js', js)):
+        assert ']]>' not in t, n + ' contains CDATA terminator'
+    foot_t = ''.join(f"<li><a href='/search/label/{quote(n)}'>{e(n)}</a></li>" for n, _ in site['topics'])
+    about = [('/p/about.html', 'من نحن'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'),
+             ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
+    foot_a = ''.join(f"<li><a href='{p}'>{e(t)}</a></li>" for p, t in about if p in pub) or '<li>الصفحات التعريفية قيد الإعداد</li>'
     t = read('theme.tpl.xml')
-    rep = {'{{CSS}}': css, '{{JS}}': js, '{{BRAND_LOCKUP}}': ui.brand_lockup(site),
-           '{{HOME}}': read('sections/home.xml').replace('{{TOPICS}}', topics).replace('{{STAGE}}', ui.stage(site)).replace('{{FAHRAS}}', ui.fahras(site)).replace('{{QUIZ_FALLBACK}}', ui.quiz_fallback(site)).replace('{{METHOD}}', ui.method_block()).replace('{{PROGRESS}}', ui.progress_block()).replace('{{THUMB}}', ui.svg('0 0 48 48', "<path d='M8 10h14a4 4 0 014 4v24a3 3 0 00-3-3H8z M40 10H26v25h12a2 2 0 002-2z' class='g-l'/>", 'glyph')),
-           '{{FOOT_ABOUT}}': foot_about, '{{DR_ABOUT}}': dr_about, '{{DAILY_BTN}}': daily_btn,
-           '{{I_MENU}}': ui.icon('menu'), '{{I_SEARCH}}': ui.icon('search'), '{{I_USER}}': ui.icon('user'), '{{I_CLOSE}}': ui.icon('close'),
-           '{{ITEM}}': read('sections/item.xml'), '{{STATIC}}': read('sections/static.xml'),
-           '{{LISTING}}': read('sections/listing.xml'), '{{ERROR}}': read('sections/error.xml'),
-           '{{FOOT_TOPICS}}': foot, '{{SITE}}': e(site['name'])}
-    for k, v in rep.items():
+    for k, v in {'{{CSS}}': css, '{{JS}}': js, '{{LOGO}}': lg, '{{HOME}}': home(site),
+                 '{{FOOT_TOPICS}}': foot_t, '{{FOOT_ABOUT}}': foot_a}.items():
         t = t.replace(k, v)
     assert '{{' not in t, 'placeholder left'
-    minidom.parseString(t.encode('utf-8'))  # يفشل إن لم يكن XML سليماً
-    pg = os.path.join(DIST, 'pages'); os.makedirs(pg, exist_ok=True)
-    for g in site['games']:
-        with open(os.path.join(pg, f'game-{g[0]}.html'), 'w', encoding='utf-8') as f:
-            f.write(ui.game_page(site, g[0]))
-    titles = {'about': 'من نحن', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا', 'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
+    minidom.parseString(t.encode('utf-8'))
+    write(os.path.join(DIST, 'theme.xml'), t)
     mail = site.get('contact_email') or '[يُضاف البريد قبل النشر]'
-    for slug in titles:
-        with open(os.path.join(pg, slug + '.html'), 'w', encoding='utf-8') as f:
-            f.write(read(f'pages/{slug}.html').replace('{{EMAIL}}', mail))
-    # مسودات المقالات: تُبنى إلى dist/articles مع المصادر، ولا تُنشر تلقائياً
-    ad = os.path.join(DIST, 'articles'); os.makedirs(ad, exist_ok=True)
-    idx = json.loads(read('../content/articles/index.json'))
+    for g in site['games']:
+        write(os.path.join(DIST, 'pages', f'game-{g[0]}.html'), game_page(site, g[0]))
+    for slug in PAGE_TITLES:
+        write(os.path.join(DIST, 'pages', slug + '.html'), read(f'pages/{slug}.html').replace('{{EMAIL}}', mail))
+    idx = json.loads(read('content/articles/index.json', ROOT))
     for a in idx['articles']:
-        body = open(os.path.join(ROOT, 'content/articles', a['file']), encoding='utf-8').read()
+        body = read('content/articles/' + a['file'], ROOT)
         srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
-        with open(os.path.join(ad, a['file']), 'w', encoding='utf-8') as f:
-            f.write(body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
-    if not site.get('contact_email'):
-        print('تحذير: contact_email فارغ في src/site.json. أضفه قبل نشر صفحة اتصل بنا.')
-    out = os.path.join(DIST, 'theme.xml')
-    with open(out, 'w', encoding='utf-8') as f:
-        f.write(t)
-    return out, len(t.encode())
+        write(os.path.join(DIST, 'articles', a['file']),
+              body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
+    # معاينة محلية للاختبار فقط (ليست قالب بلوجر): نفس CSS وJS ونفس HTML للصفحة الرئيسية
+    shell = (f"<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><title>preview</title><style>{css}</style></head><body>"
+             f"<header class='top'><div class='wrap bar'><a class='brand'>{lg}<span>BASIRA | بصيرة</span></a></div></header>{home(site)}"
+             f"<div class='wrap'><h2>صفحات الألعاب</h2>" +
+             ''.join(f"<div data-slug='{g[0]}'>{game_page(site, g[0])}</div>" for g in site['games']) +
+             f"<button class='js-theme' type='button'></button></div><script>{js}</script></body></html>")
+    write(os.path.join(PREV, 'index.html'), shell)
+    return os.path.join(DIST, 'theme.xml'), len(t.encode())
 
 
 if __name__ == '__main__':
