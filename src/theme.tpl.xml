@@ -6,7 +6,19 @@
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
   <meta content='BASIRA | بصيرة' property='og:site_name'/>
-  <meta content='summary_large_image' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' property='og:title'/>
+  <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+  <meta content='website' property='og:type'/>
+  <meta content='summary' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+  <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  <meta content='#0f5f58' name='theme-color'/>
+  <meta content='yes' name='apple-mobile-web-app-capable'/>
+  <link href='data:application/manifest+json,%7B%22name%22%3A%22BASIRA%20%7C%20%D8%A8%D8%B5%D9%8A%D8%B1%D8%A9%22%2C%22short_name%22%3A%22BASIRA%22%2C%22start_url%22%3A%22%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f7f5f0%22%2C%22theme_color%22%3A%22%230f5f58%22%2C%22lang%22%3A%22ar%22%2C%22dir%22%3A%22rtl%22%7D' rel='manifest'/>
+  <b:if cond='data:view.isSingleItem'>
+    <script type='application/ld+json'>{"@context":"https://schema.org","@type":"Article","headline":"<data:blog.pageName/>","description":"<data:blog.metaDescription/>","mainEntityOfPage":"<data:blog.canonicalUrl/>","publisher":{"@type":"Organization","name":"BASIRA | بصيرة"}}</script>
+  </b:if>
   <b:if cond='data:view.isHomepage'>
   <script type='application/ld+json'>{"@context":"https://schema.org","@type":"WebSite","name":"BASIRA | بصيرة","url":"<data:blog.homepageUrl/>","potentialAction":{"@type":"SearchAction","target":"<data:blog.homepageUrl/>search?q={q}","query-input":"required name=q"}}</script>
   </b:if>
