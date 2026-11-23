@@ -95,9 +95,11 @@ with sync_playwright() as p:
         q = host.locator('.g-q').inner_text(); texts = host.locator('.g-t').all_inner_texts(); items = om[q + '|' + ''.join(sorted(texts))]
         if i == 0:  # سحب وإفلات
             before = host.locator('.g-t').all_inner_texts()
-            host.locator('.g-item').first.drag_to(host.locator('.g-item').last)
+            a = host.locator('.g-item').first.bounding_box(); z = host.locator('.g-item').last.bounding_box()
+            sx, sy, ey = a['x'] + 60, a['y'] + a['height'] / 2, z['y'] + z['height'] / 2
+            pg.mouse.move(sx, sy); pg.mouse.down(); pg.mouse.move(sx, ey, steps=12); pg.mouse.up()
             after = host.locator('.g-t').all_inner_texts()
-            check(after != before and sorted(after) == sorted(before), 'drag and drop reorders items')
+            check(after != before and sorted(after) == sorted(before), 'pointer drag (mouse/touch handle) reorders items')
         for k, it in enumerate(items):
             while True:
                 cur = host.locator('.g-t').all_inner_texts(); idx = cur.index(it)
@@ -137,10 +139,13 @@ with sync_playwright() as p:
         h = pick_game(pg, 'memory', level); cards = h.locator('.g-card'); n = cards.count()
         check(n == cards_expected, f'memory {level}: {n} cards'); texts = {}
         for i in range(n):
+            pg.clock.run_for(400)
+            if h.locator('.g-score').count(): break  # صدفة: انتهت الجولة أثناء التعلّم
             cards.nth(i).click(); texts[i] = cards.nth(i).inner_text()
             if i % 2 == 1 and PAIR.get(texts[i - 1]) != texts[i]: pg.clock.run_for(800)
         pg.clock.run_for(900)
         for i in range(n):
+            if h.locator('.g-score').count(): break
             if 'done' in (cards.nth(i).get_attribute('class') or ''): continue
             j = next(k for k in range(n) if k != i and PAIR[texts[i]] == texts[k] and 'done' not in (cards.nth(k).get_attribute('class') or ''))
             cards.nth(i).click(); cards.nth(j).click()
