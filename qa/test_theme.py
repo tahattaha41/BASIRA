@@ -42,3 +42,12 @@ check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css" in t
 check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js" in t, 'theme loads game engine from jsDelivr')
 check((ROOT / 'dist/basira.css').is_file() and (ROOT / 'dist/basira.js').is_file(), 'remote CSS and JS assets are built')
 sys.exit(1 if fails else 0)
+
+# Source and built bilingual pages
+for slug in ('about', 'how-we-verify', 'editorial-policy', 'privacy-policy', 'terms', 'contact'):
+    check((ROOT / 'src/pages/en' / f'{slug}.html').is_file(), f'English source page exists: {slug}')
+    built = ROOT / 'dist/pages' / f'{slug}.html'
+    check(built.is_file(), f'built bilingual page exists: {slug}')
+    if built.is_file():
+        body = built.read_text(encoding='utf-8')
+        check("class='lang-ar'" in body and "class='lang-en'" in body, f'built page includes Arabic and English: {slug}')
