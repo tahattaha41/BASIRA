@@ -41,9 +41,10 @@ def home(site, ar):
     icon_ids = ['science', 'history', 'geography', 'technology', 'culture', 'logic', 'language', 'space']
     topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><svg class='topic-icon' aria-hidden='true' viewBox='0 0 48 48'><use href='#topic-{icon_ids[i]}'></use></svg><b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
     icons = read('brand/topic-icons.svg', ROOT)
+    verify_url = site.get('published_urls', {}).get('how-we-verify', '')
     verify = ("<section class='sec'><div class='wrap'><div class='verify'><div><h2 data-i='verify.title'>%s</h2><p data-i='verify.text'>%s</p></div>"
-              "<a class='btn alt' data-i='verify.link' href='/p/how-we-verify.html'>%s</a></div></div></section>"
-              % (e(ar['verify.title']), e(ar['verify.text']), e(ar['verify.link']))) if '/p/how-we-verify.html' in site.get('published', []) else ''
+              "<a class='btn alt' data-i='verify.link' href='%s'>%s</a></div></div></section>"
+              % (e(ar['verify.title']), e(ar['verify.text']), e(verify_url), e(ar['verify.link']))) if verify_url else ''
     return f"""{icons}
 <section class='hero'><div class='wrap'>
 <p class='eyebrow' data-i='hero.eyebrow'>{e(ar['hero.eyebrow'])}</p>
@@ -83,9 +84,12 @@ def build():
     foot_t = ''.join(f"<li><a data-i='t.{e(n)}' href='/search/label/{quote(n)}'>{e(ar['t.' + n])}</a></li>" for n, _ in site['topics'])
     about = [('/p/about.html', 'من نحن'), ('/p/how-we-verify.html', 'كيف نتحقق'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'),
              ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
-    foot_a = ''.join(f"<li><a href='{p}'>{e(t)}</a></li>" for p, t in about if p in pub) or f"<li data-i='foot.pending'>{e(ar['foot.pending'])}</li>"
+    page_urls = site.get('published_urls', {})
+    page_keys = [('about', 'من نحن'), ('how-we-verify', 'كيف نتحقق'), ('editorial-policy', 'سياسة التحرير'), ('contact', 'اتصل بنا'),
+                 ('privacy-policy', 'سياسة الخصوصية'), ('terms', 'شروط الاستخدام')]
+    foot_a = ''.join(f"<li><a href='{e(page_urls[k])}'>{e(label)}</a></li>" for k, label in page_keys if page_urls.get(k)) or f"<li data-i='foot.pending'>{e(ar['foot.pending'])}</li>"
     t = read('theme.tpl.xml')
-    for k, v in {'{{CSS}}': css, '{{JS}}': js, '{{LOGO}}': lg, '{{HOME}}': home(site, ar), '{{NAV_VERIFY}}': (f"<a data-i='nav.verify' href='/p/how-we-verify.html'>{e(ar['nav.verify'])}</a>" if '/p/how-we-verify.html' in pub else ''),
+    for k, v in {'{{CSS}}': css, '{{JS}}': js, '{{LOGO}}': lg, '{{HOME}}': home(site, ar), '{{NAV_VERIFY}}': (f"<a data-i='nav.verify' href='{e(site.get('published_urls', {}).get('how-we-verify', ''))}'>{e(ar['nav.verify'])}</a>" if site.get('published_urls', {}).get('how-we-verify') else ''),
                  '{{FOOT_TOPICS}}': foot_t, '{{FOOT_ABOUT}}': foot_a}.items():
         t = t.replace(k, v)
     t = fill_ar(t, ar)
