@@ -107,9 +107,13 @@ for p in (ROOT / "dist/pages").glob("*.html"):
     for href in re.findall(r"href=[\"']([^\"']+)[\"']", p.read_text(encoding="utf-8")):
         if href.startswith("/p/") and not (ROOT / "dist/pages" / (href[3:])).is_file():
             err(f"Broken internal link in {p.name}: {href}")
+page_urls = site.get("published_urls", {})
 for slug in required_pages:
-    if f"/p/{slug}.html" not in published:
-        (err if strict else warn)(f"Blogger page route is not confirmed published in src/site.json: /p/{slug}.html")
+    route = page_urls.get(slug)
+    if not route:
+        (err if strict else warn)(f"Blogger page URL is not confirmed in src/site.json: {slug}")
+    elif not re.fullmatch(r"/p/[a-z0-9_-]+\.html", route):
+        err(f"Invalid verified Blogger page URL for {slug}: {route}")
 for slug, *_ in games:
     if f"/p/game-{slug}.html" not in published:
         warn(f"Game page not yet confirmed published: /p/game-{slug}.html (the game still plays on the home page).")
