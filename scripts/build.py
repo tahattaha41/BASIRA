@@ -38,11 +38,14 @@ def logo():
 
 def home(site, ar):
     pills = ''.join(f"<button aria-pressed='false' data-g='{g[0]}' data-i='g.{g[0]}.name' type='button'>{e(ar[f'g.{g[0]}.name'])}</button>" for g in site['games'])
-    topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for n, d in site['topics'])
+    icon_ids = ['science', 'history', 'geography', 'technology', 'culture', 'logic', 'language', 'space']
+    topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><svg class='topic-icon' aria-hidden='true' viewBox='0 0 48 48'><use href='#topic-{icon_ids[i]}'></use></svg><b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
+    icons = read('brand/topic-icons.svg', ROOT)
     verify = ("<section class='sec'><div class='wrap'><div class='verify'><div><h2 data-i='verify.title'>%s</h2><p data-i='verify.text'>%s</p></div>"
               "<a class='btn alt' data-i='verify.link' href='/p/how-we-verify.html'>%s</a></div></div></section>"
               % (e(ar['verify.title']), e(ar['verify.text']), e(ar['verify.link']))) if '/p/how-we-verify.html' in site.get('published', []) else ''
-    return f"""<section class='hero'><div class='wrap'>
+    return f"""{icons}
+<section class='hero'><div class='wrap'>
 <p class='eyebrow' data-i='hero.eyebrow'>{e(ar['hero.eyebrow'])}</p>
 <h1 data-i='hero.title'>{e(ar['hero.title'])}</h1>
 <p class='lede' data-i='hero.lede'>{e(ar['hero.lede'])}</p>
