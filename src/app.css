@@ -5,7 +5,7 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.8 'Noto Sans Arabic',system-ui,sans-serif}
 a{color:var(--acc)}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-.skip{position:absolute;inset-inline-start:-999px}.skip:focus{inset-inline-start:8px;top:8px;background:var(--card);padding:8px 12px;z-index:9}
+.skip{position:absolute;top:0;inset-inline-start:0;transform:translateY(-200%);background:var(--card);padding:8px 12px;z-index:9}.skip:focus{transform:none}
 .top{border-bottom:1px solid var(--line);background:var(--bg)}
 .bar{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;font-size:20px}
@@ -69,5 +69,19 @@ button,.btn{font:inherit;cursor:pointer}
 .g-card{min-height:72px;border:1px solid var(--line);border-radius:10px;background:var(--acc);color:var(--acc-ink);font-size:16px;padding:6px}
 .g-card.up{background:var(--bg);color:var(--ink)}
 .g-card.done{background:color-mix(in srgb,var(--ok) 18%,var(--card));color:var(--ink);border-color:var(--ok)}
-@media (max-width:560px){.g-mem{grid-template-columns:repeat(3,1fr)}.nav{display:none}}
+@media (max-width:560px){.g-mem{grid-template-columns:repeat(3,1fr)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* مرحلة A: هيدر وبحث ولغة */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.find{display:flex;flex:1 1 220px;max-width:360px;min-width:0;gap:6px}
+.find input{flex:1;min-width:0;width:100%;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.find button{font:inherit;padding:8px 14px;border:0;border-radius:10px;background:var(--acc);color:var(--acc-ink);min-height:44px}
+.bar-end{display:flex;gap:8px;margin-inline-start:auto}
+.btn-quiet{min-height:44px}
+.nav{margin-inline-start:0;flex:1 1 100%;order:3;overflow-x:auto;white-space:nowrap;gap:20px;padding-bottom:8px}
+.nav a{display:inline-flex;align-items:center;min-height:44px}
+.verify{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.verify h2{margin:0 0 6px}.verify p{margin:0;color:var(--mute);max-width:560px}
+.sec-h{font-size:24px;margin:0 0 16px}
+html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
+@media (min-width:900px){.nav{flex:0 1 auto;order:0;margin-inline-start:12px;overflow:visible;padding:0}.bar-end{margin-inline-start:0}}

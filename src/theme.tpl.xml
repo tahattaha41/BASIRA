@@ -5,28 +5,45 @@
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
-  <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
+  <meta content='BASIRA | بصيرة' property='og:site_name'/>
+  <meta content='summary_large_image' name='twitter:card'/>
+  <b:if cond='data:view.isHomepage'>
+  <script type='application/ld+json'>{"@context":"https://schema.org","@type":"WebSite","name":"BASIRA | بصيرة","url":"<data:blog.homepageUrl/>","potentialAction":{"@type":"SearchAction","target":"<data:blog.homepageUrl/>search?q={q}","query-input":"required name=q"}}</script>
+  </b:if>
+  <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
-  try{if(localStorage.getItem('site-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+  (function(){var d=document.documentElement;try{if(localStorage.getItem('site-theme')==='dark')d.setAttribute('data-theme','dark');
+  var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
+  if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
   <b:skin><![CDATA[
 {{CSS}}
 ]]></b:skin>
 </head>
 <body>
-  <a class='skip' href='#content'>تجاوز إلى المحتوى</a>
+  <a class='skip' data-i='skip' href='#content'>تجاوز إلى المحتوى</a>
   <header class='top'>
     <div class='wrap bar'>
       <a class='brand' expr:href='data:blog.homepageUrl'>{{LOGO}}<span>BASIRA | بصيرة</span></a>
-      <nav aria-label='القائمة الرئيسية' class='nav'>
-        <a expr:href='data:blog.homepageUrl + &quot;#play&quot;'>الألعاب</a>
-        <a expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
-        <a href='/search?max-results=24'>المقالات</a>
+      <form action='/search' class='find' method='get' role='search'>
+        <label class='sr' data-i='search.label' for='q'>{{ar:search.label}}</label>
+        <input data-ip='search.ph' id='q' name='q' placeholder='{{ar:search.ph}}' type='search'/>
+        <button data-i='search.btn' type='submit'>{{ar:search.btn}}</button>
+      </form>
+      <div class='bar-end'>
+        <button class='btn-quiet js-lang' data-i='lang.switch' type='button'>English</button>
+        <button class='btn-quiet js-theme' type='button'>{{ar:theme.dark}}</button>
+      </div>
+      <nav aria-label='main' class='nav'>
+        <a data-i='nav.games' expr:href='data:blog.homepageUrl + &quot;#play&quot;'>{{ar:nav.games}}</a>
+        <a data-i='nav.topics' expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>{{ar:nav.topics}}</a>
+        <a data-i='nav.articles' href='/search?max-results=24'>{{ar:nav.articles}}</a>
+        {{NAV_VERIFY}}
       </nav>
     </div>
   </header>
 
-  <b:if cond='data:blog.url == data:blog.homepageUrl'>
+  <b:if cond='data:view.isHomepage'>
 {{HOME}}
   </b:if>
 
@@ -34,20 +51,22 @@
     <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
         <b:includable id='main' var='top'>
+          <b:if cond='data:view.isHomepage'><h2 class='sec-h' data-i='latest.title'>{{ar:latest.title}}</h2></b:if>
           <b:loop values='data:posts' var='post'>
             <article class='post'>
-              <b:if cond='data:blog.pageType == &quot;item&quot; or data:blog.pageType == &quot;static_page&quot;'>
+              <b:if cond='data:view.isSingleItem'>
                 <h1><data:post.title/></h1>
                 <data:post.body/>
               <b:else/>
                 <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                <p class='meta'><data:post.date/></p>
                 <data:post.snippet/>
               </b:if>
             </article>
           </b:loop>
           <div class='pager'>
-            <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>الأحدث</a></b:if>
-            <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>الأقدم</a></b:if>
+            <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>«</a></b:if>
+            <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>»</a></b:if>
           </div>
         </b:includable>
       </b:widget>
@@ -57,11 +76,11 @@
   <footer class='foot'>
     <div class='wrap'>
       <div class='foot-grid'>
-        <div><p>معلومات موثّقة وألعاب أسئلة بالعربية، تعمل بلا تسجيل.</p></div>
-        <div><h4>أقسام المعرفة</h4><ul>{{FOOT_TOPICS}}</ul></div>
-        <div><h4>عن الموقع</h4><ul>{{FOOT_ABOUT}}</ul></div>
+        <div><p data-i='foot.note'>{{ar:foot.note}}</p></div>
+        <div><h4 data-i='foot.topics'>{{ar:foot.topics}}</h4><ul>{{FOOT_TOPICS}}</ul></div>
+        <div><h4 data-i='foot.about'>{{ar:foot.about}}</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>
-      <div class='foot-end'><span>© BASIRA</span><button class='btn-quiet js-theme' type='button'>الوضع الداكن</button></div>
+      <div class='foot-end'><span>© BASIRA</span></div>
     </div>
   </footer>
   <script>//<![CDATA[

@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 API = "https://blogger.googleapis.com/v3/blogs/{blog}/pages"
 TOKEN_URL = "https://oauth2.googleapis.com/token"
-TITLES = {"about": "من نحن", "editorial-policy": "سياسة التحرير", "contact": "اتصل بنا",
+TITLES = {"about": "من نحن", "how-we-verify": "كيف نتحقق", "editorial-policy": "سياسة التحرير", "contact": "اتصل بنا",
           "privacy-policy": "سياسة الخصوصية", "terms": "شروط الاستخدام"}
 
 PLACEHOLDER = "يُضاف البريد"

@@ -4,7 +4,7 @@
 
 - لا تضمن قبول AdSense أبداً. لا كود إعلانات ولا معرّف ناشر قبل موافقة المالك.
 - حلول مجانية فقط، ولا أسرار في المستودع (عام).
-- بعد أي تعديل: `python3 scripts/build.py` ثم `python3 scripts/release_preflight.py` ثم `python3 qa/test_theme.py` و`qa/game_test.py` و`qa/content_test.py` و`qa/publish_test.py` ثم `git push`.
+- بعد أي تعديل: `python3 scripts/build.py` ثم `python3 scripts/release_preflight.py` ثم `python3 qa/test_theme.py` و`qa/ui_test.py` و`qa/game_test.py` و`qa/content_test.py` و`qa/publish_test.py` ثم `git push`.
 - لا تعدّل `dist/` يدوياً؛ هو ناتج البناء.
 - كل معلومة أو رقم في المحتوى يجب التحقق منه وعليه مصدر. لا محتوى رقيق: المقال 500 كلمة فأكثر بأمثلة محسوبة. لا ينشر محتوى آلي دون مراجعة المالك.
 - لا تذكر أن اختباراً نجح إلا إذا شُغّل فعلاً. رفع القالب إلى بلوجر يدوي (الـ API بلا مورد للقوالب).
