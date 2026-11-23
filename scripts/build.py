@@ -77,6 +77,9 @@ def build():
     js = read('i18n.js').replace('{{I18N_JSON}}', json.dumps(dic, ensure_ascii=False, separators=(',', ':'))) + '\n' + read('app.js').replace('{{BANK_JSON}}', bank).replace('{{GAMES_META}}', meta)
     for n, t in (('css', css), ('js', js)):
         assert ']]>' not in t, n + ' contains CDATA terminator'
+    # Public main-branch assets allow an installed Blogger theme to receive CSS/game updates without re-uploading XML.
+    write(os.path.join(DIST, 'basira.css'), css)
+    write(os.path.join(DIST, 'basira.js'), js)
     foot_t = ''.join(f"<li><a data-i='t.{e(n)}' href='/search/label/{quote(n)}'>{e(ar['t.' + n])}</a></li>" for n, _ in site['topics'])
     about = [('/p/about.html', 'من نحن'), ('/p/how-we-verify.html', 'كيف نتحقق'), ('/p/editorial-policy.html', 'سياسة التحرير'), ('/p/contact.html', 'اتصل بنا'),
              ('/p/privacy-policy.html', 'سياسة الخصوصية'), ('/p/terms.html', 'شروط الاستخدام')]
