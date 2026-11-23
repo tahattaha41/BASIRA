@@ -183,6 +183,19 @@ with sync_playwright() as p:
     check(store(pg)['xp'] == xp1, 'replaying the daily challenge gives no extra XP')
     pg2 = page(b); d2 = pg2.locator('#daily-panel'); d2.get_by_role('button', name='العب التحدي').click()
     check(d2.locator('.g-q').inner_text() == qs[0], 'same day => same first daily question for every player')
+    # --- تحدي صديق عبر رابط: نفس التاريخ والبذرة، ومقارنة النتيجة محلياً
+    pg4 = page(b); pg4.goto(URL + '?challenge=2026-11-23&score=999')
+    d4 = pg4.locator('#daily-panel')
+    check('999' in d4.inner_text() and 'يتحداك' in d4.inner_text(), 'friend challenge link shows inviter score and date')
+    d4.get_by_role('button', name='العب التحدي').click()
+    check(d4.locator('.g-q').inner_text() == qs[0], 'friend challenge link loads same deterministic daily questions')
+    for i in range(5):
+        q = d4.locator('.g-q').inner_text()
+        if q in MC: d4.locator('.g-opt', has_text=ex(MC[q])).first.click()
+        else: d4.locator('.g-opt', has_text=ex('صح' if TF[q] else 'خطأ')).first.click()
+        nxt(d4)
+    check('نتيجة صديقك: 999' in d4.inner_text() and 'صديقك حقق نتيجة أعلى' in d4.inner_text(), 'friend challenge compares local scores without claiming anti-cheat')
+    check(d4.get_by_role('button', name='تحدَّ صديقاً').count() == 1, 'completed challenge offers a share link')
     pg3 = page(b, T0 + datetime.timedelta(days=1)); d3 = pg3.locator('#daily-panel'); d3.get_by_role('button', name='العب التحدي').click()
     qs3 = []
     for i in range(5):
