@@ -1,6 +1,7 @@
 # BASIRA | بصيرة — سجل الحالة الرئيسي
 
 آخر تدقيق موثق: 2026-11-23  
+آخر تحديث بعد مزامنة Blogger: 2026-11-23 08:09 UTC
 المستودع: https://github.com/tahattaha41/BASIRA  
 الفرع المعتمد: `main`  
 الموقع: https://basira-play.blogspot.com/
@@ -61,11 +62,20 @@
 
 ### الصفحات الثابتة
 - يوجد Workflow باسم `BASIRA auto-sync approved Blogger pages` يعمل بعد اكتمال CI على main.
-- آخر تشغيل مرصود بتاريخ 2026-11-23 انتهى `skipped`؛ لم يثبت تحديث الصفحات على Blogger في ذلك التشغيل.
+- تشغيل المزامنة رقم [45136359740](https://github.com/tahattaha41/BASIRA/actions/runs/45136359740) اكتمل بنجاح بتاريخ 2026-11-23. سجل GitHub Actions يؤكد تحديث الصفحات الخمس الموجودة عبر Blogger API.
 - يتطلب المزامنة أسرار GitHub Actions: `BLOGGER_BLOG_ID`, `BLOGGER_CLIENT_ID`, `BLOGGER_CLIENT_SECRET`, `BLOGGER_REFRESH_TOKEN`.
 - `BASIRA_CONTACT_EMAIL` مطلوب لتوفير بريد صفحة الاتصال.
 - المزامنة الحالية تستخدم `--update`؛ أي أنها قد تستبدل محتوى صفحة Blogger الموجودة إذا تطابق عنوانها. يجب إبقاء مصدر المحتوى المعتمد في GitHub وعدم إجراء تعديلات يدوية متعارضة على تلك الصفحات.
 - لا توجد مزامنة تلقائية للمقالات الثمانية، ولا نشر تلقائي لها.
+
+### الصفحات التي حدّثتها Blogger API فعليًا
+- [من نحن](https://basira-play.blogspot.com/p/blog-page_23.html)
+- [كيف نتحقق](https://basira-play.blogspot.com/p/blog-page_625.html)
+- [سياسة التحرير](https://basira-play.blogspot.com/p/blog-page_81.html)
+- [سياسة الخصوصية](https://basira-play.blogspot.com/p/blog-page_581.html)
+- [شروط الاستخدام](https://basira-play.blogspot.com/p/blog-page_648.html)
+- صفحة «اتصل بنا» لم تُنشر/تُحدّث؛ لأن `BASIRA_CONTACT_EMAIL` فارغ، وحماها سكربت النشر من نشر نص البريد البديل.
+- التحديث المؤكد هنا هو استجابة Blogger API المسجلة في سجل Actions؛ لم أتمكن من تحميل واجهة الموقع الحية من أداة التصفح للتحقق البصري.
 
 ### إدارة الموقع
 رابط Blogger الرسمي ليس لوحة إدارة مخصصة. إدارة الصفحات والمنشورات تتم عبر حساب Blogger. إنشاء لوحة إدارة مالك داخل BASIRA يحتاج خادمًا آمنًا ومصادقة وتخزينًا؛ لا يجوز وضع OAuth secrets أو كلمات مرور داخل XML أو JavaScript. لم يتم بناء هذه اللوحة بعد.
