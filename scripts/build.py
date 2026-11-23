@@ -48,11 +48,13 @@ def home(site, ar):
 <p class='lede' data-i='hero.lede'>{e(ar['hero.lede'])}</p>
 <div class='cta'><a class='btn' data-i='hero.cta' href='#play'>{e(ar['hero.cta'])}</a><a class='btn alt' data-i='hero.cta2' href='#topics'>{e(ar['hero.cta2'])}</a></div>
 </div></section>
+<section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>{e(ar['noscript'])}</noscript></div></div></section>
 <section class='sec' id='play'><div class='wrap'><h2 data-i='games.title'>{e(ar['games.title'])}</h2>
 <p class='note' data-i='lang.note' hidden='hidden' id='lang-note'>{e(ar['lang.note'])}</p>
 <div class='picker' id='picker'>{pills}</div>
 <div class='bsr-game' id='play-host'><noscript>{e(ar['noscript'])}</noscript></div>
 </div></section>
+<section class='sec' id='progress'><div class='wrap'><div class='profile' id='profile-panel'></div></div></section>
 <section class='sec' id='topics'><div class='wrap'><h2 data-i='topics.title'>{e(ar['topics.title'])}</h2><ul class='topics'>{topics}</ul></div></section>
 {verify}"""
 
