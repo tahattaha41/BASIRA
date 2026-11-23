@@ -28,9 +28,8 @@
   var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
-  <b:skin><![CDATA[
-{{CSS}}
-]]></b:skin>
+  <link href='https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css' rel='stylesheet'/>
+  <b:skin><![CDATA[/* BASIRA styles load from the public GitHub build asset. */]]></b:skin>
 </head>
 <body>
   <a class='skip' data-i='skip' href='#content'>تجاوز إلى المحتوى</a>
@@ -108,8 +107,6 @@
       <div class='foot-end'><span>© BASIRA</span></div>
     </div>
   </footer>
-  <script>//<![CDATA[
-{{JS}}
-  //]]></script>
+  <script src='https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js'></script>
 </body>
 </html>
