@@ -143,5 +143,9 @@
   "streak.n": "سلسلة {n}",
   "cheer.1": "ممتاز",
   "cheer.2": "رائع",
-  "cheer.3": "أسطوري"
+  "cheer.3": "أسطوري",
+  "theme.mode": "المظهر: {m}",
+  "theme.m.dark": "داكن",
+  "theme.m.light": "فاتح",
+  "theme.m.auto": "تلقائي"
 }

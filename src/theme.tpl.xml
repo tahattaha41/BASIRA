@@ -24,7 +24,7 @@
   </b:if>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
-  (function(){var d=document.documentElement;try{if(localStorage.getItem('site-theme')==='dark')d.setAttribute('data-theme','dark');
+  (function(){var d=document.documentElement;try{var pr=localStorage.getItem('site-theme');if(pr!=='light'&&pr!=='auto')pr='dark';d.setAttribute('data-pref',pr);d.setAttribute('data-theme',pr==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):pr);}catch(e){d.setAttribute('data-theme','dark');}try{
   var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
@@ -43,7 +43,7 @@
       </form>
       <div class='bar-end'>
         <button class='btn-quiet js-lang' data-i='lang.switch' type='button'>English</button>
-        <button class='btn-quiet js-theme' type='button'>{{ar:theme.dark}}</button>
+        <button class='btn-quiet js-theme' type='button'>المظهر: داكن</button>
       </div>
       <nav aria-label='main' class='nav'>
         <a data-i='nav.games' expr:href='data:blog.homepageUrl + &quot;#play&quot;'>{{ar:nav.games}}</a>

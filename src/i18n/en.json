@@ -143,5 +143,9 @@
   "streak.n": "Streak {n}",
   "cheer.1": "Nice",
   "cheer.2": "Great",
-  "cheer.3": "Legendary"
+  "cheer.3": "Legendary",
+  "theme.mode": "Theme: {m}",
+  "theme.m.dark": "Dark",
+  "theme.m.light": "Light",
+  "theme.m.auto": "Auto"
 }

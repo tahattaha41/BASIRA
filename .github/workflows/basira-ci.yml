@@ -41,6 +41,8 @@ jobs:
         run: python qa/test_theme.py
       - name: Content tests (8 sections, 500+ words, sources, computed examples)
         run: python qa/content_test.py
+      - name: Contrast tests (design tokens, WCAG)
+        run: python qa/contrast_test.py
       - name: Publish-path tests (offline)
         run: python qa/publish_test.py
       - name: Install browser test dependencies

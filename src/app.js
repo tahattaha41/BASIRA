@@ -341,13 +341,15 @@ function rise(){
   setTimeout(function(){[].forEach.call(n,function(x){x.classList.add('in');});},2500);
 }
 function init(){
-  var d=document.documentElement,tb=document.querySelectorAll('.js-theme');
-  function label(){var k=d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark';[].forEach.call(tb,function(b){b.textContent=T(k);});}
+  var d=document.documentElement,tb=document.querySelectorAll('.js-theme'),ORDER=['dark','light','auto'],mq=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
+  function pref(){var p=d.getAttribute('data-pref');return ORDER.indexOf(p)<0?'dark':p;}
+  function apply(p){d.setAttribute('data-pref',p);d.setAttribute('data-theme',p==='auto'?(mq&&mq.matches?'light':'dark'):p);}
+  function label(){var p=pref();[].forEach.call(tb,function(b){b.textContent=T('theme.mode',{m:T('theme.m.'+p)});b.setAttribute('aria-label',T('theme.mode',{m:T('theme.m.'+p)}));});}
   label();document.addEventListener('basira:lang',label);
+  if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(pref()==='auto'){apply('auto');label();}});
   [].forEach.call(tb,function(b){b.addEventListener('click',function(){
-    var dark=d.getAttribute('data-theme')!=='dark';
-    if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
-    try{localStorage.setItem('site-theme',dark?'dark':'light');}catch(e){}label();});});
+    var n=ORDER[(ORDER.indexOf(pref())+1)%ORDER.length];apply(n);
+    try{localStorage.setItem('site-theme',n);}catch(e){}label();});});
   [].forEach.call(document.querySelectorAll('.bsr-game[data-game]'),function(r){mount(r,r.getAttribute('data-game'));});
   var pk=document.getElementById('picker'),host=document.getElementById('play-host');
   if(pk&&host){
