@@ -35,5 +35,5 @@ check("property='og:title'" in t and "property='og:description'" in t and "prope
 check('twitter:card' in t and "name='theme-color'" in t, 'Twitter card and theme color present')
 check('"@type":"Article"' in t and 'data:blog.canonicalUrl' in t, 'Article JSON-LD uses Blogger page data')
 check("rel='manifest'" in t and 'application/manifest+json' in t, 'lightweight web manifest present')
-check("id='topic-science'" in t and 'topic-icon' in t, 'original topic SVG icons embedded')
+check('id="topic-science"' in t and 'topic-icon' in t, 'original topic SVG icons embedded')
 sys.exit(1 if fails else 0)
