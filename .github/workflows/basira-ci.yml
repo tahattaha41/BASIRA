@@ -3,6 +3,9 @@ name: BASIRA CI
 on:
   push:
     branches: [main, platform-dev]
+    paths-ignore:
+      - 'dist/**'
+      - 'preview/**'
   pull_request:
   workflow_dispatch:
     inputs:
@@ -13,7 +16,11 @@ on:
         default: false
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: basira-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   verify:
@@ -56,9 +63,26 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
         run: python scripts/check_blogger_connection.py
+      - name: Refresh public Blogger assets on main
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          remote_sha="$(git ls-remote origin refs/heads/main | cut -f1)"
+          if [ "$remote_sha" != "$GITHUB_SHA" ]; then
+            echo "A newer main commit exists; skipping stale asset publication."
+            exit 0
+          fi
+          git add dist/basira.css dist/basira.js
+          if git diff --cached --quiet; then
+            echo "Public assets are unchanged."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "build: refresh Blogger remote assets [skip ci]"
+            git push origin HEAD:main
+          fi
       - name: Package for review
         run: |
-          mkdir -p release && cp dist/theme.xml release/basira-theme.xml && cp -R dist/pages release/pages
+          mkdir -p release && cp dist/theme.xml release/basira-theme.xml && cp dist/basira.css dist/basira.js release/ && cp -R dist/pages release/pages
           cd release && zip -r ../basira-release.zip .
       - uses: actions/upload-artifact@v4
         with:
