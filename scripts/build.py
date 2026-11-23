@@ -108,6 +108,9 @@ def build():
         srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
         write(os.path.join(DIST, 'articles', a['file']), body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
     pv = t
+    # Keep the local Playwright preview self-contained; Blogger uses the remote main-branch assets.
+    pv = pv.replace('https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css', '../dist/basira.css')
+    pv = pv.replace('https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js', '../dist/basira.js')
     pv = re.sub(r"<\?xml[^>]*\?>\s*<!DOCTYPE html>", "<!doctype html>", pv)
     pv = re.sub(r"<b:section.*?</b:section>", "<div class='wrap content'><article class='post'><h2>sample</h2></article></div>", pv, flags=re.S)
     pv = re.sub(r"</?b:if[^>]*>", "", pv)
