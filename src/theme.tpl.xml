@@ -28,7 +28,7 @@
   var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
-  <link href='https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css' rel='stylesheet'/>
+  <link href='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css' rel='stylesheet'/>
   <b:skin><![CDATA[/* BASIRA styles load from the public GitHub build asset. */]]></b:skin>
 </head>
 <body>
@@ -104,9 +104,9 @@
         <div><h4 data-i='foot.topics'>{{ar:foot.topics}}</h4><ul>{{FOOT_TOPICS}}</ul></div>
         <div><h4 data-i='foot.about'>{{ar:foot.about}}</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>
-      <div class='foot-end'><span>© BASIRA</span></div>
+      <div class='foot-end'><span>© 2026 BASIRA | بصيرة — Created by Taha Omar · إنشاء وتطوير: طه عمر</span><a class='admin-entry' href='https://www.blogger.com/' target='_blank' rel='noopener noreferrer'><span data-i='admin.link'>إدارة الموقع</span></a></div>
     </div>
   </footer>
-  <script src='https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js'></script>
+  <script src='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js'></script>
 </body>
 </html>
