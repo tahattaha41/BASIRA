@@ -25,6 +25,8 @@ check("data:view.isHomepage" in t and "== data:blog.homepageUrl" not in t, 'home
 check('<data:post.date/>' in t and 'data:view.isSingleItem' in t, 'post date and single-item switch present')
 check("name='q'" in t and "action='/search'" in t, 'header search form posts to /search')
 check('js-lang' in t, 'language switcher present')
+check('Created by Taha Omar' in t and 'إنشاء وتطوير: طه عمر' in t, 'owner credit present in footer')
+check('https://www.blogger.com/' in t and 'admin-entry' in t, 'secure Blogger administration entry is linked')
 home = t.index('data:view.isHomepage\'>\n'); widget = t.index("<b:widget")
 check(home < widget and 'id=\'play-host\'' in t.split('<b:widget')[0], 'home (games) is static, not inside the Blog widget')
 for bad in ('ads'+'bygoogle', 'ca-'+'pub-', 'page'+'ad2', 'BA'+'YAN'):
@@ -36,7 +38,16 @@ check('twitter:card' in t and "name='theme-color'" in t, 'Twitter card and theme
 check('"@type":"Article"' in t and 'data:blog.canonicalUrl' in t, 'Article JSON-LD uses Blogger page data')
 check("rel='manifest'" in t and 'application/manifest+json' in t, 'lightweight web manifest present')
 check('id="topic-science"' in t and 'topic-icon' in t, 'original topic SVG icons embedded')
-check("https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css" in t, 'theme loads CSS from the main-branch GitHub asset')
-check("https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js" in t, 'theme loads game engine from the main-branch GitHub asset')
+check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css" in t, 'theme loads CSS from jsDelivr with CSS MIME type')
+check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js" in t, 'theme loads game engine from jsDelivr')
 check((ROOT / 'dist/basira.css').is_file() and (ROOT / 'dist/basira.js').is_file(), 'remote CSS and JS assets are built')
 sys.exit(1 if fails else 0)
+
+# Source and built bilingual pages
+for slug in ('about', 'how-we-verify', 'editorial-policy', 'privacy-policy', 'terms', 'contact'):
+    check((ROOT / 'src/pages/en' / f'{slug}.html').is_file(), f'English source page exists: {slug}')
+    built = ROOT / 'dist/pages' / f'{slug}.html'
+    check(built.is_file(), f'built bilingual page exists: {slug}')
+    if built.is_file():
+        body = built.read_text(encoding='utf-8')
+        check("class='lang-ar'" in body and "class='lang-en'" in body, f'built page includes Arabic and English: {slug}')

@@ -127,5 +127,13 @@
   "challenge.opponent": "نتيجة صديقك: {s}",
   "challenge.won": "تفوقت على صديقك!",
   "challenge.lost": "صديقك حقق نتيجة أعلى",
-  "challenge.tie": "تعادلتما"
+  "challenge.tie": "تعادلتما",
+  "admin.link": "إدارة الموقع",
+  "page.about": "من نحن",
+  "page.verify": "كيف نتحقق",
+  "page.editorial": "سياسة التحرير",
+  "page.contact": "اتصل بنا",
+  "page.privacy": "الخصوصية",
+  "page.terms": "الشروط",
+  "skip": "تجاوز إلى المحتوى"
 }

@@ -7,8 +7,7 @@ from xml.dom import minidom
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC, DIST, PREV = (os.path.join(ROOT, d) for d in ('src', 'dist', 'preview'))
 e = html.escape
-PAGE_TITLES = {'about': 'من نحن', 'how-we-verify': 'كيف نتحقق', 'how-we-verify-en': 'How we verify', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا',
-               'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
+PAGE_TITLES = {'about': 'من نحن', 'how-we-verify': 'كيف نتحقق', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا', 'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
 
 
 def read(p, base=SRC):
@@ -87,7 +86,8 @@ def build():
     page_urls = site.get('published_urls', {})
     page_keys = [('about', 'من نحن'), ('how-we-verify', 'كيف نتحقق'), ('editorial-policy', 'سياسة التحرير'), ('contact', 'اتصل بنا'),
                  ('privacy-policy', 'سياسة الخصوصية'), ('terms', 'شروط الاستخدام')]
-    foot_a = ''.join(f"<li><a href='{e(page_urls[k])}'>{e(label)}</a></li>" for k, label in page_keys if page_urls.get(k)) or f"<li data-i='foot.pending'>{e(ar['foot.pending'])}</li>"
+    foot_keys = {'about': 'page.about', 'how-we-verify': 'page.verify', 'editorial-policy': 'page.editorial', 'contact': 'page.contact', 'privacy-policy': 'page.privacy', 'terms': 'page.terms'}
+    foot_a = ''.join(f"<li><a data-i='{foot_keys[k]}' href='{e(page_urls[k])}'>{e(ar[foot_keys[k]])}</a></li>" for k, label in page_keys if page_urls.get(k)) or f"<li data-i='foot.pending'>{e(ar['foot.pending'])}</li>"
     t = read('theme.tpl.xml')
     for k, v in {'{{CSS}}': css, '{{JS}}': js, '{{LOGO}}': lg, '{{HOME}}': home(site, ar), '{{NAV_VERIFY}}': (f"<a data-i='nav.verify' href='{e(site.get('published_urls', {}).get('how-we-verify', ''))}'>{e(ar['nav.verify'])}</a>" if site.get('published_urls', {}).get('how-we-verify') else ''),
                  '{{FOOT_TOPICS}}': foot_t, '{{FOOT_ABOUT}}': foot_a}.items():
@@ -101,7 +101,10 @@ def build():
         write(os.path.join(DIST, 'pages', f'game-{g[0]}.html'), game_page(site, g[0], ar))
     for slug in PAGE_TITLES:
         source = f'pages/{slug}.html'
-        write(os.path.join(DIST, 'pages', slug + '.html'), read(source).replace('{{EMAIL}}', mail))
+        ar_page = read(source).replace('{{EMAIL}}', mail)
+        en_page = read(f'pages/en/{slug}.html').replace('{{EMAIL}}', mail)
+        combined = f"<div class='lang-ar' lang='ar' dir='rtl'>{ar_page}</div><div class='lang-en' lang='en' dir='ltr'>{en_page}</div>"
+        write(os.path.join(DIST, 'pages', slug + '.html'), combined)
     idx = json.loads(read('content/articles/index.json', ROOT))
     for a in idx['articles']:
         body = read('content/articles/' + a['file'], ROOT)

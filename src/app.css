@@ -209,3 +209,6 @@ a{color:var(--acc)}
 }
 @media(max-width:380px){.topics{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.topics a{transition:none}.topics a:hover{transform:none}}
+
+/* Bilingual Blogger static pages */
+.lang-en{display:none}html[lang='en'] .lang-en{display:block}html[lang='en'] .lang-ar{display:none}.admin-entry{white-space:nowrap;text-decoration:none;font-weight:600}.foot-end{flex-wrap:wrap}
