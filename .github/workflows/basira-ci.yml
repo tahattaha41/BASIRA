@@ -40,6 +40,8 @@ jobs:
         run: |
           pip install playwright
           playwright install --with-deps chromium
+      - name: UI tests (languages, search, sizes)
+        run: python qa/ui_test.py
       - name: Game tests (real play-through)
         run: python qa/game_test.py
       - name: Reject leftovers of the old site

@@ -162,8 +162,8 @@ function mount(root,slug){
 
 function init(){
   var d=document.documentElement,tb=document.querySelectorAll('.js-theme');
-  function label(){var t=d.getAttribute('data-theme')==='dark'?'الوضع الفاتح':'الوضع الداكن';[].forEach.call(tb,function(b){b.textContent=t;});}
-  label();
+  function label(){var k=d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark';[].forEach.call(tb,function(b){b.textContent=window.BSR?window.BSR.t(k):k;});}
+  label();document.addEventListener('basira:lang',label);
   [].forEach.call(tb,function(b){b.addEventListener('click',function(){
     var dark=d.getAttribute('data-theme')!=='dark';
     if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
