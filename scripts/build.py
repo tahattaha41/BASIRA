@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """يبني dist/ من src/ و content/. لا أسرار هنا. المخرجات: theme.xml وpages وarticles، ومعاينة محلية في preview/."""
-import html, json, os, re
+import icons3d, html, json, os, re
 from urllib.parse import quote
 from xml.dom import minidom
 
@@ -55,10 +55,10 @@ HERO_ART = ("<svg class='hero-art' viewBox='0 0 380 340' aria-hidden='true' focu
 
 
 def home(site, ar):
-    pills = ''.join(f"<button aria-pressed='false' class='gcard' data-g='{g[0]}' type='button'><span class='gart'>{GAME_ART[g[0]]}</span><b data-i='g.{g[0]}.name'>{e(ar[f'g.{g[0]}.name'])}</b><small data-i='g.{g[0]}.desc'>{e(ar[f'g.{g[0]}.desc'])}</small><span class='gplay' data-i='card.play'>{e(ar['card.play'])}</span></button>" for g in site['games'])
+    pills = ''.join(f"<button aria-pressed='false' class='gcard' data-g='{g[0]}' type='button'><span class='gart'>{icons3d.use(g[0], 'i3 big')}</span><b data-i='g.{g[0]}.name'>{e(ar[f'g.{g[0]}.name'])}</b><small data-i='g.{g[0]}.desc'>{e(ar[f'g.{g[0]}.desc'])}</small><span class='gplay' data-i='card.play'>{e(ar['card.play'])}</span></button>" for g in site['games'])
     icon_ids = ['science', 'history', 'geography', 'technology', 'culture', 'logic', 'language', 'space']
-    topics = ''.join(f"<li><a href='/search/label/{quote(n)}'><svg class='topic-icon' aria-hidden='true' viewBox='0 0 48 48'><use href='#topic-{icon_ids[i]}'></use></svg><b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
-    icons = read('brand/topic-icons.svg', ROOT)
+    topics = ''.join(f"<li><a href='/search/label/{quote(n)}'>{icons3d.use(icon_ids[i], 'topic-icon i3')}<b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
+    icons = icons3d.sprite()
     verify_url = site.get('published_urls', {}).get('how-we-verify', '')
     verify = ("<section class='sec'><div class='wrap'><div class='verify'><div><h2 data-i='verify.title'>%s</h2><p data-i='verify.text'>%s</p></div>"
               "<a class='btn alt' data-i='verify.link' href='%s'>%s</a></div></div></section>"

@@ -301,3 +301,22 @@ a{color:var(--acc-t)}
  .js-rise [data-rise]{opacity:1;transform:none;transition:none}
  .picker .gcard:hover{transform:none}.confetti{display:none}
 }
+
+/* ===== أيقونات 3D (sprite SVG متعدد الطبقات) ===== */
+.i3{display:block;width:56px;height:56px;overflow:visible;filter:drop-shadow(0 6px 6px rgba(0,0,0,.32));transition:transform .25s ease}
+.i3.big{width:100%;height:auto;max-height:96px}
+.gart{background:radial-gradient(ellipse at 50% 85%,color-mix(in srgb,var(--g) 30%,transparent),transparent 70%),color-mix(in srgb,var(--g) 8%,var(--bg));padding:12px 8px 6px}
+.gart .i3.big{margin-inline:auto;width:auto;height:96px}
+.gcard:hover .i3,.gcard[aria-pressed=true] .i3,.topics a:hover .i3{transform:translateY(-5px) rotate(-4deg) scale(1.08)}
+.topics .topic-icon{width:64px;height:64px;margin-bottom:8px}
+.gcard .i3{animation:bob 4.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.ico{display:inline-flex;vertical-align:middle}.ico .i3{width:40px;height:40px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+.ico.sm .i3{width:28px;height:28px;filter:none}
+.pstrip .lvico .i3{width:52px;height:52px}
+.pf-ach li{flex-direction:row;align-items:center;gap:10px}.pf-ach li>span.txt{display:flex;flex-direction:column;min-width:0}
+.pf-ach li.off .i3{filter:grayscale(1) opacity(.5)}
+.daily-top{display:flex;gap:14px;align-items:center}.daily-top .i3{width:64px;height:64px}
+.g-end .win-ico .i3{width:96px;height:96px;margin:0 auto 8px;animation:bob 3s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.gcard .i3,.g-end .win-ico .i3{animation:none}.gcard:hover .i3,.topics a:hover .i3{transform:none}}
+.picker .gcard:last-child:nth-child(odd){grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center}@media(max-width:560px){.picker .gcard:last-child:nth-child(odd) .gart{flex:0 0 100%}}
