@@ -6,8 +6,8 @@
 ارفع ملف `BASIRA-Blogger-Theme.xml` مرة واحدة من Blogger: **المظهر ← استعادة ← تحميل**.
 
 القالب يحمل CSS وJavaScript من:
-- `https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.css`
-- `https://raw.githubusercontent.com/tahattaha41/BASIRA/main/dist/basira.js`
+- `https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css`
+- `https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js`
 
 ## التحديثات التلقائية
 بعد كل push إلى `main`:
@@ -40,3 +40,10 @@
 - لا تعديل للإدارة أو تسجيل الدخول.
 - تحديث الصفحات الموجودة يستبدل محتواها بنسخة GitHub المطابقة للعنوان؛ لا تحتفظ بتعديلات يدوية خارج المستودع إذا كنت تريد مزامنتها.
 - نجاح CI لا يثبت عرض Blogger الحقيقي؛ يجب اختبار أول رفع يدوياً.
+
+## اللغات وصفحات المعلومات
+- صفحات من نحن، كيف نتحقق، سياسة التحرير، الخصوصية، الشروط، واتصل بنا تحتوي نسختين عربية وإنجليزية، ويُظهر زر اللغة النسخة المناسبة.
+- ترجمة واجهة الألعاب والأسئلة: الأسئلة الحالية عربية؛ لا ندّعي وجود بنك أسئلة إنجليزي مكتمل.
+- رابط الإدارة في تذييل الموقع يفتح لوحة Blogger الرسمية. لا توجد لوحة CMS مخصصة داخل القالب؛ Blogger لا يوفر قاعدة بيانات أو خادماً آمناً لتخزين صلاحيات الإدارة داخل XML/JavaScript. لا تُضمّن OAuth secrets أو كلمات مرور في القالب.
+- حقوق الموقع في التذييل: © 2026 BASIRA | بصيرة — Created by Taha Omar · إنشاء وتطوير: طه عمر.
+- ملفات الشعار SVG تحدد width وheight صراحة حتى لا تظهر بحجم المتصفح الافتراضي إذا تعطل CSS.
