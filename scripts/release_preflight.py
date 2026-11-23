@@ -24,6 +24,11 @@ try:
         cur = ROOT / "dist/theme.xml"
         if not cur.is_file() or cur.read_text(encoding="utf-8") != fresh:
             err("dist/theme.xml is stale: run `python3 scripts/build.py` and commit the result.")
+        for name in ("basira.css", "basira.js"):
+            fresh_asset = tmp / "r/dist" / name
+            current_asset = ROOT / "dist" / name
+            if not fresh_asset.is_file() or not current_asset.is_file() or current_asset.read_bytes() != fresh_asset.read_bytes():
+                err(f"dist/{name} is stale or missing.")
         for f in (tmp / "r/dist/pages").glob("*.html"):
             c = ROOT / "dist/pages" / f.name
             if not c.is_file() or c.read_text(encoding="utf-8") != f.read_text(encoding="utf-8"):
@@ -70,11 +75,13 @@ if len(topics) != 8: err(f"Expected 8 sections; found {len(topics)}.")
 if len(games) != 5: err(f"Expected 5 games; found {len(games)}.")
 bank = json.loads((ROOT / "src/data/bank.json").read_text(encoding="utf-8"))
 if [t[0] for t in topics] != bank.get("topics"): err("Sections in site.json and bank.json differ.")
+asset_js_path = ROOT / "dist/basira.js"
+asset_js = asset_js_path.read_text(encoding="utf-8") if asset_js_path.is_file() else ""
 for slug, name, *_ in games:
     pg = ROOT / "dist/pages" / f"game-{slug}.html"
     if not pg.is_file(): err(f"Missing game page dist/pages/game-{slug}.html"); continue
     if f"data-game='{slug}'" not in pg.read_text(encoding="utf-8"): err(f"game-{slug}.html has no interactive mount point.")
-    if f"slug==='{slug}'" not in theme: err(f"Game engine for '{slug}' not found in theme JS.")
+    if f"slug==='{slug}'" not in asset_js: err(f"Game engine for '{slug}' not found in dist/basira.js.")
     if f"data-g='{slug}'" not in theme: err(f"Home page has no playable entry for '{slug}'.")
 for bad in ("نموذج تصميم", "قيد التنفيذ", "قريباً", "هذه صفحة نموذج", "inert='inert'"):
     blob = theme + "".join(p.read_text(encoding="utf-8") for p in (ROOT / "dist/pages").glob("*.html"))
