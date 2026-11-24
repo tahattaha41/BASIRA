@@ -43,6 +43,7 @@
       </form>
       <div class='bar-end'>
         <button class='btn-quiet js-lang' data-i='lang.switch' type='button'>English</button>
+        <button aria-pressed='false' class='btn-quiet js-sound' type='button'>الصوت: مغلق</button>
         <button class='btn-quiet js-theme' type='button'>المظهر: داكن</button>
       </div>
       <nav aria-label='main' class='nav'>

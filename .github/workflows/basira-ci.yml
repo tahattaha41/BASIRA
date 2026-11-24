@@ -51,6 +51,8 @@ jobs:
           playwright install --with-deps chromium
       - name: UI tests (languages, search, sizes)
         run: python qa/ui_test.py
+      - name: Sound tests (muted by default, toggle, persistence)
+        run: python qa/sound_test.py
       - name: Reward tests (animations, XP, level-up)
         run: python qa/reward_test.py
       - name: Game tests (real play-through)

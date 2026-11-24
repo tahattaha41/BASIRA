@@ -148,5 +148,7 @@
   "theme.m.dark": "Dark",
   "theme.m.light": "Light",
   "theme.m.auto": "Auto",
-  "lvl.up": "Level up: Level {n}"
+  "lvl.up": "Level up: Level {n}",
+  "sound.on": "Sound: On",
+  "sound.off": "Sound: Off"
 }
