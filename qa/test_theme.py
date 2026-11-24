@@ -38,6 +38,8 @@ check('twitter:card' in t and "name='theme-color'" in t, 'Twitter card and theme
 check('"@type":"Article"' in t and 'data:blog.canonicalUrl' in t, 'Article JSON-LD uses Blogger page data')
 check("rel='manifest'" in t and 'application/manifest+json' in t, 'lightweight web manifest present')
 check("id='i3-science'" in t and "id='i3-trophy'" in t and 'topic-icon' in t, '3D SVG icon sprite embedded (games, topics, progress)')
+check('cta-games' in t and 'data:view.isPost' in t and 'single-body' in t, 'article page has reading body and games CTA')
+check('<noscript>' in t, 'noscript notice present')
 check(t.count("<symbol id='i3-") >= 19, 'sprite holds all 19 icons')
 check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css" in t, 'theme loads CSS from jsDelivr with CSS MIME type')
 check("https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js" in t, 'theme loads game engine from jsDelivr')

@@ -59,6 +59,7 @@
 {{HOME}}
   </b:if>
 
+  <noscript><p class='noscript wrap' data-i='noscript'>{{ar:noscript}}</p></noscript>
   <div class='wrap content' id='content'>
     <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
@@ -80,7 +81,15 @@
               <article class='post'>
                 <b:if cond='data:view.isSingleItem'>
                   <h1><data:post.title/></h1>
-                  <data:post.body/>
+                  <p class='meta'><data:post.date/></p>
+                  <div class='single-body'><data:post.body/></div>
+                  <b:if cond='data:view.isPost'>
+                    <aside class='cta-games'>
+                      <svg class='i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-trophy'></use></svg>
+                      <div><strong data-i='cta.title'>{{ar:cta.title}}</strong><span data-i='cta.sub'>{{ar:cta.sub}}</span></div>
+                      <a class='btn' expr:href='data:blog.homepageUrl + &quot;#play&quot;' data-i='cta.btn'>{{ar:cta.btn}}</a>
+                    </aside>
+                  </b:if>
                 <b:else/>
                   <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
                   <p class='meta'><data:post.date/></p>
