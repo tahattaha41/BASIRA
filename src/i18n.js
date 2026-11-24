@@ -17,8 +17,6 @@ function apply(){
   [].forEach.call(document.querySelectorAll('[data-ip]'),function(n){n.setAttribute('placeholder',t(n.getAttribute('data-ip')));});
   [].forEach.call(document.querySelectorAll('.js-lang'),function(n){n.textContent=t('lang.switch');});
   var note=document.getElementById('lang-note');if(note)note.hidden=(lang!=='en');
-  var tb=document.querySelectorAll('.js-theme');
-  [].forEach.call(tb,function(b){b.textContent=t(d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark');});
 }
 function set(l){
   lang=l;try{localStorage.setItem(KEY,l);}catch(e){}

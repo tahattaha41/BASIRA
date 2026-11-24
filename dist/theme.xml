@@ -6,147 +6,43 @@
   <b:include data='blog' name='all-head-content'/>
   <title><data:blog.pageTitle/></title>
   <meta content='BASIRA | بصيرة' property='og:site_name'/>
-  <meta content='summary_large_image' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' property='og:title'/>
+  <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+  <meta content='website' property='og:type'/>
+  <meta content='summary' name='twitter:card'/>
+  <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+  <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  <meta content='#a88b54' name='theme-color'/>
+  <meta content='yes' name='apple-mobile-web-app-capable'/>
+  <link href='data:application/manifest+json,%7B%22name%22%3A%22BASIRA%20%7C%20%D8%A8%D8%B5%D9%8A%D8%B1%D8%A9%22%2C%22short_name%22%3A%22BASIRA%22%2C%22start_url%22%3A%22%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f6f3eb%22%2C%22theme_color%22%3A%22%23a88b54%22%2C%22lang%22%3A%22ar%22%2C%22dir%22%3A%22rtl%22%7D' rel='manifest'/>
+  <b:if cond='data:view.isSingleItem'>
+    <script type='application/ld+json'>{"@context":"https://schema.org","@type":"Article","headline":"<data:blog.pageName/>","description":"<data:blog.metaDescription/>","mainEntityOfPage":"<data:blog.canonicalUrl/>","publisher":{"@type":"Organization","name":"BASIRA | بصيرة"}}</script>
+  </b:if>
   <b:if cond='data:view.isHomepage'>
   <script type='application/ld+json'>{"@context":"https://schema.org","@type":"WebSite","name":"BASIRA | بصيرة","url":"<data:blog.homepageUrl/>","potentialAction":{"@type":"SearchAction","target":"<data:blog.homepageUrl/>search?q={q}","query-input":"required name=q"}}</script>
   </b:if>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
-  (function(){var d=document.documentElement;try{if(localStorage.getItem('site-theme')==='dark')d.setAttribute('data-theme','dark');
+  (function(){var d=document.documentElement;try{var pr=localStorage.getItem('site-theme');if(pr!=='light'&&pr!=='auto')pr='dark';d.setAttribute('data-pref',pr);d.setAttribute('data-theme',pr==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):pr);}catch(e){d.setAttribute('data-theme','dark');}try{
   var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
-  <b:skin><![CDATA[
-:root{--bg:#f7f5f0;--card:#fff;--ink:#1c1b19;--mute:#6b675f;--line:#e4e0d6;--acc:#0f5f58;--acc-ink:#fff;--ok:#1f7a45;--bad:#b3261e;--r:14px}
-:root[data-theme=dark]{--bg:#151513;--card:#1f1f1c;--ink:#f1eee6;--mute:#a7a296;--line:#33322d;--acc:#5fc7bb;--acc-ink:#0d1b19;--ok:#6fd08f;--bad:#ff8a80}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.8 'Noto Sans Arabic',system-ui,sans-serif}
-a{color:var(--acc)}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-.skip{position:absolute;top:0;inset-inline-start:0;transform:translateY(-200%);background:var(--card);padding:8px 12px;z-index:9}.skip:focus{transform:none}
-.top{border-bottom:1px solid var(--line);background:var(--bg)}
-.bar{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700;font-size:20px}
-.brand svg{width:32px;height:32px}
-.nav{display:flex;gap:20px;margin-inline-start:auto;flex-wrap:wrap}
-.nav a{color:var(--ink);text-decoration:none;font-size:15px}
-.nav a:hover{color:var(--acc)}
-button,.btn{font:inherit;cursor:pointer}
-.btn{display:inline-block;background:var(--acc);color:var(--acc-ink);border:0;border-radius:10px;padding:10px 20px;text-decoration:none;font-weight:600}
-.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn-quiet{background:none;border:1px solid var(--line);border-radius:10px;color:var(--mute);padding:6px 14px;font-size:14px}
-:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.hero{padding:56px 0 24px}
-.eyebrow{color:var(--mute);font-size:14px;margin:0 0 8px}
-.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.3;margin:0 0 16px;font-weight:700}
-.lede{max-width:620px;color:var(--mute);margin:0 0 24px}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.sec{padding:32px 0}
-.sec h2{font-size:26px;margin:0 0 16px}
-.picker{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
-.picker button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 18px;color:var(--ink)}
-.picker button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);border-color:var(--acc)}
-.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;list-style:none;margin:0;padding:0}
-.topics a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;text-decoration:none;color:var(--ink)}
-.topics b{display:block}.topics span{color:var(--mute);font-size:14px}
-.content{padding:24px 0 48px}
-.content .post{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin:0 0 16px}
-.content .post h2,.content .post h1{margin:0 0 8px;font-size:24px}
-.content .post h2 a{color:var(--ink);text-decoration:none}
-.meta{color:var(--mute);font-size:14px;margin:0 0 8px}
-.pager{display:flex;justify-content:space-between;gap:12px}
-.foot{border-top:1px solid var(--line);padding:32px 0;color:var(--mute);font-size:15px}
-.foot ul{list-style:none;margin:0;padding:0}.foot a{color:var(--mute)}
-.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
-.foot h4{margin:0 0 8px;color:var(--ink)}
-.foot-end{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.note{color:var(--mute);font-size:14px}
-/* games */
-.bsr-game{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-height:260px}
-.bsr-game h3{margin:0 0 4px;font-size:22px}
-.g-sub{color:var(--mute);margin:0 0 16px}
-.g-bar{display:flex;justify-content:space-between;color:var(--mute);font-size:14px;margin:0 0 12px}
-.g-prog{height:6px;background:var(--line);border-radius:3px;margin:0 0 16px;overflow:hidden}.g-prog i{display:block;height:100%;background:var(--acc)}
-.g-q{font-size:20px;font-weight:600;margin:0 0 16px}
-.g-opts{display:grid;gap:10px}
-.g-opt{text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 16px;color:var(--ink)}
-.g-opt:hover:not(:disabled){border-color:var(--acc)}
-.g-opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card))}
-.g-opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
-.g-fb{margin:16px 0 0;padding:12px 16px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
-.g-fb strong.ok{color:var(--ok)}.g-fb strong.bad{color:var(--bad)}
-.g-act{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-.g-end{text-align:center;padding:16px 0}
-.g-score{font-size:44px;font-weight:700;margin:0}
-.g-ord{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
-.g-ord li{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:10px 14px;min-height:46px}
-.g-ord li.fill{border-style:solid}
-.g-word{font-size:34px;letter-spacing:.2em;text-align:center;margin:8px 0 16px;direction:rtl}
-.g-in{font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:min(100%,240px)}
-.g-mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.g-card{min-height:72px;border:1px solid var(--line);border-radius:10px;background:var(--acc);color:var(--acc-ink);font-size:16px;padding:6px}
-.g-card.up{background:var(--bg);color:var(--ink)}
-.g-card.done{background:color-mix(in srgb,var(--ok) 18%,var(--card));color:var(--ink);border-color:var(--ok)}
-@media (max-width:560px){.g-mem{grid-template-columns:repeat(3,1fr)}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-/* مرحلة A: هيدر وبحث ولغة */
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.find{display:flex;flex:1 1 220px;max-width:360px;min-width:0;gap:6px}
-.find input{flex:1;min-width:0;width:100%;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
-.find button{font:inherit;padding:8px 14px;border:0;border-radius:10px;background:var(--acc);color:var(--acc-ink);min-height:44px}
-.bar-end{display:flex;gap:8px;margin-inline-start:auto}
-.btn-quiet{min-height:44px}
-.nav{margin-inline-start:0;flex:1 1 100%;order:3;overflow-x:auto;white-space:nowrap;gap:20px;padding-bottom:8px}
-.nav a{display:inline-flex;align-items:center;min-height:44px}
-.verify{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
-.verify h2{margin:0 0 6px}.verify p{margin:0;color:var(--mute);max-width:560px}
-.sec-h{font-size:24px;margin:0 0 16px}
-html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
-@media (min-width:900px){.nav{flex:0 1 auto;order:0;margin-inline-start:12px;overflow:visible;padding:0}.bar-end{margin-inline-start:0}}
-/* مرحلة C: الألعاب */
-.bsr-game{--g:var(--acc)}
-.bsr-game[data-game=mcq]{--g:#0f5f58}.bsr-game[data-game=truefalse]{--g:#a85d00}.bsr-game[data-game=order]{--g:#5b4bb0}.bsr-game[data-game=memory]{--g:#b0365f}.bsr-game[data-game=word]{--g:#1f6f9f}
-:root[data-theme=dark] .bsr-game[data-game=mcq]{--g:#5fc7bb}:root[data-theme=dark] .bsr-game[data-game=truefalse]{--g:#f0a64a}:root[data-theme=dark] .bsr-game[data-game=order]{--g:#a99bff}:root[data-theme=dark] .bsr-game[data-game=memory]{--g:#ff8fb0}:root[data-theme=dark] .bsr-game[data-game=word]{--g:#7cc4f0}
-.bsr-game{border-top:4px solid var(--g)}
-.bsr-game h3{color:var(--g)}
-.g-prog i,.g-time i{background:var(--g)}
-.g-lab{margin:12px 0 6px;font-weight:600}
-.g-lv{display:flex;gap:8px;flex-wrap:wrap}
-.g-chip{font:inherit;min-height:44px;padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
-.g-chip[aria-pressed=true]{background:var(--g);border-color:var(--g);color:#fff}
-.g-time{height:8px;background:var(--line);border-radius:4px;margin:0 0 16px;overflow:hidden}.g-time i{display:block;height:100%;width:100%}
-.g-stat{font-variant-numeric:tabular-nums}
-.g-two{grid-template-columns:1fr 1fr}
-.g-opt{min-height:48px}.g-opt.gone{visibility:hidden}
-.g-hint{margin-top:12px}
-.g-pts{font-size:20px;margin:0 0 8px;color:var(--mute)}
-.g-gain{color:var(--ok);font-weight:600}
-.g-ach{color:var(--g);font-weight:600;margin:4px 0}
-.g-sort{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
-.g-item{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-height:56px;cursor:grab;user-select:none}
-.g-item.drag{opacity:.5}.g-item.ok{border-color:var(--ok)}.g-item.bad{border-color:var(--bad)}
-.g-n{touch-action:none;min-width:36px;height:36px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-size:14px}
-.g-t{flex:1}.g-mv{display:flex;gap:4px}
-.g-arrow{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
-.g-mem6{grid-template-columns:repeat(6,1fr)}
-@media (max-width:560px){.g-mem6{grid-template-columns:repeat(4,1fr)}.g-card{font-size:14px}}
-.daily,.profile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
-.daily h2,.profile h2{margin:0 0 8px}
-.pf-top{margin-bottom:16px}.pf-lv{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.pf-ach{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
-.pf-ach li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column}
-.pf-ach li.off{opacity:.45}.pf-ach li.on{border-color:var(--acc)}
-.pf-hist{margin:0 0 16px;padding-inline-start:20px;color:var(--mute);font-size:15px}
-@media (prefers-reduced-motion:reduce){.g-time i{transition:none}}
-
-]]></b:skin>
+  <link href='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css' rel='stylesheet'/>
+  <b:skin><![CDATA[/* BASIRA styles load from the public GitHub build asset. */]]></b:skin>
 </head>
 <body>
   <a class='skip' data-i='skip' href='#content'>تجاوز إلى المحتوى</a>
   <header class='top'>
     <div class='wrap bar'>
-      <a class='brand' expr:href='data:blog.homepageUrl'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title"><title id="title">BASIRA symbol</title><path d="M7 24c4.8-8 10.5-12 17-12s12.2 4 17 12c-4.8 8-10.5 12-17 12S11.8 32 7 24z" fill="none" stroke="#0f766e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 24c2.8-4.1 5.8-6.2 9-6.2s6.2 2.1 9 6.2c-2.8 4.1-5.8 6.2-9 6.2s-6.2-2.1-9-6.2z" fill="none" stroke="#0f766e" stroke-width="2.4"/><path d="M24 19l5 5-5 5-5-5z" fill="#e6a23c" stroke="#152d43" stroke-width="1.2"/><path d="M24 4v5M24 39v5M4 24h5M39 24h5" fill="none" stroke="#152d43" stroke-width="2" stroke-linecap="round"/></svg><span>BASIRA | بصيرة</span></a>
+      <a class='brand' expr:href='data:blog.homepageUrl'><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" role="img" aria-labelledby="title">
+  <title id="title">BASIRA — بصيرة</title>
+  <path d="M8 39V23C8 14.2 15.2 7 24 7s16 7.2 16 16v16" fill="none" stroke="#18263a" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M13 39h22" fill="none" stroke="#18263a" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M24 13v5M18.5 19.5l3.2 3.2M29.5 19.5l-3.2 3.2" fill="none" stroke="#a88b54" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M24 22.5l5.5 5.5-5.5 5.5-5.5-5.5z" fill="#c5a96d"/>
+  <path d="M24 26v4" stroke="#18263a" stroke-width="1.6" stroke-linecap="round"/>
+</svg><span>BASIRA | بصيرة</span></a>
       <form action='/search' class='find' method='get' role='search'>
         <label class='sr' data-i='search.label' for='q'>ابحث في الموقع</label>
         <input data-ip='search.ph' id='q' name='q' placeholder='ابحث في المقالات' type='search'/>
@@ -154,52 +50,77 @@ html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
       </form>
       <div class='bar-end'>
         <button class='btn-quiet js-lang' data-i='lang.switch' type='button'>English</button>
-        <button class='btn-quiet js-theme' type='button'>الوضع الداكن</button>
+        <button aria-pressed='false' class='btn-quiet js-sound' type='button'>الصوت: مغلق</button>
+        <button class='btn-quiet js-theme' type='button'>المظهر: داكن</button>
       </div>
       <nav aria-label='main' class='nav'>
         <a data-i='nav.games' expr:href='data:blog.homepageUrl + &quot;#play&quot;'>الألعاب</a>
         <a data-i='nav.topics' expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>المعرفة</a>
         <a data-i='nav.articles' href='/search?max-results=24'>المقالات</a>
-        
+        <a data-i='nav.verify' href='/p/blog-page_625.html'>كيف نتحقق</a>
       </nav>
     </div>
   </header>
 
   <b:if cond='data:view.isHomepage'>
-<section class='hero'><div class='wrap'>
+<svg class='svg-defs' aria-hidden='true' focusable='false' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='i3-gloss' x1='0' y1='0' x2='.8' y2='1'><stop offset='0' stop-color='#fff' stop-opacity='.65'/><stop offset='.45' stop-color='#fff' stop-opacity='.05'/><stop offset='1' stop-color='#fff' stop-opacity='0'/></linearGradient><linearGradient id='i3g-teal' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#5EE0D0'/><stop offset='1' stop-color='#0A6B65'/></linearGradient><linearGradient id='i3d-teal' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0A6B65'/><stop offset='1' stop-color='#06423f'/></linearGradient><linearGradient id='i3l-teal' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#96ebe0'/><stop offset='1' stop-color='#5EE0D0'/></linearGradient><linearGradient id='i3g-gold' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FBE7A8'/><stop offset='1' stop-color='#B8862B'/></linearGradient><linearGradient id='i3d-gold' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#B8862B'/><stop offset='1' stop-color='#72531b'/></linearGradient><linearGradient id='i3l-gold' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#fcefc6'/><stop offset='1' stop-color='#FBE7A8'/></linearGradient><linearGradient id='i3g-violet' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#C4B8FF'/><stop offset='1' stop-color='#5B4BB0'/></linearGradient><linearGradient id='i3d-violet' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#5B4BB0'/><stop offset='1' stop-color='#382e6d'/></linearGradient><linearGradient id='i3l-violet' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#d9d1ff'/><stop offset='1' stop-color='#C4B8FF'/></linearGradient><linearGradient id='i3g-rose' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFA9C4'/><stop offset='1' stop-color='#B0365F'/></linearGradient><linearGradient id='i3d-rose' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#B0365F'/><stop offset='1' stop-color='#6d213b'/></linearGradient><linearGradient id='i3l-rose' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffc7d9'/><stop offset='1' stop-color='#FFA9C4'/></linearGradient><linearGradient id='i3g-blue' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#9AD7F8'/><stop offset='1' stop-color='#2A6FA3'/></linearGradient><linearGradient id='i3d-blue' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2A6FA3'/><stop offset='1' stop-color='#1a4565'/></linearGradient><linearGradient id='i3l-blue' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#bde5fa'/><stop offset='1' stop-color='#9AD7F8'/></linearGradient><linearGradient id='i3g-amber' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFC06E'/><stop offset='1' stop-color='#C4561A'/></linearGradient><linearGradient id='i3d-amber' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#C4561A'/><stop offset='1' stop-color='#7a3510'/></linearGradient><linearGradient id='i3l-amber' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffd6a1'/><stop offset='1' stop-color='#FFC06E'/></linearGradient><linearGradient id='i3g-green' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#9BE8B0'/><stop offset='1' stop-color='#2E8B57'/></linearGradient><linearGradient id='i3d-green' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#2E8B57'/><stop offset='1' stop-color='#1d5636'/></linearGradient><linearGradient id='i3l-green' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#bef0cc'/><stop offset='1' stop-color='#9BE8B0'/></linearGradient><linearGradient id='i3g-navy' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#3A5680'/><stop offset='1' stop-color='#101827'/></linearGradient><linearGradient id='i3d-navy' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#101827'/><stop offset='1' stop-color='#0a0f18'/></linearGradient><linearGradient id='i3l-navy' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#7f91ac'/><stop offset='1' stop-color='#3A5680'/></linearGradient><linearGradient id='i3g-silver' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#FFFFFF'/><stop offset='1' stop-color='#B7C1CF'/></linearGradient><linearGradient id='i3d-silver' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#B7C1CF'/><stop offset='1' stop-color='#717880'/></linearGradient><linearGradient id='i3l-silver' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffffff'/><stop offset='1' stop-color='#FFFFFF'/></linearGradient></defs><symbol id='i3-mcq' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M20 10H70A10 10 0 0 1 80 20V20A10 10 0 0 1 70 30H20A10 10 0 0 1 10 20V20A10 10 0 0 1 20 10Z' fill='url(#i3d-teal)' transform='translate(0 5)' /><path d='M20 10H70A10 10 0 0 1 80 20V20A10 10 0 0 1 70 30H20A10 10 0 0 1 10 20V20A10 10 0 0 1 20 10Z' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M20 10H70A10 10 0 0 1 80 20V20A10 10 0 0 1 70 30H20A10 10 0 0 1 10 20V20A10 10 0 0 1 20 10Z' fill='url(#i3-gloss)' /><path d='M20 34H70A10 10 0 0 1 80 44V44A10 10 0 0 1 70 54H20A10 10 0 0 1 10 44V44A10 10 0 0 1 20 34Z' fill='url(#i3d-gold)' transform='translate(0 5)' /><path d='M20 34H70A10 10 0 0 1 80 44V44A10 10 0 0 1 70 54H20A10 10 0 0 1 10 44V44A10 10 0 0 1 20 34Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M20 34H70A10 10 0 0 1 80 44V44A10 10 0 0 1 70 54H20A10 10 0 0 1 10 44V44A10 10 0 0 1 20 34Z' fill='url(#i3-gloss)' /><path d='M20 58H70A10 10 0 0 1 80 68V68A10 10 0 0 1 70 78H20A10 10 0 0 1 10 68V68A10 10 0 0 1 20 58Z' fill='url(#i3d-teal)' transform='translate(0 5)' /><path d='M20 58H70A10 10 0 0 1 80 68V68A10 10 0 0 1 70 78H20A10 10 0 0 1 10 68V68A10 10 0 0 1 20 58Z' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M20 58H70A10 10 0 0 1 80 68V68A10 10 0 0 1 70 78H20A10 10 0 0 1 10 68V68A10 10 0 0 1 20 58Z' fill='url(#i3-gloss)' /><path d='M19.4 44L24.35 48.95L33.15 38.5' fill='none' stroke='#101827' stroke-width='3.8500000000000005' stroke-linecap='round' stroke-linejoin='round'/><rect x='42' y='16' width='28' height='7' rx='3.5' fill='#fff' opacity='.55'/><rect x='42' y='64' width='22' height='7' rx='3.5' fill='#fff' opacity='.55'/></symbol><symbol id='i3-truefalse' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><circle cx='34' cy='57' r='26' fill='url(#i3d-green)'/><circle cx='34' cy='52' r='26' fill='url(#i3g-green)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='34' cy='52' r='26' fill='url(#i3-gloss)'/><path d='M23.8 53L31.45 60.65L45.05 44.5' fill='none' stroke='#fff' stroke-width='6.8' stroke-linecap='round' stroke-linejoin='round'/><circle cx='62' cy='47' r='26' fill='url(#i3d-rose)'/><circle cx='62' cy='42' r='26' fill='url(#i3g-rose)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='62' cy='42' r='26' fill='url(#i3-gloss)'/><path d='M52 32L72 52M72 32L52 52' stroke='#fff' stroke-width='8' stroke-linecap='round'/></symbol><symbol id='i3-order' viewBox='0 0 96 96'><ellipse cx='50' cy='90' rx='36' ry='5' fill='#000' opacity='.28'/><path d='M30 60L38 52V74L30 82Z' fill='url(#i3d-blue)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M8 60L16 52H38L30 60Z' fill='url(#i3l-blue)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='8' y='60' width='22' height='22' rx='3' fill='url(#i3g-blue)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='8' y='60' width='22' height='22' rx='3' fill='url(#i3-gloss)'/><text x='19' y='78' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='20' fill='#fff'>1</text><path d='M56 46L64 38V74L56 82Z' fill='url(#i3d-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M34 46L42 38H64L56 46Z' fill='url(#i3l-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='34' y='46' width='22' height='36' rx='3' fill='url(#i3g-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='34' y='46' width='22' height='36' rx='3' fill='url(#i3-gloss)'/><text x='45' y='72' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='22' fill='#fff'>2</text><path d='M82 30L90 22V74L82 82Z' fill='url(#i3d-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M60 30L68 22H90L82 30Z' fill='url(#i3l-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='60' y='30' width='22' height='52' rx='3' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='60' y='30' width='22' height='52' rx='3' fill='url(#i3-gloss)'/><text x='71' y='64' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='24' fill='#5a3d00'>3</text></symbol><symbol id='i3-memory' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><g transform='rotate(-12 36 50)'><path d='M22 22H50A8 8 0 0 1 58 30V72A8 8 0 0 1 50 80H22A8 8 0 0 1 14 72V30A8 8 0 0 1 22 22Z' fill='url(#i3d-rose)' transform='translate(0 5)' /><path d='M22 22H50A8 8 0 0 1 58 30V72A8 8 0 0 1 50 80H22A8 8 0 0 1 14 72V30A8 8 0 0 1 22 22Z' fill='url(#i3g-rose)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M22 22H50A8 8 0 0 1 58 30V72A8 8 0 0 1 50 80H22A8 8 0 0 1 14 72V30A8 8 0 0 1 22 22Z' fill='url(#i3-gloss)' /></g><g transform='rotate(10 60 48)'><path d='M48 18H76A8 8 0 0 1 84 26V68A8 8 0 0 1 76 76H48A8 8 0 0 1 40 68V26A8 8 0 0 1 48 18Z' fill='url(#i3d-violet)' transform='translate(0 5)' /><path d='M48 18H76A8 8 0 0 1 84 26V68A8 8 0 0 1 76 76H48A8 8 0 0 1 40 68V26A8 8 0 0 1 48 18Z' fill='url(#i3g-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M48 18H76A8 8 0 0 1 84 26V68A8 8 0 0 1 76 76H48A8 8 0 0 1 40 68V26A8 8 0 0 1 48 18Z' fill='url(#i3-gloss)' /><path d='M62.0 33.0L65.7 41.9L75.3 42.7L68.0 48.9L70.2 58.3L62.0 53.3L53.8 58.3L56.0 48.9L48.7 42.7L58.3 41.9Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.6' stroke-width='1.2'/></g></symbol><symbol id='i3-word' viewBox='0 0 96 96'><ellipse cx='50' cy='88' rx='38' ry='5' fill='#000' opacity='.28'/><path d='M28 40L36 32V60L28 68Z' fill='url(#i3d-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M6 40L14 32H36L28 40Z' fill='url(#i3l-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='6' y='40' width='22' height='28' rx='3' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='6' y='40' width='22' height='28' rx='3' fill='url(#i3-gloss)'/><text x='17' y='62' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='24' fill='#fff'>؟</text><path d='M56 40L64 32V60L56 68Z' fill='url(#i3d-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M34 40L42 32H64L56 40Z' fill='url(#i3l-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='34' y='40' width='22' height='28' rx='3' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='34' y='40' width='22' height='28' rx='3' fill='url(#i3-gloss)'/><text x='45' y='62' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='26' fill='#5a3d00'>ب</text><path d='M84 40L92 32V60L84 68Z' fill='url(#i3d-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M62 40L70 32H92L84 40Z' fill='url(#i3l-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='62' y='40' width='22' height='28' rx='3' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='62' y='40' width='22' height='28' rx='3' fill='url(#i3-gloss)'/><text x='73' y='62' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='24' fill='#fff'>؟</text><path d='M76.0 13.0L78.4 18.7L84.6 19.2L79.9 23.3L81.3 29.3L76.0 26.1L70.7 29.3L72.1 23.3L67.4 19.2L73.6 18.7Z' fill='url(#i3g-gold)'/><path d='M20.0 18.0L21.6 21.8L25.7 22.1L22.6 24.8L23.5 28.9L20.0 26.7L16.5 28.9L17.4 24.8L14.3 22.1L18.4 21.8Z' fill='url(#i3g-gold)' opacity='.8'/></symbol><symbol id='i3-trophy' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M30 22H18C18 38 24 44 33 46' fill='none' stroke='url(#i3d-gold)' stroke-width='6' stroke-linecap='round'/><path d='M66 22H78C78 38 72 44 63 46' fill='none' stroke='url(#i3d-gold)' stroke-width='6' stroke-linecap='round'/><path d='M28 12H68V34C68 52 60 60 48 60C36 60 28 52 28 34Z' fill='url(#i3d-gold)' transform='translate(0 4)' /><path d='M28 12H68V34C68 52 60 60 48 60C36 60 28 52 28 34Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M28 12H68V34C68 52 60 60 48 60C36 60 28 52 28 34Z' fill='url(#i3-gloss)' /><path d='M45 60H51A2 2 0 0 1 53 62V72A2 2 0 0 1 51 74H45A2 2 0 0 1 43 72V62A2 2 0 0 1 45 60Z' fill='url(#i3d-gold)' transform='translate(0 3)' /><path d='M45 60H51A2 2 0 0 1 53 62V72A2 2 0 0 1 51 74H45A2 2 0 0 1 43 72V62A2 2 0 0 1 45 60Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M45 60H51A2 2 0 0 1 53 62V72A2 2 0 0 1 51 74H45A2 2 0 0 1 43 72V62A2 2 0 0 1 45 60Z' fill='url(#i3-gloss)' /><path d='M32 74H64A4 4 0 0 1 68 78V82A4 4 0 0 1 64 86H32A4 4 0 0 1 28 82V78A4 4 0 0 1 32 74Z' fill='url(#i3d-gold)' transform='translate(0 3)' /><path d='M32 74H64A4 4 0 0 1 68 78V82A4 4 0 0 1 64 86H32A4 4 0 0 1 28 82V78A4 4 0 0 1 32 74Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M32 74H64A4 4 0 0 1 68 78V82A4 4 0 0 1 64 86H32A4 4 0 0 1 28 82V78A4 4 0 0 1 32 74Z' fill='url(#i3-gloss)' /><path d='M48.0 22.0L51.2 29.6L59.4 30.3L53.1 35.7L55.1 43.7L48.0 39.4L40.9 43.7L42.9 35.7L36.6 30.3L44.8 29.6Z' fill='#fff' opacity='.85'/></symbol><symbol id='i3-xp' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='28' ry='5' fill='#000' opacity='.28'/><path d='M48.0 8.0L58.0 32.2L84.1 34.3L64.2 51.3L70.3 76.7L48.0 63.0L25.7 76.7L31.8 51.3L11.9 34.3L38.0 32.2Z' fill='url(#i3d-gold)' transform='translate(0 6)' /><path d='M48.0 8.0L58.0 32.2L84.1 34.3L64.2 51.3L70.3 76.7L48.0 63.0L25.7 76.7L31.8 51.3L11.9 34.3L38.0 32.2Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M48.0 8.0L58.0 32.2L84.1 34.3L64.2 51.3L70.3 76.7L48.0 63.0L25.7 76.7L31.8 51.3L11.9 34.3L38.0 32.2Z' fill='url(#i3-gloss)' /><path d='M48.0 32.0L51.5 41.1L61.3 41.7L53.7 47.9L56.2 57.3L48.0 52.0L39.8 57.3L42.3 47.9L34.7 41.7L44.5 41.1Z' fill='#fff' opacity='.5'/></symbol><symbol id='i3-level' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M48 8L80 19V46C80 66 66 80 48 88C30 80 16 66 16 46V19Z' fill='url(#i3d-teal)' transform='translate(0 5)' /><path d='M48 8L80 19V46C80 66 66 80 48 88C30 80 16 66 16 46V19Z' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M48 8L80 19V46C80 66 66 80 48 88C30 80 16 66 16 46V19Z' fill='url(#i3-gloss)' /><path d='M48 8L80 19V46C80 66 66 80 48 88C30 80 16 66 16 46V19Z' transform='translate(48 47) scale(.78) translate(-48 -48)' fill='none' stroke='url(#i3g-gold)' stroke-width='4'/><path d='M48.0 29.0L52.5 39.8L64.2 40.7L55.3 48.4L58.0 59.8L48.0 53.6L38.0 59.8L40.7 48.4L31.8 40.7L43.5 39.8Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.6' stroke-width='1.2'/></symbol><symbol id='i3-flame' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='22' ry='5' fill='#000' opacity='.28'/><path d='M48 6C52 24 72 32 72 56C72 75 61 88 48 88C35 88 24 75 24 58C24 46 33 40 38 28C42 36 44 38 47 38C49 28 46 18 48 6Z' fill='url(#i3d-amber)' transform='translate(0 5)' /><path d='M48 6C52 24 72 32 72 56C72 75 61 88 48 88C35 88 24 75 24 58C24 46 33 40 38 28C42 36 44 38 47 38C49 28 46 18 48 6Z' fill='url(#i3g-amber)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M48 6C52 24 72 32 72 56C72 75 61 88 48 88C35 88 24 75 24 58C24 46 33 40 38 28C42 36 44 38 47 38C49 28 46 18 48 6Z' fill='url(#i3-gloss)' /><path d='M48 48C53 58 60 62 60 72C60 80 55 84 48 84C41 84 36 80 36 72C36 62 45 58 48 48Z' fill='url(#i3l-gold)'/></symbol><symbol id='i3-gem' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='28' ry='5' fill='#000' opacity='.28'/><path d='M20 41L36 21H60L76 41L48 89Z' fill='url(#i3d-teal)'/><polygon points='20 36 36 16 44 36' fill='url(#i3l-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='36 16 60 16 52 36 44 36' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='60 16 76 36 52 36' fill='url(#i3l-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='20 36 44 36 48 84' fill='url(#i3d-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='44 36 52 36 48 84' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='52 36 76 36 48 84' fill='url(#i3d-teal)' stroke='#fff' stroke-opacity='.45' stroke-width='1' stroke-linejoin='round'/><polygon points='36 16 60 16 76 36 20 36' fill='url(#i3-gloss)'/></symbol><symbol id='i3-target' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='32' ry='5' fill='#000' opacity='.28'/><circle cx='48' cy='51' r='36' fill='url(#i3d-rose)'/><circle cx='48' cy='46' r='36' fill='url(#i3g-rose)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='46' r='36' fill='url(#i3-gloss)'/><circle cx='48' cy='46' r='26' fill='url(#i3d-silver)'/><circle cx='48' cy='46' r='26' fill='url(#i3g-silver)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='46' r='26' fill='url(#i3-gloss)'/><circle cx='48' cy='46' r='17' fill='url(#i3d-rose)'/><circle cx='48' cy='46' r='17' fill='url(#i3g-rose)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='46' r='17' fill='url(#i3-gloss)'/><circle cx='48' cy='46' r='8' fill='url(#i3d-gold)'/><circle cx='48' cy='46' r='8' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='46' r='8' fill='url(#i3-gloss)'/><path d='M48 46L82 12' stroke='url(#i3d-gold)' stroke-width='4' stroke-linecap='round'/><path d='M74 10L86 8L84 20Z' fill='url(#i3g-gold)'/></symbol><symbol id='i3-science' viewBox='0 0 96 96'><ellipse cx='48' cy='88' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M38 14H58V36L76 70C80 79 74 86 65 86H31C22 86 16 79 20 70L38 36Z' fill='url(#i3d-blue)' transform='translate(0 4)'/><path d='M38 14H58V36L76 70C80 79 74 86 65 86H31C22 86 16 79 20 70L38 36Z' fill='#cfeaff' fill-opacity='.55' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M28 62H68L76 70C80 79 74 86 65 86H31C22 86 16 79 20 70Z' fill='url(#i3g-teal)'/><circle cx='42' cy='72' r='4' fill='#fff' opacity='.7'/><circle cx='56' cy='66' r='3' fill='#fff' opacity='.7'/><circle cx='50' cy='78' r='2.5' fill='#fff' opacity='.6'/><path d='M40 8H56A4 4 0 0 1 60 12V13A4 4 0 0 1 56 17H40A4 4 0 0 1 36 13V12A4 4 0 0 1 40 8Z' fill='url(#i3d-gold)' transform='translate(0 3)' /><path d='M40 8H56A4 4 0 0 1 60 12V13A4 4 0 0 1 56 17H40A4 4 0 0 1 36 13V12A4 4 0 0 1 40 8Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M40 8H56A4 4 0 0 1 60 12V13A4 4 0 0 1 56 17H40A4 4 0 0 1 36 13V12A4 4 0 0 1 40 8Z' fill='url(#i3-gloss)' /><path d='M38 14H58V36L76 70C80 79 74 86 65 86H31C22 86 16 79 20 70L38 36Z' fill='url(#i3-gloss)'/></symbol><symbol id='i3-history' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M23 10H73A3 3 0 0 1 76 13V19A3 3 0 0 1 73 22H23A3 3 0 0 1 20 19V13A3 3 0 0 1 23 10Z' fill='url(#i3d-gold)' transform='translate(0 4)' /><path d='M23 10H73A3 3 0 0 1 76 13V19A3 3 0 0 1 73 22H23A3 3 0 0 1 20 19V13A3 3 0 0 1 23 10Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M23 10H73A3 3 0 0 1 76 13V19A3 3 0 0 1 73 22H23A3 3 0 0 1 20 19V13A3 3 0 0 1 23 10Z' fill='url(#i3-gloss)' /><path d='M32 24H64A2 2 0 0 1 66 26V68A2 2 0 0 1 64 70H32A2 2 0 0 1 30 68V26A2 2 0 0 1 32 24Z' fill='url(#i3d-gold)' transform='translate(0 4)' /><path d='M32 24H64A2 2 0 0 1 66 26V68A2 2 0 0 1 64 70H32A2 2 0 0 1 30 68V26A2 2 0 0 1 32 24Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M32 24H64A2 2 0 0 1 66 26V68A2 2 0 0 1 64 70H32A2 2 0 0 1 30 68V26A2 2 0 0 1 32 24Z' fill='url(#i3-gloss)' /><path d='M39 26V68' stroke='#8a6420' stroke-opacity='.45' stroke-width='2'/><path d='M48 26V68' stroke='#8a6420' stroke-opacity='.45' stroke-width='2'/><path d='M57 26V68' stroke='#8a6420' stroke-opacity='.45' stroke-width='2'/><path d='M23 72H73A3 3 0 0 1 76 75V81A3 3 0 0 1 73 84H23A3 3 0 0 1 20 81V75A3 3 0 0 1 23 72Z' fill='url(#i3d-gold)' transform='translate(0 4)' /><path d='M23 72H73A3 3 0 0 1 76 75V81A3 3 0 0 1 73 84H23A3 3 0 0 1 20 81V75A3 3 0 0 1 23 72Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M23 72H73A3 3 0 0 1 76 75V81A3 3 0 0 1 73 84H23A3 3 0 0 1 20 81V75A3 3 0 0 1 23 72Z' fill='url(#i3-gloss)' /></symbol><symbol id='i3-geography' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='28' ry='5' fill='#000' opacity='.28'/><circle cx='48' cy='49' r='36' fill='url(#i3d-blue)'/><circle cx='48' cy='44' r='36' fill='url(#i3g-blue)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='44' r='36' fill='url(#i3-gloss)'/><path d='M30 30C38 24 46 28 44 36C42 44 32 42 28 48C24 42 24 34 30 30Z' fill='url(#i3g-green)'/><path d='M54 40C62 34 72 40 70 50C68 60 58 64 54 58C50 52 50 44 54 40Z' fill='url(#i3g-green)'/><path d='M40 62C46 60 50 66 46 72C42 74 36 70 40 62Z' fill='url(#i3g-green)'/><ellipse cx='48' cy='44' rx='14' ry='36' fill='none' stroke='#fff' stroke-opacity='.3' stroke-width='1.5'/><path d='M12 44H84' stroke='#fff' stroke-opacity='.3' stroke-width='1.5'/><circle cx='48' cy='44' r='36' fill='url(#i3-gloss)'/></symbol><symbol id='i3-technology' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='30' ry='5' fill='#000' opacity='.28'/><rect x='26' y='10' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='26' y='72' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='10' y='26' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='72' y='26' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='38' y='10' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='38' y='72' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='10' y='38' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='72' y='38' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='50' y='10' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='50' y='72' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='10' y='50' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='72' y='50' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='62' y='10' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='62' y='72' width='5' height='10' rx='1.5' fill='url(#i3g-silver)'/><rect x='10' y='62' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><rect x='72' y='62' width='10' height='5' rx='1.5' fill='url(#i3g-silver)'/><path d='M28 18H64A10 10 0 0 1 74 28V64A10 10 0 0 1 64 74H28A10 10 0 0 1 18 64V28A10 10 0 0 1 28 18Z' fill='url(#i3d-navy)' transform='translate(0 5)' /><path d='M28 18H64A10 10 0 0 1 74 28V64A10 10 0 0 1 64 74H28A10 10 0 0 1 18 64V28A10 10 0 0 1 28 18Z' fill='url(#i3g-navy)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M28 18H64A10 10 0 0 1 74 28V64A10 10 0 0 1 64 74H28A10 10 0 0 1 18 64V28A10 10 0 0 1 28 18Z' fill='url(#i3-gloss)' /><path d='M36 30H56A6 6 0 0 1 62 36V56A6 6 0 0 1 56 62H36A6 6 0 0 1 30 56V36A6 6 0 0 1 36 30Z' fill='url(#i3d-teal)' transform='translate(0 2)' /><path d='M36 30H56A6 6 0 0 1 62 36V56A6 6 0 0 1 56 62H36A6 6 0 0 1 30 56V36A6 6 0 0 1 36 30Z' fill='url(#i3g-teal)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M36 30H56A6 6 0 0 1 62 36V56A6 6 0 0 1 56 62H36A6 6 0 0 1 30 56V36A6 6 0 0 1 36 30Z' fill='url(#i3-gloss)' /><path d='M46.0 37.0L48.4 42.7L54.6 43.2L49.9 47.3L51.3 53.3L46.0 50.0L40.7 53.3L42.1 47.3L37.4 43.2L43.6 42.7Z' fill='#fff' opacity='.85'/></symbol><symbol id='i3-culture' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='34' ry='5' fill='#000' opacity='.28'/><path d='M8 22C24 16 40 18 48 28V80C40 70 24 68 8 74Z' fill='url(#i3d-rose)' transform='translate(0 5)' /><path d='M8 22C24 16 40 18 48 28V80C40 70 24 68 8 74Z' fill='url(#i3g-rose)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M8 22C24 16 40 18 48 28V80C40 70 24 68 8 74Z' fill='url(#i3-gloss)' /><path d='M88 22C72 16 56 18 48 28V80C56 70 72 68 88 74Z' fill='url(#i3d-violet)' transform='translate(0 5)' /><path d='M88 22C72 16 56 18 48 28V80C56 70 72 68 88 74Z' fill='url(#i3g-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M88 22C72 16 56 18 48 28V80C56 70 72 68 88 74Z' fill='url(#i3-gloss)' /><path d='M14 38Q27.0 34 40 40' stroke='#fff' stroke-opacity='.5' stroke-width='2' fill='none' stroke-linecap='round'/><path d='M14 50Q27.0 46 40 52' stroke='#fff' stroke-opacity='.5' stroke-width='2' fill='none' stroke-linecap='round'/><path d='M56 38Q69.0 34 82 40' stroke='#fff' stroke-opacity='.5' stroke-width='2' fill='none' stroke-linecap='round'/><path d='M56 50Q69.0 46 82 52' stroke='#fff' stroke-opacity='.5' stroke-width='2' fill='none' stroke-linecap='round'/></symbol><symbol id='i3-logic' viewBox='0 0 96 96'><ellipse cx='50' cy='89' rx='32' ry='5' fill='#000' opacity='.28'/><path d='M56 36L72 20V64L56 80Z' fill='url(#i3d-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><path d='M12 36L28 20H72L56 36Z' fill='url(#i3l-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='12' y='36' width='44' height='44' rx='3' fill='url(#i3g-violet)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><rect x='12' y='36' width='44' height='44' rx='3' fill='url(#i3-gloss)'/><circle cx='22' cy='46' r='3.6' fill='#fff'/><circle cx='46' cy='70' r='3.6' fill='#fff'/><circle cx='34' cy='58' r='3.6' fill='#fff'/><circle cx='22' cy='70' r='3.6' fill='#fff'/><circle cx='46' cy='46' r='3.6' fill='#fff'/><circle cx='34' cy='28' r='3' fill='#fff' opacity='.9'/><circle cx='44' cy='22' r='3' fill='#fff' opacity='.9'/><path d='M76.0 9.0L78.4 14.7L84.6 15.2L79.9 19.3L81.3 25.3L76.0 22.1L70.7 25.3L72.1 19.3L67.4 15.2L73.6 14.7Z' fill='url(#i3g-gold)'/></symbol><symbol id='i3-language' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='30' ry='5' fill='#000' opacity='.28'/><path d='M22 12H54A14 14 0 0 1 68 26V42A14 14 0 0 1 54 56H22A14 14 0 0 1 8 42V26A14 14 0 0 1 22 12ZM20 56L18 74L36 56Z' fill='url(#i3d-blue)' transform='translate(0 5)' /><path d='M22 12H54A14 14 0 0 1 68 26V42A14 14 0 0 1 54 56H22A14 14 0 0 1 8 42V26A14 14 0 0 1 22 12ZM20 56L18 74L36 56Z' fill='url(#i3g-blue)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M22 12H54A14 14 0 0 1 68 26V42A14 14 0 0 1 54 56H22A14 14 0 0 1 8 42V26A14 14 0 0 1 22 12ZM20 56L18 74L36 56Z' fill='url(#i3-gloss)' /><text x='38' y='46' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='34' fill='#fff'>ع</text><path d='M60 40H76A12 12 0 0 1 88 52V60A12 12 0 0 1 76 72H60A12 12 0 0 1 48 60V52A12 12 0 0 1 60 40ZM74 72L80 86L66 72Z' fill='url(#i3d-gold)' transform='translate(0 5)' /><path d='M60 40H76A12 12 0 0 1 88 52V60A12 12 0 0 1 76 72H60A12 12 0 0 1 48 60V52A12 12 0 0 1 60 40ZM74 72L80 86L66 72Z' fill='url(#i3g-gold)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round' /><path d='M60 40H76A12 12 0 0 1 88 52V60A12 12 0 0 1 76 72H60A12 12 0 0 1 48 60V52A12 12 0 0 1 60 40ZM74 72L80 86L66 72Z' fill='url(#i3-gloss)' /><text x='68' y='66' text-anchor='middle' font-family="'Noto Sans Arabic',Inter,sans-serif" font-weight='700' font-size='24' fill='#5a3d00'>A</text></symbol><symbol id='i3-space' viewBox='0 0 96 96'><ellipse cx='48' cy='89' rx='26' ry='5' fill='#000' opacity='.28'/><ellipse cx='48' cy='48' rx='42' ry='13' fill='none' stroke='url(#i3d-gold)' stroke-width='7' transform='rotate(-22 48 48)'/><circle cx='48' cy='50' r='26' fill='url(#i3d-amber)'/><circle cx='48' cy='46' r='26' fill='url(#i3g-amber)' stroke='#fff' stroke-opacity='.4' stroke-width='1.2' stroke-linejoin='round'/><circle cx='48' cy='46' r='26' fill='url(#i3-gloss)'/><ellipse cx='48' cy='48' rx='42' ry='13' fill='none' stroke='url(#i3g-gold)' stroke-width='6' transform='rotate(-22 48 48)' stroke-dasharray='62 200' stroke-dashoffset='-72'/><path d='M80.0 10.0L82.1 15.1L87.6 15.5L83.4 19.1L84.7 24.5L80.0 21.6L75.3 24.5L76.6 19.1L72.4 15.5L77.9 15.1Z' fill='url(#i3g-gold)'/><path d='M14.0 17.0L15.3 20.2L18.8 20.5L16.1 22.7L16.9 26.0L14.0 24.2L11.1 26.0L11.9 22.7L9.2 20.5L12.7 20.2Z' fill='url(#i3g-silver)'/></symbol></svg>
+<section class='hero'><div class='wrap hero-grid'><div class='hero-txt'>
 <p class='eyebrow' data-i='hero.eyebrow'>Think. Discover. Play. · فكّر. اكتشف. العب.</p>
 <h1 data-i='hero.title'>اعرف أكثر، ثم تحدَّ نفسك</h1>
 <p class='lede' data-i='hero.lede'>معلومات موثّقة بالمصادر وألعاب ذهنية بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.</p>
 <div class='cta'><a class='btn' data-i='hero.cta' href='#play'>ابدأ اللعب</a><a class='btn alt' data-i='hero.cta2' href='#topics'>تصفّح المعرفة</a></div>
-</div></section>
-<section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>تحتاج الألعاب إلى تفعيل JavaScript.</noscript></div></div></section>
+<div class='pstrip' id='pstrip' aria-live='polite'></div>
+</div><div class='hero-vis'><svg class='hero-art' viewBox='0 0 380 340' aria-hidden='true' focusable='false'><circle cx='190' cy='170' r='150' class='ring r1'/><circle cx='190' cy='170' r='112' class='ring r2'/><g class='orbit'><circle cx='190' cy='20' r='7' class='dot'/><circle cx='340' cy='170' r='5' class='dot d2'/><circle cx='60' cy='260' r='6' class='dot'/></g><path d='M70 170c34-52 82-78 120-78s86 26 120 78c-34 52-82 78-120 78S104 222 70 170z' class='eye'/><circle cx='190' cy='170' r='50' class='iris'/><circle cx='190' cy='170' r='22' class='pupil'/><circle cx='202' cy='158' r='8' class='glint'/><g class='tile t1'><rect x='28' y='54' width='58' height='58' rx='16'/><text x='57' y='96' text-anchor='middle'>؟</text></g><g class='tile t2'><rect x='294' y='38' width='58' height='58' rx='16'/><path d='M310 68l11 11 20-24' class='ck'/></g><g class='tile t3'><rect x='300' y='234' width='58' height='58' rx='16'/><text x='329' y='275' text-anchor='middle'>٣</text></g><g class='tile t4'><rect x='22' y='226' width='58' height='58' rx='16'/><path d='M51 240l5 12 13 1-10 9 3 13-11-7-11 7 3-13-10-9 13-1z' class='st'/></g></svg></div></div></section>
+<section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>الألعاب والتحدي اليومي تحتاج تفعيل JavaScript في متصفحك.</noscript></div></div></section>
 <section class='sec' id='play'><div class='wrap'><h2 data-i='games.title'>الألعاب</h2>
 <p class='note' data-i='lang.note' hidden='hidden' id='lang-note'>محتوى الأسئلة والمقالات الإنجليزية قيد المراجعة، لذلك تظهر الأسئلة بالعربية الآن.</p>
-<div class='picker' id='picker'><button aria-pressed='false' data-g='mcq' data-i='g.mcq.name' type='button'>اختبارات متعددة الخيارات</button><button aria-pressed='false' data-g='truefalse' data-i='g.truefalse.name' type='button'>صح أم خطأ</button><button aria-pressed='false' data-g='order' data-i='g.order.name' type='button'>ترتيب الأحداث</button><button aria-pressed='false' data-g='memory' data-i='g.memory.name' type='button'>لعبة الذاكرة</button><button aria-pressed='false' data-g='word' data-i='g.word.name' type='button'>خمّن الكلمة</button></div>
-<div class='bsr-game' id='play-host'><noscript>تحتاج الألعاب إلى تفعيل JavaScript.</noscript></div>
+<div class='picker' id='picker'><button aria-pressed='false' class='gcard' data-g='mcq' type='button'><span class='gart'><svg class='i3 big' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-mcq'></use></svg></span><b data-i='g.mcq.name'>اختبارات متعددة الخيارات</b><small data-i='g.mcq.desc'>أربع إجابات وتفسير بعد كل سؤال</small><span class='gplay' data-i='card.play'>العب الآن</span></button><button aria-pressed='false' class='gcard' data-g='truefalse' type='button'><span class='gart'><svg class='i3 big' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-truefalse'></use></svg></span><b data-i='g.truefalse.name'>صح أم خطأ</b><small data-i='g.truefalse.desc'>جمل سريعة تختبر دقة معلوماتك</small><span class='gplay' data-i='card.play'>العب الآن</span></button><button aria-pressed='false' class='gcard' data-g='order' type='button'><span class='gart'><svg class='i3 big' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-order'></use></svg></span><b data-i='g.order.name'>ترتيب الأحداث</b><small data-i='g.order.desc'>رتّب وقائع بالتسلسل الصحيح</small><span class='gplay' data-i='card.play'>العب الآن</span></button><button aria-pressed='false' class='gcard' data-g='memory' type='button'><span class='gart'><svg class='i3 big' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-memory'></use></svg></span><b data-i='g.memory.name'>لعبة الذاكرة</b><small data-i='g.memory.desc'>اكتشف الأزواج بأقل عدد من المحاولات</small><span class='gplay' data-i='card.play'>العب الآن</span></button><button aria-pressed='false' class='gcard' data-g='word' type='button'><span class='gart'><svg class='i3 big' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-word'></use></svg></span><b data-i='g.word.name'>خمّن الكلمة</b><small data-i='g.word.desc'>كلمة مخفية وتلميحات تساعدك</small><span class='gplay' data-i='card.play'>العب الآن</span></button></div>
+<div class='bsr-game' id='play-host'><noscript>الألعاب والتحدي اليومي تحتاج تفعيل JavaScript في متصفحك.</noscript></div>
 </div></section>
 <section class='sec' id='progress'><div class='wrap'><div class='profile' id='profile-panel'></div></div></section>
-<section class='sec' id='topics'><div class='wrap'><h2 data-i='topics.title'>أقسام المعرفة</h2><ul class='topics'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><b data-i='t.العلوم'>العلوم</b><span>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><b data-i='t.التاريخ والحضارات'>التاريخ والحضارات</b><span>أحداث وشعوب وتواريخ موثقة بالمصادر</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><b data-i='t.الجغرافيا والدول'>الجغرافيا والدول</b><span>بلدان ومدن وخرائط وحقائق مرجعية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><b data-i='t.التكنولوجيا'>التكنولوجيا</b><span>شرح مبسط لما نستخدمه كل يوم</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><b data-i='t.الثقافة العامة'>الثقافة العامة</b><span>معلومات متنوعة تستحق أن تُعرف</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><b data-i='t.الرياضيات والمنطق'>الرياضيات والمنطق</b><span>أفكار وألغاز بخطوات حل واضحة</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><b data-i='t.اللغة والأدب'>اللغة والأدب</b><span>قواعد ومفردات ونصوص وأعلام</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><b data-i='t.الفضاء والفلك'>الفضاء والفلك</b><span>الكواكب والنجوم وأحدث الاكتشافات</span></a></li></ul></div></section>
-
+<section class='sec' id='topics'><div class='wrap'><h2 data-i='topics.title'>أقسام المعرفة</h2><ul class='topics'><li><a href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-science'></use></svg><b data-i='t.العلوم'>العلوم</b><span>كيف تعمل الأشياء وما وراء الظواهر اليومية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-history'></use></svg><b data-i='t.التاريخ والحضارات'>التاريخ والحضارات</b><span>أحداث وشعوب وتواريخ موثقة بالمصادر</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-geography'></use></svg><b data-i='t.الجغرافيا والدول'>الجغرافيا والدول</b><span>بلدان ومدن وخرائط وحقائق مرجعية</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-technology'></use></svg><b data-i='t.التكنولوجيا'>التكنولوجيا</b><span>شرح مبسط لما نستخدمه كل يوم</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-culture'></use></svg><b data-i='t.الثقافة العامة'>الثقافة العامة</b><span>معلومات متنوعة تستحق أن تُعرف</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-logic'></use></svg><b data-i='t.الرياضيات والمنطق'>الرياضيات والمنطق</b><span>أفكار وألغاز بخطوات حل واضحة</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-language'></use></svg><b data-i='t.اللغة والأدب'>اللغة والأدب</b><span>قواعد ومفردات ونصوص وأعلام</span></a></li><li><a href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'><svg class='topic-icon i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-space'></use></svg><b data-i='t.الفضاء والفلك'>الفضاء والفلك</b><span>الكواكب والنجوم وأحدث الاكتشافات</span></a></li></ul></div></section>
+<section class='sec'><div class='wrap'><div class='verify'><div><h2 data-i='verify.title'>كيف نتحقق</h2><p data-i='verify.text'>كل رقم أو تاريخ في مقالاتنا له مصدر مذكور، وأسئلة الألعاب تُراجع قبل ظهورها ولا تُولَّد أثناء اللعب.</p></div><a class='btn alt' data-i='verify.link' href='/p/blog-page_625.html'>اقرأ منهجنا</a></div></div></section>
   </b:if>
 
+  <noscript><p class='noscript wrap' data-i='noscript'>الألعاب والتحدي اليومي تحتاج تفعيل JavaScript في متصفحك.</p></noscript>
   <div class='wrap content' id='content'>
     <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
         <b:includable id='main' var='top'>
           <b:if cond='data:view.isHomepage'><h2 class='sec-h' data-i='latest.title'>أحدث المقالات</h2></b:if>
-          <b:loop values='data:posts' var='post'>
-            <article class='post'>
-              <b:if cond='data:view.isSingleItem'>
-                <h1><data:post.title/></h1>
-                <data:post.body/>
-              <b:else/>
-                <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
-                <p class='meta'><data:post.date/></p>
-                <data:post.snippet/>
-              </b:if>
-            </article>
-          </b:loop>
+          <b:if cond='data:view.isHomepage'>
+            <div class='article-grid'>
+              <b:loop values='data:posts' var='post'>
+                <article class='post article-card'>
+                  <span class='article-kicker'>BASIRA · <data:post.date/></span>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                  <p><data:post.snippet/></p>
+                  <a class='article-read' expr:href='data:post.url'>اقرأ المقال ←</a>
+                </article>
+              </b:loop>
+            </div>
+          <b:else/>
+            <b:loop values='data:posts' var='post'>
+              <article class='post'>
+                <b:if cond='data:view.isSingleItem'>
+                  <h1><data:post.title/></h1>
+                  <p class='meta'><data:post.date/></p>
+                  <div class='single-body'><data:post.body/></div>
+                  <b:if cond='data:view.isPost'>
+                    <aside class='cta-games'>
+                      <svg class='i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-trophy'></use></svg>
+                      <div><strong data-i='cta.title'>خلّصت القراءة؟ اختبر نفسك</strong><span data-i='cta.sub'>خمس ألعاب بأسئلة مراجَعة وتحدي يومي، وتقدمك يُحفظ على جهازك</span></div>
+                      <a class='btn' expr:href='data:blog.homepageUrl + &quot;#play&quot;' data-i='cta.btn'>العب الآن</a>
+                    </aside>
+                  </b:if>
+                <b:else/>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                  <p class='meta'><data:post.date/></p>
+                  <data:post.snippet/>
+                </b:if>
+              </article>
+            </b:loop>
+          </b:if>
           <div class='pager'>
             <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>«</a></b:if>
             <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>»</a></b:if>
@@ -214,382 +135,11 @@ html[dir=ltr] body{font-family:'Inter','Noto Sans Arabic',system-ui,sans-serif}
       <div class='foot-grid'>
         <div><p data-i='foot.note'>معلومات موثّقة وألعاب ذهنية بالعربية، تعمل بلا تسجيل.</p></div>
         <div><h4 data-i='foot.topics'>أقسام المعرفة</h4><ul><li><a data-i='t.العلوم' href='/search/label/%D8%A7%D9%84%D8%B9%D9%84%D9%88%D9%85'>العلوم</a></li><li><a data-i='t.التاريخ والحضارات' href='/search/label/%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%AD%D8%B6%D8%A7%D8%B1%D8%A7%D8%AA'>التاريخ والحضارات</a></li><li><a data-i='t.الجغرافيا والدول' href='/search/label/%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%AF%D9%88%D9%84'>الجغرافيا والدول</a></li><li><a data-i='t.التكنولوجيا' href='/search/label/%D8%A7%D9%84%D8%AA%D9%83%D9%86%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7'>التكنولوجيا</a></li><li><a data-i='t.الثقافة العامة' href='/search/label/%D8%A7%D9%84%D8%AB%D9%82%D8%A7%D9%81%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9'>الثقافة العامة</a></li><li><a data-i='t.الرياضيات والمنطق' href='/search/label/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D9%85%D9%86%D8%B7%D9%82'>الرياضيات والمنطق</a></li><li><a data-i='t.اللغة والأدب' href='/search/label/%D8%A7%D9%84%D9%84%D8%BA%D8%A9%20%D9%88%D8%A7%D9%84%D8%A3%D8%AF%D8%A8'>اللغة والأدب</a></li><li><a data-i='t.الفضاء والفلك' href='/search/label/%D8%A7%D9%84%D9%81%D8%B6%D8%A7%D8%A1%20%D9%88%D8%A7%D9%84%D9%81%D9%84%D9%83'>الفضاء والفلك</a></li></ul></div>
-        <div><h4 data-i='foot.about'>عن الموقع</h4><ul><li data-i='foot.pending'>الصفحات التعريفية قيد الإعداد</li></ul></div>
+        <div><h4 data-i='foot.about'>عن الموقع</h4><ul><li><a data-i='page.about' href='/p/blog-page_23.html'>من نحن</a></li><li><a data-i='page.verify' href='/p/blog-page_625.html'>كيف نتحقق</a></li><li><a data-i='page.editorial' href='/p/blog-page_81.html'>سياسة التحرير</a></li><li><a data-i='page.privacy' href='/p/blog-page_581.html'>الخصوصية</a></li><li><a data-i='page.terms' href='/p/blog-page_648.html'>الشروط</a></li></ul></div>
       </div>
-      <div class='foot-end'><span>© BASIRA</span></div>
+      <div class='foot-end'><span>© 2026 BASIRA | بصيرة — Created by Taha Omar · إنشاء وتطوير: طه عمر</span><a class='admin-entry' href='https://www.blogger.com/' target='_blank' rel='noopener noreferrer'><span data-i='admin.link'>إدارة الموقع</span></a></div>
     </div>
   </footer>
-  <script>//<![CDATA[
-(function(){
-'use strict';
-var DICT={"ar":{"brand":"BASIRA | بصيرة","nav.games":"الألعاب","nav.topics":"المعرفة","nav.articles":"المقالات","nav.verify":"كيف نتحقق","search.ph":"ابحث في المقالات","search.btn":"بحث","search.label":"ابحث في الموقع","lang.switch":"English","theme.dark":"الوضع الداكن","theme.light":"الوضع الفاتح","hero.eyebrow":"Think. Discover. Play. · فكّر. اكتشف. العب.","hero.title":"اعرف أكثر، ثم تحدَّ نفسك","hero.lede":"معلومات موثّقة بالمصادر وألعاب ذهنية بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.","hero.cta":"ابدأ اللعب","hero.cta2":"تصفّح المعرفة","games.title":"الألعاب","topics.title":"أقسام المعرفة","latest.title":"أحدث المقالات","verify.title":"كيف نتحقق","verify.text":"كل رقم أو تاريخ في مقالاتنا له مصدر مذكور، وأسئلة الألعاب تُراجع قبل ظهورها ولا تُولَّد أثناء اللعب.","verify.link":"اقرأ منهجنا","foot.note":"معلومات موثّقة وألعاب ذهنية بالعربية، تعمل بلا تسجيل.","foot.topics":"أقسام المعرفة","foot.about":"عن الموقع","foot.pending":"الصفحات التعريفية قيد الإعداد","lang.note":"محتوى الأسئلة والمقالات الإنجليزية قيد المراجعة، لذلك تظهر الأسئلة بالعربية الآن.","noscript":"تحتاج الألعاب إلى تفعيل JavaScript.","t.العلوم":"العلوم","t.التاريخ والحضارات":"التاريخ والحضارات","t.الجغرافيا والدول":"الجغرافيا والدول","t.التكنولوجيا":"التكنولوجيا","t.الثقافة العامة":"الثقافة العامة","t.الرياضيات والمنطق":"الرياضيات والمنطق","t.اللغة والأدب":"اللغة والأدب","t.الفضاء والفلك":"الفضاء والفلك","g.mcq.name":"اختبارات متعددة الخيارات","g.mcq.desc":"أربع إجابات وتفسير بعد كل سؤال","g.truefalse.name":"صح أم خطأ","g.truefalse.desc":"جمل سريعة تختبر دقة معلوماتك","g.order.name":"ترتيب الأحداث","g.order.desc":"رتّب وقائع بالتسلسل الصحيح","g.memory.name":"لعبة الذاكرة","g.memory.desc":"اكتشف الأزواج بأقل عدد من المحاولات","g.word.name":"خمّن الكلمة","g.word.desc":"كلمة مخفية وتلميحات تساعدك","g.start":"ابدأ","g.next":"التالي","g.finish":"النتيجة","g.again":"جولة جديدة","g.back":"رجوع","g.best":"أفضل نتيجة","g.score":"النقاط","g.streak":"سلسلة","g.time":"الوقت","g.level":"المستوى","g.easy":"سهل","g.medium":"متوسط","g.hard":"صعب","g.prog":"متدرج","g.pick":"اختر المستوى","g.qof":"السؤال {n} من {m}","g.hint":"حذف إجابتين (−3 نقاط)","g.correct":"إجابة صحيحة.","g.wrong":"إجابة غير صحيحة.","g.timeout":"انتهى الوقت.","g.check":"تحقق","g.up":"أعلى","g.down":"أسفل","g.moves":"المحاولات","g.pairs":"الأزواج","g.reveal":"اكشف حرفاً (−2 نقطة)","g.attempts":"المحاولات المتبقية","g.hintw":"التلميح","g.wordis":"الكلمة:","g.order.is":"الترتيب الصحيح:","g.result.pass":"أحسنت! اجتزت الجولة","g.result.fail":"حاول مرة أخرى لتتحسن","g.xp":"+{n} نقطة خبرة","g.newbest":"رقم قياسي جديد","g.local":"تُحفظ نتائجك على جهازك فقط.","g.points":"نقطة","g.rules.mcq":"أجب عن أسئلة الاختيار من متعدد قبل انتهاء الوقت. الإجابات السريعة والمتتالية تمنحك نقاطاً أكثر، ولك حذف إجابتين مرة واحدة في الجولة.","g.rules.truefalse":"احكم على كل عبارة بصح أو خطأ بسرعة. كل إجابة صحيحة متتالية ترفع مضاعف السلسلة.","g.rules.order":"رتّب الأحداث من الأقدم إلى الأحدث بالسحب والإفلات أو بأزرار الأعلى والأسفل، ثم اضغط تحقق. تُحتسب نقطة لكل حدث في مكانه الصحيح.","g.rules.memory":"اقلب بطاقتين لتجد الأزواج المتطابقة بأقل عدد من المحاولات. كلما زاد المستوى زادت البطاقات.","g.rules.word":"خمّن الكلمة المخفية من التلميح. لك ثلاث محاولات، ويمكنك كشف حرف مقابل نقطتين.","g.timer.on":"مؤقت","g.items":"{n} أسئلة","daily.title":"تحدي اليوم","daily.sub":"خمسة أسئلة هي نفسها لجميع اللاعبين اليوم. تُحتسب خبرة التحدي مرة واحدة يومياً.","daily.play":"العب التحدي","daily.done":"أنجزت تحدي اليوم: {s} نقطة","daily.again":"أعد المحاولة (بلا خبرة إضافية)","profile.title":"تقدمك","profile.level":"المستوى {n}","profile.xp":"{a} / {b} خبرة","profile.ach":"الإنجازات","profile.hist":"آخر الجولات","profile.none":"لا توجد جولات بعد. ابدأ لعبة وسيظهر تقدمك هنا.","profile.days":"أيام اللعب: {n}","profile.reset":"مسح بياناتي من هذا الجهاز","profile.confirm":"سيُمسح كل تقدمك على هذا الجهاز. متأكد؟","ach.first":"أول جولة","ach.first.d":"أكمل أي جولة","ach.perfect":"جولة كاملة","ach.perfect.d":"أجب عن كل الأسئلة بشكل صحيح","ach.streak5":"سلسلة 5","ach.streak5.d":"5 إجابات صحيحة متتالية","ach.streak10":"سلسلة 10","ach.streak10.d":"10 إجابات صحيحة متتالية","ach.all":"الألعاب الخمس","ach.all.d":"العب كل الألعاب الخمس","ach.daily3":"ثلاثة أيام","ach.daily3.d":"أنجز تحدي اليوم في 3 أيام مختلفة","ach.lvl5":"المستوى 5","ach.lvl5.d":"ابلغ المستوى 5","ach.hard":"تحدٍّ صعب","ach.hard.d":"اجتز جولة بمستوى صعب بنسبة 70% فأكثر"},"en":{"brand":"BASIRA | بصيرة","nav.games":"Games","nav.topics":"Knowledge","nav.articles":"Articles","nav.verify":"How we verify","search.ph":"Search articles","search.btn":"Search","search.label":"Search the site","lang.switch":"العربية","theme.dark":"Dark mode","theme.light":"Light mode","hero.eyebrow":"Think. Discover. Play.","hero.title":"Learn something, then challenge yourself","hero.lede":"Sourced knowledge and brain games in Arabic and English. Play right away with no sign-up; your results stay on your device.","hero.cta":"Start playing","hero.cta2":"Browse knowledge","games.title":"Games","topics.title":"Knowledge sections","latest.title":"Latest articles","verify.title":"How we verify","verify.text":"Every figure and date in our articles has a cited source, and game questions are reviewed before they appear, never generated while you play.","verify.link":"Read our method","foot.note":"Sourced knowledge and brain games, no sign-up needed.","foot.topics":"Knowledge sections","foot.about":"About","foot.pending":"Info pages are being prepared","lang.note":"English questions and articles are still under review, so questions are shown in Arabic for now.","noscript":"Games need JavaScript enabled.","t.العلوم":"Science","t.التاريخ والحضارات":"History & Civilizations","t.الجغرافيا والدول":"Geography & Countries","t.التكنولوجيا":"Technology","t.الثقافة العامة":"General Knowledge","t.الرياضيات والمنطق":"Math & Logic","t.اللغة والأدب":"Language & Literature","t.الفضاء والفلك":"Space & Astronomy","g.mcq.name":"Multiple choice","g.mcq.desc":"Four answers, with an explanation after each","g.truefalse.name":"True or false","g.truefalse.desc":"Quick statements that test your accuracy","g.order.name":"Timeline order","g.order.desc":"Put events in the right order","g.memory.name":"Memory","g.memory.desc":"Find the pairs in as few tries as possible","g.word.name":"Guess the word","g.word.desc":"A hidden word and hints that help","g.start":"Start","g.next":"Next","g.finish":"Results","g.again":"New round","g.back":"Back","g.best":"Best","g.score":"Points","g.streak":"Streak","g.time":"Time","g.level":"Level","g.easy":"Easy","g.medium":"Medium","g.hard":"Hard","g.prog":"Progressive","g.pick":"Choose a level","g.qof":"Question {n} of {m}","g.hint":"Remove two answers (−3 pts)","g.correct":"Correct.","g.wrong":"Incorrect.","g.timeout":"Time's up.","g.check":"Check","g.up":"Up","g.down":"Down","g.moves":"Moves","g.pairs":"Pairs","g.reveal":"Reveal a letter (−2 pts)","g.attempts":"Attempts left","g.hintw":"Hint","g.wordis":"The word:","g.order.is":"Correct order:","g.result.pass":"Well done! You passed the round","g.result.fail":"Try again to improve","g.xp":"+{n} XP","g.newbest":"New personal best","g.local":"Your results are saved on this device only.","g.points":"pts","g.rules.mcq":"Answer multiple-choice questions before time runs out. Fast, consecutive answers earn more points, and you can remove two answers once per round.","g.rules.truefalse":"Judge each statement true or false, quickly. Each consecutive correct answer raises your streak multiplier.","g.rules.order":"Put the events in order from earliest to latest by drag and drop or the up and down buttons, then press Check. You get a point for each event in its right place.","g.rules.memory":"Flip two cards to find matching pairs in as few moves as possible. Higher levels have more cards.","g.rules.word":"Guess the hidden word from its hint. You have three attempts, and you can reveal a letter for two points.","g.timer.on":"Timed","g.items":"{n} questions","daily.title":"Daily challenge","daily.sub":"Five questions, the same for every player today. Challenge XP counts once per day.","daily.play":"Play the challenge","daily.done":"Daily challenge done: {s} points","daily.again":"Retry (no extra XP)","profile.title":"Your progress","profile.level":"Level {n}","profile.xp":"{a} / {b} XP","profile.ach":"Achievements","profile.hist":"Recent rounds","profile.none":"No rounds yet. Start a game and your progress will show here.","profile.days":"Days played: {n}","profile.reset":"Clear my data on this device","profile.confirm":"This will erase all your progress on this device. Sure?","ach.first":"First round","ach.first.d":"Complete any round","ach.perfect":"Perfect round","ach.perfect.d":"Answer every question correctly","ach.streak5":"Streak 5","ach.streak5.d":"5 correct answers in a row","ach.streak10":"Streak 10","ach.streak10.d":"10 correct answers in a row","ach.all":"All five games","ach.all.d":"Play all five games","ach.daily3":"Three days","ach.daily3.d":"Finish the daily challenge on 3 different days","ach.lvl5":"Level 5","ach.lvl5.d":"Reach level 5","ach.hard":"Hard challenge","ach.hard.d":"Pass a hard round with 70% or more"}};
-var KEY='basira.lang';
-function getLang(){
-  var m=/[?&]lang=(en|ar)/.exec(location.search);
-  if(m)return m[1];
-  try{var s=localStorage.getItem(KEY);if(s==='en'||s==='ar')return s;}catch(e){}
-  return 'ar';
-}
-var lang=getLang();
-function t(k){var d=DICT[lang]||DICT.ar;return d[k]!=null?d[k]:(DICT.ar[k]!=null?DICT.ar[k]:k);}
-function apply(){
-  var d=document.documentElement;
-  d.setAttribute('lang',lang);d.setAttribute('dir',lang==='en'?'ltr':'rtl');
-  [].forEach.call(document.querySelectorAll('[data-i]'),function(n){n.textContent=t(n.getAttribute('data-i'));});
-  [].forEach.call(document.querySelectorAll('[data-ip]'),function(n){n.setAttribute('placeholder',t(n.getAttribute('data-ip')));});
-  [].forEach.call(document.querySelectorAll('.js-lang'),function(n){n.textContent=t('lang.switch');});
-  var note=document.getElementById('lang-note');if(note)note.hidden=(lang!=='en');
-  var tb=document.querySelectorAll('.js-theme');
-  [].forEach.call(tb,function(b){b.textContent=t(d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark');});
-}
-function set(l){
-  lang=l;try{localStorage.setItem(KEY,l);}catch(e){}
-  apply();
-  try{document.dispatchEvent(new CustomEvent('basira:lang',{detail:l}));}catch(e){}
-}
-window.BSR=window.BSR||{};
-window.BSR.t=t;window.BSR.lang=function(){return lang;};window.BSR.setLang=set;window.BSR.applyI18n=apply;
-function init(){
-  [].forEach.call(document.querySelectorAll('.js-lang'),function(b){b.addEventListener('click',function(){set(lang==='en'?'ar':'en');});});
-  apply();
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-
-(function(){
-'use strict';
-var BANK={"topics":["العلوم","التاريخ والحضارات","الجغرافيا والدول","التكنولوجيا","الثقافة العامة","الرياضيات والمنطق","اللغة والأدب","الفضاء والفلك"],"mcq":[{"id":"m1","t":"العلوم","l":1,"q":"أي غاز تمتصه النباتات أثناء البناء الضوئي؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],"a":2,"x":"تمتص النباتات ثاني أكسيد الكربون وتستخدمه مع الماء وضوء الشمس لصنع الغذاء، وتطلق الأكسجين."},{"id":"m2","t":"العلوم","l":2,"q":"ما الرمز الكيميائي للذهب؟","o":["Ag","Au","Fe","Go"],"a":1,"x":"الرمز Au مأخوذ من الاسم اللاتيني aurum. أما Ag فللفضة وFe للحديد."},{"id":"m3","t":"العلوم","l":2,"q":"كم عدد العظام في جسم الإنسان البالغ تقريباً؟","o":["150","206","300","412"],"a":1,"x":"للبالغ 206 عظمة، بينما يولد الطفل بعدد أكبر تلتحم بعض عظامه مع النمو."},{"id":"m4","t":"العلوم","l":1,"q":"ما أسرع حيوان بري في العالم؟","o":["الأسد","الحصان","الفهد","الغزال"],"a":2,"x":"الفهد (الشيتا) أسرع الحيوانات البرية، ويستطيع الركض بسرعات تفوق 100 كم/س لمسافات قصيرة."},{"id":"m5","t":"العلوم","l":2,"q":"ما الغاز الأكثر وفرة في الغلاف الجوي للأرض؟","o":["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الأرجون"],"a":1,"x":"يشكل النيتروجين نحو 78% من حجم الهواء، والأكسجين نحو 21%."},{"id":"m6","t":"العلوم","l":2,"q":"ما وحدة قياس القوة في النظام الدولي للوحدات؟","o":["الجول","الواط","النيوتن","الباسكال"],"a":2,"x":"النيوتن وحدة القوة، والجول للطاقة، والواط للقدرة، والباسكال للضغط."},{"id":"m7","t":"العلوم","l":1,"q":"ما أصلب مادة طبيعية معروفة؟","o":["الحديد","الألماس","الذهب","الكوارتز"],"a":1,"x":"الألماس أصلب المواد الطبيعية على مقياس موس للصلادة."},{"id":"m8","t":"التاريخ والحضارات","l":2,"q":"في أي عام سقطت القسطنطينية بيد العثمانيين؟","o":["1204","1453","1517","1683"],"a":1,"x":"فتح السلطان محمد الفاتح القسطنطينية عام 1453م."},{"id":"m9","t":"التاريخ والحضارات","l":2,"q":"من الفرعون الذي يُنسب إليه بناء الهرم الأكبر في الجيزة؟","o":["خوفو","خفرع","رمسيس الثاني","توت عنخ آمون"],"a":0,"x":"يُنسب الهرم الأكبر إلى الملك خوفو من الأسرة الرابعة."},{"id":"m10","t":"التاريخ والحضارات","l":2,"q":"في أي عام بدأت الحرب العالمية الأولى؟","o":["1905","1914","1918","1939"],"a":1,"x":"بدأت الحرب العالمية الأولى عام 1914 وانتهت عام 1918."},{"id":"m11","t":"التاريخ والحضارات","l":1,"q":"في أي عام انتهت الحرب العالمية الثانية؟","o":["1939","1941","1945","1950"],"a":2,"x":"انتهت الحرب العالمية الثانية عام 1945."},{"id":"m12","t":"التاريخ والحضارات","l":3,"q":"من الذي نجح في فكّ رموز حجر رشيد؟","o":["هوارد كارتر","جان فرانسوا شامبليون","نابليون بونابرت","ماريت"],"a":1,"x":"فكّ شامبليون رموز الكتابة الهيروغليفية عام 1822 بالاستعانة بحجر رشيد."},{"id":"m13","t":"التاريخ والحضارات","l":2,"q":"أي حضارة بنت مدينة البتراء؟","o":["الرومان","الفرس","الأنباط","الفينيقيون"],"a":2,"x":"بنى الأنباط البتراء في جنوب الأردن ونحتوا واجهاتها في الصخر."},{"id":"m14","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة أستراليا؟","o":["سيدني","ملبورن","كانبرا","بيرث"],"a":2,"x":"عاصمة أستراليا كانبرا، وليست سيدني التي هي أكبر مدنها."},{"id":"m15","t":"الجغرافيا والدول","l":1,"q":"ما أكبر محيطات العالم مساحة؟","o":["الأطلسي","الهندي","الهادئ","المتجمد الشمالي"],"a":2,"x":"المحيط الهادئ أكبر المحيطات، ويغطي نحو ثلث سطح الأرض."},{"id":"m16","t":"الجغرافيا والدول","l":1,"q":"ما أطول نهر في قارة أفريقيا؟","o":["الكونغو","النيجر","النيل","الزمبيزي"],"a":2,"x":"نهر النيل أطول أنهار أفريقيا."},{"id":"m17","t":"الجغرافيا والدول","l":1,"q":"ما أعلى قمة جبلية فوق مستوى سطح البحر؟","o":["كي تو","إفرست","كليمنجارو","مون بلان"],"a":1,"x":"قمة إفرست في جبال الهيمالايا أعلى قمة فوق مستوى سطح البحر."},{"id":"m18","t":"الجغرافيا والدول","l":2,"q":"ما عاصمة كندا؟","o":["تورونتو","فانكوفر","أوتاوا","مونتريال"],"a":2,"x":"عاصمة كندا أوتاوا."},{"id":"m19","t":"الجغرافيا والدول","l":2,"q":"ما أصغر دولة في العالم مساحة؟","o":["موناكو","الفاتيكان","سان مارينو","ليختنشتاين"],"a":1,"x":"الفاتيكان أصغر دولة مساحة، ومساحتها نحو 0.44 كم²."},{"id":"m20","t":"التكنولوجيا","l":1,"q":"ماذا يعني الاختصار CPU؟","o":["وحدة المعالجة المركزية","ذاكرة الوصول العشوائي","وحدة التخزين","بطاقة الشاشة"],"a":0,"x":"CPU اختصار Central Processing Unit أي وحدة المعالجة المركزية، وهي عقل الحاسوب."},{"id":"m21","t":"التكنولوجيا","l":1,"q":"من الذي أسس شركة مايكروسوفت مع بول ألين؟","o":["ستيف جوبز","بيل غيتس","مارك زوكربيرغ","لاري بيج"],"a":1,"x":"أسس بيل غيتس وبول ألين مايكروسوفت عام 1975."},{"id":"m22","t":"التكنولوجيا","l":1,"q":"ما النظام العددي الذي تعتمد عليه الحواسيب داخلياً؟","o":["العشري","الثنائي","الروماني","الثماني فقط"],"a":1,"x":"تعمل الحواسيب بالنظام الثنائي المكوَّن من 0 و1."},{"id":"m23","t":"التكنولوجيا","l":2,"q":"ماذا يرمز الاختصار HTTP؟","o":["بروتوكول نقل النص التشعبي","لغة ترميز الصفحات","عنوان الموقع","نظام أسماء النطاقات"],"a":0,"x":"HTTP هو بروتوكول نقل النص التشعبي، وبه يتبادل المتصفح والخادم صفحات الويب."},{"id":"m24","t":"الثقافة العامة","l":1,"q":"كم عدد ألوان قوس قزح التقليدية؟","o":["5","6","7","8"],"a":2,"x":"يُقسَّم قوس قزح تقليدياً إلى سبعة ألوان."},{"id":"m25","t":"الثقافة العامة","l":1,"q":"ما أكبر حيوان ثديي في العالم؟","o":["الفيل الأفريقي","الحوت الأزرق","القرش الحوتي","الزرافة"],"a":1,"x":"الحوت الأزرق أكبر الثدييات، بل أكبر حيوان عاش على الأرض."},{"id":"m26","t":"الثقافة العامة","l":1,"q":"كم عدد لاعبي فريق كرة القدم داخل الملعب؟","o":["9","10","11","12"],"a":2,"x":"يلعب كل فريق بأحد عشر لاعباً داخل الملعب."},{"id":"m27","t":"الثقافة العامة","l":1,"q":"في أي دولة يقع برج بيزا المائل؟","o":["فرنسا","إيطاليا","إسبانيا","اليونان"],"a":1,"x":"يقع برج بيزا المائل في مدينة بيزا بإيطاليا."},{"id":"m28","t":"الرياضيات والمنطق","l":1,"q":"ما ناتج 12 × 12؟","o":["124","132","144","156"],"a":2,"x":"12 × 12 = 144."},{"id":"m29","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 2، 6، 12، 20، ؟","o":["28","30","32","24"],"a":1,"x":"الفروق بين الأعداد 4 ثم 6 ثم 8 ثم 10، فالعدد التالي 20 + 10 = 30."},{"id":"m30","t":"الرياضيات والمنطق","l":1,"q":"ما قيمة النسبة التقريبية π (باي)؟","o":["2.14","3.14","4.13","3.41"],"a":1,"x":"قيمة π تقريباً 3.14159."},{"id":"m31","t":"الرياضيات والمنطق","l":1,"q":"ما مجموع زوايا المثلث؟","o":["90 درجة","180 درجة","270 درجة","360 درجة"],"a":1,"x":"مجموع زوايا أي مثلث مستوٍ 180 درجة."},{"id":"m32","t":"الرياضيات والمنطق","l":2,"q":"ما الجذر التربيعي للعدد 169؟","o":["11","12","13","14"],"a":2,"x":"13 × 13 = 169."},{"id":"m33","t":"الرياضيات والمنطق","l":2,"q":"ما العدد التالي: 1، 1، 2، 3، 5، 8، ؟","o":["11","12","13","15"],"a":2,"x":"كل عدد هو مجموع العددين السابقين له (متتالية فيبوناتشي): 5 + 8 = 13."},{"id":"m34","t":"اللغة والأدب","l":1,"q":"ما جمع كلمة «كتاب»؟","o":["كتّاب","كتب","أكتاب","كاتبون"],"a":1,"x":"جمع «كتاب» هو «كتب»."},{"id":"m35","t":"اللغة والأدب","l":1,"q":"ما ضد كلمة «كريم»؟","o":["بخيل","شجاع","ذكي","قوي"],"a":0,"x":"ضد الكريم هو البخيل."},{"id":"m36","t":"اللغة والأدب","l":1,"q":"كم عدد حروف الأبجدية العربية؟","o":["26","28","29","30"],"a":1,"x":"تتكون الأبجدية العربية من 28 حرفاً."},{"id":"m37","t":"اللغة والأدب","l":2,"q":"من مؤلف سيرة «الأيام» الذاتية؟","o":["طه حسين","العقاد","توفيق الحكيم","المازني"],"a":0,"x":"«الأيام» سيرة ذاتية للأديب طه حسين."},{"id":"m38","t":"اللغة والأدب","l":2,"q":"من كاتب «الثلاثية» (بين القصرين، قصر الشوق، السكرية)؟","o":["نجيب محفوظ","يوسف إدريس","إحسان عبد القدوس","جمال الغيطاني"],"a":0,"x":"«الثلاثية» رواية لنجيب محفوظ، وقد نال جائزة نوبل في الأدب عام 1988."},{"id":"m39","t":"الفضاء والفلك","l":1,"q":"كم عدد كواكب المجموعة الشمسية؟","o":["7","8","9","10"],"a":1,"x":"ثمانية كواكب بعد أن صُنِّف بلوتو كوكباً قزماً عام 2006."},{"id":"m40","t":"الفضاء والفلك","l":1,"q":"ما أكبر كواكب المجموعة الشمسية؟","o":["زحل","المشتري","نبتون","الأرض"],"a":1,"x":"المشتري هو الأكبر، وكتلته أكبر من كتلة بقية الكواكب مجتمعة."},{"id":"m41","t":"الفضاء والفلك","l":1,"q":"أي كوكب يُعرف بالكوكب الأحمر؟","o":["المريخ","الزهرة","عطارد","أورانوس"],"a":0,"x":"المريخ، ويرجع لونه الأحمر إلى أكاسيد الحديد في تربته."},{"id":"m42","t":"الفضاء والفلك","l":1,"q":"ما اسم المجرة التي تقع فيها المجموعة الشمسية؟","o":["أندروميدا","درب التبانة","المثلث","الدوامة"],"a":1,"x":"مجرتنا هي درب التبانة."},{"id":"m43","t":"الفضاء والفلك","l":1,"q":"أي كوكب يشتهر بحلقاته الواضحة؟","o":["زحل","المريخ","عطارد","الزهرة"],"a":0,"x":"يشتهر زحل بحلقاته، وللمشتري وأورانوس ونبتون حلقات خافتة أيضاً."},{"id":"m44","t":"الفضاء والفلك","l":2,"q":"ما أقرب كواكب المجموعة الشمسية إلى الشمس؟","o":["الزهرة","الأرض","عطارد","المريخ"],"a":2,"x":"عطارد أقرب الكواكب إلى الشمس."},{"id":"m45","t":"الفضاء والفلك","l":2,"q":"من أول إنسان وطئت قدماه سطح القمر؟","o":["بز ألدرين","نيل أرمسترونغ","يوري غاغارين","مايكل كولينز"],"a":1,"x":"وطئ نيل أرمسترونغ سطح القمر في 20 يوليو 1969 ضمن مهمة أبولو 11."}],"tf":[{"id":"t1","t":"العلوم","l":1,"s":"يغلي الماء النقي عند 100 درجة مئوية عند مستوى سطح البحر.","v":true,"x":"يتغير ذلك مع الارتفاع، إذ ينخفض الضغط فتنخفض درجة الغليان."},{"id":"t2","t":"الفضاء والفلك","l":1,"s":"الشمس كوكب.","v":false,"x":"الشمس نجم، والكواكب تدور حول النجوم."},{"id":"t3","t":"العلوم","l":1,"s":"للقلب البشري أربع حجرات.","v":true,"x":"أذينان وبطينان."},{"id":"t4","t":"العلوم","l":1,"s":"الخفاش من الطيور.","v":false,"x":"الخفاش من الثدييات، وهو الثديي الوحيد القادر على الطيران الحقيقي."},{"id":"t5","t":"العلوم","l":2,"s":"كثافة الذهب أكبر من كثافة الحديد.","v":true,"x":"كثافة الذهب نحو 19.3 غ/سم³ وكثافة الحديد نحو 7.9 غ/سم³."},{"id":"t6","t":"العلوم","l":1,"s":"العنكبوت حشرة.","v":false,"x":"العنكبوت من العنكبيات وله ثماني أرجل، أما الحشرات فلها ست أرجل."},{"id":"t7","t":"الفضاء والفلك","l":1,"s":"القمر يدور حول الأرض.","v":true,"x":"القمر تابع طبيعي للأرض."},{"id":"t8","t":"الجغرافيا والدول","l":2,"s":"تقع مصر في قارة آسيا بالكامل.","v":false,"x":"معظم مصر في أفريقيا، وتقع شبه جزيرة سيناء في آسيا."},{"id":"t9","t":"الجغرافيا والدول","l":1,"s":"أستراليا قارة ودولة في آن واحد.","v":true,"x":"أستراليا دولة تشغل قارة كاملة."},{"id":"t10","t":"الجغرافيا والدول","l":2,"s":"تطل الصين على المحيط الأطلسي.","v":false,"x":"تطل الصين على المحيط الهادئ، ولا ساحل لها على الأطلسي."},{"id":"t11","t":"الرياضيات والمنطق","l":2,"s":"العدد 1 عدد أولي.","v":false,"x":"العدد الأولي له قاسمان بالضبط، والعدد 1 له قاسم واحد فقط."},{"id":"t12","t":"الرياضيات والمنطق","l":2,"s":"العدد 2 هو العدد الأولي الزوجي الوحيد.","v":true,"x":"كل عدد زوجي أكبر من 2 يقبل القسمة على 2، فليس أولياً."},{"id":"t13","t":"الرياضيات والمنطق","l":1,"s":"مجموع زوايا أي مثلث مستوٍ 180 درجة.","v":true,"x":"هذه خاصية المثلث في الهندسة المستوية."},{"id":"t14","t":"الرياضيات والمنطق","l":2,"s":"الصفر عدد زوجي.","v":true,"x":"الصفر يقبل القسمة على 2 بلا باقٍ فهو عدد زوجي."},{"id":"t15","t":"التاريخ والحضارات","l":2,"s":"بدأت الثورة الفرنسية عام 1789.","v":true,"x":"بدأت الثورة الفرنسية بسقوط سجن الباستيل في يوليو 1789."},{"id":"t16","t":"التاريخ والحضارات","l":1,"s":"بُنيت أهرامات الجيزة في عهد الدولة العثمانية.","v":false,"x":"بُنيت قبل ذلك بنحو أربعة آلاف سنة في عصر الدولة القديمة."},{"id":"t17","t":"التاريخ والحضارات","l":2,"s":"اخترع غوتنبرغ الطباعة بالحروف المعدنية المتحركة في أوروبا.","v":true,"x":"اخترعها يوهان غوتنبرغ في منتصف القرن الخامس عشر."},{"id":"t18","t":"التكنولوجيا","l":1,"s":"يعتمد الحاسوب داخلياً على النظام الثنائي.","v":true,"x":"كل المعلومات تُمثَّل بسلاسل من 0 و1."},{"id":"t19","t":"التكنولوجيا","l":2,"s":"تحتفظ ذاكرة RAM بمحتواها بعد إطفاء الجهاز.","v":false,"x":"ذاكرة RAM مؤقتة وتفقد محتواها عند انقطاع الكهرباء."},{"id":"t20","t":"اللغة والأدب","l":2,"s":"التاء المربوطة (ة) تأتي في أول الكلمة.","v":false,"x":"التاء المربوطة لا تأتي إلا في آخر الكلمة."},{"id":"t21","t":"الفضاء والفلك","l":1,"s":"المشتري أكبر من الأرض.","v":true,"x":"قطر المشتري نحو 11 ضعف قطر الأرض."},{"id":"t22","t":"العلوم","l":1,"s":"الضوء أسرع من الصوت.","v":true,"x":"يقطع الضوء نحو 300 ألف كم كل ثانية، والصوت في الهواء نحو 343 م/ث."},{"id":"t23","t":"الفضاء والفلك","l":1,"s":"تدور الأرض حول الشمس دورة كاملة كل 24 ساعة.","v":false,"x":"الدورة حول الشمس تستغرق نحو 365 يوماً، أما 24 ساعة فمدة دورانها حول نفسها."},{"id":"t24","t":"العلوم","l":3,"s":"تسقط الريشة والحجر بالتسارع نفسه في الفراغ.","v":true,"x":"في الفراغ لا توجد مقاومة هواء، فيتساوى تسارع السقوط لكل الأجسام."},{"id":"t25","t":"العلوم","l":1,"s":"الحوت سمكة.","v":false,"x":"الحوت من الثدييات يتنفس الهواء ويرضع صغاره."},{"id":"t26","t":"اللغة والأدب","l":2,"s":"نال نجيب محفوظ جائزة نوبل في الأدب.","v":true,"x":"نالها عام 1988."},{"id":"t27","t":"الجغرافيا والدول","l":2,"s":"عاصمة تركيا هي إسطنبول.","v":false,"x":"عاصمة تركيا أنقرة، وإسطنبول أكبر مدنها."},{"id":"t28","t":"الجغرافيا والدول","l":3,"s":"يُعد البحر الميت أخفض منطقة على سطح اليابسة.","v":true,"x":"يقع شاطئه على نحو 430 متراً تحت مستوى سطح البحر."},{"id":"t29","t":"العلوم","l":2,"s":"تحمي طبقة الأوزون الأرض من معظم الأشعة فوق البنفسجية الضارة.","v":true,"x":"تمتص طبقة الأوزون الجزء الأكبر من هذه الأشعة."},{"id":"t30","t":"العلوم","l":3,"s":"الألماس والجرافيت مكوَّنان من عنصر الكربون.","v":true,"x":"يختلفان في ترتيب ذرات الكربون فقط."},{"id":"t31","t":"العلوم","l":2,"s":"يتكوَّن جزيء الماء من ذرتي أكسجين وذرة هيدروجين.","v":false,"x":"العكس صحيح: ذرتا هيدروجين وذرة أكسجين (H₂O)."},{"id":"t32","t":"العلوم","l":1,"s":"ينتقل الصوت عبر الفراغ.","v":false,"x":"يحتاج الصوت إلى وسط مادي كالهواء أو الماء."},{"id":"t33","t":"الرياضيات والمنطق","l":1,"s":"تحتوي السنة الكبيسة على 366 يوماً.","v":true,"x":"يضاف يوم 29 فبراير في السنة الكبيسة."},{"id":"t34","t":"الفضاء والفلك","l":2,"s":"قطر المشتري أكبر من قطر الأرض بأكثر من عشرة أضعاف.","v":true,"x":"نحو 11.2 ضعفاً."},{"id":"t35","t":"الرياضيات والمنطق","l":1,"s":"عدد أضلاع المسدس سبعة.","v":false,"x":"للمسدس ستة أضلاع."},{"id":"t36","t":"اللغة والأدب","l":3,"s":"الخليل بن أحمد الفراهيدي هو واضع علم العروض.","v":true,"x":"وضع الخليل علم العروض لضبط أوزان الشعر العربي."},{"id":"t37","t":"العلوم","l":2,"s":"كان ابن الهيثم من علماء البصريات المسلمين.","v":true,"x":"ألّف «كتاب المناظر» وأسهم في تأسيس علم البصريات."},{"id":"t38","t":"التاريخ والحضارات","l":3,"s":"فُتحت مصر على يد عمرو بن العاص في القرن السابع الميلادي.","v":true,"x":"جرى الفتح نحو عام 640م."},{"id":"t39","t":"التكنولوجيا","l":2,"s":"يمكن لمتصفح الويب فتح الصفحات دون استخدام بروتوكول HTTP أو HTTPS.","v":false,"x":"تُحمَّل صفحات الويب عبر HTTP أو HTTPS، مع وجود بروتوكولات أخرى لخدمات مختلفة."}],"order":[{"id":"o1","t":"التاريخ والحضارات","l":2,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["اختراع الطباعة بالحروف المتحركة في أوروبا","الثورة الفرنسية","أول هبوط بشري على القمر","سقوط جدار برلين"],"x":"منتصف القرن 15، ثم 1789، ثم 1969، ثم 1989."},{"id":"o2","t":"الفضاء والفلك","l":1,"q":"رتّب الكواكب من الأقرب إلى الشمس إلى الأبعد","items":["عطارد","الزهرة","الأرض","المريخ"],"x":"عطارد ثم الزهرة ثم الأرض ثم المريخ."},{"id":"o3","t":"الرياضيات والمنطق","l":1,"q":"رتّب الوحدات من الأصغر إلى الأكبر","items":["مليمتر","سنتيمتر","متر","كيلومتر"],"x":"1 سم = 10 مم، و1 م = 100 سم، و1 كم = 1000 م."},{"id":"o4","t":"العلوم","l":1,"q":"رتّب مراحل دورة حياة الفراشة","items":["بيضة","يرقة","شرنقة","فراشة بالغة"],"x":"تمر الفراشة بتحوّل كامل: بيضة فيرقة فشرنقة فبالغة."},{"id":"o5","t":"التاريخ والحضارات","l":3,"q":"رتّب الأحداث من الأقدم إلى الأحدث","items":["بناء الهرم الأكبر (نحو 2560 ق.م)","تأسيس الإسكندرية (332 ق.م)","فتح مصر على يد عمرو بن العاص (نحو 640م)","بناء الجامع الأزهر (نحو 970م)"],"x":"الأحداث موزعة على نحو أربعة آلاف سنة من التاريخ المصري."},{"id":"o6","t":"الرياضيات والمنطق","l":1,"q":"رتّب الأعداد من الأصغر إلى الأكبر","items":["0.5","3/4","1","1.25"],"x":"0.5 ثم 0.75 ثم 1 ثم 1.25."},{"id":"o7","t":"التكنولوجيا","l":2,"q":"رتّب من الأقدم إلى الأحدث","items":["حاسوب IBM الشخصي (1981)","إطلاق شبكة الويب للجمهور (1991)","إطلاق هاتف آيفون الأول (2007)","إطلاق ChatGPT (2022)"],"x":"1981 ثم 1991 ثم 2007 ثم 2022."},{"id":"o8","t":"العلوم","l":1,"q":"رتّب حالات الماء أثناء التسخين","items":["جليد","ماء سائل","بخار ماء"],"x":"يذوب الجليد فيصير ماءً، ثم يتبخر الماء بالتسخين."},{"id":"o9","t":"الرياضيات والمنطق","l":2,"q":"رتّب الأرقام الرومانية من الأصغر إلى الأكبر","items":["V","X","L","C"],"x":"V = 5 ثم X = 10 ثم L = 50 ثم C = 100."},{"id":"o10","t":"اللغة والأدب","l":1,"q":"رتّب الأشهر الهجرية كما تأتي في السنة","items":["محرم","صفر","ربيع الأول","ربيع الآخر"],"x":"هذه أول أربعة أشهر في التقويم الهجري."}],"word":[{"id":"w1","t":"الفضاء والفلك","w":"مجرة","h":"تجمع هائل من النجوم والغاز والغبار"},{"id":"w2","t":"الفضاء والفلك","w":"كوكب","h":"جرم يدور حول نجم"},{"id":"w3","t":"الفضاء والفلك","w":"تلسكوب","h":"جهاز يُقرِّب الأجرام البعيدة"},{"id":"w4","t":"الجغرافيا والدول","w":"بركان","h":"جبل يقذف حمماً ورماداً"},{"id":"w5","t":"الجغرافيا والدول","w":"محيط","h":"أوسع مسطح مائي على الأرض"},{"id":"w6","t":"الجغرافيا والدول","w":"جزيرة","h":"يابسة تحيط بها المياه"},{"id":"w7","t":"الجغرافيا والدول","w":"خريطة","h":"رسم يمثل سطح الأرض"},{"id":"w8","t":"الجغرافيا والدول","w":"عاصمة","h":"المدينة التي تقع فيها الحكومة"},{"id":"w9","t":"العلوم","w":"ذرة","h":"أصغر وحدة بناء للعنصر"},{"id":"w10","t":"العلوم","w":"خلية","h":"وحدة بناء الكائن الحي"},{"id":"w11","t":"العلوم","w":"طاقة","h":"القدرة على إنجاز شغل"},{"id":"w12","t":"العلوم","w":"مجهر","h":"جهاز يُكبِّر الأشياء الدقيقة"},{"id":"w13","t":"العلوم","w":"جاذبية","h":"قوة تشدّ الأجسام نحو الأرض"},{"id":"w14","t":"التكنولوجيا","w":"حاسوب","h":"جهاز يعالج البيانات"},{"id":"w15","t":"التكنولوجيا","w":"برمجة","h":"كتابة تعليمات للحاسوب"},{"id":"w16","t":"التكنولوجيا","w":"شبكة","h":"أجهزة متصلة ببعضها"},{"id":"w17","t":"التكنولوجيا","w":"معالج","h":"عقل الحاسوب"},{"id":"w18","t":"الرياضيات والمنطق","w":"مثلث","h":"شكل له ثلاثة أضلاع"},{"id":"w19","t":"الرياضيات والمنطق","w":"دائرة","h":"شكل كل نقاطه على بعد واحد من مركزه"},{"id":"w20","t":"الرياضيات والمنطق","w":"معادلة","h":"تساوٍ بين تعبيرين يحوي مجهولاً"},{"id":"w21","t":"اللغة والأدب","w":"قصيدة","h":"نص شعري"},{"id":"w22","t":"اللغة والأدب","w":"ديوان","h":"مجموعة قصائد"},{"id":"w23","t":"اللغة والأدب","w":"مكتبة","h":"مكان الكتب"},{"id":"w24","t":"اللغة والأدب","w":"رواية","h":"عمل أدبي سردي طويل"},{"id":"w25","t":"التاريخ والحضارات","w":"حضارة","h":"مجتمع متقدم عمرانياً وثقافياً"},{"id":"w26","t":"التاريخ والحضارات","w":"تاريخ","h":"علم دراسة الماضي"},{"id":"w27","t":"التاريخ والحضارات","w":"فرعون","h":"لقب ملك مصر القديمة"},{"id":"w28","t":"التاريخ والحضارات","w":"قلعة","h":"حصن محصَّن"}],"mem":[{"id":"p1","title":"عواصم","kind":"الدولة والعاصمة","pairs":[["مصر","القاهرة"],["فرنسا","باريس"],["اليابان","طوكيو"],["إيطاليا","روما"],["ألمانيا","برلين"],["إسبانيا","مدريد"]]},{"id":"p2","title":"عواصم عربية","kind":"الدولة والعاصمة","pairs":[["السعودية","الرياض"],["المغرب","الرباط"],["الأردن","عمّان"],["العراق","بغداد"],["لبنان","بيروت"],["السودان","الخرطوم"]]},{"id":"p3","title":"عناصر","kind":"العنصر ورمزه","pairs":[["الذهب","Au"],["الحديد","Fe"],["الأكسجين","O"],["الهيدروجين","H"],["الصوديوم","Na"],["الكربون","C"]]},{"id":"p4","title":"علماء","kind":"العالم وإسهامه","pairs":[["الخوارزمي","الجبر"],["ابن سينا","القانون في الطب"],["ابن الهيثم","المناظر"],["ابن النفيس","الدورة الدموية الصغرى"],["نيوتن","الجاذبية"],["أينشتاين","النسبية"]]}]};
-var META=[["mcq","اختبارات متعددة الخيارات","أربع إجابات وتفسير بعد كل سؤال","متوسط"],["truefalse","صح أم خطأ","جمل سريعة تختبر دقة معلوماتك","سهل"],["order","ترتيب الأحداث","رتّب وقائع بالتسلسل الصحيح","صعب"],["memory","لعبة الذاكرة","اكتشف الأزواج بأقل عدد من المحاولات","سهل"],["word","خمّن الكلمة","كلمة مخفية وتلميح يساعدك","متوسط"]];
-var KEY='basira.v2',PASS=0.7;
-var LV={easy:1,medium:2,hard:3};
-var BASE={1:10,2:15,3:20};
-var SEC={easy:25,medium:18,hard:12};
-function T(k,v){var s=(window.BSR&&window.BSR.t)?window.BSR.t(k):k;if(v)for(var x in v)s=s.replace('{'+x+'}',v[x]);return s;}
-function el(tag,cls,text){var n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n;}
-function btn(text,cls,fn){var b=el('button',cls,text);b.type='button';if(fn)b.addEventListener('click',fn);return b;}
-function tl(node,key,v){node.setAttribute('data-i',key);if(v)node.setAttribute('data-v',JSON.stringify(v));node.textContent=T(key,v);return node;}
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}}
-function save(s){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
-function shuffle(a,rnd){a=a.slice();rnd=rnd||Math.random;for(var i=a.length-1;i>0;i--){var j=Math.floor(rnd()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function mulberry(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
-function today(){try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Cairo'}).format(new Date());}catch(e){return new Date().toISOString().slice(0,10);}}
-function norm(t){return String(t).replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,'').trim();}
-function letters(w){return Array.from(w.replace(/\s+/g,''));}
-
-/* ===== محرك النقاط والتقدم (دوال صافية قابلة للاختبار) ===== */
-function points(o){ // o: level(1-3), streak(بعد هذه الإجابة), left, total
-  var b=BASE[o.level]||10,tb=o.total?Math.round(b*0.5*Math.max(0,o.left)/o.total):0,sb=Math.min(o.streak||0,5)*2;
-  return b+tb+sb;
-}
-function levelInfo(xp){var l=1,need=50;while(xp>=need){xp-=need;l++;need=50+(l-1)*25;}return {level:l,into:xp,need:need};}
-var ACH=['first','perfect','streak5','streak10','all','daily3','lvl5','hard'];
-function unlock(s,r){
-  s.ach=s.ach||{};var got=[];
-  function g(id,c){if(c&&!s.ach[id]){s.ach[id]=Date.now();got.push(id);}}
-  g('first',true);g('perfect',r.pct===100&&r.total>0);g('streak5',r.bestStreak>=5);g('streak10',r.bestStreak>=10);
-  g('all',Object.keys(s.stats||{}).length>=5);g('daily3',Object.keys(s.daily||{}).length>=3);
-  g('lvl5',levelInfo(s.xp||0).level>=5);g('hard',r.level==='hard'&&r.pct>=70);
-  return got;
-}
-function record(r){ // يحفظ نتيجة جولة ويُرجع ملخصاً
-  var s=load();s.stats=s.stats||{};s.hist=s.hist||[];s.xp=s.xp||0;
-  var st=s.stats[r.slug]||{plays:0,best:0,bestPts:0},isBest=r.pct>st.best&&st.plays>0;
-  st.plays++;st.best=Math.max(st.best,r.pct);st.bestPts=Math.max(st.bestPts,r.pts);s.stats[r.slug]=st;
-  var xp=0;
-  if(r.daily){s.daily=s.daily||{};if(!s.daily[r.daily]){s.daily[r.daily]={pts:r.pts,pct:r.pct};xp=Math.round(r.pts/2)+10;}}
-  else xp=Math.round(r.pts/2)+(r.pct>=PASS*100?10:0);
-  s.xp+=xp;
-  s.hist.unshift({t:Date.now(),slug:r.slug,level:r.level,pts:r.pts,pct:r.pct,daily:r.daily||null});s.hist=s.hist.slice(0,10);
-  var got=unlock(s,r);save(s);
-  try{document.dispatchEvent(new CustomEvent('basira:progress'));}catch(e){}
-  return {xp:xp,isBest:isBest,ach:got,best:st.best};
-}
-
-/* ===== اختيار الأسئلة ===== */
-function pool(slug,level){
-  var all=slug==='mcq'?BANK.mcq:slug==='truefalse'?BANK.tf:BANK.order;
-  function by(f){return all.filter(f);}
-  var p;
-  if(level==='easy')p=by(function(q){return q.l===1;});
-  else if(level==='medium')p=by(function(q){return q.l===2;});
-  else p=by(function(q){return q.l>=2;});
-  return p.length>=3?p:all;
-}
-function pick(slug,list,n,rnd){
-  var s=load(),seen=(s.seen&&s.seen[slug])||[];
-  var fresh=list.filter(function(x){return seen.indexOf(x.id)<0;});
-  if(fresh.length<n){fresh=list;seen=[];}
-  var ch=shuffle(fresh,rnd).slice(0,n);
-  if(!rnd){s.seen=s.seen||{};s.seen[slug]=seen.concat(ch.map(function(x){return x.id;}));save(s);}
-  return ch;
-}
-function progressive(slug,n){ // يبدأ سهلاً ويصعد
-  var all=slug==='mcq'?BANK.mcq:BANK.tf,out=[],lv=[1,1,1,2,2,2,2,3,3,3];
-  for(var i=0;i<n;i++){var want=lv[Math.min(i,lv.length-1)];var c=all.filter(function(q){return q.l===want&&out.indexOf(q)<0;});if(!c.length)c=all.filter(function(q){return out.indexOf(q)<0;});out.push(shuffle(c)[0]);}
-  return out;
-}
-
-/* ===== واجهة اللعبة ===== */
-function mount(root,slug){
-  var m=null;for(var i=0;i<META.length;i++)if(META[i][0]===slug)m=META[i];
-  if(!m||root.getAttribute('data-ready')===slug)return;
-  root.setAttribute('data-ready',slug);root.setAttribute('data-game',slug);root.textContent='';
-  var box=el('div');root.appendChild(box);
-  var level='medium',timer=null,onDone=null,daily=null;
-  function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
-  function intro(){
-    stopTimer();box.textContent='';
-    var h=el('h3');tl(h,'g.'+slug+'.name');box.appendChild(h);
-    box.appendChild(tl(el('p','g-sub'),'g.rules.'+slug));
-    var st=(load().stats||{})[slug];
-    if(st){var p=el('p','note');p.textContent=T('g.best')+': '+st.best+'%';box.appendChild(p);}
-    box.appendChild(tl(el('p','g-lab'),'g.pick'));
-    var row=el('div','g-lv');
-    var opts=slug==='memory'?['easy','medium','hard']:slug==='order'?['easy','medium','hard']:['prog','easy','medium','hard'];
-    if(opts.indexOf(level)<0)level=opts[0];
-    opts.forEach(function(k){var b=btn('','g-chip',function(){level=k;[].forEach.call(row.children,function(c){c.setAttribute('aria-pressed',c===b?'true':'false');});});tl(b,'g.'+k);b.setAttribute('aria-pressed',k===level?'true':'false');row.appendChild(b);});
-    box.appendChild(row);
-    var a=el('div','g-act');var go=btn('','btn',function(){start(level);});tl(go,'g.start');a.appendChild(go);box.appendChild(a);
-  }
-  function finish(r){
-    stopTimer();
-    r.slug=slug;r.level=r.level||level;r.daily=daily;
-    var out=record(r);
-    box.textContent='';
-    var e=el('div','g-end');
-    e.appendChild(el('p','g-score',r.correct+' / '+r.total));
-    e.appendChild(el('p','g-pts',r.pts+' '+T('g.points')));
-    e.appendChild(tl(el('p',''),r.pct>=PASS*100?'g.result.pass':'g.result.fail'));
-    var xp=el('p','note');xp.textContent=(out.xp?T('g.xp',{n:out.xp}):'')+(out.isBest?' · '+T('g.newbest'):'');e.appendChild(xp);
-    out.ach.forEach(function(id){var p=el('p','g-ach');p.textContent='★ '+T('ach.'+id);e.appendChild(p);});
-    var bp=el('p','note');bp.textContent=T('g.best')+': '+out.best+'%';e.appendChild(bp);
-    e.appendChild(tl(el('p','note'),'g.local'));
-    var a=el('div','g-act');a.style.justifyContent='center';
-    var again=btn('','btn',function(){if(onDone&&daily){onDone();}else start(level);});tl(again,daily?'daily.again':'g.again');a.appendChild(again);
-    var back=btn('','btn alt',function(){if(daily&&onDone){onDone('close');}else intro();});tl(back,'g.back');a.appendChild(back);
-    e.appendChild(a);box.appendChild(e);
-  }
-  /* مشغّل الأسئلة المتتابعة: يدير المؤقت والسلسلة والنقاط */
-  function run(items,opt){
-    var i=0,pts=0,ok=0,streak=0,best=0,lvl=LV[opt.level]||2,hint=true;
-    function next(){
-      stopTimer();
-      if(i>=items.length)return finish({pts:pts,correct:ok,total:items.length,pct:Math.round(ok/items.length*100),bestStreak:best,level:opt.levelName});
-      box.textContent='';
-      var bar=el('div','g-bar'),a1=el('span'),a2=el('span');
-      tl(a1,'g.qof',{n:i+1,m:items.length});a2.className='g-stat';a2.textContent=T('g.score')+': '+pts+' · '+T('g.streak')+': '+streak;
-      bar.appendChild(a1);bar.appendChild(a2);
-      var pr=el('div','g-prog'),pi=el('i');pi.style.width=(i/items.length*100)+'%';pr.appendChild(pi);box.appendChild(bar);box.appendChild(pr);
-      var tb=null,tf=null,total=opt.sec||0,left=total,t0=0;
-      if(total){tb=el('div','g-time');tf=el('i');tb.appendChild(tf);tb.setAttribute('role','timer');box.appendChild(tb);}
-      var body=el('div'),fb=el('div','g-fb');fb.hidden=true;fb.setAttribute('aria-live','polite');var act=el('div','g-act');
-      box.appendChild(body);box.appendChild(fb);box.appendChild(act);
-      var done=false;
-      function answer(good,why,partial){
-        if(done)return;done=true;stopTimer();
-        var gain=0;
-        if(good){ok++;streak++;best=Math.max(best,streak);gain=points({level:lvl,streak:streak,left:left,total:total});}
-        else{streak=0;}
-        if(partial!=null){gain=partial;}
-        pts+=Math.max(0,gain);
-        fb.hidden=false;fb.textContent='';
-        var s=el('strong',good?'ok':'bad');s.textContent=(good?T('g.correct'):(left<=0&&total?T('g.timeout'):T('g.wrong')))+' ';fb.appendChild(s);
-        if(gain){fb.appendChild(el('span','g-gain','+'+gain+' '+T('g.points')+' '));}
-        if(why)fb.appendChild(document.createTextNode(why));
-        var nb=btn('','btn',function(){i++;next();});tl(nb,i+1<items.length?'g.next':'g.finish');act.appendChild(nb);nb.focus();
-      }
-      var ctx={level:lvl,levelName:opt.levelName,penalty:function(n){pts=Math.max(0,pts-n);a2.textContent=T('g.score')+': '+pts+' · '+T('g.streak')+': '+streak;},
-        hintAvail:function(){return hint;},useHint:function(){hint=false;}};
-      items[i](body,answer,ctx);
-      if(total){t0=Date.now();timer=setInterval(function(){left=Math.max(0,total-(Date.now()-t0)/1000);tf.style.width=(left/total*100)+'%';if(left<=0){answer(false,'',0);}},200);}
-    }
-    next();
-  }
-  function mcq(q){return function(body,answer,ctx){
-    body.appendChild(el('p','g-q',q.q));
-    var opts=shuffle(q.o.map(function(t,k){return {t:t,ok:k===q.a};})),list=el('div','g-opts');
-    function lock(){[].forEach.call(list.children,function(c){c.disabled=true;if(c.getAttribute('data-ok')==='1')c.classList.add('ok');});}
-    opts.forEach(function(o){var b=btn(o.t,'g-opt',function(){lock();if(!o.ok)b.classList.add('bad');answer(o.ok,q.x);});b.setAttribute('data-ok',o.ok?'1':'0');list.appendChild(b);});
-    body.appendChild(list);
-    if(ctx.hintAvail()){var h=btn('','btn-quiet g-hint',function(){
-      ctx.useHint();ctx.penalty(3);h.remove();
-      var wrong=[].filter.call(list.children,function(c){return c.getAttribute('data-ok')==='0'&&!c.disabled;});
-      shuffle(wrong).slice(0,2).forEach(function(c){c.disabled=true;c.classList.add('gone');});});tl(h,'g.hint');body.appendChild(h);}
-  };}
-  function tf(q){return function(body,answer){
-    body.appendChild(el('p','g-q',q.s));
-    var list=el('div','g-opts g-two');
-    [['صح','Yes',true],['خطأ','No',false]].forEach(function(p){
-      var b=btn(window.BSR&&window.BSR.lang()==='en'?(p[2]?'True':'False'):p[0],'g-opt',function(){[].forEach.call(list.children,function(c){c.disabled=true;});var ok=p[2]===q.v;b.classList.add(ok?'ok':'bad');answer(ok,q.x);});
-      b.setAttribute('data-v',p[2]?'1':'0');list.appendChild(b);});
-    body.appendChild(list);
-  };}
-  function order(q){return function(body,answer){
-    body.appendChild(el('p','g-q',q.q));
-    var correct=q.items,cur=shuffle(correct),n=0;while(cur.join('|')===correct.join('|')&&n++<10)cur=shuffle(correct);
-    var ul=el('ul','g-sort');
-    function render(){
-      ul.textContent='';
-      cur.forEach(function(t,k){
-        var li=el('li','g-item');li.setAttribute('data-k',k);
-        li.appendChild(el('span','g-n',String(k+1)));li.appendChild(el('span','g-t',t));
-        var c=el('span','g-mv');
-        var up=btn('▲','g-arrow',function(){if(k>0){var x=cur[k];cur[k]=cur[k-1];cur[k-1]=x;render();ul.children[k-1].querySelector('.g-arrow').focus();}});up.setAttribute('aria-label',T('g.up'));
-        var dn=btn('▼','g-arrow g-dn',function(){if(k<cur.length-1){var x=cur[k];cur[k]=cur[k+1];cur[k+1]=x;render();ul.children[k+1].querySelector('.g-dn').focus();}});dn.setAttribute('aria-label',T('g.down'));
-        c.appendChild(up);c.appendChild(dn);li.appendChild(c);
-        li.addEventListener('pointerdown',function(e){
-          if(e.target.closest('button'))return;
-          if(e.pointerType!=='mouse'&&!e.target.closest('.g-n'))return;
-          e.preventDefault();
-          var pos=[].indexOf.call(ul.children,li);try{li.setPointerCapture(e.pointerId);}catch(x){}
-          li.classList.add('drag');
-          function mv(ev){
-            var kids=[].slice.call(ul.children),j=pos;
-            for(var q=0;q<kids.length;q++){var r=kids[q].getBoundingClientRect();if(ev.clientY>=r.top&&ev.clientY<=r.bottom){j=q;break;}}
-            if(j!==pos){var it=cur.splice(pos,1)[0];cur.splice(j,0,it);if(j>pos)ul.insertBefore(li,kids[j].nextSibling);else ul.insertBefore(li,kids[j]);pos=j;
-              [].forEach.call(ul.children,function(c,i){c.querySelector('.g-n').textContent=String(i+1);});}
-          }
-          function up(){li.removeEventListener('pointermove',mv);li.removeEventListener('pointerup',up);li.removeEventListener('pointercancel',up);render();}
-          li.addEventListener('pointermove',mv);li.addEventListener('pointerup',up);li.addEventListener('pointercancel',up);
-        });
-        ul.appendChild(li);
-      });
-    }
-    render();body.appendChild(ul);
-    var go=btn('','btn',function(){
-      var good=0;[].forEach.call(ul.children,function(li,k){var r=cur[k]===correct[k];if(r)good++;li.classList.add(r?'ok':'bad');[].forEach.call(li.querySelectorAll('button'),function(b){b.disabled=true;});});
-      go.remove();
-      var full=good===correct.length,gain=Math.round(good*points({level:2,streak:0,left:0,total:0})/correct.length*1.5);
-      answer(full,T('g.order.is')+' '+correct.join(' ← ')+'. '+q.x,full?null:gain);
-    });tl(go,'g.check');body.appendChild(go);
-  };}
-  function word(q,hard){return function(body,answer,ctx){
-    var w=q.w,L=letters(w),left=hard?2:3,rev=0;
-    var p=el('p','g-q');p.textContent=T('g.hintw')+': '+q.h;body.appendChild(p);
-    var shown=el('div','g-word');function mask(){return L.map(function(c,k){return k<rev?c:'_';}).join(' ');}shown.textContent=mask();
-    var inp=el('input','g-in');inp.type='text';inp.autocomplete='off';inp.setAttribute('aria-label',T('g.check'));
-    var info=el('p','note');function upd(){info.textContent=T('g.attempts')+': '+left;}upd();
-    function end(good,why){inp.disabled=true;go.disabled=true;if(rv)rv.disabled=true;shown.textContent=L.join(' ');answer(good,why||T('g.wordis')+' '+w+'.');}
-    var go=btn('','btn',function(){
-      if(!inp.value.trim())return;
-      if(norm(inp.value)===norm(w)){var g=points({level:ctx.level,streak:0,left:0,total:0})+(L.length-rev)*2;return end(true,T('g.wordis')+' '+w+'.');}
-      left--;inp.value='';if(rev<L.length-1)rev++;shown.textContent=mask();upd();
-      if(left<=0)end(false);else inp.focus();});tl(go,'g.check');
-    var rv=btn('','btn-quiet',function(){if(rev<L.length-1){rev++;ctx.penalty(2);shown.textContent=mask();}});tl(rv,'g.reveal');
-    inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();go.click();}});
-    body.appendChild(shown);body.appendChild(inp);body.appendChild(document.createTextNode(' '));body.appendChild(go);body.appendChild(rv);body.appendChild(info);
-  };}
-  function memory(lev){
-    stopTimer();
-    var need=lev==='easy'?4:6,sets=shuffle(BANK.mem),pairs=[];
-    sets.forEach(function(s){if(pairs.length<(lev==='hard'?12:need))shuffle(s.pairs).forEach(function(p){if(pairs.length<(lev==='hard'?12:need))pairs.push(p);});});
-    var cards=[];pairs.forEach(function(p,k){cards.push({k:k,t:p[0]});cards.push({k:k,t:p[1]});});cards=shuffle(cards);
-    box.textContent='';
-    var h=el('h3');tl(h,'g.memory.name');box.appendChild(h);
-    var info=el('p','g-bar');var a=el('span'),b2=el('span');info.appendChild(a);info.appendChild(b2);
-    var grid=el('div','g-mem'+(pairs.length>6?' g-mem6':''));
-    var open=[],moves=0,found=0,lock=false,t0=Date.now(),clock=null;
-    function stat(){a.textContent=T('g.moves')+': '+moves+' · '+T('g.pairs')+': '+found+'/'+pairs.length;b2.textContent=T('g.time')+': '+Math.floor((Date.now()-t0)/1000)+'s';}
-    stat();timer=setInterval(stat,500);
-    cards.forEach(function(c){
-      var b=btn('؟','g-card',function(){
-        if(lock||b.disabled||open.indexOf(b)>=0)return;
-        b.textContent=c.t;b.classList.add('up');open.push(b);if(open.length<2)return;
-        moves++;var x=open[0],y=open[1];
-        if(x._c.k===y._c.k){x.disabled=y.disabled=true;x.classList.add('done');y.classList.add('done');open=[];found++;stat();
-          if(found===pairs.length){var eff=Math.min(100,Math.round(pairs.length/moves*100)),secs=(Date.now()-t0)/1000,bonus=Math.max(0,Math.round(pairs.length*3-secs/10));
-            setTimeout(function(){finish({pts:Math.round(pairs.length*10*eff/100)+bonus,correct:pairs.length,total:pairs.length,pct:eff,bestStreak:0,level:lev});},350);}
-        }else{lock=true;stat();setTimeout(function(){[x,y].forEach(function(z){z.textContent='؟';z.classList.remove('up');});open=[];lock=false;},700);}
-      });b._c=c;grid.appendChild(b);});
-    box.appendChild(info);box.appendChild(grid);
-  }
-  function start(lev){
-    level=lev;
-    var secFor=function(){return SEC[lev==='prog'?'medium':lev];};
-    var name=lev==='prog'?'medium':lev;
-    if(slug==='mcq'){var qs=lev==='prog'?progressive('mcq',10):pick('mcq',pool('mcq',lev),10);run(qs.map(mcq),{level:name,levelName:lev,sec:secFor()});}
-    else if(slug==='truefalse'){var ts=lev==='prog'?progressive('tf',10):pick('truefalse',pool('truefalse',lev),10);run(ts.map(tf),{level:name,levelName:lev,sec:Math.round(secFor()*0.6)});}
-    else if(slug==='order'){run(pick('order',pool('order',lev),5).map(order),{level:name,levelName:lev,sec:0});}
-    else if(slug==='word'){
-      var ws=BANK.word,ln=function(x){return letters(x.w).length;};
-      var pl=lev==='easy'?ws.filter(function(x){return ln(x)<=4;}):lev==='prog'?ws:ws.filter(function(x){return ln(x)>=5;});
-      run(pick('word',pl.length>=5?pl:ws,5).map(function(q){return word(q,lev==='hard');}),{level:name,levelName:lev,sec:lev==='hard'?40:0});}
-    else if(slug==='memory')memory(lev);
-  }
-  /* تحدي اليوم: نفس الأسئلة لكل اللاعبين في اليوم بنفس البذرة */
-  root._daily=function(date,done){
-    daily=date;onDone=done;level='medium';
-    var r=mulberry(hash('basira-'+date)),m5=shuffle(BANK.mcq,r).slice(0,3),t2=shuffle(BANK.tf,r).slice(0,2);
-    var items=m5.map(mcq).concat(t2.map(tf));
-    run(items,{level:'medium',levelName:'medium',sec:20});
-  };
-  if(root.getAttribute('data-auto')==='daily')return;
-  intro();
-}
-
-/* ===== لوحات الرئيسية: تحدي اليوم والتقدم ===== */
-function dailyPanel(host){
-  var gh=el('div','bsr-game');gh.id='daily-host';
-  function render(){
-    host.textContent='';var d=today(),s=load(),done=s.daily&&s.daily[d];
-    var h=el('h2');tl(h,'daily.title');host.appendChild(h);
-    host.appendChild(tl(el('p','g-sub'),'daily.sub'));
-    if(done){host.appendChild(tl(el('p','g-ach'),'daily.done',{s:done.pts}));}
-    var a=el('div','g-act'),b=btn('','btn',function(){
-      host.textContent='';var g=el('div','bsr-game');g.setAttribute('data-auto','daily');host.appendChild(g);
-      var back=function(mode){render();};
-      mount(g,'mcq');g._daily(d,function(mode){render();});
-    });tl(b,done?'daily.again':'daily.play');a.appendChild(b);host.appendChild(a);
-  }
-  render();document.addEventListener('basira:lang',render);
-}
-function profilePanel(host){
-  function render(){
-    var s=load(),li=levelInfo(s.xp||0);host.textContent='';
-    var h=el('h2');tl(h,'profile.title');host.appendChild(h);
-    var top=el('div','pf-top');
-    var lv=el('div','pf-lv');lv.appendChild(tl(el('b'),'profile.level',{n:li.level}));lv.appendChild(tl(el('span','note'),'profile.xp',{a:li.into,b:li.need}));top.appendChild(lv);
-    var bar=el('div','g-prog'),bi=el('i');bi.style.width=Math.round(li.into/li.need*100)+'%';bar.appendChild(bi);top.appendChild(bar);
-    var days=Object.keys((function(){var o={};(s.hist||[]).forEach(function(r){o[new Date(r.t).toDateString()]=1;});return o;})()).length;
-    top.appendChild(tl(el('p','note'),'profile.days',{n:days}));host.appendChild(top);
-    var h2=el('h3');tl(h2,'profile.ach');host.appendChild(h2);
-    var ul=el('ul','pf-ach');ACH.forEach(function(id){var li2=el('li',(s.ach&&s.ach[id])?'on':'off');li2.appendChild(tl(el('b'),'ach.'+id));li2.appendChild(tl(el('span','note'),'ach.'+id+'.d'));ul.appendChild(li2);});host.appendChild(ul);
-    var h3=el('h3');tl(h3,'profile.hist');host.appendChild(h3);
-    if(!(s.hist&&s.hist.length))host.appendChild(tl(el('p','note'),'profile.none'));
-    else{var hl=el('ul','pf-hist');s.hist.forEach(function(r){var l=el('li');l.textContent=T('g.'+r.slug+'.name')+' · '+T('g.'+(r.level==='prog'?'prog':r.level))+' · '+r.pts+' '+T('g.points')+' · '+r.pct+'%'+(r.daily?' · '+T('daily.title'):'');hl.appendChild(l);});host.appendChild(hl);}
-    var rs=btn('','btn-quiet',function(){if(confirm(T('profile.confirm'))){try{localStorage.removeItem(KEY);}catch(e){}render();document.dispatchEvent(new CustomEvent('basira:progress'));}});tl(rs,'profile.reset');host.appendChild(rs);
-  }
-  render();document.addEventListener('basira:progress',render);document.addEventListener('basira:lang',render);
-}
-
-function init(){
-  var d=document.documentElement,tb=document.querySelectorAll('.js-theme');
-  function label(){var k=d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark';[].forEach.call(tb,function(b){b.textContent=T(k);});}
-  label();document.addEventListener('basira:lang',label);
-  [].forEach.call(tb,function(b){b.addEventListener('click',function(){
-    var dark=d.getAttribute('data-theme')!=='dark';
-    if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
-    try{localStorage.setItem('site-theme',dark?'dark':'light');}catch(e){}label();});});
-  [].forEach.call(document.querySelectorAll('.bsr-game[data-game]'),function(r){mount(r,r.getAttribute('data-game'));});
-  var pk=document.getElementById('picker'),host=document.getElementById('play-host');
-  if(pk&&host){
-    var bs=pk.querySelectorAll('button');
-    [].forEach.call(bs,function(b){b.addEventListener('click',function(){
-      [].forEach.call(bs,function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true');host.removeAttribute('data-ready');mount(host,b.getAttribute('data-g'));});});
-    bs[0].click();
-  }
-  var dh=document.getElementById('daily-panel');if(dh)dailyPanel(dh);
-  var ph=document.getElementById('profile-panel');if(ph)profilePanel(ph);
-  document.addEventListener('basira:lang',function(){
-    [].forEach.call(document.querySelectorAll('[data-i]'),function(n){if(n.hasAttribute('data-v')){try{n.textContent=T(n.getAttribute('data-i'),JSON.parse(n.getAttribute('data-v')));}catch(e){}}});
-  });
-}
-window.BSR=window.BSR||{};window.BSR.engine={points:points,levelInfo:levelInfo,mulberry:mulberry,hash:hash,today:today,norm:norm};
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-
-  //]]></script>
+  <script src='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js'></script>
 </body>
 </html>

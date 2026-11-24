@@ -41,6 +41,10 @@ jobs:
         run: python qa/test_theme.py
       - name: Content tests (8 sections, 500+ words, sources, computed examples)
         run: python qa/content_test.py
+      - name: Phase docs exist
+        run: test -s docs/PHASE3-DESIGN.md
+      - name: Contrast tests (design tokens, WCAG)
+        run: python qa/contrast_test.py
       - name: Publish-path tests (offline)
         run: python qa/publish_test.py
       - name: Install browser test dependencies
@@ -49,6 +53,12 @@ jobs:
           playwright install --with-deps chromium
       - name: UI tests (languages, search, sizes)
         run: python qa/ui_test.py
+      - name: Touch drag test (real touch events)
+        run: python qa/touch_test.py
+      - name: Sound tests (muted by default, toggle, persistence)
+        run: python qa/sound_test.py
+      - name: Reward tests (animations, XP, level-up)
+        run: python qa/reward_test.py
       - name: Game tests (real play-through)
         run: python qa/game_test.py
       - name: Reject leftovers of the old site

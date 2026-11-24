@@ -24,7 +24,7 @@
   </b:if>
   <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&amp;family=Inter:wght@400;600;700&amp;display=swap' rel='stylesheet'/>
   <script>//<![CDATA[
-  (function(){var d=document.documentElement;try{if(localStorage.getItem('site-theme')==='dark')d.setAttribute('data-theme','dark');
+  (function(){var d=document.documentElement;try{var pr=localStorage.getItem('site-theme');if(pr!=='light'&&pr!=='auto')pr='dark';d.setAttribute('data-pref',pr);d.setAttribute('data-theme',pr==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):pr);}catch(e){d.setAttribute('data-theme','dark');}try{
   var m=/[?&]lang=(en|ar)/.exec(location.search),l=m?m[1]:localStorage.getItem('basira.lang');
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
@@ -43,7 +43,8 @@
       </form>
       <div class='bar-end'>
         <button class='btn-quiet js-lang' data-i='lang.switch' type='button'>English</button>
-        <button class='btn-quiet js-theme' type='button'>{{ar:theme.dark}}</button>
+        <button aria-pressed='false' class='btn-quiet js-sound' type='button'>الصوت: مغلق</button>
+        <button class='btn-quiet js-theme' type='button'>المظهر: داكن</button>
       </div>
       <nav aria-label='main' class='nav'>
         <a data-i='nav.games' expr:href='data:blog.homepageUrl + &quot;#play&quot;'>{{ar:nav.games}}</a>
@@ -58,6 +59,7 @@
 {{HOME}}
   </b:if>
 
+  <noscript><p class='noscript wrap' data-i='noscript'>{{ar:noscript}}</p></noscript>
   <div class='wrap content' id='content'>
     <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
       <b:widget id='Blog1' locked='true' title='مشاركات المدونة' type='Blog' version='2' visible='true'>
@@ -79,7 +81,15 @@
               <article class='post'>
                 <b:if cond='data:view.isSingleItem'>
                   <h1><data:post.title/></h1>
-                  <data:post.body/>
+                  <p class='meta'><data:post.date/></p>
+                  <div class='single-body'><data:post.body/></div>
+                  <b:if cond='data:view.isPost'>
+                    <aside class='cta-games'>
+                      <svg class='i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-trophy'></use></svg>
+                      <div><strong data-i='cta.title'>{{ar:cta.title}}</strong><span data-i='cta.sub'>{{ar:cta.sub}}</span></div>
+                      <a class='btn' expr:href='data:blog.homepageUrl + &quot;#play&quot;' data-i='cta.btn'>{{ar:cta.btn}}</a>
+                    </aside>
+                  </b:if>
                 <b:else/>
                   <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
                   <p class='meta'><data:post.date/></p>

@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var DICT={"ar":{"brand":"BASIRA | بصيرة","nav.games":"الألعاب","nav.topics":"المعرفة","nav.articles":"المقالات","nav.verify":"كيف نتحقق","search.ph":"ابحث في المقالات","search.btn":"بحث","search.label":"ابحث في الموقع","lang.switch":"English","theme.dark":"الوضع الداكن","theme.light":"الوضع الفاتح","hero.eyebrow":"Think. Discover. Play. · فكّر. اكتشف. العب.","hero.title":"اعرف أكثر، ثم تحدَّ نفسك","hero.lede":"معلومات موثّقة بالمصادر وألعاب ذهنية بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.","hero.cta":"ابدأ اللعب","hero.cta2":"تصفّح المعرفة","games.title":"الألعاب","topics.title":"أقسام المعرفة","latest.title":"أحدث المقالات","verify.title":"كيف نتحقق","verify.text":"كل رقم أو تاريخ في مقالاتنا له مصدر مذكور، وأسئلة الألعاب تُراجع قبل ظهورها ولا تُولَّد أثناء اللعب.","verify.link":"اقرأ منهجنا","foot.note":"معلومات موثّقة وألعاب ذهنية بالعربية، تعمل بلا تسجيل.","foot.topics":"أقسام المعرفة","foot.about":"عن الموقع","foot.pending":"الصفحات التعريفية قيد الإعداد","lang.note":"محتوى الأسئلة والمقالات الإنجليزية قيد المراجعة، لذلك تظهر الأسئلة بالعربية الآن.","noscript":"تحتاج الألعاب إلى تفعيل JavaScript.","t.العلوم":"العلوم","t.التاريخ والحضارات":"التاريخ والحضارات","t.الجغرافيا والدول":"الجغرافيا والدول","t.التكنولوجيا":"التكنولوجيا","t.الثقافة العامة":"الثقافة العامة","t.الرياضيات والمنطق":"الرياضيات والمنطق","t.اللغة والأدب":"اللغة والأدب","t.الفضاء والفلك":"الفضاء والفلك","g.mcq.name":"اختبارات متعددة الخيارات","g.mcq.desc":"أربع إجابات وتفسير بعد كل سؤال","g.truefalse.name":"صح أم خطأ","g.truefalse.desc":"جمل سريعة تختبر دقة معلوماتك","g.order.name":"ترتيب الأحداث","g.order.desc":"رتّب وقائع بالتسلسل الصحيح","g.memory.name":"لعبة الذاكرة","g.memory.desc":"اكتشف الأزواج بأقل عدد من المحاولات","g.word.name":"خمّن الكلمة","g.word.desc":"كلمة مخفية وتلميحات تساعدك","g.start":"ابدأ","g.next":"التالي","g.finish":"النتيجة","g.again":"جولة جديدة","g.back":"رجوع","g.best":"أفضل نتيجة","g.score":"النقاط","g.streak":"سلسلة","g.time":"الوقت","g.level":"المستوى","g.easy":"سهل","g.medium":"متوسط","g.hard":"صعب","g.prog":"متدرج","g.pick":"اختر المستوى","g.qof":"السؤال {n} من {m}","g.hint":"حذف إجابتين (−3 نقاط)","g.correct":"إجابة صحيحة.","g.wrong":"إجابة غير صحيحة.","g.timeout":"انتهى الوقت.","g.check":"تحقق","g.up":"أعلى","g.down":"أسفل","g.moves":"المحاولات","g.pairs":"الأزواج","g.reveal":"اكشف حرفاً (−2 نقطة)","g.attempts":"المحاولات المتبقية","g.hintw":"التلميح","g.wordis":"الكلمة:","g.order.is":"الترتيب الصحيح:","g.result.pass":"أحسنت! اجتزت الجولة","g.result.fail":"حاول مرة أخرى لتتحسن","g.xp":"+{n} نقطة خبرة","g.newbest":"رقم قياسي جديد","g.local":"تُحفظ نتائجك على جهازك فقط.","g.points":"نقطة","g.rules.mcq":"أجب عن أسئلة الاختيار من متعدد قبل انتهاء الوقت. الإجابات السريعة والمتتالية تمنحك نقاطاً أكثر، ولك حذف إجابتين مرة واحدة في الجولة.","g.rules.truefalse":"احكم على كل عبارة بصح أو خطأ بسرعة. كل إجابة صحيحة متتالية ترفع مضاعف السلسلة.","g.rules.order":"رتّب الأحداث من الأقدم إلى الأحدث بالسحب والإفلات أو بأزرار الأعلى والأسفل، ثم اضغط تحقق. تُحتسب نقطة لكل حدث في مكانه الصحيح.","g.rules.memory":"اقلب بطاقتين لتجد الأزواج المتطابقة بأقل عدد من المحاولات. كلما زاد المستوى زادت البطاقات.","g.rules.word":"خمّن الكلمة المخفية من التلميح. لك ثلاث محاولات، ويمكنك كشف حرف مقابل نقطتين.","g.timer.on":"مؤقت","g.items":"{n} أسئلة","daily.title":"تحدي اليوم","daily.sub":"خمسة أسئلة هي نفسها لجميع اللاعبين اليوم. تُحتسب خبرة التحدي مرة واحدة يومياً.","daily.play":"العب التحدي","daily.done":"أنجزت تحدي اليوم: {s} نقطة","daily.again":"أعد المحاولة (بلا خبرة إضافية)","profile.title":"تقدمك","profile.level":"المستوى {n}","profile.xp":"{a} / {b} خبرة","profile.ach":"الإنجازات","profile.hist":"آخر الجولات","profile.none":"لا توجد جولات بعد. ابدأ لعبة وسيظهر تقدمك هنا.","profile.days":"أيام اللعب: {n}","profile.reset":"مسح بياناتي من هذا الجهاز","profile.confirm":"سيُمسح كل تقدمك على هذا الجهاز. متأكد؟","ach.first":"أول جولة","ach.first.d":"أكمل أي جولة","ach.perfect":"جولة كاملة","ach.perfect.d":"أجب عن كل الأسئلة بشكل صحيح","ach.streak5":"سلسلة 5","ach.streak5.d":"5 إجابات صحيحة متتالية","ach.streak10":"سلسلة 10","ach.streak10.d":"10 إجابات صحيحة متتالية","ach.all":"الألعاب الخمس","ach.all.d":"العب كل الألعاب الخمس","ach.daily3":"ثلاثة أيام","ach.daily3.d":"أنجز تحدي اليوم في 3 أيام مختلفة","ach.lvl5":"المستوى 5","ach.lvl5.d":"ابلغ المستوى 5","ach.hard":"تحدٍّ صعب","ach.hard.d":"اجتز جولة بمستوى صعب بنسبة 70% فأكثر","challenge.title":"تحدي صديق","challenge.invite":"صديقك يتحداك في تحدي {date} بنتيجة {s} نقطة. العب الأسئلة نفسها وقارن نتيجتك.","challenge.share":"تحدَّ صديقاً","challenge.share.text":"تحداك في بصيرة! نتيجتي {score} نقطة. العب نفس التحدي: {url}","challenge.copied":"تم نسخ رابط التحدي","challenge.copy.prompt":"انسخ رابط التحدي وشاركه","challenge.opponent":"نتيجة صديقك: {s}","challenge.won":"تفوقت على صديقك!","challenge.lost":"صديقك حقق نتيجة أعلى","challenge.tie":"تعادلتما","admin.link":"إدارة الموقع","page.about":"من نحن","page.verify":"كيف نتحقق","page.editorial":"سياسة التحرير","page.contact":"اتصل بنا","page.privacy":"الخصوصية","page.terms":"الشروط","skip":"تجاوز إلى المحتوى"},"en":{"brand":"BASIRA | بصيرة","nav.games":"Games","nav.topics":"Knowledge","nav.articles":"Articles","nav.verify":"How we verify","search.ph":"Search articles","search.btn":"Search","search.label":"Search the site","lang.switch":"العربية","theme.dark":"Dark mode","theme.light":"Light mode","hero.eyebrow":"Think. Discover. Play.","hero.title":"Learn something, then challenge yourself","hero.lede":"Sourced knowledge and brain games in Arabic and English. Play right away with no sign-up; your results stay on your device.","hero.cta":"Start playing","hero.cta2":"Browse knowledge","games.title":"Games","topics.title":"Knowledge sections","latest.title":"Latest articles","verify.title":"How we verify","verify.text":"Every figure and date in our articles has a cited source, and game questions are reviewed before they appear, never generated while you play.","verify.link":"Read our method","foot.note":"Sourced knowledge and brain games, no sign-up needed.","foot.topics":"Knowledge sections","foot.about":"About","foot.pending":"Info pages are being prepared","lang.note":"English questions and articles are still under review, so questions are shown in Arabic for now.","noscript":"Games need JavaScript enabled.","t.العلوم":"Science","t.التاريخ والحضارات":"History & Civilizations","t.الجغرافيا والدول":"Geography & Countries","t.التكنولوجيا":"Technology","t.الثقافة العامة":"General Knowledge","t.الرياضيات والمنطق":"Math & Logic","t.اللغة والأدب":"Language & Literature","t.الفضاء والفلك":"Space & Astronomy","g.mcq.name":"Multiple choice","g.mcq.desc":"Four answers, with an explanation after each","g.truefalse.name":"True or false","g.truefalse.desc":"Quick statements that test your accuracy","g.order.name":"Timeline order","g.order.desc":"Put events in the right order","g.memory.name":"Memory","g.memory.desc":"Find the pairs in as few tries as possible","g.word.name":"Guess the word","g.word.desc":"A hidden word and hints that help","g.start":"Start","g.next":"Next","g.finish":"Results","g.again":"New round","g.back":"Back","g.best":"Best","g.score":"Points","g.streak":"Streak","g.time":"Time","g.level":"Level","g.easy":"Easy","g.medium":"Medium","g.hard":"Hard","g.prog":"Progressive","g.pick":"Choose a level","g.qof":"Question {n} of {m}","g.hint":"Remove two answers (−3 pts)","g.correct":"Correct.","g.wrong":"Incorrect.","g.timeout":"Time's up.","g.check":"Check","g.up":"Up","g.down":"Down","g.moves":"Moves","g.pairs":"Pairs","g.reveal":"Reveal a letter (−2 pts)","g.attempts":"Attempts left","g.hintw":"Hint","g.wordis":"The word:","g.order.is":"Correct order:","g.result.pass":"Well done! You passed the round","g.result.fail":"Try again to improve","g.xp":"+{n} XP","g.newbest":"New personal best","g.local":"Your results are saved on this device only.","g.points":"pts","g.rules.mcq":"Answer multiple-choice questions before time runs out. Fast, consecutive answers earn more points, and you can remove two answers once per round.","g.rules.truefalse":"Judge each statement true or false, quickly. Each consecutive correct answer raises your streak multiplier.","g.rules.order":"Put the events in order from earliest to latest by drag and drop or the up and down buttons, then press Check. You get a point for each event in its right place.","g.rules.memory":"Flip two cards to find matching pairs in as few moves as possible. Higher levels have more cards.","g.rules.word":"Guess the hidden word from its hint. You have three attempts, and you can reveal a letter for two points.","g.timer.on":"Timed","g.items":"{n} questions","daily.title":"Daily challenge","daily.sub":"Five questions, the same for every player today. Challenge XP counts once per day.","daily.play":"Play the challenge","daily.done":"Daily challenge done: {s} points","daily.again":"Retry (no extra XP)","profile.title":"Your progress","profile.level":"Level {n}","profile.xp":"{a} / {b} XP","profile.ach":"Achievements","profile.hist":"Recent rounds","profile.none":"No rounds yet. Start a game and your progress will show here.","profile.days":"Days played: {n}","profile.reset":"Clear my data on this device","profile.confirm":"This will erase all your progress on this device. Sure?","ach.first":"First round","ach.first.d":"Complete any round","ach.perfect":"Perfect round","ach.perfect.d":"Answer every question correctly","ach.streak5":"Streak 5","ach.streak5.d":"5 correct answers in a row","ach.streak10":"Streak 10","ach.streak10.d":"10 correct answers in a row","ach.all":"All five games","ach.all.d":"Play all five games","ach.daily3":"Three days","ach.daily3.d":"Finish the daily challenge on 3 different days","ach.lvl5":"Level 5","ach.lvl5.d":"Reach level 5","ach.hard":"Hard challenge","ach.hard.d":"Pass a hard round with 70% or more","challenge.title":"Friend challenge","challenge.invite":"Your friend challenges you on {date} with {s} points. Play the same questions and compare your result.","challenge.share":"Challenge a friend","challenge.share.text":"I challenge you on BASIRA! My score: {score} points. Play the same challenge: {url}","challenge.copied":"Challenge link copied","challenge.copy.prompt":"Copy and share this challenge link","challenge.opponent":"Your friend's score: {s}","challenge.won":"You beat your friend!","challenge.lost":"Your friend scored higher","challenge.tie":"It's a tie","admin.link":"Site administration","page.about":"About","page.verify":"How we verify","page.editorial":"Editorial policy","page.contact":"Contact","page.privacy":"Privacy","page.terms":"Terms","skip":"Skip to content"}};
+var DICT={"ar":{"brand":"BASIRA | بصيرة","nav.games":"الألعاب","nav.topics":"المعرفة","nav.articles":"المقالات","nav.verify":"كيف نتحقق","search.ph":"ابحث في المقالات","search.btn":"بحث","search.label":"ابحث في الموقع","lang.switch":"English","theme.dark":"الوضع الداكن","theme.light":"الوضع الفاتح","hero.eyebrow":"Think. Discover. Play. · فكّر. اكتشف. العب.","hero.title":"اعرف أكثر، ثم تحدَّ نفسك","hero.lede":"معلومات موثّقة بالمصادر وألعاب ذهنية بالعربية. تلعب فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك فقط.","hero.cta":"ابدأ اللعب","hero.cta2":"تصفّح المعرفة","games.title":"الألعاب","topics.title":"أقسام المعرفة","latest.title":"أحدث المقالات","verify.title":"كيف نتحقق","verify.text":"كل رقم أو تاريخ في مقالاتنا له مصدر مذكور، وأسئلة الألعاب تُراجع قبل ظهورها ولا تُولَّد أثناء اللعب.","verify.link":"اقرأ منهجنا","foot.note":"معلومات موثّقة وألعاب ذهنية بالعربية، تعمل بلا تسجيل.","foot.topics":"أقسام المعرفة","foot.about":"عن الموقع","foot.pending":"الصفحات التعريفية قيد الإعداد","lang.note":"محتوى الأسئلة والمقالات الإنجليزية قيد المراجعة، لذلك تظهر الأسئلة بالعربية الآن.","noscript":"الألعاب والتحدي اليومي تحتاج تفعيل JavaScript في متصفحك.","t.العلوم":"العلوم","t.التاريخ والحضارات":"التاريخ والحضارات","t.الجغرافيا والدول":"الجغرافيا والدول","t.التكنولوجيا":"التكنولوجيا","t.الثقافة العامة":"الثقافة العامة","t.الرياضيات والمنطق":"الرياضيات والمنطق","t.اللغة والأدب":"اللغة والأدب","t.الفضاء والفلك":"الفضاء والفلك","g.mcq.name":"اختبارات متعددة الخيارات","g.mcq.desc":"أربع إجابات وتفسير بعد كل سؤال","g.truefalse.name":"صح أم خطأ","g.truefalse.desc":"جمل سريعة تختبر دقة معلوماتك","g.order.name":"ترتيب الأحداث","g.order.desc":"رتّب وقائع بالتسلسل الصحيح","g.memory.name":"لعبة الذاكرة","g.memory.desc":"اكتشف الأزواج بأقل عدد من المحاولات","g.word.name":"خمّن الكلمة","g.word.desc":"كلمة مخفية وتلميحات تساعدك","g.start":"ابدأ","g.next":"التالي","g.finish":"النتيجة","g.again":"جولة جديدة","g.back":"رجوع","g.best":"أفضل نتيجة","g.score":"النقاط","g.streak":"سلسلة","g.time":"الوقت","g.level":"المستوى","g.easy":"سهل","g.medium":"متوسط","g.hard":"صعب","g.prog":"متدرج","g.pick":"اختر المستوى","g.qof":"السؤال {n} من {m}","g.hint":"حذف إجابتين (−3 نقاط)","g.correct":"إجابة صحيحة.","g.wrong":"إجابة غير صحيحة.","g.timeout":"انتهى الوقت.","g.check":"تحقق","g.up":"أعلى","g.down":"أسفل","g.moves":"المحاولات","g.pairs":"الأزواج","g.reveal":"اكشف حرفاً (−2 نقطة)","g.attempts":"المحاولات المتبقية","g.hintw":"التلميح","g.wordis":"الكلمة:","g.order.is":"الترتيب الصحيح:","g.result.pass":"أحسنت! اجتزت الجولة","g.result.fail":"حاول مرة أخرى لتتحسن","g.xp":"+{n} نقطة خبرة","g.newbest":"رقم قياسي جديد","g.local":"تُحفظ نتائجك على جهازك فقط.","g.points":"نقطة","g.rules.mcq":"أجب عن أسئلة الاختيار من متعدد قبل انتهاء الوقت. الإجابات السريعة والمتتالية تمنحك نقاطاً أكثر، ولك حذف إجابتين مرة واحدة في الجولة.","g.rules.truefalse":"احكم على كل عبارة بصح أو خطأ بسرعة. كل إجابة صحيحة متتالية ترفع مضاعف السلسلة.","g.rules.order":"رتّب الأحداث من الأقدم إلى الأحدث بالسحب والإفلات أو بأزرار الأعلى والأسفل، ثم اضغط تحقق. تُحتسب نقطة لكل حدث في مكانه الصحيح.","g.rules.memory":"اقلب بطاقتين لتجد الأزواج المتطابقة بأقل عدد من المحاولات. كلما زاد المستوى زادت البطاقات.","g.rules.word":"خمّن الكلمة المخفية من التلميح. لك ثلاث محاولات، ويمكنك كشف حرف مقابل نقطتين.","g.timer.on":"مؤقت","g.items":"{n} أسئلة","daily.title":"تحدي اليوم","daily.sub":"خمسة أسئلة هي نفسها لجميع اللاعبين اليوم. تُحتسب خبرة التحدي مرة واحدة يومياً.","daily.play":"العب التحدي","daily.done":"أنجزت تحدي اليوم: {s} نقطة","daily.again":"أعد المحاولة (بلا خبرة إضافية)","profile.title":"تقدمك","profile.level":"المستوى {n}","profile.xp":"{a} / {b} خبرة","profile.ach":"الإنجازات","profile.hist":"آخر الجولات","profile.none":"لا توجد جولات بعد. ابدأ لعبة وسيظهر تقدمك هنا.","profile.days":"أيام اللعب: {n}","profile.reset":"مسح بياناتي من هذا الجهاز","profile.confirm":"سيُمسح كل تقدمك على هذا الجهاز. متأكد؟","ach.first":"أول جولة","ach.first.d":"أكمل أي جولة","ach.perfect":"جولة كاملة","ach.perfect.d":"أجب عن كل الأسئلة بشكل صحيح","ach.streak5":"سلسلة 5","ach.streak5.d":"5 إجابات صحيحة متتالية","ach.streak10":"سلسلة 10","ach.streak10.d":"10 إجابات صحيحة متتالية","ach.all":"الألعاب الخمس","ach.all.d":"العب كل الألعاب الخمس","ach.daily3":"ثلاثة أيام","ach.daily3.d":"أنجز تحدي اليوم في 3 أيام مختلفة","ach.lvl5":"المستوى 5","ach.lvl5.d":"ابلغ المستوى 5","ach.hard":"تحدٍّ صعب","ach.hard.d":"اجتز جولة بمستوى صعب بنسبة 70% فأكثر","challenge.title":"تحدي صديق","challenge.invite":"صديقك يتحداك في تحدي {date} بنتيجة {s} نقطة. العب الأسئلة نفسها وقارن نتيجتك.","challenge.share":"تحدَّ صديقاً","challenge.share.text":"تحداك في بصيرة! نتيجتي {score} نقطة. العب نفس التحدي: {url}","challenge.copied":"تم نسخ رابط التحدي","challenge.copy.prompt":"انسخ رابط التحدي وشاركه","challenge.opponent":"نتيجة صديقك: {s}","challenge.won":"تفوقت على صديقك!","challenge.lost":"صديقك حقق نتيجة أعلى","challenge.tie":"تعادلتما","admin.link":"إدارة الموقع","page.about":"من نحن","page.verify":"كيف نتحقق","page.editorial":"سياسة التحرير","page.contact":"اتصل بنا","page.privacy":"الخصوصية","page.terms":"الشروط","skip":"تجاوز إلى المحتوى","card.play":"العب الآن","pstrip.lv":"المستوى {n}","pstrip.xp":"{a} / {b} خبرة","pstrip.new":"ابدأ أول جولة واكسب الخبرة","streak.n":"سلسلة {n}","cheer.1":"ممتاز","cheer.2":"رائع","cheer.3":"أسطوري","theme.mode":"المظهر: {m}","theme.m.dark":"داكن","theme.m.light":"فاتح","theme.m.auto":"تلقائي","lvl.up":"مستوى جديد: المستوى {n}","sound.on":"الصوت: مفعّل","sound.off":"الصوت: مغلق","cta.title":"خلّصت القراءة؟ اختبر نفسك","cta.sub":"خمس ألعاب بأسئلة مراجَعة وتحدي يومي، وتقدمك يُحفظ على جهازك","cta.btn":"العب الآن","empty.title":"لا يوجد شيء هنا","empty.sub":"الصفحة غير موجودة أو لا توجد نتائج مطابقة. جرّب البحث أو ابدأ لعبة.","empty.home":"الرئيسية","empty.play":"العب الآن"},"en":{"brand":"BASIRA | بصيرة","nav.games":"Games","nav.topics":"Knowledge","nav.articles":"Articles","nav.verify":"How we verify","search.ph":"Search articles","search.btn":"Search","search.label":"Search the site","lang.switch":"العربية","theme.dark":"Dark mode","theme.light":"Light mode","hero.eyebrow":"Think. Discover. Play.","hero.title":"Learn something, then challenge yourself","hero.lede":"Sourced knowledge and brain games in Arabic and English. Play right away with no sign-up; your results stay on your device.","hero.cta":"Start playing","hero.cta2":"Browse knowledge","games.title":"Games","topics.title":"Knowledge sections","latest.title":"Latest articles","verify.title":"How we verify","verify.text":"Every figure and date in our articles has a cited source, and game questions are reviewed before they appear, never generated while you play.","verify.link":"Read our method","foot.note":"Sourced knowledge and brain games, no sign-up needed.","foot.topics":"Knowledge sections","foot.about":"About","foot.pending":"Info pages are being prepared","lang.note":"English questions and articles are still under review, so questions are shown in Arabic for now.","noscript":"Games and the daily challenge need JavaScript enabled in your browser.","t.العلوم":"Science","t.التاريخ والحضارات":"History & Civilizations","t.الجغرافيا والدول":"Geography & Countries","t.التكنولوجيا":"Technology","t.الثقافة العامة":"General Knowledge","t.الرياضيات والمنطق":"Math & Logic","t.اللغة والأدب":"Language & Literature","t.الفضاء والفلك":"Space & Astronomy","g.mcq.name":"Multiple choice","g.mcq.desc":"Four answers, with an explanation after each","g.truefalse.name":"True or false","g.truefalse.desc":"Quick statements that test your accuracy","g.order.name":"Timeline order","g.order.desc":"Put events in the right order","g.memory.name":"Memory","g.memory.desc":"Find the pairs in as few tries as possible","g.word.name":"Guess the word","g.word.desc":"A hidden word and hints that help","g.start":"Start","g.next":"Next","g.finish":"Results","g.again":"New round","g.back":"Back","g.best":"Best","g.score":"Points","g.streak":"Streak","g.time":"Time","g.level":"Level","g.easy":"Easy","g.medium":"Medium","g.hard":"Hard","g.prog":"Progressive","g.pick":"Choose a level","g.qof":"Question {n} of {m}","g.hint":"Remove two answers (−3 pts)","g.correct":"Correct.","g.wrong":"Incorrect.","g.timeout":"Time's up.","g.check":"Check","g.up":"Up","g.down":"Down","g.moves":"Moves","g.pairs":"Pairs","g.reveal":"Reveal a letter (−2 pts)","g.attempts":"Attempts left","g.hintw":"Hint","g.wordis":"The word:","g.order.is":"Correct order:","g.result.pass":"Well done! You passed the round","g.result.fail":"Try again to improve","g.xp":"+{n} XP","g.newbest":"New personal best","g.local":"Your results are saved on this device only.","g.points":"pts","g.rules.mcq":"Answer multiple-choice questions before time runs out. Fast, consecutive answers earn more points, and you can remove two answers once per round.","g.rules.truefalse":"Judge each statement true or false, quickly. Each consecutive correct answer raises your streak multiplier.","g.rules.order":"Put the events in order from earliest to latest by drag and drop or the up and down buttons, then press Check. You get a point for each event in its right place.","g.rules.memory":"Flip two cards to find matching pairs in as few moves as possible. Higher levels have more cards.","g.rules.word":"Guess the hidden word from its hint. You have three attempts, and you can reveal a letter for two points.","g.timer.on":"Timed","g.items":"{n} questions","daily.title":"Daily challenge","daily.sub":"Five questions, the same for every player today. Challenge XP counts once per day.","daily.play":"Play the challenge","daily.done":"Daily challenge done: {s} points","daily.again":"Retry (no extra XP)","profile.title":"Your progress","profile.level":"Level {n}","profile.xp":"{a} / {b} XP","profile.ach":"Achievements","profile.hist":"Recent rounds","profile.none":"No rounds yet. Start a game and your progress will show here.","profile.days":"Days played: {n}","profile.reset":"Clear my data on this device","profile.confirm":"This will erase all your progress on this device. Sure?","ach.first":"First round","ach.first.d":"Complete any round","ach.perfect":"Perfect round","ach.perfect.d":"Answer every question correctly","ach.streak5":"Streak 5","ach.streak5.d":"5 correct answers in a row","ach.streak10":"Streak 10","ach.streak10.d":"10 correct answers in a row","ach.all":"All five games","ach.all.d":"Play all five games","ach.daily3":"Three days","ach.daily3.d":"Finish the daily challenge on 3 different days","ach.lvl5":"Level 5","ach.lvl5.d":"Reach level 5","ach.hard":"Hard challenge","ach.hard.d":"Pass a hard round with 70% or more","challenge.title":"Friend challenge","challenge.invite":"Your friend challenges you on {date} with {s} points. Play the same questions and compare your result.","challenge.share":"Challenge a friend","challenge.share.text":"I challenge you on BASIRA! My score: {score} points. Play the same challenge: {url}","challenge.copied":"Challenge link copied","challenge.copy.prompt":"Copy and share this challenge link","challenge.opponent":"Your friend's score: {s}","challenge.won":"You beat your friend!","challenge.lost":"Your friend scored higher","challenge.tie":"It's a tie","admin.link":"Site administration","page.about":"About","page.verify":"How we verify","page.editorial":"Editorial policy","page.contact":"Contact","page.privacy":"Privacy","page.terms":"Terms","skip":"Skip to content","card.play":"Play now","pstrip.lv":"Level {n}","pstrip.xp":"{a} / {b} XP","pstrip.new":"Play a round to earn XP","streak.n":"Streak {n}","cheer.1":"Nice","cheer.2":"Great","cheer.3":"Legendary","theme.mode":"Theme: {m}","theme.m.dark":"Dark","theme.m.light":"Light","theme.m.auto":"Auto","lvl.up":"Level up: Level {n}","sound.on":"Sound: On","sound.off":"Sound: Off","cta.title":"Done reading? Test yourself","cta.sub":"Five games with reviewed questions and a daily challenge; your progress stays on your device","cta.btn":"Play now","empty.title":"Nothing here","empty.sub":"The page does not exist or no results match. Try searching or start a game.","empty.home":"Home","empty.play":"Play now"}};
 var KEY='basira.lang';
 function getLang(){
   var m=/[?&]lang=(en|ar)/.exec(location.search);
@@ -17,8 +17,6 @@ function apply(){
   [].forEach.call(document.querySelectorAll('[data-ip]'),function(n){n.setAttribute('placeholder',t(n.getAttribute('data-ip')));});
   [].forEach.call(document.querySelectorAll('.js-lang'),function(n){n.textContent=t('lang.switch');});
   var note=document.getElementById('lang-note');if(note)note.hidden=(lang!=='en');
-  var tb=document.querySelectorAll('.js-theme');
-  [].forEach.call(tb,function(b){b.textContent=t(d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark');});
 }
 function set(l){
   lang=l;try{localStorage.setItem(KEY,l);}catch(e){}
@@ -55,12 +53,55 @@ function today(){try{return new Intl.DateTimeFormat('en-CA',{timeZone:'Africa/Ca
 function norm(t){return String(t).replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/\s+/g,'').trim();}
 function letters(w){return Array.from(w.replace(/\s+/g,''));}
 
+/* ===== مؤثرات صوتية (Web Audio، بلا ملفات، صامتة افتراضياً) ===== */
+var SFX=(function(){
+  var ctx=null,KEY='basira.sound',on=false;
+  try{on=localStorage.getItem(KEY)==='on';}catch(e){}
+  var NOTES={ok:[[660,0,.09],[880,.09,.14]],bad:[[220,0,.16],[165,.12,.2]],reward:[[988,0,.07],[1319,.07,.07],[1760,.14,.16]],
+    win:[[523,0,.12],[659,.12,.12],[784,.24,.12],[1047,.36,.3]],level:[[392,0,.12],[523,.12,.12],[659,.24,.12],[784,.36,.12],[1047,.48,.35]]};
+  function ensure(){
+    if(ctx)return ctx;var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
+    try{ctx=new AC();}catch(e){ctx=null;}return ctx;
+  }
+  function play(n){
+    if(!on||!NOTES[n])return;var c=ensure();if(!c)return;
+    if(c.state==='suspended'&&c.resume)c.resume();
+    var t0=c.currentTime;
+    NOTES[n].forEach(function(x){
+      var o=c.createOscillator(),g=c.createGain();o.type=n==='bad'?'triangle':'sine';o.frequency.value=x[0];
+      g.gain.setValueAtTime(0.0001,t0+x[1]);g.gain.exponentialRampToValueAtTime(.16,t0+x[1]+.02);g.gain.exponentialRampToValueAtTime(.0001,t0+x[1]+x[2]);
+      o.connect(g);g.connect(c.destination);o.start(t0+x[1]);o.stop(t0+x[1]+x[2]+.05);
+    });
+  }
+  function set(v){on=!!v;try{localStorage.setItem(KEY,on?'on':'off');}catch(e){}}
+  return {play:play,set:set,isOn:function(){return on;}};
+})();
+function ico(name,cls){var s=el('span','ico'+(cls?' '+cls:''));s.setAttribute('aria-hidden','true');s.innerHTML='<svg class="i3" aria-hidden="true" viewBox="0 0 96 96" focusable="false"><use href="#i3-'+name+'"></use></svg>';return s;}
+function tick(){var s=el('span','tick');s.setAttribute('aria-hidden','true');s.innerHTML='<svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="11"/><path d="M6.5 12.5l4 4 7-8.5"/></svg>';return s;}
+function levelUp(host,n){
+  var o=el('div','lvlup');o.setAttribute('role','status');
+  var c=el('div','lvlup-card');c.appendChild(ico('level','lvl-big'));
+  var t=el('p','lvlup-t');t.textContent=T('lvl.up',{n:n});c.appendChild(t);o.appendChild(c);
+  var close=function(){if(o.parentNode)o.parentNode.removeChild(o);};
+  o.addEventListener('click',close);host.appendChild(o);burst(host);setTimeout(close,4000);
+}
+function burst(host){
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var c=el('div','confetti'),cols=['#d7bd82','#5fc7bb','#e9a3ba','#6a58c8','#c27a12'];
+  for(var i=0;i<34;i++){var p=el('i');p.style.left=Math.round(Math.random()*100)+'%';p.style.background=cols[i%cols.length];if(i%3===0)p.className='star';p.style.setProperty('--dx',Math.round(Math.random()*160-80)+'px');p.style.setProperty('--rot',Math.round(Math.random()*720-360)+'deg');p.style.animationDelay=(Math.random()*0.4)+'s';c.appendChild(p);}
+  host.appendChild(c);setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c);},2600);
+}
+function countUp(n,target,suffix){
+  var steps=16,k=0;if(!target){n.textContent=target+(suffix||'');return;}
+  var id=setInterval(function(){k++;n.textContent=Math.round(target*k/steps)+(suffix||'');if(k>=steps)clearInterval(id);},35);
+}
 /* ===== محرك النقاط والتقدم (دوال صافية قابلة للاختبار) ===== */
 function points(o){ // o: level(1-3), streak(بعد هذه الإجابة), left, total
   var b=BASE[o.level]||10,tb=o.total?Math.round(b*0.5*Math.max(0,o.left)/o.total):0,sb=Math.min(o.streak||0,5)*2;
   return b+tb+sb;
 }
 function levelInfo(xp){var l=1,need=50;while(xp>=need){xp-=need;l++;need=50+(l-1)*25;}return {level:l,into:xp,need:need};}
+var ACHI={first:'xp',perfect:'gem',streak5:'flame',streak10:'flame',all:'trophy',daily3:'target',lvl5:'level',hard:'trophy'};
 var ACH=['first','perfect','streak5','streak10','all','daily3','lvl5','hard'];
 function unlock(s,r){
   s.ach=s.ach||{};var got=[];
@@ -133,11 +174,15 @@ function mount(root,slug){
   function finish(r){
     stopTimer();
     r.slug=slug;r.level=r.level||level;r.daily=daily;
+    var lvBefore=levelInfo(load().xp||0).level;
     var out=record(r);
+    var lvAfter=levelInfo(load().xp||0).level;
     box.textContent='';
-    var e=el('div','g-end');
+    var e=el('div','g-end'+(r.pct>=PASS*100?' win':''));
+    if(r.pct>=PASS*100){var wi=el('div','win-ico');wi.appendChild(ico('trophy'));e.appendChild(wi);}
     e.appendChild(el('p','g-score',r.correct+' / '+r.total));
     e.appendChild(el('p','g-pts',r.pts+' '+T('g.points')));
+    if(out.xp){var gain=el('span','g-gain');gain.textContent='+'+out.xp+' XP';gain.setAttribute('aria-hidden','true');e.appendChild(gain);}
     e.appendChild(tl(el('p',''),r.pct>=PASS*100?'g.result.pass':'g.result.fail'));
     var xp=el('p','note');xp.textContent=(out.xp?T('g.xp',{n:out.xp}):'')+(out.isBest?' · '+T('g.newbest'):'');e.appendChild(xp);
     out.ach.forEach(function(id){var p=el('p','g-ach');p.textContent='★ '+T('ach.'+id);e.appendChild(p);});
@@ -155,6 +200,9 @@ function mount(root,slug){
     });tl(share,'challenge.share');a.appendChild(share);}
     var back=btn('','btn alt',function(){if(daily&&onDone){onDone('close');}else intro();});tl(back,'g.back');a.appendChild(back);
     e.appendChild(a);box.appendChild(e);
+    if(r.pct>=PASS*100){burst(root);SFX.play('win');}
+    if(out.ach.length)setTimeout(function(){SFX.play('reward');},700);
+    if(lvAfter>lvBefore){levelUp(root,lvAfter);setTimeout(function(){SFX.play('level');},900);}
   }
   /* مشغّل الأسئلة المتتابعة: يدير المؤقت والسلسلة والنقاط */
   function run(items,opt){
@@ -173,6 +221,7 @@ function mount(root,slug){
       box.appendChild(body);box.appendChild(fb);box.appendChild(act);
       var done=false;
       function answer(good,why,partial){
+        SFX.play(good?'ok':'bad');
         if(done)return;done=true;stopTimer();
         var gain=0;
         if(good){ok++;streak++;best=Math.max(best,streak);gain=points({level:lvl,streak:streak,left:left,total:total});}
@@ -180,6 +229,8 @@ function mount(root,slug){
         if(partial!=null){gain=partial;}
         pts+=Math.max(0,gain);
         fb.hidden=false;fb.textContent='';
+        if(good)fb.appendChild(tick());
+        if(good&&streak>=3){var sb=el('span','streak-b');sb.appendChild(ico('flame','sm'));sb.appendChild(document.createTextNode(' '+T('streak.n',{n:streak})));fb.appendChild(sb);}
         var s=el('strong',good?'ok':'bad');s.textContent=(good?T('g.correct'):(left<=0&&total?T('g.timeout'):T('g.wrong')))+' ';fb.appendChild(s);
         if(gain){fb.appendChild(el('span','g-gain','+'+gain+' '+T('g.points')+' '));}
         if(why)fb.appendChild(document.createTextNode(why));
@@ -188,7 +239,7 @@ function mount(root,slug){
       var ctx={level:lvl,levelName:opt.levelName,penalty:function(n){pts=Math.max(0,pts-n);a2.textContent=T('g.score')+': '+pts+' · '+T('g.streak')+': '+streak;},
         hintAvail:function(){return hint;},useHint:function(){hint=false;}};
       items[i](body,answer,ctx);
-      if(total){t0=Date.now();timer=setInterval(function(){left=Math.max(0,total-(Date.now()-t0)/1000);tf.style.width=(left/total*100)+'%';if(left<=0){answer(false,'',0);}},200);}
+      if(total){t0=Date.now();timer=setInterval(function(){left=Math.max(0,total-(Date.now()-t0)/1000);tf.style.width=(left/total*100)+'%';tb.classList.toggle('low',left/total<0.3);if(left<=0){answer(false,'',0);}},200);}
     }
     next();
   }
@@ -228,15 +279,25 @@ function mount(root,slug){
           if(e.target.closest('button'))return;
           if(e.pointerType!=='mouse'&&!e.target.closest('.g-n'))return;
           e.preventDefault();
-          var pos=[].indexOf.call(ul.children,li);try{li.setPointerCapture(e.pointerId);}catch(x){}
-          li.classList.add('drag');
+          /* السحب بالتحويل (transform) دون نقل العنصر في DOM: نقل العنصر أثناء اللمس يقطع تسلسل مؤشر اللمس، فيتوقف السحب بعد أول تبديل */
+          var kids=[].slice.call(ul.children),pos=kids.indexOf(li),n=kids.length,y0=e.clientY;
+          var rects=kids.map(function(x){return x.getBoundingClientRect();});
+          var step=n>1?rects[1].top-rects[0].top:li.offsetHeight,target=pos;
+          try{li.setPointerCapture(e.pointerId);}catch(x){}
+          li.classList.add('drag');li.style.position='relative';li.style.zIndex='3';
           function mv(ev){
-            var kids=[].slice.call(ul.children),j=pos;
-            for(var q=0;q<kids.length;q++){var r=kids[q].getBoundingClientRect();if(ev.clientY>=r.top&&ev.clientY<=r.bottom){j=q;break;}}
-            if(j!==pos){var it=cur.splice(pos,1)[0];cur.splice(j,0,it);if(j>pos)ul.insertBefore(li,kids[j].nextSibling);else ul.insertBefore(li,kids[j]);pos=j;
-              [].forEach.call(ul.children,function(c,i){c.querySelector('.g-n').textContent=String(i+1);});}
+            var dy=ev.clientY-y0;li.style.transform='translateY('+dy+'px)';
+            var c=rects[pos].top+rects[pos].height/2+dy,j=0;
+            for(var q=0;q<n;q++){if(q!==pos&&rects[q].top+rects[q].height/2<c)j++;}
+            target=j;
+            kids.forEach(function(k,q){if(q===pos)return;var s=0;if(pos<q&&q<=j)s=-step;else if(j<=q&&q<pos)s=step;k.style.transition='transform .15s';k.style.transform=s?'translateY('+s+'px)':'';});
           }
-          function up(){li.removeEventListener('pointermove',mv);li.removeEventListener('pointerup',up);li.removeEventListener('pointercancel',up);render();}
+          function up(){
+            li.removeEventListener('pointermove',mv);li.removeEventListener('pointerup',up);li.removeEventListener('pointercancel',up);
+            kids.forEach(function(k){k.style.transform='';k.style.transition='';});li.style.zIndex='';li.style.position='';
+            if(target!==pos){var it=cur.splice(pos,1)[0];cur.splice(target,0,it);}
+            render();
+          }
           li.addEventListener('pointermove',mv);li.addEventListener('pointerup',up);li.addEventListener('pointercancel',up);
         });
         ul.appendChild(li);
@@ -319,8 +380,7 @@ function dailyPanel(host){
   var gh=el('div','bsr-game');gh.id='daily-host';
   function render(){
     host.textContent='';var params=new URLSearchParams(location.search),challengeDate=params.get('challenge'),isChallenge=/^\d{4}-\d{2}-\d{2}$/.test(challengeDate||''),d=isChallenge?challengeDate:today(),opponent=params.has('score')?Number(params.get('score')):null,s=load(),done=s.daily&&s.daily[d];
-    var h=el('h2');tl(h,'daily.title');host.appendChild(h);
-    host.appendChild(tl(el('p','g-sub'),'daily.sub'));
+    var top=el('div','daily-top');top.appendChild(ico('target'));var th=el('div');var h=el('h2');tl(h,'daily.title');th.appendChild(h);th.appendChild(tl(el('p','g-sub'),'daily.sub'));top.appendChild(th);host.appendChild(top);
     if(isChallenge&&Number.isFinite(opponent)){host.appendChild(tl(el('p','g-ach'),'challenge.invite',{s:opponent,date:d}));}
     if(done){host.appendChild(tl(el('p','g-ach'),'daily.done',{s:done.pts}));}
     var a=el('div','g-act'),b=btn('','btn',function(){
@@ -341,7 +401,7 @@ function profilePanel(host){
     var days=Object.keys((function(){var o={};(s.hist||[]).forEach(function(r){o[new Date(r.t).toDateString()]=1;});return o;})()).length;
     top.appendChild(tl(el('p','note'),'profile.days',{n:days}));host.appendChild(top);
     var h2=el('h3');tl(h2,'profile.ach');host.appendChild(h2);
-    var ul=el('ul','pf-ach');ACH.forEach(function(id){var li2=el('li',(s.ach&&s.ach[id])?'on':'off');li2.appendChild(tl(el('b'),'ach.'+id));li2.appendChild(tl(el('span','note'),'ach.'+id+'.d'));ul.appendChild(li2);});host.appendChild(ul);
+    var ul=el('ul','pf-ach');ACH.forEach(function(id){var li2=el('li',(s.ach&&s.ach[id])?'on':'off'),tx=el('span','txt');li2.appendChild(ico(ACHI[id]));tx.appendChild(tl(el('b'),'ach.'+id));tx.appendChild(tl(el('span','note'),'ach.'+id+'.d'));li2.appendChild(tx);ul.appendChild(li2);});host.appendChild(ul);
     var h3=el('h3');tl(h3,'profile.hist');host.appendChild(h3);
     if(!(s.hist&&s.hist.length))host.appendChild(tl(el('p','note'),'profile.none'));
     else{var hl=el('ul','pf-hist');s.hist.forEach(function(r){var l=el('li');l.textContent=T('g.'+r.slug+'.name')+' · '+T('g.'+(r.level==='prog'?'prog':r.level))+' · '+r.pts+' '+T('g.points')+' · '+r.pct+'%'+(r.daily?' · '+T('daily.title'):'');hl.appendChild(l);});host.appendChild(hl);}
@@ -350,29 +410,59 @@ function profilePanel(host){
   render();document.addEventListener('basira:progress',render);document.addEventListener('basira:lang',render);
 }
 
+function pstrip(){
+  var h=document.getElementById('pstrip');if(!h)return;
+  var s=load(),li=levelInfo(s.xp||0);h.textContent='';
+  if(!(s.xp>0)){h.appendChild(tl(el('span','note'),'pstrip.new'));h.firstChild.style.color='#cfd5de';return;}
+  var lv=ico('level','lvico');var x=el('div','xp'),sm=el('small');sm.textContent=T('pstrip.lv',{n:li.level})+' · '+T('pstrip.xp',{a:li.into,b:li.need});
+  var b=el('div','bar'),i=el('i');i.style.width=Math.round(li.into/li.need*100)+'%';b.appendChild(i);x.appendChild(sm);x.appendChild(b);h.appendChild(lv);h.appendChild(x);
+}
+function rise(){
+  var n=document.querySelectorAll('.sec,.hero-vis');if(!('IntersectionObserver' in window)){return;}
+  document.documentElement.classList.add('js-rise');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+  [].forEach.call(n,function(x){x.setAttribute('data-rise','');io.observe(x);});
+  setTimeout(function(){[].forEach.call(n,function(x){x.classList.add('in');});},2500);
+}
+function emptyState(){
+  var c=document.getElementById('content');if(!c||document.getElementById('play')||c.querySelector('.post'))return false;
+  if(c.querySelector('.empty-state'))return true;
+  var d=el('section','empty-state');d.appendChild(ico('gem','big'));
+  var h=el('h1');tl(h,'empty.title');d.appendChild(h);d.appendChild(tl(el('p'),'empty.sub'));
+  var a=el('div','cta');var home=el('a','btn');home.href=(document.querySelector('.brand')||{}).href||'/';tl(home,'empty.home');a.appendChild(home);
+  var pl=el('a','btn alt');pl.href=home.href.replace(/#.*/,'')+'#play';tl(pl,'empty.play');a.appendChild(pl);d.appendChild(a);c.appendChild(d);return true;
+}
 function init(){
-  var d=document.documentElement,tb=document.querySelectorAll('.js-theme');
-  function label(){var k=d.getAttribute('data-theme')==='dark'?'theme.light':'theme.dark';[].forEach.call(tb,function(b){b.textContent=T(k);});}
+  emptyState();
+  var d=document.documentElement,tb=document.querySelectorAll('.js-theme'),ORDER=['dark','light','auto'],mq=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
+  function pref(){var p=d.getAttribute('data-pref');return ORDER.indexOf(p)<0?'dark':p;}
+  function apply(p){d.setAttribute('data-pref',p);d.setAttribute('data-theme',p==='auto'?(mq&&mq.matches?'light':'dark'):p);}
+  function label(){var p=pref();[].forEach.call(tb,function(b){b.textContent=T('theme.mode',{m:T('theme.m.'+p)});b.setAttribute('aria-label',T('theme.mode',{m:T('theme.m.'+p)}));});}
   label();document.addEventListener('basira:lang',label);
+  var sb=document.querySelectorAll('.js-sound');
+  function slabel(){var on=SFX.isOn();[].forEach.call(sb,function(b){b.setAttribute('aria-pressed',on?'true':'false');b.textContent=T(on?'sound.on':'sound.off');});}
+  slabel();document.addEventListener('basira:lang',slabel);
+  [].forEach.call(sb,function(b){b.addEventListener('click',function(){SFX.set(!SFX.isOn());slabel();if(SFX.isOn())SFX.play('reward');});});
+  if(mq&&mq.addEventListener)mq.addEventListener('change',function(){if(pref()==='auto'){apply('auto');label();}});
   [].forEach.call(tb,function(b){b.addEventListener('click',function(){
-    var dark=d.getAttribute('data-theme')!=='dark';
-    if(dark)d.setAttribute('data-theme','dark');else d.removeAttribute('data-theme');
-    try{localStorage.setItem('site-theme',dark?'dark':'light');}catch(e){}label();});});
+    var n=ORDER[(ORDER.indexOf(pref())+1)%ORDER.length];apply(n);
+    try{localStorage.setItem('site-theme',n);}catch(e){}label();});});
   [].forEach.call(document.querySelectorAll('.bsr-game[data-game]'),function(r){mount(r,r.getAttribute('data-game'));});
   var pk=document.getElementById('picker'),host=document.getElementById('play-host');
   if(pk&&host){
     var bs=pk.querySelectorAll('button');
     [].forEach.call(bs,function(b){b.addEventListener('click',function(){
       [].forEach.call(bs,function(x){x.setAttribute('aria-pressed','false');});
-      b.setAttribute('aria-pressed','true');host.removeAttribute('data-ready');mount(host,b.getAttribute('data-g'));});});
+      b.setAttribute('aria-pressed','true');host.removeAttribute('data-ready');mount(host,b.getAttribute('data-g'));if(b._user&&host.scrollIntoView)host.scrollIntoView({behavior:'smooth',block:'start'});});b.addEventListener('pointerdown',function(){b._user=1;});});
     bs[0].click();
   }
+  pstrip();document.addEventListener('basira:progress',pstrip);document.addEventListener('basira:lang',pstrip);rise();
   var dh=document.getElementById('daily-panel');if(dh)dailyPanel(dh);
   var ph=document.getElementById('profile-panel');if(ph)profilePanel(ph);
   document.addEventListener('basira:lang',function(){
     [].forEach.call(document.querySelectorAll('[data-i]'),function(n){if(n.hasAttribute('data-v')){try{n.textContent=T(n.getAttribute('data-i'),JSON.parse(n.getAttribute('data-v')));}catch(e){}}});
   });
 }
-window.BSR=window.BSR||{};window.BSR.engine={points:points,levelInfo:levelInfo,mulberry:mulberry,hash:hash,today:today,norm:norm};
+window.BSR=window.BSR||{};window.BSR.sfx=SFX;window.BSR.emptyState=emptyState;window.BSR.engine={points:points,levelInfo:levelInfo,mulberry:mulberry,hash:hash,today:today,norm:norm};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
