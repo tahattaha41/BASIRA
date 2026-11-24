@@ -245,15 +245,25 @@ function mount(root,slug){
           if(e.target.closest('button'))return;
           if(e.pointerType!=='mouse'&&!e.target.closest('.g-n'))return;
           e.preventDefault();
-          var pos=[].indexOf.call(ul.children,li);try{li.setPointerCapture(e.pointerId);}catch(x){}
-          li.classList.add('drag');
+          /* السحب بالتحويل (transform) دون نقل العنصر في DOM: نقل العنصر أثناء اللمس يقطع تسلسل مؤشر اللمس، فيتوقف السحب بعد أول تبديل */
+          var kids=[].slice.call(ul.children),pos=kids.indexOf(li),n=kids.length,y0=e.clientY;
+          var rects=kids.map(function(x){return x.getBoundingClientRect();});
+          var step=n>1?rects[1].top-rects[0].top:li.offsetHeight,target=pos;
+          try{li.setPointerCapture(e.pointerId);}catch(x){}
+          li.classList.add('drag');li.style.position='relative';li.style.zIndex='3';
           function mv(ev){
-            var kids=[].slice.call(ul.children),j=pos;
-            for(var q=0;q<kids.length;q++){var r=kids[q].getBoundingClientRect();if(ev.clientY>=r.top&&ev.clientY<=r.bottom){j=q;break;}}
-            if(j!==pos){var it=cur.splice(pos,1)[0];cur.splice(j,0,it);if(j>pos)ul.insertBefore(li,kids[j].nextSibling);else ul.insertBefore(li,kids[j]);pos=j;
-              [].forEach.call(ul.children,function(c,i){c.querySelector('.g-n').textContent=String(i+1);});}
+            var dy=ev.clientY-y0;li.style.transform='translateY('+dy+'px)';
+            var c=rects[pos].top+rects[pos].height/2+dy,j=0;
+            for(var q=0;q<n;q++){if(q!==pos&&rects[q].top+rects[q].height/2<c)j++;}
+            target=j;
+            kids.forEach(function(k,q){if(q===pos)return;var s=0;if(pos<q&&q<=j)s=-step;else if(j<=q&&q<pos)s=step;k.style.transition='transform .15s';k.style.transform=s?'translateY('+s+'px)':'';});
           }
-          function up(){li.removeEventListener('pointermove',mv);li.removeEventListener('pointerup',up);li.removeEventListener('pointercancel',up);render();}
+          function up(){
+            li.removeEventListener('pointermove',mv);li.removeEventListener('pointerup',up);li.removeEventListener('pointercancel',up);
+            kids.forEach(function(k){k.style.transform='';k.style.transition='';});li.style.zIndex='';li.style.position='';
+            if(target!==pos){var it=cur.splice(pos,1)[0];cur.splice(target,0,it);}
+            render();
+          }
           li.addEventListener('pointermove',mv);li.addEventListener('pointerup',up);li.addEventListener('pointercancel',up);
         });
         ul.appendChild(li);
