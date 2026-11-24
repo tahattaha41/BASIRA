@@ -147,5 +147,6 @@
   "theme.mode": "المظهر: {m}",
   "theme.m.dark": "داكن",
   "theme.m.light": "فاتح",
-  "theme.m.auto": "تلقائي"
+  "theme.m.auto": "تلقائي",
+  "lvl.up": "مستوى جديد: المستوى {n}"
 }

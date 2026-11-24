@@ -147,5 +147,6 @@
   "theme.mode": "Theme: {m}",
   "theme.m.dark": "Dark",
   "theme.m.light": "Light",
-  "theme.m.auto": "Auto"
+  "theme.m.auto": "Auto",
+  "lvl.up": "Level up: Level {n}"
 }

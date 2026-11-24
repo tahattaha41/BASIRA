@@ -320,3 +320,17 @@ a{color:var(--acc-t)}
 .g-end .win-ico .i3{width:96px;height:96px;margin:0 auto 8px;animation:bob 3s ease-in-out infinite}
 @media(prefers-reduced-motion:reduce){.gcard .i3,.g-end .win-ico .i3{animation:none}.gcard:hover .i3,.topics a:hover .i3{transform:none}}
 .picker .gcard:last-child:nth-child(odd){grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center}@media(max-width:560px){.picker .gcard:last-child:nth-child(odd) .gart{flex:0 0 100%}}
+
+/* ===== مكافآت اللعب ===== */
+.tick{display:inline-flex;vertical-align:middle;margin-inline-end:8px}
+.tick svg{width:26px;height:26px}.tick circle{fill:var(--ok);opacity:.2}
+.tick path{fill:none;stroke:var(--ok);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:24;stroke-dashoffset:24;animation:draw .5s .1s ease forwards}
+.tick circle{transform-origin:center;animation:pop .45s ease}
+@keyframes draw{to{stroke-dashoffset:0}}
+.g-gain{display:inline-block;background:var(--acc);color:var(--acc-ink);border-radius:999px;padding:4px 14px;font-weight:700;margin:6px 0;animation:gain 1.2s ease both}
+@keyframes gain{0%{opacity:0;transform:translateY(14px) scale(.8)}35%{opacity:1;transform:translateY(-4px) scale(1.1)}100%{opacity:1;transform:none}}
+.confetti i.star{width:14px;height:14px;border-radius:0;clip-path:polygon(50% 0,62% 36%,100% 38%,70% 60%,80% 100%,50% 76%,20% 100%,30% 60%,0 38%,38% 36%);background:var(--gold)!important}
+.lvlup{position:absolute;inset:0;display:grid;place-items:center;background:rgba(11,20,34,.82);border-radius:inherit;z-index:5;animation:rise .3s ease;cursor:pointer}
+.lvlup-card{text-align:center;color:#F5F3EC}.lvlup-card .lvl-big .i3{width:120px;height:120px;margin:0 auto;animation:bob 2s ease-in-out infinite}
+.lvlup-t{font-size:22px;font-weight:700;margin:8px 0 0;color:var(--gold-l)}
+@media(prefers-reduced-motion:reduce){.tick path{animation:none;stroke-dashoffset:0}.g-gain,.lvlup,.lvlup-card .i3{animation:none}}
