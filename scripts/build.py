@@ -54,27 +54,57 @@ HERO_ART = ("<svg class='hero-art' viewBox='0 0 380 340' aria-hidden='true' focu
  "</svg>")
 
 
+def stage():
+    orbs = ''.join(f"<span class='orb' style='--a:{a}deg'>{icons3d.use(n, 'i3')}</span>" for a, n in ((0, 'gem'), (60, 'math'), (120, 'flame'), (180, 'simon'), (240, 'target'), (300, 'xp')))
+    sp = ''.join(f"<i class='sp s{k}'></i>" for k in range(1, 9))
+    return (f"<div class='stage' aria-hidden='true'><div class='stage-glow'></div><div class='stage-rays'></div><div class='stage-ring'></div>"
+            f"<div class='orbit'>{orbs}</div><div class='stage-main'>{icons3d.use('trophy', 'i3')}</div><div class='stage-floor'></div>{sp}</div>")
+STAGE = stage()
+
+
 def home(site, ar):
-    pills = ''.join(f"<button aria-pressed='false' class='gcard' data-g='{g[0]}' type='button'><span class='gart'>{icons3d.use(g[0], 'i3 big')}</span><b data-i='g.{g[0]}.name'>{e(ar[f'g.{g[0]}.name'])}</b><small data-i='g.{g[0]}.desc'>{e(ar[f'g.{g[0]}.desc'])}</small><span class='gplay' data-i='card.play'>{e(ar['card.play'])}</span></button>" for g in site['games'])
+    CATS = {'mcq': 'knowledge', 'truefalse': 'knowledge speed', 'order': 'knowledge logic', 'memory': 'memory', 'word': 'knowledge logic',
+            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed'}
+    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival'}; CHAL = {'blitz', 'survival'}
+    DIFF = {'سهل': 1, 'متوسط': 2, 'صعب': 3}
+    def card(g):
+        slug = g[0]; d = DIFF.get(g[3], 2)
+        dots = ''.join(f"<i class='{'on' if k < d else ''}'></i>" for k in range(3))
+        tag = (f"<span class='gtag ch' data-i='tag.challenge'>{e(ar['tag.challenge'])}</span>" if slug in CHAL else f"<span class='gtag' data-i='tag.new'>{e(ar['tag.new'])}</span>" if slug in NEW else '')
+        return (f"<button aria-pressed='false' class='gcard' data-g='{slug}' data-cat='{CATS[slug]}' type='button'>"
+                f"<span class='gart'><i class='gfloor'></i>{icons3d.use(slug, 'i3 big')}{tag}</span>"
+                f"<span class='gbody'><b data-i='g.{slug}.name'>{e(ar[f'g.{slug}.name'])}</b><small data-i='g.{slug}.desc'>{e(ar[f'g.{slug}.desc'])}</small></span>"
+                f"<span class='gfoot'><span class='gdots' aria-hidden='true'>{dots}</span><span class='gbest'></span><span class='gplay' data-i='card.play'>{e(ar['card.play'])}</span></span></button>")
+    pills = ''.join(card(g) for g in site['games'])
+    filters = ''.join(f"<button type='button' class='gfilter' aria-pressed='{'true' if k == 'all' else 'false'}' data-f='{k}' data-i='filter.{k}'>{e(ar['filter.' + k])}</button>" for k in ('all', 'knowledge', 'speed', 'memory', 'logic'))
     icon_ids = ['science', 'history', 'geography', 'technology', 'culture', 'logic', 'language', 'space']
     topics = ''.join(f"<li><a href='/search/label/{quote(n)}'>{icons3d.use(icon_ids[i], 'topic-icon i3')}<b data-i='t.{e(n)}'>{e(ar['t.' + n])}</b><span>{e(d)}</span></a></li>" for i, (n, d) in enumerate(site['topics']))
     icons = icons3d.sprite()
+    def mrow(gs):
+        one = ''.join(f"<span class='mq-chip'>{icons3d.use(g[0], 'i3')}<b data-i='g.{g[0]}.name'>{e(ar[f'g.{g[0]}.name'])}</b></span>" for g in gs)
+        return f"<div class='mq-row'><div class='mq-track'>{one * 3}</div></div>"
+    marq = mrow(site['games'][:5]) + mrow(site['games'][5:])
     verify_url = site.get('published_urls', {}).get('how-we-verify', '')
     verify = ("<section class='sec'><div class='wrap'><div class='verify'><div><h2 data-i='verify.title'>%s</h2><p data-i='verify.text'>%s</p></div>"
               "<a class='btn alt' data-i='verify.link' href='%s'>%s</a></div></div></section>"
               % (e(ar['verify.title']), e(ar['verify.text']), e(verify_url), e(ar['verify.link']))) if verify_url else ''
     return f"""{icons}
 <section class='hero'><div class='wrap hero-grid'><div class='hero-txt'>
-<p class='eyebrow' data-i='hero.eyebrow'>{e(ar['hero.eyebrow'])}</p>
-<h1 data-i='hero.title'>{e(ar['hero.title'])}</h1>
+<p class='hero-badge'><span class='pulse-dot'></span><span data-i='hero.badge'>{e(ar['hero.badge'])}</span></p>
+<h1 class='mask-in' data-i='hero.title'>{e(ar['hero.title'])}</h1>
 <p class='lede' data-i='hero.lede'>{e(ar['hero.lede'])}</p>
 <div class='cta'><a class='btn' data-i='hero.cta' href='#play'>{e(ar['hero.cta'])}</a><a class='btn alt' data-i='hero.cta2' href='#topics'>{e(ar['hero.cta2'])}</a></div>
+<ul class='hstats'><li data-i='hero.s1'>{e(ar['hero.s1'])}</li><li data-i='hero.s2'>{e(ar['hero.s2'])}</li><li data-i='hero.s3'>{e(ar['hero.s3'])}</li></ul>
 <div class='pstrip' id='pstrip' aria-live='polite'></div>
-</div><div class='hero-vis'>{HERO_ART}</div></div></section>
+</div><div class='hero-vis'>{STAGE}</div></div></section>
+<section class='mq' aria-hidden='true'>{marq}</section>
+<section class='sec manifesto'><div class='wrap'><p class='scrub' data-i='manifesto.text'>{e(ar['manifesto.text'])}</p></div></section>
 <section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>{e(ar['noscript'])}</noscript></div></div></section>
 <section class='sec' id='play'><div class='wrap'><h2 data-i='games.title'>{e(ar['games.title'])}</h2>
 <p class='note' data-i='lang.note' hidden='hidden' id='lang-note'>{e(ar['lang.note'])}</p>
+<div class='gfilters' role='group' aria-label='filter'>{filters}</div>
 <div class='picker' id='picker'>{pills}</div>
+<p class='more-title' data-i='view.more'>{e(ar['view.more'])}</p>
 <div class='bsr-game' id='play-host'><noscript>{e(ar['noscript'])}</noscript></div>
 </div></section>
 <section class='sec' id='progress'><div class='wrap'><div class='profile' id='profile-panel'></div></div></section>
