@@ -254,7 +254,61 @@ def i_space():
     return s
 
 
+# ---------- ألعاب جديدة ----------
+def i_math():
+    s = shadow(48, 89, 30)
+    s += ext(rrect(14, 8, 68, 78, 12), 'navy', 6)
+    s += ext(rrect(22, 16, 52, 18, 5), 'teal', 2) + txt(48, 31, '٤٢', 15)
+    for r, row in enumerate((('+', '\u2212', '\u00d7'), ('\u00f7', '=', '؟'))):
+        for c, ch in enumerate(row):
+            x = 22 + c * 18
+            y = 42 + r * 20
+            hue = 'gold' if ch in '=؟' else 'blue'
+            s += ext(rrect(x, y, 15, 16, 4), hue, 2) + txt(x + 7.5, y + 12.5, ch, 12, '#101827' if hue == 'gold' else '#fff')
+    return s
+
+
+def i_pattern():
+    s = shadow(48, 89, 32)
+    xs = (8, 30, 52)
+    for i, x in enumerate(xs):
+        s += ext(rrect(x, 52 - i * 12, 20, 22 + i * 12, 6), ('blue', 'violet', 'teal')[i], 4)
+    s += ext(rrect(74, 20, 18, 54, 6), 'gold', 4) + txt(83, 55, '؟', 22, '#5a3d00')
+    s += "<path d='M12 36Q40 6 74 14' fill='none' stroke='#fff' stroke-opacity='.6' stroke-width='3' stroke-dasharray='2 6' stroke-linecap='round'/>"
+    return s
+
+
+def i_simon():
+    s = shadow(48, 89, 30)
+    pads = (('rose', 8, 10), ('blue', 50, 10), ('green', 8, 48), ('amber', 50, 48))
+    for h, x, y in pads:
+        s += ext(rrect(x, y, 38, 34, 12), h, 5)
+    s += f"<circle cx='48' cy='45' r='10' fill='{G('navy')}' stroke='#fff' stroke-opacity='.4'/><path d='{star(48, 45, 6)}' fill='{G('gold')}'/>"
+    return s
+
+
+def i_blitz():
+    s = shadow(48, 89, 28)
+    s += disc(48, 50, 34, 'navy', 6)
+    s += f"<circle cx='48' cy='50' r='27' fill='{G('silver')}'/>"
+    s += "".join(f"<path d='M48 {26 + 0} V30' stroke='#101827' stroke-width='3' stroke-linecap='round' transform='rotate({a} 48 50)'/>" for a in range(0, 360, 30))
+    s += f"<path d='M48 50L48 32' stroke='#101827' stroke-width='4' stroke-linecap='round'/><path d='M48 50L62 58' stroke='{D('rose')}' stroke-width='4' stroke-linecap='round'/>"
+    s += ext(rrect(41, 8, 14, 8, 3), 'gold', 2)
+    s += f"<path d='M70 6L58 26H68L62 40L80 20H70Z' fill='{G('gold')}' stroke='#fff' stroke-opacity='.7' stroke-width='1.2' stroke-linejoin='round'/>"
+    return s
+
+
+def i_survival():
+    s = shadow(48, 89, 28)
+    heart = "M48 84C20 64 10 48 10 34C10 22 19 14 30 14C38 14 44 18 48 25C52 18 58 14 66 14C77 14 86 22 86 34C86 48 76 64 48 84Z"
+    s += ext(heart, 'rose', 6)
+    s += f"<path d='M26 30C26 24 31 21 36 22' fill='none' stroke='#fff' stroke-opacity='.7' stroke-width='4' stroke-linecap='round'/>"
+    s += f"<path d='M48 28V58M36 44H60' stroke='#fff' stroke-width='7' stroke-linecap='round' opacity='.9'/>"
+    return s
+
+
 ICONS = {
+    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,
     'trophy': i_trophy, 'xp': i_xp, 'level': i_level, 'flame': i_flame, 'gem': i_gem, 'target': i_target,
     'science': i_science, 'history': i_history, 'geography': i_geo, 'technology': i_tech,

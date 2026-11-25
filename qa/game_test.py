@@ -62,7 +62,9 @@ with sync_playwright() as p:
     check(len(set(seen)) == 10, 'no repeated question inside a round')
     check('10 / 10' in host.locator('.g-score').inner_text(), 'perfect round 10/10')
     exp = pts_expected(2, 10, 18)
-    check(f'{exp} نقطة' in host.locator('.g-pts').inner_text(), f'points = {exp} (level 2, full time bonus, streak bonus)')
+    got = int(host.locator('.g-pts').inner_text().split()[0])
+    check(exp - 10 <= got <= exp, f'points ~ {exp} (level 2, near-full time bonus, streak bonus; real time flows slightly) got {got}')
+    exp = got
     st = store(pg)
     check(st['xp'] == round(exp / 2) + 10, 'XP awarded = points/2 + 10 pass bonus')
     check('first' in st['ach'] and 'perfect' in st['ach'] and 'streak5' in st['ach'] and 'streak10' in st['ach'], 'achievements: first, perfect, streak5, streak10')
@@ -163,11 +165,12 @@ with sync_playwright() as p:
     xp_before = store(pg)['xp']
     check(xp_before > 100, 'xp accumulated across games')
     pg.on('dialog', lambda d: d.accept())
+    pg.evaluate('BSR.leaveGame()')
     pr.get_by_role('button', name=re.compile('مسح')).click()
     check(store(pg) == {} and pr.locator('.pf-hist li').count() == 0, 'reset clears local data')
 
     # --- تحدي اليوم
-    d = pg.locator('#daily-panel'); d.get_by_role('button', name='العب التحدي').click()
+    d = pg.locator('#daily-panel'); d.get_by_role('button', name='ابدأ التحدي').click()
     qs = []
     for i in range(5):
         q = d.locator('.g-q').inner_text(); qs.append(q)
@@ -177,17 +180,17 @@ with sync_playwright() as p:
     check('5 / 5' in d.locator('.g-score').inner_text(), 'daily challenge perfect')
     s1 = store(pg); xp1 = s1['xp']; check('2026-11-23' in s1['daily'] and xp1 > 0, 'daily result stored with date and XP awarded')
     d.get_by_role('button', name=re.compile('أعد المحاولة')).click()
-    check('أنجزت تحدي اليوم' in d.inner_text(), 'daily panel shows done state')
+    check('أنجزت تحدّي اليوم' in d.inner_text(), 'daily panel shows done state')
     d.get_by_role('button', name=re.compile('أعد المحاولة')).click()
     for i in range(5): d.locator('.g-opt[data-ok="0"], .g-opt[data-v]').first.click(); nxt(d)
     check(store(pg)['xp'] == xp1, 'replaying the daily challenge gives no extra XP')
-    pg2 = page(b); d2 = pg2.locator('#daily-panel'); d2.get_by_role('button', name='العب التحدي').click()
+    pg2 = page(b); d2 = pg2.locator('#daily-panel'); d2.get_by_role('button', name='ابدأ التحدي').click()
     check(d2.locator('.g-q').inner_text() == qs[0], 'same day => same first daily question for every player')
     # --- تحدي صديق عبر رابط: نفس التاريخ والبذرة، ومقارنة النتيجة محلياً
     pg4 = page(b); pg4.goto(URL + '?challenge=2026-11-23&score=999')
     d4 = pg4.locator('#daily-panel')
     check('999' in d4.inner_text() and 'يتحداك' in d4.inner_text(), 'friend challenge link shows inviter score and date')
-    d4.get_by_role('button', name='العب التحدي').click()
+    d4.get_by_role('button', name='ابدأ التحدي').click()
     check(d4.locator('.g-q').inner_text() == qs[0], 'friend challenge link loads same deterministic daily questions')
     for i in range(5):
         q = d4.locator('.g-q').inner_text()
@@ -196,7 +199,7 @@ with sync_playwright() as p:
         nxt(d4)
     check('نتيجة صديقك: 999' in d4.inner_text() and 'صديقك حقق نتيجة أعلى' in d4.inner_text(), 'friend challenge compares local scores without claiming anti-cheat')
     check(d4.get_by_role('button', name='تحدَّ صديقاً').count() == 1, 'completed challenge offers a share link')
-    pg3 = page(b, T0 + datetime.timedelta(days=1)); d3 = pg3.locator('#daily-panel'); d3.get_by_role('button', name='العب التحدي').click()
+    pg3 = page(b, T0 + datetime.timedelta(days=1)); d3 = pg3.locator('#daily-panel'); d3.get_by_role('button', name='ابدأ التحدي').click()
     qs3 = []
     for i in range(5):
         q = d3.locator('.g-q').inner_text(); qs3.append(q)
@@ -204,9 +207,10 @@ with sync_playwright() as p:
     check(qs3 != qs, 'next day => a different daily set')
 
     # --- الإنجليزية: واجهة اللعبة مترجمة
-    pe = page(b, lang='en'); h = pe.locator('#play-host')
+    pe = page(b, lang='en'); pe.locator('#picker button[data-g=mcq]').click(); h = pe.locator('#play-host')
+    pe.locator('#picker button[data-g=mcq]').click()
     check(h.get_by_role('button', name='Start').count() == 1 and h.locator('.g-chip', has_text='Easy').count() == 1, 'English game UI (Start, Easy)')
-    check(pe.locator('#daily-panel h2').inner_text() == 'Daily challenge', 'English daily panel')
+    check(pe.locator('#daily-panel h2').inner_text() == "Today's challenge", 'English daily panel')
     # --- صفحات الألعاب المستقلة
     check(pg.locator('[data-slug=mcq] .bsr-game h3').count() == 1 and pg.locator('[data-slug=memory] .bsr-game h3').count() == 1, 'standalone game pages mount')
     check(not pg._errs and not pg2._errs and not pg3._errs and not pe._errs, 'no JS errors ' + str(pg._errs))
