@@ -226,5 +226,8 @@
   "habit.imported": "Imported.",
   "habit.bad": "Invalid code.",
   "habit.chest": "Daily chest opened: +{n} XP",
-  "habit.mile": "{d}-day streak: +{n} XP"
+  "habit.mile": "{d}-day streak: +{n} XP",
+  "g.bubbles.name": "Knowledge bubbles",
+  "g.bubbles.desc": "Tap the right bubble before it floats away",
+  "g.rules.bubbles": "Four bubbles float up, each holding a possible answer. Tap the right one to pop it. Each question is timed, and all questions are reviewed and stored on your device."
 }

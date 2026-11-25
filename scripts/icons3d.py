@@ -307,8 +307,16 @@ def i_survival():
     return s
 
 
+def i_bubbles():
+    s = shadow(48, 89, 26)
+    for cx, cy, r, c in ((34, 56, 24, 'blue'), (62, 36, 18, 'green'), (62, 68, 13, 'rose')):
+        s += disc(cx, cy, r, c, 3)
+        s += f"<ellipse cx='{cx - r * 0.35:.1f}' cy='{cy - r * 0.4:.1f}' rx='{r * 0.28:.1f}' ry='{r * 0.16:.1f}' fill='#fff' opacity='.8' transform='rotate(-30 {cx - r * 0.35:.1f} {cy - r * 0.4:.1f})'/>"
+    return s
+
+
 ICONS = {
-    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival,
+    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,
     'trophy': i_trophy, 'xp': i_xp, 'level': i_level, 'flame': i_flame, 'gem': i_gem, 'target': i_target,
     'science': i_science, 'history': i_history, 'geography': i_geo, 'technology': i_tech,

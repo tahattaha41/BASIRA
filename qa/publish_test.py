@@ -23,7 +23,7 @@ rc, _ = quiet(mode='apply', confirm=True); check('apply بلا أسرار مرف
 os.environ.update(BLOGGER_BLOG_ID='1', BLOGGER_CLIENT_ID='a', BLOGGER_CLIENT_SECRET='b', BLOGGER_REFRESH_TOKEN='c')
 rc, out = quiet(mode='apply', confirm=True)
 posts = [c for c in calls if c[0] == 'POST' and 'pages' in c[1]]
-check('apply: ينشئ المفقود فقط (4: بلا اتصل بنا لنقص البريد، بلا ألعاب) ويتخطى الموجود', rc == 0 and len(posts) == 4 and '[skip] about' in out and '[skip] contact' in out, (len(posts), out[:300]))
+check('apply: ينشئ المفقود فقط (5: مع اتصل بنا لأن البريد موجود، بلا ألعاب) ويتخطى الموجود', rc == 0 and len(posts) == 5 and '[skip] about' in out and '[created] contact' in out, (len(posts), out[:300]))
 check('apply: لا PATCH ولا DELETE بدون --update', not any(c[0] in ('PATCH', 'DELETE') for c in calls))
 check('لا يستدعي أي مسار للقوالب', not any('theme' in c[1].lower() or 'template' in c[1].lower() for c in calls))
 calls.clear(); quiet(mode='apply', confirm=True, update=True)

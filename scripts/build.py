@@ -64,8 +64,8 @@ STAGE = stage()
 
 def home(site, ar):
     CATS = {'mcq': 'knowledge', 'truefalse': 'knowledge speed', 'order': 'knowledge logic', 'memory': 'memory', 'word': 'knowledge logic',
-            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed'}
-    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival'}; CHAL = {'blitz', 'survival'}
+            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed', 'bubbles': 'knowledge speed'}
+    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles'}; CHAL = {'blitz', 'survival'}
     DIFF = {'سهل': 1, 'متوسط': 2, 'صعب': 3}
     def card(g):
         slug = g[0]; d = DIFF.get(g[3], 2)
