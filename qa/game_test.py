@@ -66,7 +66,7 @@ with sync_playwright() as p:
     check(exp - 10 <= got <= exp, f'points ~ {exp} (level 2, near-full time bonus, streak bonus; real time flows slightly) got {got}')
     exp = got
     st = store(pg)
-    check(st['xp'] == round(exp / 2) + 10, 'XP awarded = points/2 + 10 pass bonus')
+    check(st['xp'] == int(exp / 2 + 0.5) + 10, 'XP awarded = points/2 + 10 pass bonus')
     check('first' in st['ach'] and 'perfect' in st['ach'] and 'streak5' in st['ach'] and 'streak10' in st['ach'], 'achievements: first, perfect, streak5, streak10')
     check(len(st['hist']) == 1, 'history records the round')
     # جولة بمؤقت: انتهاء الوقت
