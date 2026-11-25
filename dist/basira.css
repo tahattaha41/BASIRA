@@ -457,3 +457,21 @@ a{color:var(--acc-t)}
 .cur.play .cur-t{transform:scale(1)}
 @media(prefers-reduced-motion:reduce){.mask-in{clip-path:none}.mask-in.go{animation:none}.cur{transition:none}}
 .gcard[hidden]{display:none!important}
+/* v6: عادة يومية */
+.habit{border:1px solid var(--line);border-radius:24px;background:var(--card);padding:20px;display:grid;gap:14px}
+.hb-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hb-flame{position:relative;width:64px;height:64px;display:grid;place-items:center}.hbi{width:64px;height:64px}
+.hb-n{position:absolute;bottom:-2px;inset-inline-end:-4px;min-width:26px;height:26px;border-radius:13px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font-size:14px;padding:0 6px}
+.hb-tx{flex:1;min-width:180px}.hb-tx h3{margin:0 0 4px;font-size:20px}.hb-sub{margin:0;color:var(--mute);font-size:14px;line-height:1.6}
+.hb-ring{--p:0;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;align-content:center;background:conic-gradient(var(--acc) calc(var(--p)*360deg),var(--line) 0);position:relative;text-align:center}
+.hb-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--card)}
+.hb-ring span,.hb-ring small{position:relative}.hb-ring span{font-weight:800;font-size:16px}.hb-ring small{font-size:10px;color:var(--mute)}
+.hb-week{display:flex;gap:8px;list-style:none;margin:0;padding:0;justify-content:space-between}
+.hb-week li{flex:1;display:grid;justify-items:center;gap:4px;font-size:11px;color:var(--mute)}
+.hb-week i{width:100%;max-width:38px;height:10px;border-radius:5px;background:var(--line)}.hb-week .on i{background:var(--acc)}
+.hb-next{margin:0;font-size:13px;color:var(--mute)}
+.hb-sync summary{cursor:pointer;font-weight:600;min-height:40px;display:flex;align-items:center}
+.hb-sync textarea{width:100%;margin:8px 0;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);padding:10px;font:inherit;font-size:12px;direction:ltr}
+.hb-row{display:flex;gap:8px;flex-wrap:wrap}
+.view-game .habit,.view-game #habit{display:none}
+.hbi2{width:20px;height:20px;vertical-align:middle}

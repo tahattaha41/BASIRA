@@ -99,6 +99,7 @@ def home(site, ar):
 </div><div class='hero-vis'>{STAGE}</div></div></section>
 <section class='mq' aria-hidden='true'>{marq}</section>
 <section class='sec manifesto'><div class='wrap'><p class='scrub' data-i='manifesto.text'>{e(ar['manifesto.text'])}</p></div></section>
+<section class='sec' id='habit'><div class='wrap'><div class='habit' id='habit-panel'></div></div></section>
 <section class='sec' id='daily'><div class='wrap'><div class='daily' id='daily-panel'><noscript>{e(ar['noscript'])}</noscript></div></div></section>
 <section class='sec' id='play'><div class='wrap'><h2 data-i='games.title'>{e(ar['games.title'])}</h2>
 <p class='note' data-i='lang.note' hidden='hidden' id='lang-note'>{e(ar['lang.note'])}</p>
