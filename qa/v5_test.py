@@ -5,7 +5,7 @@ fails = []
 def check(c, m):
     print(('ok   ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-GAMES = ['mcq', 'truefalse', 'order', 'memory', 'word', 'math', 'pattern', 'simon', 'blitz', 'survival']
+GAMES = ['mcq', 'truefalse', 'order', 'memory', 'word', 'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles']
 with sync_playwright() as p:
     b = p.chromium.launch()
     for w in (360, 390, 768, 1280):
@@ -16,7 +16,7 @@ with sync_playwright() as p:
         pg.close()
     pg = b.new_page(viewport={'width': 390, 'height': 844}); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     pg.goto(URL); pg.wait_for_timeout(300)
-    check(pg.locator('#picker .gcard').count() == 10, 'ten game cards')
+    check(pg.locator('#picker .gcard').count() == 11, 'eleven game cards')
     check(pg.evaluate("!document.body.className.includes('view-game')") and not pg.locator('#play-host').is_visible(), 'home shows no game until one is chosen')
     pg.locator('.gfilter[data-f=speed]').click()
     vis = pg.evaluate("[...document.querySelectorAll('#picker .gcard')].filter(c=>c.offsetParent).map(c=>c.dataset.g)")

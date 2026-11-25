@@ -11,7 +11,7 @@
  --foot:rgba(0,0,0,.2);--hero-bg:linear-gradient(160deg,#0B1422 0%,#101B2D 55%,#0F2A33 100%);
  --on-g:#0D1420;
  --g-mcq:#3CC4B5;--g-truefalse:#F0B35A;--g-order:#A99BFF;--g-memory:#FF8FB0;--g-word:#7CC4F0;
- --g-math:#6FB6FF;--g-pattern:#E2A6FF;--g-simon:#8CE08C;--g-blitz:#FF9F6B;--g-survival:#FF8A8A;
+ --g-math:#6FB6FF;--g-pattern:#E2A6FF;--g-simon:#8CE08C;--g-blitz:#FF9F6B;--g-survival:#FF8A8A;--g-bubbles:#5EE0D0;
 }
 :root[data-theme=light]{
  color-scheme:light;
@@ -21,7 +21,7 @@
  --foot:rgba(24,38,58,.03);
  --on-g:#FFFFFF;
  --g-mcq:#0F6B63;--g-truefalse:#9A5A00;--g-order:#5B4BB0;--g-memory:#B0365F;--g-word:#1F6F9F;
- --g-math:#1F5FA8;--g-pattern:#7A3FA8;--g-simon:#2E7D3E;--g-blitz:#B24A12;--g-survival:#B0302E;
+ --g-math:#1F5FA8;--g-pattern:#7A3FA8;--g-simon:#2E7D3E;--g-blitz:#B24A12;--g-survival:#B0302E;--g-bubbles:#0B6F68;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -475,3 +475,11 @@ a{color:var(--acc-t)}
 .hb-row{display:flex;gap:8px;flex-wrap:wrap}
 .view-game .habit,.view-game #habit{display:none}
 .hbi2{width:20px;height:20px;vertical-align:middle}
+
+.picker .gcard[data-g=bubbles]{--g:var(--g-bubbles)}.bsr-game[data-game=bubbles]{--g:var(--g-bubbles)}
+.bub-sea{position:relative;overflow:hidden;border-radius:20px;margin:12px 0;background:linear-gradient(180deg,color-mix(in srgb,var(--g) 10%,var(--card)),var(--card));border:1px solid var(--line);touch-action:manipulation}
+.bub{position:absolute;left:0;top:0;border-radius:50%;border:1.5px solid color-mix(in srgb,#fff 55%,transparent);background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.55),color-mix(in srgb,var(--g) 38%,transparent) 42%,color-mix(in srgb,var(--g) 62%,#0a1628) 100%);color:#fff;display:grid;place-items:center;padding:12px;cursor:pointer;will-change:transform;box-shadow:inset 0 -8px 16px rgba(0,0,0,.25),0 8px 18px -8px rgba(0,0,0,.5);min-height:0}
+.bub-t{font-size:13px;line-height:1.3;font-weight:700;text-wrap:balance;text-shadow:0 1px 2px rgba(0,0,0,.6);pointer-events:none}
+.bub.ok{background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.6),rgba(60,200,120,.55) 45%,#14683a)}
+.bub.bad{background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.5),rgba(255,90,90,.55) 45%,#7a1c1c)}
+.bub-d{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;opacity:.85;pointer-events:none;margin:-4px 0 0 -4px}
