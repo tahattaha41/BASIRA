@@ -28,4 +28,18 @@ check('apply: لا PATCH ولا DELETE بدون --update', not any(c[0] in ('PAT
 check('لا يستدعي أي مسار للقوالب', not any('theme' in c[1].lower() or 'template' in c[1].lower() for c in calls))
 calls.clear(); quiet(mode='apply', confirm=True, update=True)
 check('--update يستعمل PATCH للموجود', sum(1 for c in calls if c[0] == 'PATCH') == 1 and not any(c[0] == 'DELETE' for c in calls))
+
+import blogger_posts as bq
+calls2 = []
+def fake2(method, url, token=None, body=None, form=None):
+    calls2.append((method, url, body))
+    if 'oauth2' in url: return {'access_token': 't'}
+    if method == 'GET': return {'items': [{'id': '9', 'title': 'جسور كونيغسبرغ السبعة: لماذا لا حل لها؟'}]}
+    return {'url': 'https://x/p.html'}
+with contextlib.redirect_stdout(io.StringIO()) as o2: rc2 = bq.run('apply', True, False, _http=fake2)
+pp = [c for c in calls2 if c[0] == 'POST' and 'posts' in c[1]]
+check('posts: ينشئ 7 ويتخطى الموجود (8 مقالات، واحد موجود)', rc2 == 0 and len(pp) == 7, len(pp))
+check('posts: كل منشور له تصنيف ومحتوى طويل', all(c[2]['labels'] and len(c[2]['content']) > 3000 for c in pp))
+check('posts: لا PATCH ولا DELETE بدون --update', not any(c[0] in ('PATCH', 'DELETE') for c in calls2))
+
 print('\nFAILED: %d' % len(fails) if fails else '\nALL PASS'); sys.exit(1 if fails else 0)

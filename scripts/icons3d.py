@@ -396,8 +396,57 @@ def i_merge():
     return s
 
 
+def i_opsign():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 22, 80, 46, 12), 'navy', 6) + txt(24, 55, '٦', 24) + txt(72, 55, '٢', 24)
+    s += disc(48, 45, 15, 'gold', 3) + txt(48, 53, '؟', 20, '#101827')
+    return s
+
+
+def i_numline():
+    s = shadow(48, 89, 30)
+    s += ext(rrect(8, 40, 80, 14, 7), 'silver', 4)
+    for x in (18, 36, 54, 72):
+        s += f"<rect x='{x}' y='34' width='3' height='26' rx='1.5' fill='#5b6676'/>"
+    s += ext("M48 14L60 32H36Z", 'rose', 3)
+    return s
+
+
+def i_pathmem():
+    s = shadow(48, 89, 28)
+    for r in range(3):
+        for c in range(3):
+            lit = (r, c) in ((0, 0), (1, 1), (2, 2), (2, 1))
+            s += ext(rrect(10 + c * 26, 10 + r * 26, 22, 22, 6), 'blue' if lit else 'navy', 3)
+    return s
+
+
+def i_revdigits():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 22, 80, 46, 12), 'amber', 6)
+    s += txt(26, 55, '٥', 26, '#101827') + txt(48, 55, '٧', 26, '#101827') + txt(70, 55, '٣', 26, '#101827')
+    s += "<path d='M30 16H66L60 10M66 16L60 22' stroke='#fff' stroke-width='3' fill='none' stroke-linecap='round'/>"
+    return s
+
+
+def i_shades():
+    s = shadow(48, 89, 28)
+    for i, h in enumerate(('navy', 'violet', 'blue', 'silver')):
+        s += ext(rrect(8 + i * 21, 20 + (3 - i) * 4, 18, 52 - (3 - i) * 4, 5), h, 3)
+    return s
+
+
+def i_intruder():
+    s = shadow(48, 89, 28)
+    for r in range(3):
+        for c in range(3):
+            hue = 'rose' if (r, c) == (1, 2) else 'gold'
+            s += disc(22 + c * 26, 22 + r * 24, 10, hue, 3)
+    return s
+
+
 ICONS = {
-    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge,
+    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge, 'opsign': i_opsign, 'numline': i_numline, 'pathmem': i_pathmem, 'revdigits': i_revdigits, 'shades': i_shades, 'intruder': i_intruder,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,
     'trophy': i_trophy, 'xp': i_xp, 'level': i_level, 'flame': i_flame, 'gem': i_gem, 'target': i_target,
     'science': i_science, 'history': i_history, 'geography': i_geo, 'technology': i_tech,
