@@ -315,8 +315,89 @@ def i_bubbles():
     return s
 
 
+def i_stroop():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(10, 18, 76, 56, 14), 'navy', 6)
+    s += txt(30, 56, 'ح', 30, '#FF6B6B') + txt(48, 56, 'ب', 30, '#4C8DFF') + txt(66, 56, 'ر', 30, '#F5C542')
+    return s
+
+
+def i_compare():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 26, 36, 44, 10), 'blue', 5) + txt(26, 56, '٧', 26)
+    s += ext(rrect(52, 26, 36, 44, 10), 'amber', 5) + txt(70, 56, '٩', 26, '#101827')
+    s += f"<path d='M44 48L52 44V52Z' fill='#fff' opacity='.9'/>"
+    return s
+
+
+def i_count():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(10, 14, 76, 68, 14), 'navy', 6)
+    for x, y, h in ((30, 36, 'teal'), (58, 32, 'gold'), (42, 56, 'rose'), (66, 58, 'violet')):
+        s += disc(x, y, 8, h, 3)
+    return s
+
+
+def i_schulte():
+    s = shadow(48, 89, 28)
+    n = 0
+    for r in range(3):
+        for c in range(3):
+            n += 1
+            x, y = 10 + c * 26, 12 + r * 26
+            s += ext(rrect(x, y, 22, 22, 6), 'violet' if n < 5 else 'silver', 3) + txt(x + 11, y + 17, str(n), 13, '#fff' if n < 5 else '#101827')
+    return s
+
+
+def i_odd():
+    s = shadow(48, 89, 28)
+    for r in range(3):
+        for c in range(3):
+            x, y = 10 + c * 26, 12 + r * 26
+            hue = 'gold' if (r, c) == (1, 1) else 'rose'
+            s += ext(rrect(x, y, 22, 22, 6), hue, 3)
+    return s
+
+
+def i_multiples():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 12, 80, 70, 14), 'navy', 6)
+    for i, (x, y, h) in enumerate(((22, 32, 'amber'), (48, 32, 'silver'), (74, 32, 'amber'), (22, 60, 'silver'), (48, 60, 'amber'), (74, 60, 'silver'))):
+        s += disc(x, y, 10, h, 3) + txt(x, y + 5, str(3 * (i + 1) if h == 'amber' else i + 1), 12, '#101827')
+    return s
+
+
+def i_digits():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 22, 80, 46, 12), 'blue', 6)
+    s += txt(26, 56, '٣', 28) + txt(48, 56, '٧', 28) + txt(70, 56, '٥', 28)
+    return s
+
+
+def i_stack():
+    s = shadow(48, 89, 30)
+    for k, (x, w, h) in enumerate(((10, 76, 'blue'), (16, 62, 'teal'), (22, 50, 'amber'), (30, 36, 'rose'))):
+        s += ext(rrect(x, 70 - k * 18, w, 16, 4), h, 3)
+    return s
+
+
+def i_rhythm():
+    s = shadow(48, 89, 28)
+    s += disc(48, 46, 34, 'navy', 6) + disc(48, 46, 24, 'teal', 0) + disc(48, 46, 12, 'silver', 0)
+    return s
+
+
+def i_merge():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(8, 14, 80, 68, 12), 'navy', 6)
+    for x, y, h, v in ((14, 20, 'amber', '٢'), (50, 20, 'rose', '٤'), (14, 52, 'violet', '٨')):
+        s += ext(rrect(x, y, 32, 24, 6), h, 3) + txt(x + 16, y + 19, v, 16, '#101827' if h == 'amber' else '#fff')
+    s += ext(rrect(50, 52, 32, 24, 6), 'teal', 3) + txt(66, 71, '١٦', 14)
+    return s
+
+
 ICONS = {
-    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles,
+    'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,
     'trophy': i_trophy, 'xp': i_xp, 'level': i_level, 'flame': i_flame, 'gem': i_gem, 'target': i_target,
     'science': i_science, 'history': i_history, 'geography': i_geo, 'technology': i_tech,

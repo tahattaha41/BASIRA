@@ -47,8 +47,8 @@
         <button class='btn-quiet js-theme' type='button'>المظهر: داكن</button>
       </div>
       <nav aria-label='main' class='nav'>
-        <a data-i='nav.games' expr:href='data:blog.homepageUrl + &quot;#play&quot;'>{{ar:nav.games}}</a>
-        <a data-i='nav.topics' expr:href='data:blog.homepageUrl + &quot;#topics&quot;'>{{ar:nav.topics}}</a>
+        <a data-i='nav.games' expr:href='data:blog.homepageUrl + "#play"'>{{ar:nav.games}}</a>
+        <a data-i='nav.topics' expr:href='data:blog.homepageUrl + "#topics"'>{{ar:nav.topics}}</a>
         <a data-i='nav.articles' href='/search?max-results=24'>{{ar:nav.articles}}</a>
         {{NAV_VERIFY}}
       </nav>
@@ -87,7 +87,7 @@
                     <aside class='cta-games'>
                       <svg class='i3' aria-hidden='true' focusable='false' viewBox='0 0 96 96'><use href='#i3-trophy'></use></svg>
                       <div><strong data-i='cta.title'>{{ar:cta.title}}</strong><span data-i='cta.sub'>{{ar:cta.sub}}</span></div>
-                      <a class='btn' expr:href='data:blog.homepageUrl + &quot;#play&quot;' data-i='cta.btn'>{{ar:cta.btn}}</a>
+                      <a class='btn' expr:href='data:blog.homepageUrl + "#play"' data-i='cta.btn'>{{ar:cta.btn}}</a>
                     </aside>
                   </b:if>
                 <b:else/>
@@ -114,7 +114,7 @@
         <div><h4 data-i='foot.topics'>{{ar:foot.topics}}</h4><ul>{{FOOT_TOPICS}}</ul></div>
         <div><h4 data-i='foot.about'>{{ar:foot.about}}</h4><ul>{{FOOT_ABOUT}}</ul></div>
       </div>
-      <div class='foot-end'><span>© 2026 BASIRA | بصيرة — Created by Taha Omar · إنشاء وتطوير: طه عمر</span><a class='admin-entry' href='https://www.blogger.com/' target='_blank' rel='noopener noreferrer'><span data-i='admin.link'>إدارة الموقع</span></a></div>
+      <div class='foot-end'><span>© 2026 BASIRA | بصيرة — Created by Taha Omar · إنشاء وتطوير: طه عمر</span><details class='admin-menu'><summary class='admin-entry'><span data-i='admin.link'>إدارة الموقع</span></summary><div class='admin-list'><a expr:href='"https://www.blogger.com/blog/posts/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.posts'>المقالات</a><a expr:href='"https://www.blogger.com/blog/pages/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.pages'>الصفحات</a><a expr:href='"https://www.blogger.com/blog/stats/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.stats'>الإحصائيات</a><a expr:href='"https://www.blogger.com/blog/comments/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.comments'>التعليقات</a><a expr:href='"https://www.blogger.com/blog/themes/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.theme'>القالب</a><a expr:href='"https://www.blogger.com/blog/settings/" + data:blog.blogId' target='_blank' rel='noopener noreferrer' data-i='admin.settings'>الإعدادات</a><a href='https://search.google.com/search-console' target='_blank' rel='noopener noreferrer' data-i='admin.gsc'>Search Console</a><a href='https://pagespeed.web.dev/' target='_blank' rel='noopener noreferrer' data-i='admin.speed'>سرعة الموقع</a></div></details></div>
     </div>
   </footer>
   <script src='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.js'></script>
