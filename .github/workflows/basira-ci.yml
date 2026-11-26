@@ -66,7 +66,7 @@ jobs:
       - name: Bubbles game
         run: python qa/bubbles_test.py
       - name: Generated games, friend challenges, skill games
-        run: python qa/games7_test.py && python qa/friend_test.py && python qa/skill_test.py
+        run: python qa/games7_test.py && python qa/games6_test.py && python qa/friend_test.py && python qa/skill_test.py
       - name: v5 (cards, routing, filters, new games)
         run: python qa/v5_test.py
       - name: Reject leftovers of the old site

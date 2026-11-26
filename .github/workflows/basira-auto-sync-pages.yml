@@ -38,3 +38,4 @@ jobs:
             exit 0
           fi
           python scripts/blogger_pages.py apply --confirm --update
+          python scripts/blogger_posts.py apply --confirm
