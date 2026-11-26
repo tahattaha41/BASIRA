@@ -1,0 +1,35 @@
+name: BASIRA admin panel (GitHub Pages)
+
+# يدوي فقط: يتطلب أن يفعّل المالك Pages (Settings > Pages > Source: GitHub Actions).
+# يرفع لوحة الإدارة فقط (dist/admin) وهي صفحة ثابتة بلا أسرار؛ التعديلات تتم بتوكن المالك من المتصفح.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: basira-admin-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/build.py
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/admin
+      - id: deployment
+        uses: actions/deploy-pages@v4

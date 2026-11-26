@@ -118,6 +118,32 @@ def game_page(site, slug, ar):
             f"<div class='bsr-game' data-game='{slug}'><noscript>تحتاج اللعبة إلى تفعيل JavaScript.</noscript></div>\n")
 
 
+def build_admin(site):
+    """لوحة إدارة مستقلة: صفحة واحدة ذاتية الاحتواء مع لقطة بيانات حقيقية من المستودع (لا بيانات وهمية)."""
+    import subprocess, datetime
+    bank = json.loads(read('data/bank.json'))
+    idx = json.loads(read('content/articles/index.json', ROOT))
+    arts = []
+    for a in idx['articles']:
+        body = read('content/articles/' + a['file'], ROOT)
+        arts.append({'file': a['file'], 'title': a['title'], 'label': a['label'], 'checked': a['checked'], 'sources': a['sources'],
+                     'words': len(re.sub(r'<[^>]+>', ' ', body).split())})
+    slugs = ['about', 'how-we-verify', 'editorial-policy', 'contact', 'privacy-policy', 'terms']
+    titles = {'about': 'من نحن', 'how-we-verify': 'كيف نتحقق', 'editorial-policy': 'سياسة التحرير', 'contact': 'اتصل بنا', 'privacy-policy': 'سياسة الخصوصية', 'terms': 'شروط الاستخدام'}
+    pages = [{'slug': s, 'title': titles[s], 'built': os.path.isfile(os.path.join(DIST, 'pages', s + '.html'))} for s in slugs]
+    try: sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=ROOT, text=True).strip()
+    except Exception: sha = 'unknown'
+    data = {'bank': bank, 'games': [g[:4] for g in site['games']], 'articles': arts, 'pages': pages,
+            'images': json.loads(read('content/images.json', ROOT)),
+            'site': {'name': site.get('name', ''), 'tagline': site.get('tagline_ar', ''), 'email': site.get('contact_email', ''),
+                     'blog': 'https://basira-play.blogspot.com', 'repo': 'tahattaha41/BASIRA', 'published_urls': site.get('published_urls', {})},
+            'build': {'sha': sha, 'generated': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}}
+    js = read('admin/admin.js')
+    assert '</script' not in js.lower() and ']]>' not in js
+    html = read('admin/admin.html').replace('{{CSS}}', read('admin/admin.css')).replace('{{JS}}', js).replace('{{DATA}}', json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/'))
+    write(os.path.join(DIST, 'admin', 'index.html'), html)
+
+
 def build():
     site = json.loads(read('site.json'))
     dic = i18n(); ar = dic['ar']
@@ -161,6 +187,7 @@ def build():
         body = read('content/articles/' + a['file'], ROOT)
         srcs = ''.join(f"<li><a href='{e(x['url'])}' rel='noopener'>{e(x['title'])}</a></li>" for x in a['sources'])
         write(os.path.join(DIST, 'articles', a['file']), body + f"<h2>المصادر</h2><ul>{srcs}</ul><p class='note'>آخر مراجعة للمصادر: {e(a['checked'])}.</p>")
+    build_admin(site)
     pv = t
     # Keep the local Playwright preview self-contained; Blogger uses the remote main-branch assets.
     pv = re.sub(r"https://(?:raw\.githubusercontent\.com|cdn\.jsdelivr\.net/gh)/tahattaha41/BASIRA(?:/|@)main/dist/basira\.(css|js)", r"../dist/basira.\1", pv)
