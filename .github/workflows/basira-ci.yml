@@ -71,6 +71,8 @@ jobs:
         run: python qa/admin_test.py
       - name: Character games test
         run: python qa/chars_test.py
+      - name: Lantern game
+        run: python qa/lantern_test.py
       - name: Analytics snippet test
         run: python qa/ga_test.py
       - name: Embedded admin page

@@ -351,5 +351,15 @@
   "g.rules.moles": "Moles pop out of holes one at a time, each holding an answer. Tap the right one while it is up. Tap a wrong one and the question is lost.",
   "btl.you": "Your health",
   "btl.foe": "Monster health",
-  "admin.panel": "BASIRA admin panel"
+  "admin.panel": "BASIRA admin panel",
+  "g.lantern.name": "Basira's lantern",
+  "g.lantern.desc": "Carry the lantern through a dark cave and catch the firefly that holds the right answer",
+  "g.rules.lantern": "You are the owl and your lantern is your life. Drag your finger or use the arrow keys to fly. Answers are fireflies you can only read inside your light. The right one refuels the lantern and scares the bats away; a wrong one or a bat bite drains it and shrinks your light. Ten reviewed questions per round.",
+  "ltn.aria": "Dark cave: move the owl to catch the right firefly",
+  "ltn.hint": "Drag with your finger or use the arrow keys. Answers can only be read inside the light.",
+  "ltn.q": "Question {n} / {m}",
+  "ltn.streak": "Streak {n}",
+  "ltn.right": "Correct: the lantern refuelled",
+  "ltn.wrong": "Wrong answer.",
+  "ltn.energy": "Lantern fuel {n}%"
 }

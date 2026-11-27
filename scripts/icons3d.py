@@ -476,7 +476,16 @@ def i_moles():
     return s
 
 
+def i_lantern():
+    s = shadow(48, 89, 26)
+    s += ext(rrect(30, 28, 36, 50, 10), 'amber', 5)
+    s += disc(48, 54, 12, 'gold', 3)
+    s += f"<path d='M38 28Q48 8 58 28' fill='none' stroke='#F4F7FB' stroke-width='5' stroke-linecap='round'/>"
+    return s
+
+
 ICONS = {
+    'lantern': i_lantern,
     'battle': i_battle, 'lanes': i_lanes, 'hopper': i_hopper, 'moles': i_moles,
     'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge, 'opsign': i_opsign, 'numline': i_numline, 'pathmem': i_pathmem, 'revdigits': i_revdigits, 'shades': i_shades, 'intruder': i_intruder,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,

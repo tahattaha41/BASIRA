@@ -18,7 +18,7 @@ def lum(h):
     return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]
 def cr(a, b):
     x, y = sorted([lum(a), lum(b)], reverse=True); return (x + .05) / (y + .05)
-games = ['g-mcq', 'g-truefalse', 'g-order', 'g-memory', 'g-word', 'g-math', 'g-pattern', 'g-simon', 'g-blitz', 'g-survival', 'g-bubbles'] + ['g-%s' % s for s in 'stroop compare count schulte odd multiples digits stack rhythm merge opsign numline pathmem revdigits shades intruder battle lanes hopper moles'.split()]
+games = ['g-mcq', 'g-truefalse', 'g-order', 'g-memory', 'g-word', 'g-math', 'g-pattern', 'g-simon', 'g-blitz', 'g-survival', 'g-bubbles'] + ['g-%s' % s for s in 'stroop compare count schulte odd multiples digits stack rhythm merge opsign numline pathmem revdigits shades intruder battle lanes hopper moles lantern'.split()]
 for name, t in (('dark', dark), ('light', light)):
     pairs = [('ink', 'bg', 7), ('ink', 'card', 7), ('mute', 'bg', 4.5), ('mute', 'card', 4.5), ('acc-t', 'bg', 4.5), ('acc-t', 'card', 4.5),
              ('acc-ink', 'acc', 4.5), ('ok', 'card', 4.5), ('bad', 'card', 4.5), ('teal-t', 'card', 4.5)]
