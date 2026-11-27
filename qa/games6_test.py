@@ -16,7 +16,8 @@ with sync_playwright() as p:
         for i in range(10):
             eq = pg.locator('.g-eq').inner_text().replace('−', '-').replace('×', '*')
             m = re.match(r'(\d+)\s+\?\s+(\d+)\s+=\s+(\d+)', eq); a, bb, c = map(int, m.groups())
-            ops = [o for o in ('+', '-', '*', '/') if (bb and eval(f'{a}{o}{bb}') == c)]
+            avail = {'سهل': ('+', '-'), 'متوسط': ('+', '-', '*'), 'صعب': ('+', '-', '*', '/')}[lvl]
+            ops = [o for o in avail if (bb and eval(f'{a}{o}{bb}') == c)]
             ok &= len(ops) == 1
             sym = {'+': '+', '-': '−', '*': '×', '/': '÷'}[ops[0]]
             pg.evaluate("[...document.querySelectorAll('.g-opt')].find(b=>b.textContent=='%s').click()" % sym); nxt(h)
