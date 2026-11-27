@@ -10,6 +10,7 @@ try:
     d = json.loads(orig); d['ga4_id'] = 'G-TEST123456'; SJ.write_text(json.dumps(d, ensure_ascii=False, indent=2), encoding='utf-8')
     r = build(); t = (R / 'dist/theme.xml').read_text(encoding='utf-8')
     check(r.returncode == 0 and 'G-TEST123456' in t and 'basira_internal' in t and "anonymize_ip" in t, 'snippet present with id, internal-exclusion flag and IP anonymisation')
+    check("navigator.webdriver" in t and "file:" in t, 'snippet skips automated browsers (CI) and local files so tests never pollute real stats')
     minidom.parseString(t.encode('utf-8')); check(True, 'theme is still valid XML with the snippet')
     check('إحصاءات الزيارات' in (R / 'dist/pages/privacy-policy.html').read_text(encoding='utf-8'), 'privacy page discloses analytics when enabled')
     d['ga4_id'] = 'bad id'; SJ.write_text(json.dumps(d), encoding='utf-8'); check(build().returncode != 0, 'invalid ga4_id fails the build')

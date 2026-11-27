@@ -30,7 +30,8 @@ with sync_playwright() as p:
         check(o['x'] < s['owl']['x'] - 40 and o['y'] < s['owl']['y'] - 40, f'owl flies toward the pointer {o}')
         # wrong answer first
         s1 = chase(pg, False); pg.wait_for_timeout(200); note = h.locator('.ltn-note').inner_text()
-        check('خاطئة' in note and len(note) > 20, f'wrong answer shows the explanation ({note[:30]}...)')
+        got_wrong = any(f['state'] == 2 for f in S(pg)['ff'])
+        check(('خاطئة' in note and len(note) > 20) if got_wrong else ('أصبت' in note), f'feedback matches the pick (wrong={got_wrong}): {note[:30]}')
         pg.wait_for_timeout(1800)
         for i in range(9):
             chase(pg, True); pg.wait_for_timeout(1800)
