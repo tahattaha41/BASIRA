@@ -64,8 +64,8 @@ STAGE = stage()
 
 def home(site, ar):
     CATS = {'mcq': 'knowledge', 'truefalse': 'knowledge speed', 'order': 'knowledge logic', 'memory': 'memory', 'word': 'knowledge logic',
-            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed', 'bubbles': 'knowledge speed', 'stroop': 'speed logic', 'compare': 'speed logic', 'count': 'memory speed', 'schulte': 'speed logic', 'odd': 'logic speed', 'multiples': 'logic speed', 'digits': 'memory', 'stack': 'speed logic', 'rhythm': 'speed', 'merge': 'logic', 'opsign': 'logic speed', 'numline': 'logic', 'pathmem': 'memory', 'revdigits': 'memory', 'shades': 'logic speed', 'intruder': 'logic speed'}
-    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder'}; CHAL = {'blitz', 'survival'}
+            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed', 'bubbles': 'knowledge speed', 'stroop': 'speed logic', 'compare': 'speed logic', 'count': 'memory speed', 'schulte': 'speed logic', 'odd': 'logic speed', 'multiples': 'logic speed', 'digits': 'memory', 'stack': 'speed logic', 'rhythm': 'speed', 'merge': 'logic', 'opsign': 'logic speed', 'numline': 'logic', 'pathmem': 'memory', 'revdigits': 'memory', 'shades': 'logic speed', 'intruder': 'logic speed', 'battle': 'knowledge speed', 'lanes': 'knowledge speed', 'hopper': 'knowledge', 'moles': 'knowledge speed'}
+    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder', 'battle', 'lanes', 'hopper', 'moles'}; CHAL = {'blitz', 'survival'}
     DIFF = {'سهل': 1, 'متوسط': 2, 'صعب': 3}
     def card(g):
         slug = g[0]; d = DIFF.get(g[3], 2)
@@ -136,7 +136,7 @@ def build_admin(site):
     data = {'bank': bank, 'games': [g[:4] for g in site['games']], 'articles': arts, 'pages': pages,
             'images': json.loads(read('content/images.json', ROOT)),
             'site': {'name': site.get('name', ''), 'tagline': site.get('tagline_ar', ''), 'email': site.get('contact_email', ''),
-                     'blog': 'https://basira-play.blogspot.com', 'repo': 'tahattaha41/BASIRA', 'published_urls': site.get('published_urls', {})},
+                     'blog': 'https://basira-play.blogspot.com', 'ga4_id': site.get('ga4_id', ''), 'repo': 'tahattaha41/BASIRA', 'published_urls': site.get('published_urls', {})},
             'build': {'sha': sha, 'generated': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}}
     js = read('admin/admin.js')
     assert '</script' not in js.lower() and ']]>' not in js
@@ -166,6 +166,10 @@ def build():
     foot_keys = {'about': 'page.about', 'how-we-verify': 'page.verify', 'editorial-policy': 'page.editorial', 'contact': 'page.contact', 'privacy-policy': 'page.privacy', 'terms': 'page.terms'}
     foot_a = ''.join(f"<li><a data-i='{foot_keys[k]}' href='{e(page_urls[k])}'>{e(ar[foot_keys[k]])}</a></li>" for k, label in page_keys if page_urls.get(k)) or f"<li data-i='foot.pending'>{e(ar['foot.pending'])}</li>"
     t = read('theme.tpl.xml')
+    gid = site.get('ga4_id', '')
+    assert not gid or re.fullmatch(r'G-[A-Z0-9]{6,14}', gid), 'ga4_id غير صالح'
+    ga = ("<script>//<![CDATA[\n(function(){var id='%s';try{var q=/[?&]basira_internal=([01])/.exec(location.search);if(q)localStorage.setItem('basira.internal',q[1]);if(localStorage.getItem('basira.internal')==='1'||/blogger\\.com$/.test(location.hostname)||window.self!==window.top){window['ga-disable-'+id]=true;return;}}catch(e){}\nvar s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function g(){dataLayer.push(arguments);}window.gtag=g;g('js',new Date());g('config',id,{anonymize_ip:true});})();\n//]]></script>" % gid) if gid else ''
+    t = t.replace('{{GA4}}', ga)
     for k, v in {'{{CSS}}': css, '{{JS}}': js, '{{LOGO}}': lg, '{{HOME}}': home(site, ar), '{{NAV_VERIFY}}': (f"<a data-i='nav.verify' href='{e(site.get('published_urls', {}).get('how-we-verify', ''))}'>{e(ar['nav.verify'])}</a>" if site.get('published_urls', {}).get('how-we-verify') else ''),
                  '{{FOOT_TOPICS}}': foot_t, '{{FOOT_ABOUT}}': foot_a}.items():
         t = t.replace(k, v)
@@ -180,6 +184,9 @@ def build():
         source = f'pages/{slug}.html'
         ar_page = read(source).replace('{{EMAIL}}', mail)
         en_page = read(f'pages/en/{slug}.html').replace('{{EMAIL}}', mail)
+        if slug == 'privacy-policy' and site.get('ga4_id'):
+            ar_page += "<h2>إحصاءات الزيارات</h2><p>نستخدم Google Analytics لقياس عدد الزيارات والصفحات الأكثر قراءة بشكل مجمّع، مع إخفاء جزء من عنوان IP. يضع هذا الأداة ملفات تعريف ارتباط في متصفحك. يمكنك منعها من إعدادات المتصفح أو بإضافة حظر التتبع.</p>"
+            en_page += "<h2>Visit statistics</h2><p>We use Google Analytics to measure visits and the most-read pages in aggregate, with IP anonymisation. It sets cookies in your browser. You can block them in your browser settings or with a tracking blocker.</p>"
         combined = f"<div class='lang-ar' lang='ar' dir='rtl'>{ar_page}</div><div class='lang-en' lang='en' dir='ltr'>{en_page}</div>"
         write(os.path.join(DIST, 'pages', slug + '.html'), combined)
     idx = json.loads(read('content/articles/index.json', ROOT))

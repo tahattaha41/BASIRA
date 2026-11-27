@@ -5,7 +5,7 @@ fails = []
 def check(c, m):
     print(('ok   ' if c else 'FAIL ') + m)
     if not c: fails.append(m)
-GAMES = ['mcq', 'truefalse', 'order', 'memory', 'word', 'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder']
+GAMES = ['mcq', 'truefalse', 'order', 'memory', 'word', 'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder', 'battle', 'lanes', 'hopper', 'moles']
 with sync_playwright() as p:
     b = p.chromium.launch()
     for w in (360, 390, 768, 1280):
@@ -16,11 +16,11 @@ with sync_playwright() as p:
         pg.close()
     pg = b.new_page(viewport={'width': 390, 'height': 844}); errs = []; pg.on('pageerror', lambda e: errs.append(str(e)))
     pg.goto(URL); pg.wait_for_timeout(300)
-    check(pg.locator('#picker .gcard').count() == 27, '27 game cards')
+    check(pg.locator('#picker .gcard').count() == 31, '31 game cards')
     check(pg.evaluate("!document.body.className.includes('view-game')") and not pg.locator('#play-host').is_visible(), 'home shows no game until one is chosen')
     pg.locator('.gfilter[data-f=speed]').click()
     vis = pg.evaluate("[...document.querySelectorAll('#picker .gcard')].filter(c=>c.offsetParent).map(c=>c.dataset.g)")
-    check(0 < len(vis) < 27 and 'mcq' not in vis and 'blitz' in vis, 'speed filter narrows the cards ' + str(vis))
+    check(0 < len(vis) < 31 and 'mcq' not in vis and 'blitz' in vis, 'speed filter narrows the cards ' + str(vis))
     pg.locator('.gfilter[data-f=all]').click()
     for g in GAMES:
         pg.locator(f'#picker button[data-g={g}]').click(); pg.wait_for_timeout(150)

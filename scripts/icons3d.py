@@ -445,7 +445,39 @@ def i_intruder():
     return s
 
 
+def i_battle():
+    s = shadow(48, 89, 28)
+    s += ext(f"M48 14L58 40L84 42L64 58L72 84L48 68L24 84L32 58L12 42L38 40Z", 'rose', 5)
+    s += f"<path d='M40 44L56 44M48 36V52' stroke='#fff' stroke-width='5' stroke-linecap='round' opacity='.9'/>"
+    return s
+
+
+def i_lanes():
+    s = shadow(48, 89, 28)
+    for x, c in ((8, 'blue'), (36, 'amber'), (64, 'green')):
+        s += ext(rrect(x, 18, 24, 56, 8), c, 4)
+    s += disc(48, 56, 11, 'rose', 3)
+    return s
+
+
+def i_hopper():
+    s = shadow(48, 89, 30)
+    s += ext("M48 26C76 26 86 44 78 60C70 74 26 74 18 60C10 44 20 26 48 26Z", 'green', 6)
+    s += disc(36, 42, 8, 'gold', 2) + disc(60, 42, 8, 'gold', 2)
+    s += f"<circle cx='37' cy='43' r='3' fill='#101827'/><circle cx='59' cy='43' r='3' fill='#101827'/>"
+    return s
+
+
+def i_moles():
+    s = shadow(48, 89, 30)
+    s += ext(rrect(10, 56, 76, 24, 12), 'navy', 4)
+    s += disc(48, 44, 22, 'amber', 4)
+    s += f"<circle cx='40' cy='40' r='3.5' fill='#101827'/><circle cx='56' cy='40' r='3.5' fill='#101827'/><ellipse cx='48' cy='50' rx='6' ry='4' fill='#E58FA0'/>"
+    return s
+
+
 ICONS = {
+    'battle': i_battle, 'lanes': i_lanes, 'hopper': i_hopper, 'moles': i_moles,
     'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge, 'opsign': i_opsign, 'numline': i_numline, 'pathmem': i_pathmem, 'revdigits': i_revdigits, 'shades': i_shades, 'intruder': i_intruder,
     'mcq': i_mcq, 'truefalse': i_tf, 'order': i_order, 'memory': i_memory, 'word': i_word,
     'trophy': i_trophy, 'xp': i_xp, 'level': i_level, 'flame': i_flame, 'gem': i_gem, 'target': i_target,

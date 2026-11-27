@@ -30,7 +30,10 @@ with sync_playwright() as p:
     b = p.chromium.launch(); errs = []
     for vp, name in (({'width': 1280, 'height': 800}, 'desktop'), ({'width': 390, 'height': 844}, 'mobile')):
         pg = b.new_page(viewport=vp); pg.on('pageerror', lambda e: errs.append(str(e))); pg.route('https://api.github.com/**', gh); pg.route('**/feeds/posts/summary**', feed)
-        pg.goto(URL); pg.wait_for_selector('.kpi'); pg.wait_for_timeout(300)
+        pg.goto(URL); pg.wait_for_selector('input[type=password]'); check(pg.locator('.kpi').count() == 0, 'lock: dashboard hidden before password (%s)' % name)
+        pg.fill('input[type=password]', 'taha'); pg.keyboard.press('Enter'); pg.wait_for_selector('text=كلمة المرور غير صحيحة'); check(pg.locator('.kpi').count() == 0, 'lock: wrong/case-different password rejected')
+        pg.fill('input[type=password]', 'Taha'); pg.keyboard.press('Enter'); pg.wait_for_selector('.kpi'); check('Taha' not in open(URL.replace('file://', '')).read(), 'lock: password itself is not in the file (hash only)')
+        pg.goto(URL + '#/stats'); pg.wait_for_selector('text=لم يُفعَّل قياس'); check(pg.locator('text=لم يُفعَّل قياس').count() == 1, 'stats: honest empty state without GA4 id'); pg.goto(URL + '#/'); pg.wait_for_selector('.kpi'); pg.wait_for_timeout(300)
         side = pg.locator('.side').is_visible(); bot = pg.locator('.bot').is_visible()
         check(side != bot and (side if name == 'desktop' else bot), f'{name}: correct navigation (sidebar on desktop, bottom bar on mobile)')
         check(pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), f'{name}: no horizontal overflow')
@@ -47,7 +50,7 @@ with sync_playwright() as p:
         pg.goto(URL + '#/articles'); pg.wait_for_timeout(400)
         check(pg.locator('tbody tr').count() == 8, 'articles: 8 rows'); check(pg.locator('.tag.ok', has_text='منشور').count() == 1, 'articles: only the post that is live on the feed is marked published')
         pg.fill('main input[aria-label="بحث"]', 'رشيد'); check(pg.locator('tbody tr').count() == 1, 'articles: search narrows to 1')
-        pg.goto(URL + '#/games'); check(pg.locator('tbody tr').count() == 27 or pg.locator('tbody tr').count() >= 21, 'games: all games listed (%d)' % pg.locator('tbody tr').count())
+        pg.goto(URL + '#/games'); check(pg.locator('tbody tr').count() == 31 or pg.locator('tbody tr').count() >= 21, 'games: all games listed (%d)' % pg.locator('tbody tr').count())
         # بنك الأسئلة
         pg.goto(URL + '#/bank'); pg.wait_for_timeout(200)
         n0 = pg.locator('tbody tr').count(); check(n0 == len(BANK['mcq']), f'bank: mcq rows = {n0}')
