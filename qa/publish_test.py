@@ -36,10 +36,24 @@ def fake2(method, url, token=None, body=None, form=None):
     if 'oauth2' in url: return {'access_token': 't'}
     if method == 'GET': return {'items': [{'id': '9', 'title': 'جسور كونيغسبرغ السبعة: لماذا لا حل لها؟'}]}
     return {'url': 'https://x/p.html'}
-with contextlib.redirect_stdout(io.StringIO()) as o2: rc2 = bq.run('apply', True, False, _http=fake2)
+with contextlib.redirect_stdout(io.StringIO()) as o2: rc2 = bq.run('apply', True, False, _http=fake2, _sleep=lambda d: None)
 pp = [c for c in calls2 if c[0] == 'POST' and 'posts' in c[1]]
 check('posts: ينشئ 7 ويتخطى الموجود (8 مقالات، واحد موجود)', rc2 == 0 and len(pp) == 7, len(pp))
 check('posts: كل منشور له تصنيف ومحتوى طويل', all(c[2]['labels'] and len(c[2]['content']) > 3000 for c in pp))
 check('posts: لا PATCH ولا DELETE بدون --update', not any(c[0] in ('PATCH', 'DELETE') for c in calls2))
+
+import urllib.error
+n429 = [0]
+def fake3(method, url, token=None, body=None, form=None):
+    if 'oauth2' in url and n429[0] < 2:
+        n429[0] += 1; raise urllib.error.HTTPError(url, 429, 'Too Many', {}, None)
+    return fake2(method, url, token, body, form)
+waits = []
+with contextlib.redirect_stdout(io.StringIO()): rc3 = bq.run('apply', True, False, _http=fake3, _sleep=waits.append)
+check('posts: يعيد المحاولة عند 429 ثم ينجح', rc3 == 0 and n429[0] == 2 and len(waits) == 2 and waits[1] > waits[0], (rc3, waits))
+def fake4(method, url, token=None, body=None, form=None): raise urllib.error.HTTPError(url, 403, 'No', {}, None)
+try: bq.run('apply', True, False, _http=fake4, _sleep=lambda d: None); ok4 = False
+except urllib.error.HTTPError: ok4 = True
+check('posts: لا يعيد المحاولة عند 403', ok4)
 
 print('\nFAILED: %d' % len(fails) if fails else '\nALL PASS'); sys.exit(1 if fails else 0)
