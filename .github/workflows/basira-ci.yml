@@ -73,6 +73,8 @@ jobs:
         run: python qa/chars_test.py
       - name: Analytics snippet test
         run: python qa/ga_test.py
+      - name: Embedded admin page
+        run: python qa/admin_embed_test.py
       - name: v5 (cards, routing, filters, new games)
         run: python qa/v5_test.py
       - name: Reject leftovers of the old site

@@ -857,8 +857,20 @@ function emptyState(){
   var a=el('div','cta');var home=el('a','btn');home.href=(document.querySelector('.brand')||{}).href||'/';tl(home,'empty.home');a.appendChild(home);
   var pl=el('a','btn alt');pl.href=home.href.replace(/#.*/,'')+'#play';tl(pl,'empty.play');a.appendChild(pl);d.appendChild(a);c.appendChild(d);return true;
 }
+/* صفحة الإدارة داخل الموقع: تُحمَّل في إطار srcdoc معزول التنسيق من نفس نسخة الأصول، وتحتاج كلمة مرور شكلية ثم توكن GitHub للتعديل */
+function mountAdmin(){
+  var host=document.getElementById('basira-admin');if(!host||host.getAttribute('data-ready'))return;host.setAttribute('data-ready','1');
+  var sc=document.querySelector('script[src*="basira.js"]');if(!sc)return;
+  try{localStorage.setItem('basira.internal','1');}catch(e){}
+  var m=document.createElement('meta');m.name='robots';m.content='noindex,nofollow';document.head.appendChild(m);
+  var url=sc.src.replace(/basira\.js(\?.*)?$/,'admin/index.html');
+  host.textContent=document.documentElement.lang==='en'?'Loading admin panel…':'جارٍ تحميل لوحة الإدارة…';
+  fetch(url).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();}).then(function(h){
+    var f=document.createElement('iframe');f.title='BASIRA admin';f.className='admin-frame';f.srcdoc=h;host.textContent='';host.appendChild(f);document.body.classList.add('is-admin');
+  }).catch(function(){host.textContent=document.documentElement.lang==='en'?'Could not load the admin panel.':'تعذّر تحميل لوحة الإدارة.';});
+}
 function init(){
-  emptyState();
+  emptyState();mountAdmin();
   var d=document.documentElement,tb=document.querySelectorAll('.js-theme'),ORDER=['dark','light','auto'],mq=window.matchMedia?matchMedia('(prefers-color-scheme: light)'):null;
   function pref(){var p=d.getAttribute('data-pref');return ORDER.indexOf(p)<0?'dark':p;}
   function apply(p){d.setAttribute('data-pref',p);d.setAttribute('data-theme',p==='auto'?(mq&&mq.matches?'light':'dark'):p);}

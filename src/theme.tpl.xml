@@ -29,6 +29,7 @@
   if(l==='en'){d.setAttribute('lang','en');d.setAttribute('dir','ltr');}}catch(e){}})();
   //]]></script>
   <link href='https://cdn.jsdelivr.net/gh/tahattaha41/BASIRA@main/dist/basira.css' rel='stylesheet'/>
+  <b:if cond='data:blog.pageName == &quot;إدارة بصيرة&quot;'><meta content='noindex,nofollow' name='robots'/></b:if>
   {{GA4}}
   <b:skin><![CDATA[/* BASIRA styles load from the public GitHub build asset. */]]></b:skin>
 </head>

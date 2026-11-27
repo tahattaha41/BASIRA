@@ -563,3 +563,5 @@ a{color:var(--acc-t)}
 .mol-s{position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);max-width:120px;min-width:56px;padding:3px 8px;border-radius:8px;background:#fff;color:#141414;font-size:12px;font-weight:700;line-height:1.25;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.25)}
 .mol-h:not([data-k]) .mol-m{display:none}.mol-h.ok .mol-s{background:#2FB36D;color:#fff}.mol-h.bad .mol-s{background:#E5484D;color:#fff}.mol-h:focus-visible{outline:3px solid #fff;outline-offset:-3px}
 @media (prefers-reduced-motion:reduce){.c-eye,.btl-s .chr,.lns-r,.hop-l{animation:none!important}.lns-g,.mol-m,.btl-s,.lns-r{transition:none!important}}
+
+.admin-frame{position:fixed;inset:0;width:100%;height:100%;border:0;z-index:2147483000;background:var(--bg,#0b1220)}body.is-admin{overflow:hidden}

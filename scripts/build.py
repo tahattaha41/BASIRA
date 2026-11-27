@@ -180,6 +180,7 @@ def build():
     mail = site.get('contact_email') or '[يُضاف البريد قبل النشر]'
     for g in site['games']:
         write(os.path.join(DIST, 'pages', f'game-{g[0]}.html'), game_page(site, g[0], ar))
+    write(os.path.join(DIST, 'pages', 'admin.html'), "<div id='basira-admin' dir='rtl'></div><noscript><p>تحتاج لوحة الإدارة إلى JavaScript.</p></noscript>")
     for slug in PAGE_TITLES:
         source = f'pages/{slug}.html'
         ar_page = read(source).replace('{{EMAIL}}', mail)
