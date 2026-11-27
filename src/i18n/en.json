@@ -350,5 +350,6 @@
   "g.moles.desc": "Tap the mole holding the right answer when it pops up",
   "g.rules.moles": "Moles pop out of holes one at a time, each holding an answer. Tap the right one while it is up. Tap a wrong one and the question is lost.",
   "btl.you": "Your health",
-  "btl.foe": "Monster health"
+  "btl.foe": "Monster health",
+  "admin.panel": "BASIRA admin panel"
 }

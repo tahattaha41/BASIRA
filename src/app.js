@@ -825,7 +825,8 @@ function emptyState(){
 }
 /* صفحة الإدارة داخل الموقع: تُحمَّل في إطار srcdoc معزول التنسيق من نفس نسخة الأصول، وتحتاج كلمة مرور شكلية ثم توكن GitHub للتعديل */
 function mountAdmin(){
-  var host=document.getElementById('basira-admin');if(!host||host.getAttribute('data-ready'))return;host.setAttribute('data-ready','1');
+  var host=document.getElementById('basira-admin');if(!host&&/[?&]admin=1(&|$)/.test(location.search)){host=document.createElement('div');host.id='basira-admin';document.body.prepend(host);}
+  if(!host||host.getAttribute('data-ready'))return;host.setAttribute('data-ready','1');
   var sc=document.querySelector('script[src*="basira.js"]');if(!sc)return;
   try{localStorage.setItem('basira.internal','1');}catch(e){}
   var m=document.createElement('meta');m.name='robots';m.content='noindex,nofollow';document.head.appendChild(m);

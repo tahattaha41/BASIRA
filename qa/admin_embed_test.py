@@ -23,6 +23,8 @@ with sync_playwright() as p:
         check(pg.evaluate("localStorage.getItem('basira.internal')") == '1', 'visiting admin marks the device internal (no analytics)')
         check(pg.evaluate("document.querySelector('meta[name=robots]').content") == 'noindex,nofollow', 'admin page is noindex')
         check(not errs, f'no page errors ({name}) {errs[:1]}')
+    pq = b.new_page(viewport={'width': 390, 'height': 844}); pq.goto(URL + '?admin=1'); pq.wait_for_selector('iframe.admin-frame', timeout=8000)
+    check(True, 'the ?admin=1 link opens the panel on any page, without a Blogger page')
     pn = b.new_page(); pn.goto(URL); pn.wait_for_timeout(400)
     check(pn.locator('iframe.admin-frame').count() == 0 and pn.evaluate("localStorage.getItem('basira.internal')") is None, 'normal pages are untouched (no admin frame, device not marked internal)')
 srv.shutdown()

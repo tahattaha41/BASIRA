@@ -33,7 +33,7 @@ with sync_playwright() as p:
         pg.goto(URL); pg.wait_for_selector('input[type=password]'); check(pg.locator('.kpi').count() == 0, 'lock: dashboard hidden before password (%s)' % name)
         pg.fill('input[type=password]', 'taha'); pg.keyboard.press('Enter'); pg.wait_for_selector('text=كلمة المرور غير صحيحة'); check(pg.locator('.kpi').count() == 0, 'lock: wrong/case-different password rejected')
         pg.fill('input[type=password]', 'Taha'); pg.keyboard.press('Enter'); pg.wait_for_selector('.kpi'); check('Taha' not in open(URL.replace('file://', '')).read(), 'lock: password itself is not in the file (hash only)')
-        pg.goto(URL + '#/stats'); pg.wait_for_selector('text=لم يُفعَّل قياس'); check(pg.locator('text=لم يُفعَّل قياس').count() == 1, 'stats: honest empty state without GA4 id'); pg.goto(URL + '#/'); pg.wait_for_selector('.kpi'); pg.wait_for_timeout(300)
+        pg.goto(URL + '#/stats'); pg.wait_for_selector('text=القياس مفعّل'); check(pg.locator('text=basira_internal').count() == 0 and pg.locator('a[href*=basira_internal]').count() == 2, 'stats: shows GA4 id and the own-visit exclusion links'); pg.goto(URL + '#/'); pg.wait_for_selector('.kpi'); pg.wait_for_timeout(300)
         side = pg.locator('.side').is_visible(); bot = pg.locator('.bot').is_visible()
         check(side != bot and (side if name == 'desktop' else bot), f'{name}: correct navigation (sidebar on desktop, bottom bar on mobile)')
         check(pg.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), f'{name}: no horizontal overflow')
