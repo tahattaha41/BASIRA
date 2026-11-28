@@ -484,7 +484,30 @@ def i_lantern():
     return s
 
 
+def i_swarm():
+    s = shadow(48, 89, 28)
+    for x, y, r in ((30, 30, 9), (62, 36, 9), (46, 56, 10), (24, 62, 8), (68, 66, 8)):
+        s += disc(x, y, r, 'gold', 3)
+    return s
+
+
+def i_flip():
+    s = shadow(48, 89, 28)
+    s += ext(rrect(14, 14, 68, 14, 5), 'navy', 3) + ext(rrect(14, 68, 68, 14, 5), 'navy', 3)
+    s += disc(48, 48, 15, 'amber', 4)
+    s += "<path d='M70 36L78 48L70 60' fill='none' stroke='#F4F7FB' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/>"
+    return s
+
+
+def i_mirrors():
+    s = shadow(48, 89, 30)
+    s += ext(rrect(14, 14, 68, 68, 12), 'navy', 5)
+    s += "<path d='M24 72L72 24' stroke='#BFF7F2' stroke-width='9' stroke-linecap='round'/><path d='M12 36L40 36' stroke='#FFE08A' stroke-width='5' stroke-linecap='round'/>"
+    return s
+
+
 ICONS = {
+    'swarm': i_swarm, 'flip': i_flip, 'mirrors': i_mirrors,
     'lantern': i_lantern,
     'battle': i_battle, 'lanes': i_lanes, 'hopper': i_hopper, 'moles': i_moles,
     'math': i_math, 'pattern': i_pattern, 'simon': i_simon, 'blitz': i_blitz, 'survival': i_survival, 'bubbles': i_bubbles, 'stroop': i_stroop, 'compare': i_compare, 'count': i_count, 'schulte': i_schulte, 'odd': i_odd, 'multiples': i_multiples, 'digits': i_digits, 'stack': i_stack, 'rhythm': i_rhythm, 'merge': i_merge, 'opsign': i_opsign, 'numline': i_numline, 'pathmem': i_pathmem, 'revdigits': i_revdigits, 'shades': i_shades, 'intruder': i_intruder,

@@ -73,6 +73,9 @@ jobs:
         run: python qa/chars_test.py
       - name: Lantern game
         run: python qa/lantern_test.py
+      - name: Real-skill games (swarm, flip, mirrors)
+        timeout-minutes: 6
+        run: python qa/real_test.py
       - name: Analytics snippet test
         run: python qa/ga_test.py
       - name: Embedded admin page

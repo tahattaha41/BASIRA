@@ -50,7 +50,7 @@ with sync_playwright() as p:
         pg.goto(URL + '#/articles'); pg.wait_for_timeout(400)
         check(pg.locator('tbody tr').count() == 8, 'articles: 8 rows'); check(pg.locator('.tag.ok', has_text='منشور').count() == 1, 'articles: only the post that is live on the feed is marked published')
         pg.fill('main input[aria-label="بحث"]', 'رشيد'); check(pg.locator('tbody tr').count() == 1, 'articles: search narrows to 1')
-        pg.goto(URL + '#/games'); check(pg.locator('tbody tr').count() == 32 or pg.locator('tbody tr').count() >= 21, 'games: all games listed (%d)' % pg.locator('tbody tr').count())
+        pg.goto(URL + '#/games'); check(pg.locator('tbody tr').count() == 35 or pg.locator('tbody tr').count() >= 21, 'games: all games listed (%d)' % pg.locator('tbody tr').count())
         # بنك الأسئلة
         pg.goto(URL + '#/bank'); pg.wait_for_timeout(200)
         n0 = pg.locator('tbody tr').count(); check(n0 == len(BANK['mcq']), f'bank: mcq rows = {n0}')

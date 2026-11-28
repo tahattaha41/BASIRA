@@ -22,7 +22,12 @@ def write(path, txt):
 
 
 def i18n():
-    return {l: json.loads(read(f'i18n/{l}.json')) for l in ('ar', 'en')}
+    d = {l: json.loads(read(f'i18n/{l}.json')) for l in ('ar', 'en')}
+    n = len(json.loads(read('site.json'))['games'])   # الرقم الحقيقي دائماً، لا رقم مكتوب يدوياً
+    d['ar']['hero.s1'] = f'{n} لعبة'; d['en']['hero.s1'] = f'{n} games'
+    d['ar']['hero.lede'] = f'{n} لعبة ذهنية وحركية وتحدٍّ جديد كل يوم، بأسئلة موثّقة المصدر. ابدأ فوراً بلا تسجيل، وتُحفظ نتائجك على جهازك.'
+    d['en']['hero.lede'] = f'{n} brain and action games and a fresh challenge every day, with sourced questions. Start instantly with no sign-up; your results stay on your device.'
+    return d
 
 
 def fill_ar(text, ar):
@@ -64,8 +69,8 @@ STAGE = stage()
 
 def home(site, ar):
     CATS = {'mcq': 'knowledge', 'truefalse': 'knowledge speed', 'order': 'knowledge logic', 'memory': 'memory', 'word': 'knowledge logic',
-            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed', 'bubbles': 'knowledge speed', 'stroop': 'speed logic', 'compare': 'speed logic', 'count': 'memory speed', 'schulte': 'speed logic', 'odd': 'logic speed', 'multiples': 'logic speed', 'digits': 'memory', 'stack': 'speed logic', 'rhythm': 'speed', 'merge': 'logic', 'opsign': 'logic speed', 'numline': 'logic', 'pathmem': 'memory', 'revdigits': 'memory', 'shades': 'logic speed', 'intruder': 'logic speed', 'lantern': 'knowledge speed', 'battle': 'knowledge speed', 'lanes': 'knowledge speed', 'hopper': 'knowledge', 'moles': 'knowledge speed'}
-    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder', 'battle', 'lanes', 'hopper', 'moles', 'lantern'}; CHAL = {'blitz', 'survival'}
+            'math': 'speed logic', 'pattern': 'logic', 'simon': 'memory', 'blitz': 'knowledge speed', 'survival': 'knowledge speed', 'bubbles': 'knowledge speed', 'stroop': 'speed logic', 'compare': 'speed logic', 'count': 'memory speed', 'schulte': 'speed logic', 'odd': 'logic speed', 'multiples': 'logic speed', 'digits': 'memory', 'stack': 'speed logic', 'rhythm': 'speed', 'merge': 'logic', 'opsign': 'logic speed', 'numline': 'logic', 'pathmem': 'memory', 'revdigits': 'memory', 'shades': 'logic speed', 'intruder': 'logic speed', 'lantern': 'knowledge speed', 'swarm': 'speed', 'flip': 'speed', 'mirrors': 'logic', 'battle': 'knowledge speed', 'lanes': 'knowledge speed', 'hopper': 'knowledge', 'moles': 'knowledge speed'}
+    NEW = {'math', 'pattern', 'simon', 'blitz', 'survival', 'bubbles', 'stroop', 'compare', 'count', 'schulte', 'odd', 'multiples', 'digits', 'stack', 'rhythm', 'merge', 'opsign', 'numline', 'pathmem', 'revdigits', 'shades', 'intruder', 'battle', 'lanes', 'hopper', 'moles', 'lantern', 'swarm', 'flip', 'mirrors'}; CHAL = {'blitz', 'survival'}
     DIFF = {'سهل': 1, 'متوسط': 2, 'صعب': 3}
     def card(g):
         slug = g[0]; d = DIFF.get(g[3], 2)
