@@ -286,77 +286,9 @@ function mount(root,slug){
 
   /* ===== ألعاب الشخصيات: شخصيات أصلية من تصميمنا مرسومة بـSVG، الأسئلة من البنك المراجَع ولا ذكاء اصطناعي أثناء اللعب ===== */
   var CHR={
-    owl:"<svg viewBox='0 0 80 90' aria-hidden='true'><g class='c-wl'><ellipse cx='12' cy='56' rx='9' ry='20' fill='#7A4B2A'/></g><g class='c-wr'><ellipse cx='68' cy='56' rx='9' ry='20' fill='#7A4B2A'/></g><ellipse cx='40' cy='54' rx='28' ry='32' fill='#A0663A'/><ellipse cx='40' cy='64' rx='17' ry='20' fill='#F4DDB8'/><path d='M16 28L10 8L28 20ZM64 28L70 8L52 20Z' fill='#7A4B2A'/><circle cx='28' cy='38' r='13' fill='#fff'/><circle cx='52' cy='38' r='13' fill='#fff'/><circle class='c-eye' cx='29' cy='39' r='6' fill='#141414'/><circle class='c-eye' cx='51' cy='39' r='6' fill='#141414'/><path d='M36 48L44 48L40 57Z' fill='#F5A524'/><path d='M30 84L30 90M50 84L50 90' stroke='#F5A524' stroke-width='5' stroke-linecap='round'/></svg>",
-    imp:"<svg viewBox='0 0 90 90' aria-hidden='true'><path d='M20 26L12 4L34 18ZM70 26L78 4L56 18Z' fill='#5B2A86'/><path d='M12 62C8 36 26 20 45 20C64 20 82 36 78 62C76 78 62 86 45 86C28 86 14 78 12 62Z' fill='#8E4BD1'/><circle cx='32' cy='48' r='10' fill='#fff'/><circle cx='58' cy='48' r='10' fill='#fff'/><circle class='c-eye' cx='33' cy='49' r='5' fill='#2A0F45'/><circle class='c-eye' cx='57' cy='49' r='5' fill='#2A0F45'/><path d='M26 38L40 43M64 38L50 43' stroke='#2A0F45' stroke-width='4' stroke-linecap='round'/><path d='M28 66Q45 78 62 66' fill='#2A0F45'/><path d='M34 68L38 74L42 68M48 68L52 74L56 68' fill='#fff'/></svg>",
-    cat:"<svg viewBox='0 0 70 80' aria-hidden='true'><path d='M52 60C66 58 68 40 62 34' fill='none' stroke='#E08A3C' stroke-width='8' stroke-linecap='round' class='c-tail'/><ellipse cx='34' cy='56' rx='20' ry='20' fill='#F0A04B'/><path d='M12 26L14 6L30 18ZM56 26L54 6L38 18Z' fill='#F0A04B'/><ellipse cx='34' cy='32' rx='22' ry='18' fill='#F0A04B'/><circle cx='26' cy='30' r='4' fill='#141414' class='c-eye'/><circle cx='42' cy='30' r='4' fill='#141414' class='c-eye'/><path d='M31 38L37 38L34 42Z' fill='#E5484D'/><path d='M8 36L22 38M8 44L22 42M60 36L46 38M60 44L46 42' stroke='#fff' stroke-width='1.6'/><path d='M24 74L24 80M44 74L44 80' stroke='#C46E1F' stroke-width='6' stroke-linecap='round' class='c-leg'/></svg>",
-    frog:"<svg viewBox='0 0 80 60' aria-hidden='true'><ellipse cx='40' cy='38' rx='28' ry='18' fill='#4CB86B'/><ellipse cx='40' cy='44' rx='18' ry='9' fill='#B9EBC4'/><circle cx='24' cy='18' r='11' fill='#4CB86B'/><circle cx='56' cy='18' r='11' fill='#4CB86B'/><circle cx='24' cy='18' r='7' fill='#fff'/><circle cx='56' cy='18' r='7' fill='#fff'/><circle class='c-eye' cx='25' cy='19' r='3.5' fill='#141414'/><circle class='c-eye' cx='55' cy='19' r='3.5' fill='#141414'/><path d='M30 38Q40 46 50 38' fill='none' stroke='#1E6B3A' stroke-width='3' stroke-linecap='round'/><ellipse cx='12' cy='52' rx='10' ry='5' fill='#3A9F5A'/><ellipse cx='68' cy='52' rx='10' ry='5' fill='#3A9F5A'/></svg>",
-    mole:"<svg viewBox='0 0 70 70' aria-hidden='true'><ellipse cx='35' cy='44' rx='26' ry='26' fill='#8A6A4F'/><ellipse cx='35' cy='52' rx='16' ry='13' fill='#C9A98A'/><circle cx='25' cy='36' r='4.5' fill='#141414' class='c-eye'/><circle cx='45' cy='36' r='4.5' fill='#141414' class='c-eye'/><ellipse cx='35' cy='45' rx='7' ry='5' fill='#E58FA0'/><path d='M30 54Q35 58 40 54' fill='none' stroke='#5B4331' stroke-width='2.5' stroke-linecap='round'/><ellipse cx='12' cy='56' rx='7' ry='5' fill='#6E5240'/><ellipse cx='58' cy='56' rx='7' ry='5' fill='#6E5240'/></svg>"
+    owl:"<svg viewBox='0 0 80 90' aria-hidden='true'><g class='c-wl'><ellipse cx='12' cy='56' rx='9' ry='20' fill='#7A4B2A'/></g><g class='c-wr'><ellipse cx='68' cy='56' rx='9' ry='20' fill='#7A4B2A'/></g><ellipse cx='40' cy='54' rx='28' ry='32' fill='#A0663A'/><ellipse cx='40' cy='64' rx='17' ry='20' fill='#F4DDB8'/><path d='M16 28L10 8L28 20ZM64 28L70 8L52 20Z' fill='#7A4B2A'/><circle cx='28' cy='38' r='13' fill='#fff'/><circle cx='52' cy='38' r='13' fill='#fff'/><circle class='c-eye' cx='29' cy='39' r='6' fill='#141414'/><circle class='c-eye' cx='51' cy='39' r='6' fill='#141414'/><path d='M36 48L44 48L40 57Z' fill='#F5A524'/><path d='M30 84L30 90M50 84L50 90' stroke='#F5A524' stroke-width='5' stroke-linecap='round'/></svg>"
   };
-  function chr(kind,cls){var d=el('span','chr chr-'+kind+(cls?' '+cls:''));d.innerHTML=CHR[kind];d.setAttribute('aria-hidden','true');return d;}
-  function optsOf(q,n){var all=q.o.map(function(t,k){return {t:t,ok:k===q.a};}),good=all.filter(function(o){return o.ok;})[0],bad=shuffle(all.filter(function(o){return !o.ok;})).slice(0,n-1);return shuffle([good].concat(bad));}
   var REDUCE=function(){return matchMedia('(prefers-reduced-motion: reduce)').matches;};
-  /* معركة المعرفة: بطل ضد وحش؛ الإجابة الصحيحة تضرب الوحش والخاطئة تؤذيك */
-  function battleItem(q,st){return function(body,answer){
-    var sc=el('div','btl');var hero=el('div','btl-s btl-h'),mon=el('div','btl-s btl-m');
-    var hb=el('div','btl-hp'),hi=el('i');hb.appendChild(hi);hb.setAttribute('role','img');hb.setAttribute('aria-label',T('btl.you'));
-    var mb=el('div','btl-hp btl-hp-m'),mi=el('i');mb.appendChild(mi);mb.setAttribute('role','img');mb.setAttribute('aria-label',T('btl.foe'));
-    hero.appendChild(hb);hero.appendChild(chr('owl'));mon.appendChild(mb);mon.appendChild(chr('imp'));sc.appendChild(hero);sc.appendChild(mon);body.appendChild(sc);
-    function hp(){hi.style.width=Math.max(0,st.me)+'%';mi.style.width=Math.max(0,st.foe)+'%';hb.setAttribute('data-hp',Math.max(0,st.me));mb.setAttribute('data-hp',Math.max(0,st.foe));}hp();
-    body.appendChild(el('p','g-q',q.q));var list=el('div','g-opts'),done=false;
-    optsOf(q,4).forEach(function(o){var b=btn(o.t,'g-opt',function(){if(done)return;done=true;
-      [].forEach.call(list.children,function(c){c.disabled=true;if(c.getAttribute('data-ok')==='1')c.classList.add('ok');});
-      if(o.ok){st.foe-=st.dmg;hero.classList.add('atk');mon.classList.add('hit');}else{b.classList.add('bad');st.me-=25;mon.classList.add('atk');hero.classList.add('hit');}
-      hp();answer(o.ok,q.x);});b.setAttribute('data-ok',o.ok?'1':'0');list.appendChild(b);});
-    body.appendChild(list);
-  };}
-  /* ممر المعرفة: عدّاء على ثلاثة مسارات؛ بوابات الإجابات تقترب منه فاختر مساره */
-  function lanesItem(q,st,dur){return function(body,answer){
-    body.appendChild(el('p','g-q',q.q));var os=optsOf(q,3),done=false,tm=0;
-    var road=el('div','lns');body.appendChild(road);var cols=[],gates=[];
-    var runner=chr('cat','lns-r');road.appendChild(runner);
-    function place(){runner.style.insetInlineStart=(st.lane*33.333+16.666)+'%';cols.forEach(function(c,k){c.setAttribute('aria-pressed',k===st.lane?'true':'false');});}
-    function arrive(){if(done)return;done=true;clearTimeout(tm);var o=os[st.lane];gates.forEach(function(g,k){g.classList.add(os[k].ok?'ok':(k===st.lane?'bad':'off'));});runner.classList.add(o.ok?'cheer':'stumble');answer(o.ok,q.x);}
-    os.forEach(function(o,k){
-      var g=el('div','lns-g');g.setAttribute('data-ok',o.ok?'1':'0');g.appendChild(el('span','',o.t));g.style.insetInlineStart=(k*33.333)+'%';g.style.transitionDuration=dur+'ms';road.appendChild(g);gates.push(g);
-      var c=btn('','lns-c',function(){if(done)return;st.lane=k;place();dash();});c.setAttribute('aria-label',o.t);c.style.insetInlineStart=(k*33.333)+'%';road.appendChild(c);cols.push(c);});
-    function dash(){gates.forEach(function(g){g.style.transitionDuration='600ms';});clearTimeout(tm);tm=setTimeout(arrive,640);}
-    place();
-    requestAnimationFrame(function(){requestAnimationFrame(function(){if(done)return;road.classList.add('go');tm=setTimeout(arrive,dur+40);});});
-    function key(e){if(!body.isConnected||done){document.removeEventListener('keydown',key);return;}
-      var rtl=document.documentElement.dir==='rtl',d=e.key==='ArrowLeft'?(rtl?1:-1):e.key==='ArrowRight'?(rtl?-1:1):0;if(!d)return;e.preventDefault();st.lane=Math.max(0,Math.min(2,st.lane+d));place();}
-    document.addEventListener('keydown',key);
-  };}
-  /* الضفدع القفّاز: اختر ورقة النيلوفر الصحيحة فيقفز إليها، والخاطئة تغرق */
-  function hopperItem(q,st){return function(body,answer){
-    body.appendChild(el('p','g-q',q.q));var pond=el('div','hop');body.appendChild(pond);
-    var frog=chr('frog','hop-f');pond.appendChild(frog);var os=optsOf(q,3),pads=el('div','hop-p');pond.appendChild(pads);var done=false;
-    os.forEach(function(o){var b=btn('','hop-l',function(){if(done)return;done=true;
-      [].forEach.call(pads.children,function(c){c.disabled=true;if(c.getAttribute('data-ok')==='1')c.classList.add('ok');});
-      var pr=pond.getBoundingClientRect(),br=b.getBoundingClientRect(),fr=frog.getBoundingClientRect();
-      var dx=(br.left+br.width/2)-(fr.left+fr.width/2),dy=(br.top+br.height/2)-(fr.top+fr.height/2)-8;
-      if(frog.animate&&!REDUCE()){frog.animate([{transform:'translate(0,0)'},{transform:'translate('+dx*0.5+'px,'+(dy-70)+'px) scale(1.12)',offset:.5},{transform:'translate('+dx+'px,'+dy+'px)'}],{duration:620,easing:'ease-in-out',fill:'forwards'});}
-      else frog.style.transform='translate('+dx+'px,'+dy+'px)';
-      if(!o.ok){b.classList.add('bad');setTimeout(function(){frog.classList.add('sink');},560);}else{b.classList.add('ok');}
-      setTimeout(function(){answer(o.ok,q.x);},REDUCE()?0:640);});
-      b.setAttribute('data-ok',o.ok?'1':'0');b.appendChild(el('span','',o.t));pads.appendChild(b);});
-  };}
-  /* خُلد الإجابات: خلدان يطلعان من الجحور وكل واحد يحمل إجابة؛ اضغط الخُلد الصحيح وهو ظاهر */
-  function molesItem(q,up,gap){return function(body,answer){
-    body.appendChild(el('p','g-q',q.q));var field=el('div','mol');body.appendChild(field);
-    var os=optsOf(q,4),spots=shuffle([0,1,2,3,4,5]).slice(0,4),holes=[],done=false,tm=0,order=[],cur=-1;
-    for(var i=0;i<6;i++){var h=btn('','mol-h',null);h.type='button';var m=el('span','mol-m');m.appendChild(chr('mole'));var sg=el('span','mol-s');m.appendChild(sg);h.appendChild(m);h.appendChild(el('span','mol-d'));field.appendChild(h);holes.push(h);}
-    os.forEach(function(o,k){var h=holes[spots[k]];h.setAttribute('data-ok',o.ok?'1':'0');h.setAttribute('data-k',k);h.querySelector('.mol-s').textContent=o.t;h.setAttribute('aria-label',o.t);});
-    holes.forEach(function(h){h.addEventListener('click',function(){if(done||h.getAttribute('data-k')===null||!h.classList.contains('up'))return;
-      done=true;clearTimeout(tm);var ok=h.getAttribute('data-ok')==='1';h.classList.add(ok?'ok':'bad');
-      holes.forEach(function(x){if(x.getAttribute('data-ok')==='1')x.classList.add('up','ok');});
-      answer(ok,q.x);});});
-    function nextPop(){if(done||!body.isConnected)return;if(cur>=0)holes[spots[cur]].classList.remove('up');
-      if(!order.length)order=shuffle([0,1,2,3]);cur=order.pop();holes[spots[cur]].classList.add('up');tm=setTimeout(function(){if(done)return;holes[spots[cur]].classList.remove('up');tm=setTimeout(nextPop,gap);},up);}
-    nextPop();
-  };}
-
-  /* فانوس بصير: لعبة حركة أصلية. البومة تحمل الفانوس في كهف مظلم، الإجابات يراعات لا تُقرأ إلا داخل الضوء، والخفافيش تطفئ الفانوس.
-     الأسئلة من البنك المراجَع، ولا ذكاء اصطناعي أثناء اللعب. */
   var OWL_IMG=null;
   function owlImg(){if(!OWL_IMG){OWL_IMG=new Image();OWL_IMG.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(CHR.owl.replace("<svg ","<svg xmlns='http://www.w3.org/2000/svg' width='80' height='90' "));}return OWL_IMG;}
   function lanternGame(lev){
@@ -877,7 +809,7 @@ function mount(root,slug){
     var ok=0,asked=0,streak=0,best=0,pts=0,lives=cfg.lives,left=cfg.sec,t0=Date.now(),idx=0,over=false,tok={};
     var h=el('h3');tl(h,'g.'+mode+'.name');box.appendChild(h);
     var bar=el('p','g-bar'),a=el('span'),b2=el('span');bar.appendChild(a);bar.appendChild(b2);box.appendChild(bar);
-    var tb=null,tf=null;if(cfg.sec){tb=el('div','g-time');tf=el('i');tb.appendChild(tf);tb.setAttribute('role','timer');box.appendChild(tb);}
+    var tb=null,tfill=null;if(cfg.sec){tb=el('div','g-time');tfill=el('i');tb.appendChild(tfill);tb.setAttribute('role','timer');box.appendChild(tb);}
     var body=el('div'),fb=el('div','g-fb');fb.setAttribute('aria-live','polite');box.appendChild(body);box.appendChild(fb);
     function stats(){a.textContent=T('g.score')+': '+pts+' · '+T('g.streak')+': '+streak;b2.textContent=cfg.lives?T('survival.lives')+': '+'♥'.repeat(Math.max(lives,0)):T('blitz.correct',{n:ok});}
     function end(){if(over)return;over=true;tok={};stopTimer();var pct=Math.min(100,Math.round(ok/cfg.target*100));
@@ -897,7 +829,7 @@ function mount(root,slug){
       (it.k==='m'?mcq(it.q):tf(it.q))(body,answer,ctx);
     }
     stats();
-    if(cfg.sec){timer=setInterval(function(){left=Math.max(0,cfg.sec-(Date.now()-t0)/1000);tf.style.width=(left/cfg.sec*100)+'%';tb.classList.toggle('low',left/cfg.sec<0.25);if(left<=0)end();},200);}
+    if(cfg.sec){timer=setInterval(function(){left=Math.max(0,cfg.sec-(Date.now()-t0)/1000);tfill.style.width=(left/cfg.sec*100)+'%';tb.classList.toggle('low',left/cfg.sec<0.25);if(left<=0)end();},200);}
     nextQ();
   }
   function start(lev){
@@ -936,10 +868,6 @@ function mount(root,slug){
     else if(slug==='flip')flipGame(lev==='prog'?'medium':lev);
     else if(slug==='mirrors')mirrorsGame(lev==='prog'?'medium':lev);
     else if(slug==='lantern')lanternGame(lev==='prog'?'medium':lev);
-    else if(slug==='battle'){var nb=lev==='prog'?'medium':lev,qb=pick('mcq',pool('mcq',nb),8),stB={me:100,foe:100,dmg:nb==='easy'?20:nb==='medium'?16:13};run(qb.map(function(q){return battleItem(q,stB);}),{level:nb,levelName:lev,sec:nb==='easy'?25:nb==='medium'?20:15});}
-    else if(slug==='lanes'){var nl=lev==='prog'?'medium':lev,ql=pick('mcq',pool('mcq',nl),8),stL={lane:1},dL=nl==='easy'?9000:nl==='medium'?7000:5000;run(ql.map(function(q){return lanesItem(q,stL,dL);}),{level:nl,levelName:lev,sec:0});}
-    else if(slug==='hopper'){var nh=lev==='prog'?'medium':lev,qh=pick('mcq',pool('mcq',nh),8);run(qh.map(function(q){return hopperItem(q,{});}),{level:nh,levelName:lev,sec:nh==='easy'?25:nh==='medium'?20:15});}
-    else if(slug==='moles'){var nm3=lev==='prog'?'medium':lev,qm=pick('mcq',pool('mcq',nm3),8),upM=nm3==='easy'?1700:nm3==='medium'?1300:950;run(qm.map(function(q){return molesItem(q,upM,350);}),{level:nm3,levelName:lev,sec:nm3==='easy'?30:nm3==='medium'?26:22});}
     else if(slug==='blitz'||slug==='survival')endless(lev==='prog'?'medium':lev,slug);
   }
   /* تحدي اليوم: نفس الأسئلة لكل اللاعبين في اليوم بنفس البذرة */

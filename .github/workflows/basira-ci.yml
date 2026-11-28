@@ -69,10 +69,10 @@ jobs:
         run: python qa/games7_test.py && python qa/games6_test.py && python qa/friend_test.py && python qa/skill_test.py
       - name: Admin panel
         run: python qa/admin_test.py
-      - name: Character games test
-        run: python qa/chars_test.py
       - name: Lantern game
         run: python qa/lantern_test.py
+      - name: Endless modes regression
+        run: python qa/endless_test.py
       - name: Real-skill games (swarm, flip, mirrors)
         timeout-minutes: 6
         run: python qa/real_test.py
