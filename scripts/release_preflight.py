@@ -72,7 +72,7 @@ if re.search(r"(example\.(com|org)|test@|lorem ipsum|\bTODO\b|\bFIXME\b)", theme
 # 3) ثمانية أقسام وخمس ألعاب حقيقية
 topics, games = site.get("topics", []), site.get("games", [])
 if len(topics) != 8: err(f"Expected 8 sections; found {len(topics)}.")
-if len(games) != 27: err(f"Expected 27 games; found {len(games)}.")
+if len(games) != 31: err(f"Expected 31 games; found {len(games)}.")
 bank = json.loads((ROOT / "src/data/bank.json").read_text(encoding="utf-8"))
 if [t[0] for t in topics] != bank.get("topics"): err("Sections in site.json and bank.json differ.")
 asset_js_path = ROOT / "dist/basira.js"

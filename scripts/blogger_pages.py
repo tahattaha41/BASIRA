@@ -23,7 +23,7 @@ PLACEHOLDER = "يُضاف البريد"
 def wanted(with_games=False):
     site = json.loads((ROOT / "src/site.json").read_text(encoding="utf-8"))
     items = [(s, t) for s, t in TITLES.items()]
-    if with_games: items += [(f"game-{g[0]}", g[1]) for g in site["games"]]
+    if with_games: items += [("admin", "إدارة بصيرة")] + [(f"game-{g[0]}", g[1]) for g in site["games"]]
     out = []
     for slug, title in items:
         f = ROOT / "dist/pages" / f"{slug}.html"

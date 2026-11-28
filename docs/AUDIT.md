@@ -16,4 +16,4 @@
 - ما زال موجوداً لأن الحذف مرفوض (403) من بيئة الجلسة، وكل محتواه مدموج أو متروك عمداً، فيُحذف يدوياً من GitHub: `basira-brand-identity`, `basira-publish-readiness`, `basira-complete-platform`, `basira-main-brand-cleanup`, `basira-reference-platform`, `basira-ci-main`, `basira-cleanup`, وكذلك `basira-project-reference` و`platform-dev` (صفر تقدم عن `main`).
 
 ## الحالة الراهنة للمنصة
-الألعاب الخمس حقيقية؛ ثمانية مسودات مقالات غير منشورة؛ الحفظ محلي على الجهاز فقط؛ لا حسابات ولا إعلانات؛ رفع القالب إلى بلوجر يدوي.
+31 لعبة (انظر docs/GAMES-STATUS.md للحالة الفعلية لكل لعبة)؛ 8 مقالات نُشرت عبر المزامنة (تحقق من الموقع الحي)؛ الحفظ محلي على الجهاز فقط؛ لا حسابات ولا إعلانات؛ رفع القالب إلى بلوجر يدوي.
