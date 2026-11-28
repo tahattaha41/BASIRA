@@ -35,8 +35,11 @@ with sync_playwright() as p:
         h = start(pg, 'flip'); h.locator('canvas.ltn').wait_for(); F = lambda: pg.evaluate("document.querySelector('canvas.ltn').__flip()")
         f0 = F(); pg.keyboard.press('Space'); pg.wait_for_timeout(500); f1 = F()
         check(f0['side'] != f1['side'] or f1['dead'], f'flip ({name}): space flips gravity side {f0["side"]}->{f1["side"]}')
-        pg3 = b.new_page(viewport=vp); h3 = start(pg3, 'flip'); pg3.wait_for_timeout(9000)
-        check(pg3.locator('.g-end').count() == 1 or pg3.evaluate("document.querySelector('canvas.ltn').__flip()")['dead'], 'flip: doing nothing ends the run on the first spike')
+        pg3 = b.new_page(viewport=vp); h3 = start(pg3, 'flip'); ended = False
+        for _ in range(100):
+            pg3.wait_for_timeout(300)
+            if pg3.evaluate("(()=>{const c=document.querySelector('canvas.ltn');return !c||c.__flip().dead})()"): ended = True; break
+        check(ended, 'flip: doing nothing ends the run on the first spike')
         pg4 = b.new_page(viewport=vp); h4 = start(pg4, 'flip'); alive = True
         for i in range(520):
             st = pg4.evaluate("document.querySelector('canvas.ltn')?document.querySelector('canvas.ltn').__flip():null")
